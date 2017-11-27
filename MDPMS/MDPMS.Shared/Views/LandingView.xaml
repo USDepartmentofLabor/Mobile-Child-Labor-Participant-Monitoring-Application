@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDPMS.Shared.Views.LandingView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LandingPageLabelStyleMain" TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="LineBreakMode" Value="CharacterWrap"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0" Grid.RowSpan="2" Source="child.png" Aspect="AspectFill"/>
+            <Grid Grid.Row="0" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="1" Style="{StaticResource LandingPageLabelStyleMain}" Text="Direct Beneficiary Monitoring System" Font="Bold,28"/>
+                <Label Grid.Row="2" Style="{StaticResource LandingPageLabelStyleMain}" Text="mobile" Font="Italics,24"/>
+                <Label Grid.Row="3" Style="{StaticResource LandingPageLabelStyleMain}" Text="The more we connect, the better it gets." Font="Bold,24"/>
+                <Image Grid.Row="4" Source="dolseal.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Button Grid.Row="5" Text="Proceed" Margin="10"/>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using MDPMS.Shared.Models;
+using MDPMS.Shared.Views;
+using MDPMS.Shared.ViewModels;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared
@@ -13,8 +11,14 @@ namespace MDPMS.Shared
 		{
 			InitializeComponent();
 
-			MainPage = new MDPMS.Shared.MainPage();
-		}
+            var applicationInstanceData = new ApplicationInstanceData();
+
+            MainPage = new LandingView()
+            {
+                BindingContext = new LandingViewModel(applicationInstanceData),
+                Title = @"mDPMS"
+            };            
+        }
 
 		protected override void OnStart ()
 		{
