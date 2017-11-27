@@ -5,7 +5,7 @@ using System.Text;
 
 using Xamarin.Forms;
 
-namespace MDPMS
+namespace MDPMS.Shared
 {
 	public partial class App : Application
 	{
@@ -13,7 +13,7 @@ namespace MDPMS
 		{
 			InitializeComponent();
 
-			MainPage = new MDPMS.MainPage();
+			MainPage = new MDPMS.Shared.MainPage();
 		}
 
 		protected override void OnStart ()
