@@ -7,12 +7,9 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MDPMS", "MDPMS\MDPMS\MDPMS.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDPMS.Android", "MDPMS\MDPMS.Android\MDPMS.Android.csproj", "{C3808BE9-34F9-47F7-96C8-99AC5C03CB97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDPMS.iOS", "MDPMS\MDPMS.iOS\MDPMS.iOS.csproj", "{BF014880-ED2C-4E8A-A261-D234A707EEC8}"
-EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		MDPMS\MDPMS\MDPMS.projitems*{542d148c-ff38-4173-9449-25679e45fe35}*SharedItemsImports = 13
-		MDPMS\MDPMS\MDPMS.projitems*{bf014880-ed2c-4e8a-a261-d234a707eec8}*SharedItemsImports = 4
 		MDPMS\MDPMS\MDPMS.projitems*{c3808be9-34f9-47f7-96c8-99ac5c03cb97}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,26 +63,6 @@ Global
 		{C3808BE9-34F9-47F7-96C8-99AC5C03CB97}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{C3808BE9-34F9-47F7-96C8-99AC5C03CB97}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{C3808BE9-34F9-47F7-96C8-99AC5C03CB97}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
-		{BF014880-ED2C-4E8A-A261-D234A707EEC8}.Ad-Hoc|Any CPU.ActiveCfg = Ad-Hoc|iPhoneSimulator
-		{BF014880-ED2C-4E8A-A261-D234A707EEC8}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
-		{BF014880-ED2C-4E8A-A261-D234A707EEC8}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
-		{BF014880-ED2C-4E8A-A261-D234A707EEC8}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Ad-Hoc|iPhoneSimulator
-		{BF014880-ED2C-4E8A-A261-D234A707EEC8}.Ad-Hoc|iPhoneSimulator.Build.0 = Ad-Hoc|iPhoneSimulator
-		{BF014880-ED2C-4E8A-A261-D234A707EEC8}.AppStore|Any CPU.ActiveCfg = AppStore|iPhoneSimulator
-		{BF014880-ED2C-4E8A-A261-D234A707EEC8}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
-		{BF014880-ED2C-4E8A-A261-D234A707EEC8}.AppStore|iPhone.Build.0 = AppStore|iPhone
-		{BF014880-ED2C-4E8A-A261-D234A707EEC8}.AppStore|iPhoneSimulator.ActiveCfg = AppStore|iPhoneSimulator
-		{BF014880-ED2C-4E8A-A261-D234A707EEC8}.AppStore|iPhoneSimulator.Build.0 = AppStore|iPhoneSimulator
-		{BF014880-ED2C-4E8A-A261-D234A707EEC8}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
-		{BF014880-ED2C-4E8A-A261-D234A707EEC8}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{BF014880-ED2C-4E8A-A261-D234A707EEC8}.Debug|iPhone.Build.0 = Debug|iPhone
-		{BF014880-ED2C-4E8A-A261-D234A707EEC8}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{BF014880-ED2C-4E8A-A261-D234A707EEC8}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{BF014880-ED2C-4E8A-A261-D234A707EEC8}.Release|Any CPU.ActiveCfg = Release|iPhoneSimulator
-		{BF014880-ED2C-4E8A-A261-D234A707EEC8}.Release|iPhone.ActiveCfg = Release|iPhone
-		{BF014880-ED2C-4E8A-A261-D234A707EEC8}.Release|iPhone.Build.0 = Release|iPhone
-		{BF014880-ED2C-4E8A-A261-D234A707EEC8}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
-		{BF014880-ED2C-4E8A-A261-D234A707EEC8}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
