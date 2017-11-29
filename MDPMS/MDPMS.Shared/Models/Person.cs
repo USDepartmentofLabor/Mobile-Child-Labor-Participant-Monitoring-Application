@@ -7,16 +7,6 @@ namespace MDPMS.Shared.Models
     /// </summary>
     public class Person
     {
-
-        #region "Parent"
-
-        /// <summary>
-        /// Parent household
-        /// </summary>
-        public Household Household { get; set; }
-
-        #endregion
-
         /// <summary>
         /// Last name (family name)
         /// </summary>

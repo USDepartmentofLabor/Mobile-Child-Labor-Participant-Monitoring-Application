@@ -9,6 +9,7 @@ namespace MDPMS.EfDatabase.Database
         public DbSet<Gender> Genders { get; set; }
 
         // Data
+        public DbSet<Household> Households { get; set; }
         public DbSet<Person> People { get; set; }
 
         private string DatabasePath { get; set; }
