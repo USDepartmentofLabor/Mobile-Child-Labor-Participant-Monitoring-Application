@@ -7,11 +7,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.1" />
-    <PackageReference Include="Xamarin.Forms" Version="2.5.0.91635" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\MDPMS.EfDatabase\MDPMS.EfDatabase.csproj" />
   </ItemGroup>
 
 </Project>

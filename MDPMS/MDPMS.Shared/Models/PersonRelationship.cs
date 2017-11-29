@@ -1,11 +1,9 @@
-﻿using MDPMS.Shared.Models.Base;
-
-namespace MDPMS.Shared.Models
+﻿namespace MDPMS.Shared.Models
 {
     /// <summary>
     /// The family or social relationship of one person to another, e.g. parent, grandchild, etc.
     /// </summary>
-    public class PersonRelationship : BaseRecord
+    public class PersonRelationship
     {
         /// <summary>
         /// DPMS code field, open ended string

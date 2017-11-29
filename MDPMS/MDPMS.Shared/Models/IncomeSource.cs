@@ -1,11 +1,9 @@
-﻿using MDPMS.Shared.Models.Base;
-
-namespace MDPMS.Shared.Models
+﻿namespace MDPMS.Shared.Models
 {
     /// <summary>
     /// Household income source
     /// </summary>
-    public class IncomeSource : BaseRecord
+    public class IncomeSource
     {
         /// <summary>
         /// Name of product or service

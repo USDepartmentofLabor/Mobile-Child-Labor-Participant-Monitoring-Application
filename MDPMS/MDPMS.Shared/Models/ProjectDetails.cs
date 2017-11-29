@@ -1,12 +1,11 @@
 ﻿using System;
-using MDPMS.Shared.Models.Base;
 
 namespace MDPMS.Shared.Models
 {
     /// <summary>
     /// Project details, one per app instance
     /// </summary>
-    public class ProjectDetails : BaseRecord
+    public class ProjectDetails
     {
         /// <summary>
         /// Short name

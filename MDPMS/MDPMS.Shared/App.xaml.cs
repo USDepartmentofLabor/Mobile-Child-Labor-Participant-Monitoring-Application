@@ -1,4 +1,5 @@
-﻿using MDPMS.Shared.Models;
+﻿using MDPMS.EfDatabase.Database;
+using MDPMS.Shared.Models;
 using MDPMS.Shared.Views;
 using MDPMS.Shared.ViewModels;
 using Xamarin.Forms;
@@ -7,9 +8,15 @@ namespace MDPMS.Shared
 {
 	public partial class App : Application
 	{
-		public App ()
+		public App (string databasePath)
 		{
 			InitializeComponent();
+
+            // init db
+            var db = new MDPMSDatabaseContext(databasePath);
+
+            var databaseWasCreated = db.Database.EnsureCreated();
+            if (databaseWasCreated) DatabaseSeed.SeedDatabase(db);
 
             var applicationInstanceData = new ApplicationInstanceData();
 

@@ -1,12 +1,11 @@
 ﻿using System;
-using MDPMS.Shared.Models.Base;
 
 namespace MDPMS.Shared.Models
 {
     /// <summary>
     /// Person, adult or child
     /// </summary>
-    public class Person : BaseRecord
+    public class Person
     {
 
         #region "Parent"

@@ -1,24 +1,18 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace MDPMS.Shared.Models.Base
+namespace MDPMS.EfDatabase.EfModels.Base
 {
     /// <summary>
-    /// Base record for models tied to external entities
+    /// Base model for entity framework models tied to external entities
     /// </summary>
-    public class BaseRecord
+    public class EfBaseModel
     {
-        // TODO: Identifier as separate type for substitution?
-        // TODO: Single Identifier, substitute external for internal as it is available?
-
         /// <summary>
         /// Internal identifier
         /// </summary>
-        public Guid? InternalId { get; set; }
-
-        /// <summary>
-        /// Check if it has an internal Id
-        /// </summary>
-        public bool HasInternalId { get { return InternalId == null; } }
+        [Key]
+        public int InternalId { get; set; }
 
         /// <summary>
         /// External identifier
@@ -43,6 +37,6 @@ namespace MDPMS.Shared.Models.Base
         /// <summary>
         /// Boolean, true for record is soft deleted
         /// </summary>
-        public bool SoftDeleted { get; set; }
+        public bool SoftDeleted { get; set; }       
     }
 }

@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using MDPMS.Shared.Models.Base;
 
 namespace MDPMS.Shared.Models
 {
     /// <summary>
     /// Household
     /// </summary>
-    public class Household : BaseRecord
+    public class Household
     {        
         /// <summary>
         /// Household name
