@@ -56,11 +56,19 @@ Copy-Item .\MDPMS\MDPMS.EfDatabase\Database\* $projectPath
 Copy-Item .\MDPMS\MDPMS.EfDatabase\EfModels\* $projectPath
 Copy-Item .\MDPMS\MDPMS.EfDatabase\EfModels\Base\* $projectPath
 
+# copy existing migrations
+$tempProjMigrationsPath = (Join-Path -Path $projectPath -ChildPath "Migrations\")
+New-Item -Path $tempProjMigrationsPath -ItemType directory
+Copy-Item .\MDPMS\MDPMS.EfDatabase\Migrations\* $tempProjMigrationsPath
+
 # build a migration
 iex "dotnet restore $csprojPath"
 iex "dotnet build $csprojPath"
 cd $projectPath
 iex "dotnet ef migrations add $migrationName"
 cd ..
+
+#copy generated migrations back
+Copy-Item (Join-Path -Path $tempProjMigrationsPath -ChildPath "\*") .\MDPMS\MDPMS.EfDatabase\Migrations\
 
 Write-Output "done"
