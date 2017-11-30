@@ -5,6 +5,7 @@ Param([string]$migrationName)
 # relative path
 Resolve-Path GenerateMigrationsProj.ps1
 $projectPath = ".\MigrationsDotNetProj\"
+$csprojPath = (Join-Path -Path $projectPath -ChildPath "Migrations.csproj")
 
 # check if folder exsists
 $folderExists = Test-Path $projectPath
@@ -16,39 +17,39 @@ if ($folderExists) { Remove-Item $projectPath -Recurse }
 New-Item -Path $projectPath -ItemType directory
 
 # create csproj file
-Set-Content (Join-Path -Path $projectPath -ChildPath "Migrations.csproj") '<Project Sdk="Microsoft.NET.Sdk">'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Migrations.csproj") ''
-Add-Content (Join-Path -Path $projectPath -ChildPath "Migrations.csproj") '  <PropertyGroup>'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Migrations.csproj") '    <OutputType>Exe</OutputType>'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Migrations.csproj") '    <TargetFramework>netcoreapp2.0</TargetFramework>'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Migrations.csproj") '  </PropertyGroup>'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Migrations.csproj") ''
-Add-Content (Join-Path -Path $projectPath -ChildPath "Migrations.csproj") '  <ItemGroup>'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Migrations.csproj") '    <PackageReference Include="NETStandard.Library" Version="2.0.1" />'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Migrations.csproj") '    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Migrations.csproj") '    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.1" />'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Migrations.csproj") '    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.1" />'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Migrations.csproj") '    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Migrations.csproj") '  </ItemGroup>'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Migrations.csproj") ''
-Add-Content (Join-Path -Path $projectPath -ChildPath "Migrations.csproj") '</Project>'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Migrations.csproj") ''
+Set-Content $csprojPath '<Project Sdk="Microsoft.NET.Sdk">'
+Add-Content $csprojPath ''
+Add-Content $csprojPath '  <PropertyGroup>'
+Add-Content $csprojPath '    <OutputType>Exe</OutputType>'
+Add-Content $csprojPath '    <TargetFramework>netcoreapp2.0</TargetFramework>'
+Add-Content $csprojPath '  </PropertyGroup>'
+Add-Content $csprojPath ''
+Add-Content $csprojPath '  <ItemGroup>'
+Add-Content $csprojPath '    <PackageReference Include="NETStandard.Library" Version="2.0.1" />'
+Add-Content $csprojPath '    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />'
+Add-Content $csprojPath '    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.1" />'
+Add-Content $csprojPath '    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.1" />'
+Add-Content $csprojPath '    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />'
+Add-Content $csprojPath '  </ItemGroup>'
+Add-Content $csprojPath ''
+Add-Content $csprojPath '</Project>'
 
 # create main for build
-Set-Content (Join-Path -Path $projectPath -ChildPath "Program.cs") 'using System;'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Program.cs") ''
-Add-Content (Join-Path -Path $projectPath -ChildPath "Program.cs") 'namespace Migrations'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Program.cs") '{'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Program.cs") '    class Program'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Program.cs") '    {'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Program.cs") '        static void Main(string[] args)'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Program.cs") '        {'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Program.cs") '            Console.WriteLine("Migrations!");'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Program.cs") '            Console.ReadLine();'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Program.cs") '        }'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Program.cs") '    }'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Program.cs") '}'
-Add-Content (Join-Path -Path $projectPath -ChildPath "Program.cs") ''
+$programCsPath = (Join-Path -Path $projectPath -ChildPath "Program.cs")
+Set-Content $programCsPath 'using System;'
+Add-Content $programCsPath ''
+Add-Content $programCsPath 'namespace Migrations'
+Add-Content $programCsPath '{'
+Add-Content $programCsPath '    class Program'
+Add-Content $programCsPath '    {'
+Add-Content $programCsPath '        static void Main(string[] args)'
+Add-Content $programCsPath '        {'
+Add-Content $programCsPath '            Console.WriteLine("Migrations!");'
+Add-Content $programCsPath '            Console.ReadLine();'
+Add-Content $programCsPath '        }'
+Add-Content $programCsPath '    }'
+Add-Content $programCsPath '}'
+Add-Content $programCsPath ''
 
 # copy files from ef database project
 Copy-Item .\MDPMS\MDPMS.EfDatabase\Database\* $projectPath
@@ -56,9 +57,10 @@ Copy-Item .\MDPMS\MDPMS.EfDatabase\EfModels\* $projectPath
 Copy-Item .\MDPMS\MDPMS.EfDatabase\EfModels\Base\* $projectPath
 
 # build a migration
+iex "dotnet restore $csprojPath"
+iex "dotnet build $csprojPath"
 cd $projectPath
-iex "dotnet restore"
-iex "dotnet build"
 iex "dotnet ef migrations add $migrationName"
+cd ..
 
 Write-Output "done"
