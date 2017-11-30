@@ -3,7 +3,7 @@
 Param([string]$migrationName)
 
 # relative path
-Resolve-Path GenerateMigrationsProj.ps1
+Resolve-Path AddMigration.ps1
 $projectPath = ".\MigrationsDotNetProj\"
 $csprojPath = (Join-Path -Path $projectPath -ChildPath "Migrations.csproj")
 
