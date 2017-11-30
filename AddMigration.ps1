@@ -71,4 +71,7 @@ cd ..
 #copy generated migrations back
 Copy-Item (Join-Path -Path $tempProjMigrationsPath -ChildPath "\*") .\MDPMS\MDPMS.EfDatabase\Migrations\
 
+# clean up temp files
+Remove-Item $projectPath -Recurse
+
 Write-Output "done"
