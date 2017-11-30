@@ -1,5 +1,7 @@
 # create a dotnot project to create ef migrations for the xamarin app
 
+Param([string]$migrationName)
+
 # relative path
 Resolve-Path GenerateMigrationsProj.ps1
 $projectPath = ".\MigrationsDotNetProj\"
@@ -47,5 +49,16 @@ Add-Content (Join-Path -Path $projectPath -ChildPath "Program.cs") '        }'
 Add-Content (Join-Path -Path $projectPath -ChildPath "Program.cs") '    }'
 Add-Content (Join-Path -Path $projectPath -ChildPath "Program.cs") '}'
 Add-Content (Join-Path -Path $projectPath -ChildPath "Program.cs") ''
+
+# copy files from ef database project
+Copy-Item .\MDPMS\MDPMS.EfDatabase\Database\* $projectPath
+Copy-Item .\MDPMS\MDPMS.EfDatabase\EfModels\* $projectPath
+Copy-Item .\MDPMS\MDPMS.EfDatabase\EfModels\Base\* $projectPath
+
+# build a migration
+cd $projectPath
+iex "dotnet restore"
+iex "dotnet build"
+iex "dotnet ef migrations add $migrationName"
 
 Write-Output "done"

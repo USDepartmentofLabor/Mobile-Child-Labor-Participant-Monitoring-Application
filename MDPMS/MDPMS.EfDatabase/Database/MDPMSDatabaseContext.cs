@@ -14,6 +14,11 @@ namespace MDPMS.EfDatabase.Database
 
         private string DatabasePath { get; set; }
         
+        public MDPMSDatabaseContext()
+        {
+            //
+        }
+
         public MDPMSDatabaseContext(string databasePath)
         {
             DatabasePath = databasePath;
