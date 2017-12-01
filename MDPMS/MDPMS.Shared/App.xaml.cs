@@ -2,6 +2,7 @@
 using MDPMS.Shared.Models;
 using MDPMS.Shared.Views;
 using MDPMS.Shared.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared
@@ -15,9 +16,12 @@ namespace MDPMS.Shared
             // init db
             var db = new MDPMSDatabaseContext(databasePath);
 
-            var databaseWasCreated = db.Database.EnsureCreated();
-            if (databaseWasCreated) DatabaseSeed.SeedDatabase(db);
+            //var databaseWasCreated = db.Database.EnsureCreated();
+            //if (databaseWasCreated) DatabaseSeed.SeedDatabase(db);
 
+            db.Database.Migrate();
+            DatabaseSeed.SeedDatabase(db);
+            
             var applicationInstanceData = new ApplicationInstanceData();
 
             MainPage = new LandingView()
