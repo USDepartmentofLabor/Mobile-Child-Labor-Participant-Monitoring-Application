@@ -1,11 +1,12 @@
-﻿using System;
+﻿using MDPMS.EfDatabase.EfModels.Base;
+using System;
 
-namespace MDPMS.Shared.Models
+namespace MDPMS.EfDatabase.EfModels
 {
     /// <summary>
     /// Project details, one per app instance
     /// </summary>
-    public class ProjectDetails
+    public class ProjectDetails : EfBaseModel
     {
         /// <summary>
         /// Short name
@@ -46,13 +47,5 @@ namespace MDPMS.Shared.Models
         /// Region
         /// </summary>
         public string Region { get; set; }
-
-        #region "Child objects"
-
-        // TODO: Locations
-        // TODO: Direct Beneficiary Targets
-
-        #endregion
-
     }
 }

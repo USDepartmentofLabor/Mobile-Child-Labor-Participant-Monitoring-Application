@@ -27,12 +27,12 @@ namespace MDPMS.EfDatabase.EfModels.Base
         /// <summary>
         /// DateTime record was created
         /// </summary>
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
         /// <summary>
         /// DateTime record was last changed
         /// </summary>
-        public DateTime LastUpdatedAt { get; set; }
+        public DateTime? LastUpdatedAt { get; set; }
 
         /// <summary>
         /// Boolean, true for record is soft deleted

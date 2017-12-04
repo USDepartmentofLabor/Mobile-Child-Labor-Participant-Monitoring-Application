@@ -16,7 +16,8 @@ namespace MDPMS.Shared
             // init db
             var db = new MDPMSDatabaseContext(databasePath);
 
-            db.Database.Migrate();
+            db.Database.EnsureCreated();            
+            //db.Database.Migrate();
             DatabaseSeed.SeedDatabase(db);
             
             var applicationInstanceData = new ApplicationInstanceData();

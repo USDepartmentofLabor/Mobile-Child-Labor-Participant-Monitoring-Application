@@ -7,10 +7,13 @@ namespace MDPMS.EfDatabase.Database
     {
         // Look ups
         public DbSet<Gender> Genders { get; set; }
+        public DbSet<PersonRelationship> PersonRelationships { get; set; }
+        public DbSet<ProjectDetails> ProjectDetails { get; set; }
 
         // Data
         public DbSet<Household> Households { get; set; }
         public DbSet<Person> People { get; set; }
+        public DbSet<IncomeSource> IncomeSources { get; set; }
 
         private string DatabasePath { get; set; }
         

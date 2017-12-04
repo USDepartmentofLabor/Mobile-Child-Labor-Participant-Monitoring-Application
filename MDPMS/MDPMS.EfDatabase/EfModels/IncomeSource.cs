@@ -1,13 +1,14 @@
-﻿namespace MDPMS.Shared.Models
+﻿using MDPMS.EfDatabase.EfModels.Base;
+
+namespace MDPMS.EfDatabase.EfModels
 {
     /// <summary>
-    /// Household income source
+    /// Household income source, note fields stored as string since they can be open ended answers
     /// </summary>
-    public class IncomeSource
+    public class IncomeSource : EfBaseModel
     {
         /// <summary>
         /// Name of product or service
-        /// Fields stored as string since they can be open ended answers
         /// </summary>
         public string ProductServiceName { get; set; }
 
@@ -34,6 +35,6 @@
         /// <summary>
         /// Currency
         /// </summary>
-        public string Currency { get; set; }        
+        public string Currency { get; set; }
     }
 }

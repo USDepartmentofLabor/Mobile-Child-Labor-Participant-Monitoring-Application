@@ -1,4 +1,5 @@
 ﻿using MDPMS.EfDatabase.EfModels.Base;
+using System.Collections.Generic;
 
 namespace MDPMS.EfDatabase.EfModels
 {
@@ -14,8 +15,14 @@ namespace MDPMS.EfDatabase.EfModels
         /// </summary>
         public string Name { get; set; }
 
-        // TODO: Intake, hold only 1?
-        // TODO: Income sources, hold many
-        // TODO: Members, hold many people        
+        /// <summary>
+        /// FK to manu income sources
+        /// </summary>
+        public List<IncomeSource> IncomeSources { get; set; }
+
+        /// <summary>
+        /// Household members
+        /// </summary>
+        public List<Person> Members { get; set; }
     }
 }

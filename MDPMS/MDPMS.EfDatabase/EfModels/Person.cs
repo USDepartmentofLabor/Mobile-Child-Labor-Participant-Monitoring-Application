@@ -39,6 +39,14 @@ namespace MDPMS.EfDatabase.EfModels
         /// </summary>
         public bool DateOfBirthIsApproximate { get; set; }
 
-        // TODO: FK to person_relationship to household        
+        /// <summary>
+        /// Relationship to head of household
+        /// </summary>
+        public PersonRelationship RelationshipToHeadOfHousehold { get; set; }
+
+        /// <summary>
+        /// Optional, relationship to head of household if other
+        /// </summary>
+        public string RelationshipIfOther { get; set; }
     }
 }
