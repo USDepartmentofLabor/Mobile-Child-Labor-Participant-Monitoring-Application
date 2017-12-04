@@ -60,13 +60,19 @@ namespace Migrations.Migrations
 
                     b.Property<DateTime?>("DateOfBirth");
 
+                    b.Property<bool>("DateOfBirthIsApproximate");
+
                     b.Property<int?>("ExternalId");
+
+                    b.Property<string>("FirstName");
 
                     b.Property<int?>("GenderId");
 
+                    b.Property<string>("LastName");
+
                     b.Property<DateTime>("LastUpdatedAt");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("MiddleName");
 
                     b.Property<bool>("SoftDeleted");
 

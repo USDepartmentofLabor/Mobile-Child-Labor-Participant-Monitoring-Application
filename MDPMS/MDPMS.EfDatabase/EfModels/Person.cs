@@ -3,13 +3,42 @@ using System;
 
 namespace MDPMS.EfDatabase.EfModels
 {
+    /// <summary>
+    /// Person, adult or child
+    /// </summary>
     public class Person : EfBaseModel
     {
-        public string Name { get; set; }
+        /// <summary>
+        /// First name (given name)
+        /// </summary>
+        public string FirstName { get; set; }
 
-        public DateTime? DateOfBirth { get; set; }
-
+        /// <summary>
+        /// Last name (family name)
+        /// </summary>
+        public string LastName { get; set; }
+        
+        /// <summary>
+        /// Middle name
+        /// </summary>
+        public string MiddleName { get; set; }
+        
+        /// <summary>
+        /// Gender
+        /// </summary>
         // ForeignKey to Gender        
         public Gender Gender { get; set; }
+
+        /// <summary>
+        /// Date of birth, DateTime
+        /// </summary>
+        public DateTime? DateOfBirth { get; set; }
+
+        /// <summary>
+        /// Date of birth is approximate date?, true = yes, false = no
+        /// </summary>
+        public bool DateOfBirthIsApproximate { get; set; }
+
+        // TODO: FK to person_relationship to household        
     }
 }

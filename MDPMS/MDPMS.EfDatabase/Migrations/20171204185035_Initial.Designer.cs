@@ -11,7 +11,7 @@ using System;
 namespace Migrations.Migrations
 {
     [DbContext(typeof(MDPMSDatabaseContext))]
-    [Migration("20171130184309_Initial")]
+    [Migration("20171204185035_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,13 +61,19 @@ namespace Migrations.Migrations
 
                     b.Property<DateTime?>("DateOfBirth");
 
+                    b.Property<bool>("DateOfBirthIsApproximate");
+
                     b.Property<int?>("ExternalId");
+
+                    b.Property<string>("FirstName");
 
                     b.Property<int?>("GenderId");
 
+                    b.Property<string>("LastName");
+
                     b.Property<DateTime>("LastUpdatedAt");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("MiddleName");
 
                     b.Property<bool>("SoftDeleted");
 
