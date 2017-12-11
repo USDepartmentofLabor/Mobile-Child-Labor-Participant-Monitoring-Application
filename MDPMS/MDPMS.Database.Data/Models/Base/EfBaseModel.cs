@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace MDPMS.EfDatabase.EfModels.Base
+namespace MDPMS.Database.Data.Models.Base
 {
     /// <summary>
     /// Base model for entity framework models tied to external entities

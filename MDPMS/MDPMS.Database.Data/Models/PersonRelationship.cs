@@ -1,6 +1,6 @@
-﻿using MDPMS.EfDatabase.EfModels.Base;
+﻿using MDPMS.Database.Data.Models.Base;
 
-namespace MDPMS.EfDatabase.EfModels
+namespace MDPMS.Database.Data.Models
 {
     /// <summary>
     /// The family or social relationship of one person to another, e.g. parent, grandchild, etc.

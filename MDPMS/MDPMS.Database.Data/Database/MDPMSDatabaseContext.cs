@@ -1,7 +1,7 @@
-﻿using MDPMS.EfDatabase.EfModels;
+﻿using MDPMS.Database.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace MDPMS.EfDatabase.Database
+namespace MDPMS.Database.Data.Database
 {
     public class MDPMSDatabaseContext : DbContext
     {

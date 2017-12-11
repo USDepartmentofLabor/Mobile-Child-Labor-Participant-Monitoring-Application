@@ -1,9 +1,9 @@
-﻿using MDPMS.EfDatabase.EfModels;
+﻿using MDPMS.Database.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MDPMS.EfDatabase.Database
+namespace MDPMS.Database.Data.Database
 {
     public static class DatabaseSeed
     {

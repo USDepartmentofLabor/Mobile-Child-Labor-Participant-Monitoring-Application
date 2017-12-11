@@ -1,7 +1,7 @@
-﻿using MDPMS.EfDatabase.EfModels.Base;
+﻿using MDPMS.Database.Data.Models.Base;
 using System;
 
-namespace MDPMS.EfDatabase.EfModels
+namespace MDPMS.Database.Data.Models
 {
     /// <summary>
     /// Person, adult or child

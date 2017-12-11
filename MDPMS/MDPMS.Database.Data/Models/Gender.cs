@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MDPMS.EfDatabase.EfModels
+namespace MDPMS.Database.Data.Models
 {
     /// <summary>
     /// Look up table for Gender

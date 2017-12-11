@@ -11,7 +11,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MDPMS.EfDatabase\MDPMS.EfDatabase.csproj" />
+    <ProjectReference Include="..\MDPMS.Database.Data\MDPMS.Database.Data.csproj" />
+    <ProjectReference Include="..\MDPMS.Database.Localization\MDPMS.Database.Localization.csproj" />
+    <ProjectReference Include="..\MDPMS.Helper.Json\MDPMS.Helper.Json.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\LocalizationSelectionView.xaml.cs">
+      <DependentUpon>LocalizationSelectionView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

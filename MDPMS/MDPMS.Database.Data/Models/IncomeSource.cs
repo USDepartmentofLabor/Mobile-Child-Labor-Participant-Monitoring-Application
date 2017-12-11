@@ -1,6 +1,6 @@
-﻿using MDPMS.EfDatabase.EfModels.Base;
+﻿using MDPMS.Database.Data.Models.Base;
 
-namespace MDPMS.EfDatabase.EfModels
+namespace MDPMS.Database.Data.Models
 {
     /// <summary>
     /// Household income source, note fields stored as string since they can be open ended answers

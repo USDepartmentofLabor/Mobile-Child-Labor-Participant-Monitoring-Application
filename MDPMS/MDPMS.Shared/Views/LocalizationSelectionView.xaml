@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDPMS.Shared.Views.LocalizationSelectionView">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition/>
+                <RowDefinition Height="65"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[SelectLocalization]}" Margin="5" FontAttributes="Bold" FontSize="20" Style="{StaticResource LabelStyleCenteredWrapped}"/>
+            <ListView Grid.Row="1" ItemsSource="{Binding Localizations}" SelectedItem="{Binding SelectedLocalization, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding DisplayName}" TextColor="Black"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Image="Cancel_disable_32x_orange.png" Command="{Binding NavigateToLandingPageCommand}"/>
+                <Button Grid.Column="1" Image="VSO_F12_Checkmark_32x_blue.png" Command="{Binding NavigateToLandingPageCheckSelectionCommand}"/>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

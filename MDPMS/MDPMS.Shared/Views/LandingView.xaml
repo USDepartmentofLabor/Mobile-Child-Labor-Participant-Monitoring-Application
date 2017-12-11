@@ -2,18 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDPMS.Shared.Views.LandingView">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style x:Key="LandingPageLabelStyleMain" TargetType="Label">
-                <Setter Property="TextColor" Value="White"/>
-                <Setter Property="LineBreakMode" Value="CharacterWrap"/>
-                <Setter Property="HorizontalOptions" Value="Center"/>
-                <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="HorizontalTextAlignment" Value="Center"/>
-                <Setter Property="VerticalTextAlignment" Value="Center"/>
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -25,17 +13,19 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="3*"/>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="3*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="1" Style="{StaticResource LandingPageLabelStyleMain}" Text="Direct Beneficiary Monitoring System" Font="Bold,28"/>
-                <Label Grid.Row="2" Style="{StaticResource LandingPageLabelStyleMain}" Text="mobile" Font="Italics,24"/>
-                <Label Grid.Row="3" Style="{StaticResource LandingPageLabelStyleMain}" Text="The more we connect, the better it gets." Font="Bold,24"/>
+                <Label Grid.Row="1" TextColor="White" Style="{StaticResource LabelStyleCenteredWrapped}" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[ProjectName]}" FontAttributes="Bold" FontSize="28"/>
+                <Label Grid.Row="2" TextColor="White" Style="{StaticResource LabelStyleCenteredWrapped}" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Mobile]}" FontAttributes="Bold" FontSize="24"/>
+                <Label Grid.Row="3" TextColor="White" Style="{StaticResource LabelStyleCenteredWrapped}" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[ProjectPhrase]}" FontAttributes="Bold" FontSize="24"/>
                 <Image Grid.Row="4" Source="dolseal.png" HorizontalOptions="Center" VerticalOptions="Center"/>
-                <Button Grid.Row="5" Text="Proceed" Margin="10"/>
+                <Button Grid.Row="5" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Proceed]}" Margin="10"/>
+                <Button Grid.Row="6" Margin="1" Image="globe_32xLG.png" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding NavigateToLocalizationSelectionCommand}"/>
+                <Label Grid.Row="6" Text="{Binding ApplicationInstanceData.SelectedLocalization.DisplayName}" Margin="5,5,15,5" TextColor="White" FontAttributes="Italic" FontSize="22" HorizontalOptions="End" VerticalOptions="Center" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
             </Grid>
         </Grid>
     </ContentPage.Content>

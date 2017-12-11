@@ -52,14 +52,13 @@ Add-Content $programCsPath '}'
 Add-Content $programCsPath ''
 
 # copy files from ef database project
-Copy-Item .\MDPMS\MDPMS.Database.Data\Database\* $projectPath
-Copy-Item .\MDPMS\MDPMS.Database.Data\Models\* $projectPath
-Copy-Item .\MDPMS\MDPMS.Database.Data\Models\Base\* $projectPath
+Copy-Item .\MDPMS\MDPMS.Database.Localization\Database\* $projectPath
+Copy-Item .\MDPMS\MDPMS.Database.Localization\Models\* $projectPath
 
 # copy existing migrations
 $tempProjMigrationsPath = (Join-Path -Path $projectPath -ChildPath "Migrations\")
 New-Item -Path $tempProjMigrationsPath -ItemType directory
-Copy-Item .\MDPMS\MDPMS.Database.Data\Migrations\* $tempProjMigrationsPath
+Copy-Item .\MDPMS\MDPMS.Database.Localization\Migrations\* $tempProjMigrationsPath
 
 # build a migration
 iex "dotnet restore $csprojPath"
@@ -69,7 +68,7 @@ iex "dotnet ef migrations add $migrationName"
 cd ..
 
 #copy generated migrations back
-Copy-Item (Join-Path -Path $tempProjMigrationsPath -ChildPath "\*") .\MDPMS\MDPMS.Database.Data\Migrations\
+Copy-Item (Join-Path -Path $tempProjMigrationsPath -ChildPath "\*") .\MDPMS\MDPMS.Database.Localization\Migrations\
 
 # clean up temp files
 Remove-Item $projectPath -Recurse
