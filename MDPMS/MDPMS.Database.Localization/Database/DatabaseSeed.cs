@@ -28,15 +28,23 @@ namespace MDPMS.Database.Localization.Database
             const int projectNameKeyId = 1;
             const int mobileKeyId = 2;
             const int projectPhraseKeyId = 3;
-            const int proceedKeyId = 4;
+            const int continueKeyId = 4;
             const int selectLocalizationKeyId = 5;
+            const int homeKeyId = 6;
+            const int householdsKeyId = 7;
+            const int settingsKeyId = 8;
+            const int aboutKeyId = 9;
             foreach (var key in new Dictionary<int, string>
             {
                 { projectNameKeyId, @"ProjectName" },
                 { mobileKeyId, @"Mobile" },
                 { projectPhraseKeyId, @"ProjectPhrase" },
-                { proceedKeyId, @"Proceed" },
-                { selectLocalizationKeyId, @"SelectLocalization" }
+                { continueKeyId, @"Continue" },
+                { selectLocalizationKeyId, @"SelectLocalization" },
+                { homeKeyId, @"Home" },
+                { householdsKeyId, @"Households" },
+                { settingsKeyId, @"Settings" },
+                { aboutKeyId, @"About" }
             })
             {
                 if (localizationDatabaseContext.Keys.Any(a => a.KeyName.Equals(key.Value))) continue;
@@ -50,23 +58,31 @@ namespace MDPMS.Database.Localization.Database
             var translations = new Dictionary<int, List<Tuple<int, string>>>
             {
                 {
-                    enLocalizationId, new List<Tuple<int, string>>()
+                    enLocalizationId, new List<Tuple<int, string>>
                     {
                         new Tuple<int, string>(projectNameKeyId, @"Direct Participant Monitoring System"),
                         new Tuple<int, string>(mobileKeyId, @"Mobile"),
                         new Tuple<int, string>(projectPhraseKeyId, @"The more we connect, the better it gets."),
-                        new Tuple<int, string>(proceedKeyId, @"Proceed"),
-                        new Tuple<int, string>(selectLocalizationKeyId, @"Select Localization")
+                        new Tuple<int, string>(continueKeyId, @"Continue"),
+                        new Tuple<int, string>(selectLocalizationKeyId, @"Select Localization"),
+                        new Tuple<int, string>(homeKeyId, @"Home"),
+                        new Tuple<int, string>(householdsKeyId, @"Households"),
+                        new Tuple<int, string>(settingsKeyId, @"Settings"),
+                        new Tuple<int, string>(aboutKeyId, @"About")
                     }
                 },
                 {
-                    esLocalizationId, new List<Tuple<int, string>>()
+                    esLocalizationId, new List<Tuple<int, string>>
                     {
                         new Tuple<int, string>(projectNameKeyId, @"Sistema de monitoreo directo de participantes"),
                         new Tuple<int, string>(mobileKeyId, @"Móvil"),
                         new Tuple<int, string>(projectPhraseKeyId, @"Cuanto más nos conectamos, mejor se pone."),
-                        new Tuple<int, string>(proceedKeyId, @"Proceder"),
-                        new Tuple<int, string>(selectLocalizationKeyId, @"Seleccionar localización")
+                        new Tuple<int, string>(continueKeyId, @"Continuar"),
+                        new Tuple<int, string>(selectLocalizationKeyId, @"Seleccionar localización"),
+                        new Tuple<int, string>(homeKeyId, @"Casa"),
+                        new Tuple<int, string>(householdsKeyId, @"Hogares"),
+                        new Tuple<int, string>(settingsKeyId, @"Configuraciones"),
+                        new Tuple<int, string>(aboutKeyId, @"Acerca de")
                     }
                 }
             };            

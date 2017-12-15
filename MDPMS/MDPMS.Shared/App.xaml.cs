@@ -21,7 +21,8 @@ namespace MDPMS.Shared
                 DatabasePath = databasePath,
                 LocalizationDatabasePath = localizationDatabasePath,
                 SerializedApplicationInstanceData = new SerializedApplicationInstanceData(),
-                AvailableLocalizations = new ObservableCollection<Localization>()                
+                AvailableLocalizations = new ObservableCollection<Localization>(),
+                App = this
             };
 
 		    var applicationInstanceDataFilePath = System.IO.Path.Combine(applicationInstanceData.PlatformDataPath, applicationInstanceData.ApplicationInstanceDataFileName);
@@ -50,10 +51,7 @@ namespace MDPMS.Shared
             applicationInstanceData.SetLocalization(@"en");
                        
             // Load view
-            MainPage = new LandingView()
-            {
-                BindingContext = new LandingViewModel(applicationInstanceData)
-            };            
+            applicationInstanceData.NavigateToLandingView();                        
         }
 
 		protected override void OnStart ()

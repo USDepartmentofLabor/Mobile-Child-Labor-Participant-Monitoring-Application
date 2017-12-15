@@ -3,12 +3,21 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using MDPMS.Database.Data.Database;
 using MDPMS.Database.Localization.Database;
+using MDPMS.Shared.ViewModels;
+using MDPMS.Shared.Views;
+using Xamarin.Forms;
 
 namespace MDPMS.Shared.Models
 {
     public class ApplicationInstanceData
     {
         // PURPOSE: package instance data (settings, etc.)     
+
+        // Navigation data
+        public string Title { get; set; } = @"mDPMS";
+        public NavigationPage NavigationPage { get; set; }
+        public App App { get; set; }
+        public RootPage RootPage { get; set; }
 
         // Non-serialized data
         public string PlatformDataPath { get; set; }
@@ -55,6 +64,31 @@ namespace MDPMS.Shared.Models
             {
                 SelectedLocalization.Translations.Add(translation.KeyName, translation.KeyLocalizationValue);
             }            
+        }
+
+        public void HideMenu()
+        {
+            NavigationPage.Navigation.PopToRootAsync();
+            RootPage.IsPresented = false;
+        }
+
+        public void GoToView(ContentPage view)
+        {
+            // do not navigate if it is the same choice
+            if (view.GetType() != NavigationPage.CurrentPage.GetType())
+            {
+                NavigationPage = new NavigationPage(view);
+                RootPage.Detail = NavigationPage;
+            }
+            RootPage.IsPresented = false;
+        }
+
+        public void NavigateToLandingView()
+        {            
+            App.MainPage = new LandingView
+            {
+                BindingContext = new LandingViewModel(this)
+            };
         }
     }
 }
