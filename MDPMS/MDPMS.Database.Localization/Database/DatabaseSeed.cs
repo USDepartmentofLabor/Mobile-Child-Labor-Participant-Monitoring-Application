@@ -34,6 +34,7 @@ namespace MDPMS.Database.Localization.Database
             const int householdsKeyId = 7;
             const int settingsKeyId = 8;
             const int aboutKeyId = 9;
+            const int dpmsUrlKeyId = 10;
             foreach (var key in new Dictionary<int, string>
             {
                 { projectNameKeyId, @"ProjectName" },
@@ -44,7 +45,8 @@ namespace MDPMS.Database.Localization.Database
                 { homeKeyId, @"Home" },
                 { householdsKeyId, @"Households" },
                 { settingsKeyId, @"Settings" },
-                { aboutKeyId, @"About" }
+                { aboutKeyId, @"About" },
+                { dpmsUrlKeyId, @"DPMSURL" }
             })
             {
                 if (localizationDatabaseContext.Keys.Any(a => a.KeyName.Equals(key.Value))) continue;
@@ -68,7 +70,8 @@ namespace MDPMS.Database.Localization.Database
                         new Tuple<int, string>(homeKeyId, @"Home"),
                         new Tuple<int, string>(householdsKeyId, @"Households"),
                         new Tuple<int, string>(settingsKeyId, @"Settings"),
-                        new Tuple<int, string>(aboutKeyId, @"About")
+                        new Tuple<int, string>(aboutKeyId, @"About"),
+                        new Tuple<int, string>(dpmsUrlKeyId, @"DPMS URL")
                     }
                 },
                 {
@@ -82,7 +85,8 @@ namespace MDPMS.Database.Localization.Database
                         new Tuple<int, string>(homeKeyId, @"Casa"),
                         new Tuple<int, string>(householdsKeyId, @"Hogares"),
                         new Tuple<int, string>(settingsKeyId, @"Configuraciones"),
-                        new Tuple<int, string>(aboutKeyId, @"Acerca de")
+                        new Tuple<int, string>(aboutKeyId, @"Acerca de"),
+                        new Tuple<int, string>(dpmsUrlKeyId, @"DPMS URL")
                     }
                 }
             };            

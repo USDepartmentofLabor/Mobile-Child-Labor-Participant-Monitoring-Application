@@ -90,5 +90,10 @@ namespace MDPMS.Shared.Models
                 BindingContext = new LandingViewModel(this)
             };
         }
+
+        public void SaveSerializedApplicationInstanceData()
+        {
+            Helper.Json.JsonFileHelper.SaveDataToJsonFile(SerializedApplicationInstanceData, System.IO.Path.Combine(PlatformDataPath, ApplicationInstanceDataFileName));
+        }
     }
 }

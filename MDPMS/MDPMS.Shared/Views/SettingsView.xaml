@@ -3,10 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDPMS.Shared.Views.SettingsView">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Settings]}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[DPMSURL]}" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            <Entry Grid.Column="1" Grid.Row="0" Text="{Binding DpmsUrl}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+            <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Image="Cancel_disable_32x_orange.png" Command="{Binding RevertChangesCommand}"/>
+                <Button Grid.Column="1" Image="VSO_F12_Checkmark_32x_blue.png" Command="{Binding CommitChangesCommand}"/>
+            </Grid>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
