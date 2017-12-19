@@ -35,7 +35,8 @@ namespace MDPMS.Database.Localization.Database
             const int settingsKeyId = 8;
             const int aboutKeyId = 9;
             const int dpmsUrlKeyId = 10;
-            const int apiKeyKeyId = 11;            
+            const int apiKeyKeyId = 11;
+            const int syncKeyId = 12;
             foreach (var key in new Dictionary<int, string>
             {
                 { projectNameKeyId, @"ProjectName" },
@@ -48,7 +49,8 @@ namespace MDPMS.Database.Localization.Database
                 { settingsKeyId, @"Settings" },
                 { aboutKeyId, @"About" },
                 { dpmsUrlKeyId, @"DPMSURL" },
-                { apiKeyKeyId, @"ApiKey" }
+                { apiKeyKeyId, @"ApiKey" },
+                { syncKeyId, @"Sync" }
             })
             {
                 if (localizationDatabaseContext.Keys.Any(a => a.KeyName.Equals(key.Value))) continue;
@@ -74,7 +76,8 @@ namespace MDPMS.Database.Localization.Database
                         new Tuple<int, string>(settingsKeyId, @"Settings"),
                         new Tuple<int, string>(aboutKeyId, @"About"),
                         new Tuple<int, string>(dpmsUrlKeyId, @"DPMS URL"),
-                        new Tuple<int, string>(apiKeyKeyId, @"API Key")
+                        new Tuple<int, string>(apiKeyKeyId, @"API Key"),
+                        new Tuple<int, string>(syncKeyId, @"Sync")
                     }
                 },
                 {
@@ -90,7 +93,8 @@ namespace MDPMS.Database.Localization.Database
                         new Tuple<int, string>(settingsKeyId, @"Configuraciones"),
                         new Tuple<int, string>(aboutKeyId, @"Acerca de"),
                         new Tuple<int, string>(dpmsUrlKeyId, @"DPMS URL"),
-                        new Tuple<int, string>(apiKeyKeyId, @"Clave API")
+                        new Tuple<int, string>(apiKeyKeyId, @"Clave API"),
+                        new Tuple<int, string>(syncKeyId, @"Sincronización")
                     }
                 }
             };            

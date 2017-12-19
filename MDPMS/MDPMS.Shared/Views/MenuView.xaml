@@ -4,18 +4,29 @@
              x:Class="MDPMS.Shared.Views.MenuView">
     <ContentPage.Content>
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="80"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="55"/>
-            </Grid.RowDefinitions>
-            <Button Grid.Row="0" Text="☰" Command="{Binding HideMenuCommand}"/>
-            <Button Grid.Row="1" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Home]}" Command="{Binding NavigateToLandingViewCommand}"/>
-            <Button Grid.Row="2" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Households]}" Command="{Binding NavigateToHouseholdsCommand}"/>
-            <Button Grid.Row="3" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Settings]}" Command="{Binding NavigateToSettingsCommand}"/>
-            <Button Grid.Row="4" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[About]}" Command="{Binding NavigateToAboutCommand}"/>
+            <Grid IsVisible="{Binding IsBusy}">
+                <ActivityIndicator IsRunning="{Binding IsBusy}"/>
+                <Label Text="{Binding StatusMessage}" IsVisible="{Binding IsBusy}"
+                       FontSize="48" FontAttributes="Bold"
+                       HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            </Grid>
+            <Grid IsVisible="{Binding IsBusy, Converter={StaticResource reverseBooleanConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="55"/>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Text="☰" Command="{Binding HideMenuCommand}"/>
+                <Button Grid.Row="1" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Home]}" Command="{Binding NavigateToLandingViewCommand}"/>
+                <Button Grid.Row="2" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Households]}" Command="{Binding NavigateToHouseholdsCommand}"/>
+                <Button Grid.Row="3" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Sync]}" Command="{Binding SyncCommand}"/>
+                <Button Grid.Row="4" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Settings]}" Command="{Binding NavigateToSettingsCommand}"/>
+                <Button Grid.Row="5" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[About]}" Command="{Binding NavigateToAboutCommand}"/>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

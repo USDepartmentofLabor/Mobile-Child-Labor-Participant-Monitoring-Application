@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MDPMS.Shared.App">
+             x:Class="MDPMS.Shared.App"
+             xmlns:converters="clr-namespace:MDPMS.Shared.Converters;assembly=MDPMS.Shared">
     <Application.Resources>
         <ResourceDictionary>
+            
+            <!-- Styles -->
             <Style x:Key="LabelStyleCenteredWrapped" TargetType="Label">
                 <Setter Property="LineBreakMode" Value="CharacterWrap"/>
                 <Setter Property="HorizontalOptions" Value="Center"/>
@@ -11,6 +14,10 @@
                 <Setter Property="HorizontalTextAlignment" Value="Center"/>
                 <Setter Property="VerticalTextAlignment" Value="Center"/>
             </Style>
+            
+            <!-- Converters -->
+            <converters:ReverseBooleanConverter x:Key="reverseBooleanConverter"/>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
