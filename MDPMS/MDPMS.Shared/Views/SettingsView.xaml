@@ -10,12 +10,15 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
                 <RowDefinition/>
                 <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
             <Label Grid.Column="0" Grid.Row="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[DPMSURL]}" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
             <Entry Grid.Column="1" Grid.Row="0" Text="{Binding DpmsUrl}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
-            <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
+            <Label Grid.Column="0" Grid.Row="1" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[ApiKey]}" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            <Entry Grid.Column="1" Grid.Row="1" Text="{Binding DpmsApiKey}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+            <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>

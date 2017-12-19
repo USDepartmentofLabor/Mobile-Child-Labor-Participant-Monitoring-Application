@@ -7,5 +7,6 @@ namespace MDPMS.Shared.Models
         public DateTime? LastSync { get; set; } = null;
         public string Url { get; set; } = @"";
         public bool SyncError { get; set; } = false;
+        public string ApiKey { get; set; } = @"";
     }
 }

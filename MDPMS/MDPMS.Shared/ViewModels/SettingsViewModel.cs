@@ -11,6 +11,7 @@ namespace MDPMS.Shared.ViewModels
         public Command CommitChangesCommand { get; set; }
 
         public string DpmsUrl { get; set; }
+        public string DpmsApiKey { get; set; }
 
         public SettingsViewModel(ApplicationInstanceData applicationInstanceData)
         {
@@ -18,11 +19,13 @@ namespace MDPMS.Shared.ViewModels
             CommitChangesCommand = new Command(ExecuteCommitChangesCommand);
             ApplicationInstanceData = applicationInstanceData;
             SetDpmsUrl();
+            SetDpmsApiKey();
         }
 
         private void ExecuteCommitChangesCommand()
         {
             ApplicationInstanceData.SerializedApplicationInstanceData.Url = DpmsUrl;
+            ApplicationInstanceData.SerializedApplicationInstanceData.ApiKey = DpmsApiKey;
             Helper.Json.JsonFileHelper.SaveDataToJsonFile(ApplicationInstanceData.SerializedApplicationInstanceData, System.IO.Path.Combine(ApplicationInstanceData.PlatformDataPath, ApplicationInstanceData.ApplicationInstanceDataFileName));
         }
 
@@ -35,6 +38,12 @@ namespace MDPMS.Shared.ViewModels
         {
             DpmsUrl = ApplicationInstanceData.SerializedApplicationInstanceData.Url;
             OnPropertyChanged(@"DpmsUrl");
+        }
+
+        private void SetDpmsApiKey()
+        {
+            DpmsApiKey = ApplicationInstanceData.SerializedApplicationInstanceData.ApiKey;
+            OnPropertyChanged(@"ApiKey");
         }
     }
 }
