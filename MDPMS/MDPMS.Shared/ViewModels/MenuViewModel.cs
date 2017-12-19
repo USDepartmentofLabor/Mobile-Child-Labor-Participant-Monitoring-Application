@@ -55,6 +55,9 @@ namespace MDPMS.Shared.ViewModels
             
             HideMenu();
 
+            // disable menu
+            ApplicationInstanceData.RootPage.IsGestureEnabled = false;
+
             // sync
             syncViewModel.StatusMessage = @"Syncing";
             syncViewModel.IsBusy = true;
@@ -68,6 +71,9 @@ namespace MDPMS.Shared.ViewModels
             ApplicationInstanceData.NavigationPage = currentView;
             ApplicationInstanceData.RootPage.Detail = ApplicationInstanceData.NavigationPage;
             ApplicationInstanceData.RootPage.IsPresented = false;
+
+            // re-enable menu
+            ApplicationInstanceData.RootPage.IsGestureEnabled = true;
         }
 
         private void ExecuteNavigateToSettingsCommand()
