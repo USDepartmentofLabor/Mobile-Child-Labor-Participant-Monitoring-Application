@@ -37,6 +37,7 @@ namespace MDPMS.Database.Localization.Database
             const int dpmsUrlKeyId = 10;
             const int apiKeyKeyId = 11;
             const int syncKeyId = 12;
+            const int syncingKeyId = 13;
             foreach (var key in new Dictionary<int, string>
             {
                 { projectNameKeyId, @"ProjectName" },
@@ -50,7 +51,8 @@ namespace MDPMS.Database.Localization.Database
                 { aboutKeyId, @"About" },
                 { dpmsUrlKeyId, @"DPMSURL" },
                 { apiKeyKeyId, @"ApiKey" },
-                { syncKeyId, @"Sync" }
+                { syncKeyId, @"Sync" },
+                { syncingKeyId, @"Syncing" }
             })
             {
                 if (localizationDatabaseContext.Keys.Any(a => a.KeyName.Equals(key.Value))) continue;
@@ -77,7 +79,8 @@ namespace MDPMS.Database.Localization.Database
                         new Tuple<int, string>(aboutKeyId, @"About"),
                         new Tuple<int, string>(dpmsUrlKeyId, @"DPMS URL"),
                         new Tuple<int, string>(apiKeyKeyId, @"API Key"),
-                        new Tuple<int, string>(syncKeyId, @"Sync")
+                        new Tuple<int, string>(syncKeyId, @"Sync"),
+                        new Tuple<int, string>(syncingKeyId, @"Syncing")
                     }
                 },
                 {
@@ -94,7 +97,8 @@ namespace MDPMS.Database.Localization.Database
                         new Tuple<int, string>(aboutKeyId, @"Acerca de"),
                         new Tuple<int, string>(dpmsUrlKeyId, @"DPMS URL"),
                         new Tuple<int, string>(apiKeyKeyId, @"Clave API"),
-                        new Tuple<int, string>(syncKeyId, @"Sincronización")
+                        new Tuple<int, string>(syncKeyId, @"Sincronización"),
+                        new Tuple<int, string>(syncingKeyId, @"Sincronizando")
                     }
                 }
             };            

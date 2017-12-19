@@ -59,7 +59,7 @@ namespace MDPMS.Shared.ViewModels
             ApplicationInstanceData.RootPage.IsGestureEnabled = false;
 
             // sync
-            syncViewModel.StatusMessage = @"Syncing";
+            syncViewModel.StatusMessage = ApplicationInstanceData.SelectedLocalization.Translations[@"Syncing"];
             syncViewModel.IsBusy = true;
             await Task.Run(() =>
             {
