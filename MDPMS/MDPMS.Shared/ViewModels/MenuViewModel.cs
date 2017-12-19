@@ -7,20 +7,7 @@ using Xamarin.Forms;
 namespace MDPMS.Shared.ViewModels
 {
     public class MenuViewModel : ViewModelBase
-    {
-        private string _statusMessage { get; set; }
-
-        public string StatusMessage
-        {
-            get => _statusMessage;
-            set
-            {
-                if (value == _statusMessage) return;
-                _statusMessage = value;
-                RaisePropertyChanged(() => StatusMessage);
-            }
-        }
-
+    {        
         public Command HideMenuCommand { get; set; }
         public Command NavigateToLandingViewCommand { get; set; }
         public Command NavigateToHouseholdsCommand { get; set; }
@@ -41,7 +28,7 @@ namespace MDPMS.Shared.ViewModels
 
         private void ExecuteHideMenuCommand()
         {
-            ApplicationInstanceData.HideMenu();
+            HideMenu();
         }
 
         private void ExecuteNavigateToLandingViewCommand()
@@ -51,29 +38,41 @@ namespace MDPMS.Shared.ViewModels
 
         private void ExecuteNavigateToHouseholdsCommand()
         {
-            ApplicationInstanceData.GoToView(new HouseholdsView
+            GoToView(new HouseholdsView
             {
                 BindingContext = new HouseholdsViewModel(ApplicationInstanceData)
             });
         }
 
         private async void ExecuteSyncCommand()
-        {
-            // SYNC
-            StatusMessage = @"Syncing";
-            IsBusy = true;
+        {            
+            // save current view
+            var currentView = ApplicationInstanceData.NavigationPage;
+            
+            // show sync view
+            var syncViewModel = new SyncViewModel(ApplicationInstanceData);
+            GoToView(new SyncView { BindingContext = syncViewModel });
+            
+            HideMenu();
 
+            // sync
+            syncViewModel.StatusMessage = @"Syncing";
+            syncViewModel.IsBusy = true;
             await Task.Run(() =>
             {
-                System.Threading.Thread.Sleep(5000);
+                System.Threading.Thread.Sleep(5000);                
             });
-
-            IsBusy = false;
+            syncViewModel.IsBusy = false;
+            
+            // display original view
+            ApplicationInstanceData.NavigationPage = currentView;
+            ApplicationInstanceData.RootPage.Detail = ApplicationInstanceData.NavigationPage;
+            ApplicationInstanceData.RootPage.IsPresented = false;
         }
 
         private void ExecuteNavigateToSettingsCommand()
         {
-            ApplicationInstanceData.GoToView(new SettingsView
+            GoToView(new SettingsView
             {
                 BindingContext = new SettingsViewModel(ApplicationInstanceData)
             });
@@ -81,10 +80,27 @@ namespace MDPMS.Shared.ViewModels
 
         private void ExecuteNavigateToAboutCommand()
         {
-            ApplicationInstanceData.GoToView(new AboutView
+            GoToView(new AboutView
             {
                 BindingContext = new AboutViewModel(ApplicationInstanceData)
             });
+        }
+
+        private void HideMenu()
+        {
+            ApplicationInstanceData.NavigationPage.Navigation.PopToRootAsync();
+            ApplicationInstanceData.RootPage.IsPresented = false;
+        }
+
+        private void GoToView(ContentPage view)
+        {
+            // do not navigate if it is the same choice
+            if (view.GetType() != ApplicationInstanceData.NavigationPage.CurrentPage.GetType())
+            {
+                ApplicationInstanceData.NavigationPage = new NavigationPage(view);
+                ApplicationInstanceData.RootPage.Detail = ApplicationInstanceData.NavigationPage;
+            }
+            ApplicationInstanceData.RootPage.IsPresented = false;
         }
     }
 }

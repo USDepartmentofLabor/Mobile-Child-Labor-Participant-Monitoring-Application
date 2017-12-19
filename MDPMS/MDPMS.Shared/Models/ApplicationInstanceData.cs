@@ -65,24 +65,7 @@ namespace MDPMS.Shared.Models
                 SelectedLocalization.Translations.Add(translation.KeyName, translation.KeyLocalizationValue);
             }            
         }
-
-        public void HideMenu()
-        {
-            NavigationPage.Navigation.PopToRootAsync();
-            RootPage.IsPresented = false;
-        }
-
-        public void GoToView(ContentPage view)
-        {
-            // do not navigate if it is the same choice
-            if (view.GetType() != NavigationPage.CurrentPage.GetType())
-            {
-                NavigationPage = new NavigationPage(view);
-                RootPage.Detail = NavigationPage;
-            }
-            RootPage.IsPresented = false;
-        }
-
+        
         public void NavigateToLandingView()
         {            
             App.MainPage = new LandingView
