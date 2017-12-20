@@ -37,7 +37,15 @@ namespace MDPMS.Database.Localization.Database
             const int dpmsUrlKeyId = 10;
             const int apiKeyKeyId = 11;
             const int syncKeyId = 12;
-            const int syncingKeyId = 13;
+            const int syncingKeyId = 13;            
+            const int obtainedKeyId = 14;
+            const int usernameKeyId = 15;
+            const int passwordKeyId = 16;
+            const int trueKeyId = 17;
+            const int falseKeyId = 18;
+            const int yesKeyId = 19;
+            const int noKeyId = 20;
+            const int errorKeyId = 21;            
             foreach (var key in new Dictionary<int, string>
             {
                 { projectNameKeyId, @"ProjectName" },
@@ -52,7 +60,15 @@ namespace MDPMS.Database.Localization.Database
                 { dpmsUrlKeyId, @"DPMSURL" },
                 { apiKeyKeyId, @"ApiKey" },
                 { syncKeyId, @"Sync" },
-                { syncingKeyId, @"Syncing" }
+                { syncingKeyId, @"Syncing" },
+                { obtainedKeyId, @"Obtained" },
+                { usernameKeyId, @"Username" },
+                { passwordKeyId, @"Password" },
+                { trueKeyId, @"True" },
+                { falseKeyId, @"False" },
+                { yesKeyId, @"Yes" },
+                { noKeyId, @"No" },
+                { errorKeyId, @"Error" }
             })
             {
                 if (localizationDatabaseContext.Keys.Any(a => a.KeyName.Equals(key.Value))) continue;
@@ -80,7 +96,15 @@ namespace MDPMS.Database.Localization.Database
                         new Tuple<int, string>(dpmsUrlKeyId, @"DPMS URL"),
                         new Tuple<int, string>(apiKeyKeyId, @"API Key"),
                         new Tuple<int, string>(syncKeyId, @"Sync"),
-                        new Tuple<int, string>(syncingKeyId, @"Syncing")
+                        new Tuple<int, string>(syncingKeyId, @"Syncing"),
+                        new Tuple<int, string>(obtainedKeyId, @"Obtained"),
+                        new Tuple<int, string>(usernameKeyId, @"Username"),
+                        new Tuple<int, string>(passwordKeyId, @"Password"),
+                        new Tuple<int, string>(trueKeyId, @"True"),
+                        new Tuple<int, string>(falseKeyId, @"False"),
+                        new Tuple<int, string>(yesKeyId, @"Yes"),
+                        new Tuple<int, string>(noKeyId, @"No"),
+                        new Tuple<int, string>(errorKeyId, @"Error")
                     }
                 },
                 {
@@ -98,7 +122,15 @@ namespace MDPMS.Database.Localization.Database
                         new Tuple<int, string>(dpmsUrlKeyId, @"DPMS URL"),
                         new Tuple<int, string>(apiKeyKeyId, @"Clave API"),
                         new Tuple<int, string>(syncKeyId, @"Sincronización"),
-                        new Tuple<int, string>(syncingKeyId, @"Sincronizando")
+                        new Tuple<int, string>(syncingKeyId, @"Sincronizando"),
+                        new Tuple<int, string>(obtainedKeyId, @"Adquirido"),
+                        new Tuple<int, string>(usernameKeyId, @"Nombre de usuario"),
+                        new Tuple<int, string>(passwordKeyId, @"Contraseña"),
+                        new Tuple<int, string>(trueKeyId, @"Cierto"),
+                        new Tuple<int, string>(falseKeyId, @"Falso"),
+                        new Tuple<int, string>(yesKeyId, @"Sí"),
+                        new Tuple<int, string>(noKeyId, @"No"),
+                        new Tuple<int, string>(errorKeyId, @"Error")
                     }
                 }
             };            
