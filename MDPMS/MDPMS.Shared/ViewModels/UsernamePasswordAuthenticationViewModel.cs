@@ -1,6 +1,7 @@
 ﻿using System;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
+using MDPMS.Shared.Views;
 using Plugin.Connectivity;
 using Xamarin.Forms;
 
@@ -47,7 +48,9 @@ namespace MDPMS.Shared.ViewModels
                         Password);
                     // parse json response to get api key and store it
                     ApplicationInstanceData.SerializedApplicationInstanceData.ApiKey = Helper.Json.JsonFileHelper.ParseTokenResponse(apiKeyResponse);
-                    Helper.Json.JsonFileHelper.SaveDataToJsonFile(ApplicationInstanceData.SerializedApplicationInstanceData, System.IO.Path.Combine(ApplicationInstanceData.PlatformDataPath, ApplicationInstanceData.ApplicationInstanceDataFileName));                    
+                    Helper.Json.JsonFileHelper.SaveDataToJsonFile(ApplicationInstanceData.SerializedApplicationInstanceData, System.IO.Path.Combine(ApplicationInstanceData.PlatformDataPath, ApplicationInstanceData.ApplicationInstanceDataFileName));                                      
+                    // go back to settings since successful
+                    ApplicationInstanceData.GoToView(new SettingsView { BindingContext = new SettingsViewModel(ApplicationInstanceData) });
                 }
                 catch (Exception e)
                 {
