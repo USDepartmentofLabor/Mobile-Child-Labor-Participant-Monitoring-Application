@@ -6,7 +6,7 @@
         <Grid IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="55"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
