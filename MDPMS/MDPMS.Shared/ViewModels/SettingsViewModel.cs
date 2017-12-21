@@ -46,7 +46,7 @@ namespace MDPMS.Shared.ViewModels
         private void SetApiKeyObtained()
         {
             // TODO: regex for api key check
-            ApiKeyObtained = ApplicationInstanceData.SerializedApplicationInstanceData.ApiKey.Equals(String.Empty) ?
+            ApiKeyObtained = !ApplicationInstanceData.SerializedApplicationInstanceData.ApiKey.Equals(String.Empty) ?
                 ApplicationInstanceData.SelectedLocalization.Translations[@"Yes"] :
                 ApplicationInstanceData.SelectedLocalization.Translations[@"No"];            
             OnPropertyChanged(@"ApiKeyObtained");
