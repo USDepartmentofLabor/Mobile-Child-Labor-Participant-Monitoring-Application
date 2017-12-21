@@ -104,6 +104,9 @@
     <Reference Include="Remotion.Linq, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Remotion.Linq.2.1.2\lib\portable-net45+win+wpa81+wp80\Remotion.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=106.1.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.106.1.0\lib\netstandard2.0\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="SQLitePCLRaw.batteries_green, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a84b7dcfb1391f7f, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SQLitePCLRaw.bundle_green.1.1.9\lib\MonoAndroid\SQLitePCLRaw.batteries_green.dll</HintPath>
     </Reference>
