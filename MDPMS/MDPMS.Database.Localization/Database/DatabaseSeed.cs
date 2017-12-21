@@ -51,6 +51,8 @@ namespace MDPMS.Database.Localization.Database
             const int authenticateKeyId = 24;
             const int okKeyId = 25;
             const int cancelKeyId = 26;
+            const int alertKeyId = 27;
+            const int connectivityProblemKeyId = 28;
             foreach (var key in new Dictionary<int, string>
             {
                 { projectNameKeyId, @"ProjectName" },
@@ -78,7 +80,9 @@ namespace MDPMS.Database.Localization.Database
                 { showPasswordKeyId, @"ShowPassword" },
                 { authenticateKeyId, @"Authenticate" },
                 { okKeyId, @"OK" },
-                { cancelKeyId, @"Cancel" }
+                { cancelKeyId, @"Cancel" },
+                { alertKeyId, @"Alert" },
+                { connectivityProblemKeyId, @"ConnectivityProblem" }
             })
             {
                 if (localizationDatabaseContext.Keys.Any(a => a.KeyName.Equals(key.Value))) continue;
@@ -119,7 +123,9 @@ namespace MDPMS.Database.Localization.Database
                         new Tuple<int, string>(showPasswordKeyId, @"Show Password"),
                         new Tuple<int, string>(authenticateKeyId, @"Authenticate"),
                         new Tuple<int, string>(okKeyId, @"OK"),
-                        new Tuple<int, string>(cancelKeyId, @"Cancel")                        
+                        new Tuple<int, string>(cancelKeyId, @"Cancel"),
+                        new Tuple<int, string>(alertKeyId, @"Alert"),
+                        new Tuple<int, string>(connectivityProblemKeyId, @"Connectivity Problem")
                     }
                 },
                 {
@@ -150,7 +156,9 @@ namespace MDPMS.Database.Localization.Database
                         new Tuple<int, string>(showPasswordKeyId, @"Mostrar contraseña"),
                         new Tuple<int, string>(authenticateKeyId, @"Autenticar"),
                         new Tuple<int, string>(okKeyId, @"De acuerdo"),
-                        new Tuple<int, string>(cancelKeyId, @"Cancelar")
+                        new Tuple<int, string>(cancelKeyId, @"Cancelar"),
+                        new Tuple<int, string>(alertKeyId, @"Alerta"),
+                        new Tuple<int, string>(connectivityProblemKeyId, @"Problema de conectividad")
                     }
                 }
             };            
