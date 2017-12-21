@@ -57,5 +57,16 @@ namespace MDPMS.Helper.Json
                                     e.Message + @"'.");
             }            
         }
+
+        /// <summary>
+        /// Parse JSON response for "token" ex: {"token": "0123456789abcdef0123456789abcdef"}
+        /// </summary>
+        /// <param name="jsonResponse"></param>
+        /// <returns></returns>
+        public static string ParseTokenResponse(string jsonResponse)
+        {
+            dynamic parse = JsonConvert.DeserializeObject(jsonResponse);
+            return parse.token;            
+        }
     }
 }
