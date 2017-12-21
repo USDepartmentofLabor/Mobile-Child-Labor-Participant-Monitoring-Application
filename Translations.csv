@@ -8,7 +8,7 @@ Home,Home,Casa
 Households,Households,Hogares
 Settings,Settings,Configuraciones
 About,About,Acerca de
-ApiKey,API Key, Clave API
+ApiKey,API Key,Clave API
 Sync,Sync,Sincronización
 Syncing,Syncing,Sincronizando
 Obtained,Obtained,Adquirido
@@ -19,3 +19,8 @@ False,False,Falso
 Yes,Yes,Sí
 No,No,No
 Error,Error,Error
+GetNewApiKey,Get New API Key,Obtener una nueva clave de API
+ShowPassword,Show Password,Mostrar contraseña
+Authenticate,Authenticate,Autenticar
+OK,OK,De acuerdo
+Cancel,Cancel,Cancelar

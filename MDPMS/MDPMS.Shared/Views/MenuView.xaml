@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDPMS.Shared.Views.MenuView">
     <ContentPage.Content>
-        <Grid IsVisible="{Binding IsBusy, Converter={StaticResource reverseBooleanConverter}}">
+        <Grid IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="*"/>

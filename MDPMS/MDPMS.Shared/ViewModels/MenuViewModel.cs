@@ -38,7 +38,7 @@ namespace MDPMS.Shared.ViewModels
 
         private void ExecuteNavigateToHouseholdsCommand()
         {
-            GoToView(new HouseholdsView
+            ApplicationInstanceData.GoToView(new HouseholdsView
             {
                 BindingContext = new HouseholdsViewModel(ApplicationInstanceData)
             });
@@ -51,7 +51,7 @@ namespace MDPMS.Shared.ViewModels
             
             // show sync view
             var syncViewModel = new SyncViewModel(ApplicationInstanceData);
-            GoToView(new SyncView { BindingContext = syncViewModel });
+            ApplicationInstanceData.GoToView(new SyncView { BindingContext = syncViewModel });
             
             HideMenu();
 
@@ -78,7 +78,7 @@ namespace MDPMS.Shared.ViewModels
 
         private void ExecuteNavigateToSettingsCommand()
         {
-            GoToView(new SettingsView
+            ApplicationInstanceData.GoToView(new SettingsView
             {
                 BindingContext = new SettingsViewModel(ApplicationInstanceData)
             });
@@ -86,7 +86,7 @@ namespace MDPMS.Shared.ViewModels
 
         private void ExecuteNavigateToAboutCommand()
         {
-            GoToView(new AboutView
+            ApplicationInstanceData.GoToView(new AboutView
             {
                 BindingContext = new AboutViewModel(ApplicationInstanceData)
             });
@@ -95,17 +95,6 @@ namespace MDPMS.Shared.ViewModels
         private void HideMenu()
         {
             ApplicationInstanceData.NavigationPage.Navigation.PopToRootAsync();
-            ApplicationInstanceData.RootPage.IsPresented = false;
-        }
-
-        private void GoToView(ContentPage view)
-        {
-            // do not navigate if it is the same choice
-            if (view.GetType() != ApplicationInstanceData.NavigationPage.CurrentPage.GetType())
-            {
-                ApplicationInstanceData.NavigationPage = new NavigationPage(view);
-                ApplicationInstanceData.RootPage.Detail = ApplicationInstanceData.NavigationPage;
-            }
             ApplicationInstanceData.RootPage.IsPresented = false;
         }
     }

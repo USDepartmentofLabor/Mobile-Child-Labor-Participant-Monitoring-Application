@@ -45,7 +45,12 @@ namespace MDPMS.Database.Localization.Database
             const int falseKeyId = 18;
             const int yesKeyId = 19;
             const int noKeyId = 20;
-            const int errorKeyId = 21;            
+            const int errorKeyId = 21;
+            const int getNewApiKeyKeyId = 22;
+            const int showPasswordKeyId = 23;
+            const int authenticateKeyId = 24;
+            const int okKeyId = 25;
+            const int cancelKeyId = 26;
             foreach (var key in new Dictionary<int, string>
             {
                 { projectNameKeyId, @"ProjectName" },
@@ -68,7 +73,12 @@ namespace MDPMS.Database.Localization.Database
                 { falseKeyId, @"False" },
                 { yesKeyId, @"Yes" },
                 { noKeyId, @"No" },
-                { errorKeyId, @"Error" }
+                { errorKeyId, @"Error" },
+                { getNewApiKeyKeyId, @"GetNewApiKey" },
+                { showPasswordKeyId, @"ShowPassword" },
+                { authenticateKeyId, @"Authenticate" },
+                { okKeyId, @"OK" },
+                { cancelKeyId, @"Cancel" }
             })
             {
                 if (localizationDatabaseContext.Keys.Any(a => a.KeyName.Equals(key.Value))) continue;
@@ -104,7 +114,12 @@ namespace MDPMS.Database.Localization.Database
                         new Tuple<int, string>(falseKeyId, @"False"),
                         new Tuple<int, string>(yesKeyId, @"Yes"),
                         new Tuple<int, string>(noKeyId, @"No"),
-                        new Tuple<int, string>(errorKeyId, @"Error")
+                        new Tuple<int, string>(errorKeyId, @"Error"),
+                        new Tuple<int, string>(getNewApiKeyKeyId, @"Get New API Key"),
+                        new Tuple<int, string>(showPasswordKeyId, @"Show Password"),
+                        new Tuple<int, string>(authenticateKeyId, @"Authenticate"),
+                        new Tuple<int, string>(okKeyId, @"OK"),
+                        new Tuple<int, string>(cancelKeyId, @"Cancel")                        
                     }
                 },
                 {
@@ -130,7 +145,12 @@ namespace MDPMS.Database.Localization.Database
                         new Tuple<int, string>(falseKeyId, @"Falso"),
                         new Tuple<int, string>(yesKeyId, @"Sí"),
                         new Tuple<int, string>(noKeyId, @"No"),
-                        new Tuple<int, string>(errorKeyId, @"Error")
+                        new Tuple<int, string>(errorKeyId, @"Error"),
+                        new Tuple<int, string>(getNewApiKeyKeyId, @"Obtener una nueva clave de API"),
+                        new Tuple<int, string>(showPasswordKeyId, @"Mostrar contraseña"),
+                        new Tuple<int, string>(authenticateKeyId, @"Autenticar"),
+                        new Tuple<int, string>(okKeyId, @"De acuerdo"),
+                        new Tuple<int, string>(cancelKeyId, @"Cancelar")
                     }
                 }
             };            

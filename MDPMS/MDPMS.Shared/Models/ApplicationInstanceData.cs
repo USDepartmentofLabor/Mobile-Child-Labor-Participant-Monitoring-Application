@@ -78,5 +78,16 @@ namespace MDPMS.Shared.Models
         {
             Helper.Json.JsonFileHelper.SaveDataToJsonFile(SerializedApplicationInstanceData, System.IO.Path.Combine(PlatformDataPath, ApplicationInstanceDataFileName));
         }
+
+        public void GoToView(ContentPage view)
+        {
+            // do not navigate if it is the same choice
+            if (view.GetType() != NavigationPage.CurrentPage.GetType())
+            {
+                NavigationPage = new NavigationPage(view);
+                RootPage.Detail = NavigationPage;
+            }
+            RootPage.IsPresented = false;
+        }
     }
 }
