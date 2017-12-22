@@ -30,6 +30,7 @@ namespace MDPMS.Shared.ViewModels
         {
             ApplicationInstanceData = applicationInstanceData;
             AuthenticateCommand = new Command(ExecuteAuthenticateCommand);
+            Username = ApplicationInstanceData.SerializedApplicationInstanceData.LastSuccessfulUsernameUsed;
         }
 
         private void ExecuteAuthenticateCommand()
@@ -48,7 +49,10 @@ namespace MDPMS.Shared.ViewModels
                         Password);
                     // parse json response to get api key and store it
                     ApplicationInstanceData.SerializedApplicationInstanceData.ApiKey = Helper.Json.JsonFileHelper.ParseTokenResponse(apiKeyResponse);
-                    Helper.Json.JsonFileHelper.SaveDataToJsonFile(ApplicationInstanceData.SerializedApplicationInstanceData, System.IO.Path.Combine(ApplicationInstanceData.PlatformDataPath, ApplicationInstanceData.ApplicationInstanceDataFileName));                                      
+                    // save last successfully used username
+                    ApplicationInstanceData.SerializedApplicationInstanceData.LastSuccessfulUsernameUsed = Username;
+                    // Save app data
+                    Helper.Json.JsonFileHelper.SaveDataToJsonFile(ApplicationInstanceData.SerializedApplicationInstanceData, System.IO.Path.Combine(ApplicationInstanceData.PlatformDataPath, ApplicationInstanceData.ApplicationInstanceDataFileName));
                     // go back to settings since successful
                     ApplicationInstanceData.GoToView(new SettingsView { BindingContext = new SettingsViewModel(ApplicationInstanceData) });
                 }
