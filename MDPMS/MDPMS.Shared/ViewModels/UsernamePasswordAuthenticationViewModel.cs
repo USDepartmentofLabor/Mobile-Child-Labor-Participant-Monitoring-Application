@@ -58,6 +58,7 @@ namespace MDPMS.Shared.ViewModels
                 }
                 catch (Exception e)
                 {
+                    // TODO: log error
                     ApplicationInstanceData.App.MainPage.DisplayAlert(
                         ApplicationInstanceData.SelectedLocalization.Translations[@"Alert"],
                         ApplicationInstanceData.SelectedLocalization.Translations[@"Error"],
