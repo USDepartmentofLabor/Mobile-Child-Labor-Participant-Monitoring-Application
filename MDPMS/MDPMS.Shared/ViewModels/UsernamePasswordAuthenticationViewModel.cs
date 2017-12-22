@@ -56,7 +56,7 @@ namespace MDPMS.Shared.ViewModels
                     // go back to settings since successful
                     ApplicationInstanceData.GoToView(new SettingsView { BindingContext = new SettingsViewModel(ApplicationInstanceData) });
                 }
-                catch (Exception e)
+                catch
                 {
                     // TODO: log error
                     ApplicationInstanceData.App.MainPage.DisplayAlert(

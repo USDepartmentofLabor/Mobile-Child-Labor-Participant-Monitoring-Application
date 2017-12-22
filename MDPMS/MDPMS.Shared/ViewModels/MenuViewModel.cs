@@ -43,7 +43,7 @@ namespace MDPMS.Shared.ViewModels
                 BindingContext = new HouseholdsViewModel(ApplicationInstanceData)
             });
         }
-
+        
         private async void ExecuteSyncCommand()
         {            
             // save current view
@@ -58,13 +58,11 @@ namespace MDPMS.Shared.ViewModels
             // disable menu
             ApplicationInstanceData.RootPage.IsGestureEnabled = false;
 
-            // sync
+            // sync            
             syncViewModel.StatusMessage = ApplicationInstanceData.SelectedLocalization.Translations[@"Syncing"];
             syncViewModel.IsBusy = true;
-            await Task.Run(() =>
-            {
-                System.Threading.Thread.Sleep(5000);                
-            });
+            var taskResult = false;
+            await Task.Run(() => { taskResult = Workers.SyncWorker.Sync(ApplicationInstanceData); });            
             syncViewModel.IsBusy = false;
             
             // display original view
@@ -74,6 +72,17 @@ namespace MDPMS.Shared.ViewModels
 
             // re-enable menu
             ApplicationInstanceData.RootPage.IsGestureEnabled = true;
+            ExecutePostExecuteSyncCommand(taskResult);
+        }
+
+        private void ExecutePostExecuteSyncCommand(bool success)
+        {
+            ApplicationInstanceData.App.MainPage.DisplayAlert(
+                ApplicationInstanceData.SelectedLocalization.Translations[@"Sync"],
+                success
+                    ? ApplicationInstanceData.SelectedLocalization.Translations[@"Yes"]
+                    : ApplicationInstanceData.SelectedLocalization.Translations[@"Error"],
+                ApplicationInstanceData.SelectedLocalization.Translations[@"OK"]);
         }
 
         private void ExecuteNavigateToSettingsCommand()
