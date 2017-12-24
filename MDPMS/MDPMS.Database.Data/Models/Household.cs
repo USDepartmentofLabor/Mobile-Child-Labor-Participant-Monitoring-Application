@@ -1,4 +1,5 @@
-﻿using MDPMS.Database.Data.Models.Base;
+﻿using System;
+using MDPMS.Database.Data.Models.Base;
 using System.Collections.Generic;
 
 namespace MDPMS.Database.Data.Models
@@ -14,6 +15,11 @@ namespace MDPMS.Database.Data.Models
         /// Household name assigned
         /// </summary>
         public string HouseholdName { get; set; }
+
+        /// <summary>
+        /// Intake date
+        /// </summary>
+        public DateTime IntakeDate { get; set; }
 
         /// <summary>
         /// Address line 1, address_line_1 from api
