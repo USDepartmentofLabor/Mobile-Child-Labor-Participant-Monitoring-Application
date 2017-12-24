@@ -1,6 +1,8 @@
-﻿using System;
+﻿using System.IO;
 using System.Linq;
+using System.Text;
 using MDPMS.Shared.Models;
+using Newtonsoft.Json;
 
 namespace MDPMS.Shared.Workers
 {
@@ -10,7 +12,33 @@ namespace MDPMS.Shared.Workers
         {
             try
             {
-                // get Households
+                // post new households first
+                foreach (var household in applicationInstanceData.Data.Households.Where(a => a.ExternalId.HasValue == false))
+                {
+                    var sb = new StringBuilder();
+                    var sw = new StringWriter(sb);
+                    using(JsonWriter writer = new JsonTextWriter(sw))
+                    {
+                        writer.Formatting = Formatting.None;                        
+                        writer.WriteStartObject();
+                        writer.WritePropertyName(@"household");
+                        writer.WriteStartObject();                      
+                        writer.WritePropertyName("name");
+                        writer.WriteValue(household.HouseholdName);
+                        writer.WritePropertyName("intake_date");
+                        writer.WriteValue(household.IntakeDate.ToString("yyyy-MM-dd"));
+                        writer.WriteEndObject();
+                        writer.WriteEndObject();
+                    }
+                    var postSuccess = Helper.Rest.RestHelper.PerformRestPostRequestWithApiKey(
+                        applicationInstanceData.SerializedApplicationInstanceData.Url,
+                        @"/api/v1/households",
+                        applicationInstanceData.SerializedApplicationInstanceData.ApiKey,
+                        sw.ToString());
+                    // TODO: handle error on POST
+                }
+                
+                // get/update existing Households
                 var householdsJson = Helper.Rest.RestHelper.PerformRestGetRequestWithApiKey(
                     applicationInstanceData.SerializedApplicationInstanceData.Url, @"/api/v1/households",
                     applicationInstanceData.SerializedApplicationInstanceData.ApiKey);
@@ -32,6 +60,17 @@ namespace MDPMS.Shared.Workers
                     if (householdDbRecord.Any())
                     {
                         // TODO: sync non new records
+                        if (householdDbRecord.First().LastUpdatedAt <= newHousehold.LastUpdatedAt)
+                        {
+                            // the parent is newer or equal so replace the local
+                            applicationInstanceData.Data.Households.Remove(householdDbRecord.First());
+                            applicationInstanceData.Data.Households.Add(newHousehold);
+                        }
+                        else
+                        {
+                            // the local is newer so update the parent with new info
+                            // TODO: UPDATE
+                        }
                     }
                     else
                     {
