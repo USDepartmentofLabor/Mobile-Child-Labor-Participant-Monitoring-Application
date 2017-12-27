@@ -10,6 +10,46 @@ namespace MDPMS.Shared.Workers
     {
         public static bool Sync(ApplicationInstanceData applicationInstanceData)
         {
+            /*
+             SYNC STRATEGY
+             =============
+             * SUMMARY => Record existence and update age
+                * For now, mobile can not edit households after it is synced to parent
+                * Use integer id from parent to identify records
+                * Mobile will have internal and external (parent DPMS) ids
+                * Record age will be determined by updated_at datetime
+                              
+               Mobile                                               Parent_DPMS
+               ======                                               ===========
+             * GetRecordFromParent <------------------------------- Exists on parent but not on mobile
+             * Exists on Mobile but not on parent ----------------> GetRecordFromMobile
+             * Older on mobile than parent <--UpdateMobileRecord--- Newer on parent than mobile
+             * Newer on mobile than parent <--NotYetSupported------ Older on parent than mobile             (Currently invalid, would be supported by updating DPMS record, also resolve conflicts?)
+                            
+             REASONING =>
+
+             Exists
+             ======
+             Mobile | Parent
+             ---------------
+             0      |   0       * N/A
+             0      |   1       * Exists only on parent, mobile get from parent
+             1      |   0       * Exists only on mobile, send to parent
+             1      |   1       * Exists on both, see Record_Age table ==>
+ 
+            Record_Age
+            ==========
+            Mobile | Parent
+            ---------------
+            0      |   0        * Same age, no action
+            0      |   1        * Newer on parent, update mobile
+            1      |   0        * Newer on mobile, update parent    (NOT_YET_SUPPORTED)
+            1      |   1        * Same age, no action
+ 
+            NOTE ON Newer on mobile:
+            For now we can send those to the parent and mark as NEEDS_TO_BE_MANUALLY_RESOLVED
+             */
+             
             try
             {
                 // post new households first
