@@ -44,17 +44,17 @@ namespace MDPMS.Helper.Rest
             if (response.IsSuccessful) { return new Tuple<bool, string>(true, response.Content); }
             throw new Exception(@"Unsuccessful REST Request");            
         }
-        
-        //public static bool PerformRestPutRequestWithApiKeyAndId(string url, string apiPath, string apiKey, string json, string id)
-        //{
-        //    var client = new RestClient(url + apiPath + @"/" + id);
-        //    var request = new RestRequest(Method.PUT);
-        //    request.AddHeader(@"Content-Type", @"application/json");
-        //    request.AddHeader(@"Authorization", @"Token token=" + apiKey);
-        //    request.AddParameter("application/json", json, ParameterType.RequestBody);
-        //    var response = client.Execute(request);
-        //    if (response.IsSuccessful) { return true; }
-        //    throw new Exception(@"Unsuccessful REST Request");
-        //}
+
+        public static Tuple<bool, string> PerformRestPutRequestWithApiKeyAndId(string url, string apiPath, string apiKey, string json, string id)
+        {
+            var client = new RestClient(url + apiPath + @"/" + id);
+            var request = new RestRequest(Method.PUT);
+            request.AddHeader(@"Content-Type", @"application/json");
+            request.AddHeader(@"Authorization", @"Token token=" + apiKey);
+            request.AddParameter("application/json", json, ParameterType.RequestBody);
+            var response = client.Execute(request);
+            if (response.IsSuccessful) { return new Tuple<bool, string>(true, response.Content); }
+            throw new Exception(@"Unsuccessful REST Request");
+        }
     }
 }
