@@ -5,16 +5,16 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="65"/>
+                <RowDefinition Height="70"/>
                 <RowDefinition/>
-                <RowDefinition Height="65"/>
+                <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="105"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Grid.Column="0" Text="... search ..." HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                <Entry Grid.Column="0" Text="... search ..." HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
                 <Button Grid.Column="1" Text="Search"/>
             </Grid>
             <Label Grid.Row="1" 
