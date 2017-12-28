@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using Newtonsoft.Json;
 
@@ -68,120 +70,87 @@ namespace MDPMS.Shared.Workers
                     applicationInstanceData.SerializedApplicationInstanceData.ApiKey);
 
                 // deserialize and sync Households
+                var idsInParent = new List<int>();
                 dynamic householdParse = JsonConvert.DeserializeObject(householdsJson);
                 foreach (var household in householdParse)
-                {
-                    var newHousehold = new Database.Data.Models.Household
-                    {
-                        ExternalId = household.id,                        
-                        CreatedAt = household.created_at,
-                        LastUpdatedAt = household.updated_at,
-                        SoftDeleted = false,
-                        HouseholdName = household.name,
-                        IntakeDate = household.intake_date,
-                        AddressLine1 = household.address_line_1,
-                        AddressLine2 = household.address_line_2,
-                        PostalCode = household.postal_code,
-                        DependentLocality = household.dependent_locality,
-                        Locality = household.locality,
-                        AdminvArea = household.adminv_area,
-                        DependentAdminvArea = household.dependent_adminv_area,
-                        Country = household.country,
-                        AddressInfo = household.address_info
-                    };
-
-                    // compare against database and use updated_at vs. LastUpdateAt
+                {                                        
+                    Household newHousehold = GetHouseholdFromJson(household);
+                    idsInParent.Add((int)newHousehold.ExternalId);
                     var householdDbRecord = applicationInstanceData.Data.Households.Where(a => a.ExternalId.Equals(newHousehold.ExternalId));
                     if (householdDbRecord.Any())
                     {
                         // sync non new records
-                        if (householdDbRecord.First().LastUpdatedAt < newHousehold.LastUpdatedAt)
+                        var record = householdDbRecord.First();
+                        
+                        // the parent is newer so update the local
+                        if (record.LastUpdatedAt < newHousehold.LastUpdatedAt) UpdateHouseholdRecord(record, newHousehold);
+                        else if (record.LastUpdatedAt > newHousehold.LastUpdatedAt)
                         {
-                            // the parent is newer so replace the local TODO: just update the fields to keep the internal id
-                            applicationInstanceData.Data.Households.Remove(householdDbRecord.First());
-                            applicationInstanceData.Data.Households.Add(newHousehold);
-                        }
-                        // if = then assume same, should check fields or superstitious?
-                        //else
-                        //{
-                        //    //else, the local is newer so update the parent with new info, TODO: UPDATE, NOTE: NOT_YET_SUPPORTED
-                        //    var record = householdDbRecord.First();
-                        //    // form the json (determine the fields that need to be updated)
-                        //    var sb = new StringBuilder();
-                        //    var sw = new StringWriter(sb);
-                        //    var writer = new JsonTextWriter(sw);
-                        //    writer.Formatting = Formatting.None;
-                        //    writer.WriteStartObject();
-                        //    writer.WritePropertyName(@"household");
-                        //    writer.WriteStartObject();                            
-                        //    if (!record.HouseholdName.Equals(newHousehold.HouseholdName))
-                        //    {
-                        //        writer.WritePropertyName("name");
-                        //        writer.WriteValue(record.HouseholdName);
-                        //    }
-                        //    // TODO: other properties
-                        //    writer.WriteEndObject();
-                        //    writer.WriteEndObject();
-                        //    var putSuccess = Helper.Rest.RestHelper.PerformRestPutRequestWithApiKeyAndId(
-                        //        applicationInstanceData.SerializedApplicationInstanceData.Url,
-                        //        @"/api/v1/households",
-                        //        applicationInstanceData.SerializedApplicationInstanceData.ApiKey,
-                        //        sw.ToString(),
-                        //        record.ExternalId.ToString());
-                        //    // TODO: handle error on POST                        
-                        //}
+                            var updateParentIsAllowed = true;
+                            if (updateParentIsAllowed)
+                            {
+                                // IF_SUPPORTED: the local is newer so update the parent with new info
+                                var putSuccess = Helper.Rest.RestHelper.PerformRestPutRequestWithApiKeyAndId(
+                                    applicationInstanceData.SerializedApplicationInstanceData.Url,
+                                    @"/api/v1/households",
+                                    applicationInstanceData.SerializedApplicationInstanceData.ApiKey,
+                                    GenerateUpdateJsonForHousehold(newHousehold, record),
+                                    record.ExternalId.ToString());
+                                if (putSuccess.Item1)
+                                {
+                                    // set last updated at from JSON response
+                                    dynamic jsonResponseParse = JsonConvert.DeserializeObject(putSuccess.Item2);
+                                    if (jsonResponseParse.status.Value.ToString().Equals(@"success"))
+                                    {
+                                        household.LastUpdatedAt = ((DateTime)DateTime.Parse(jsonResponseParse.updated_at.Value)).ToUniversalTime();
+                                    }
+                                    else
+                                    {
+                                        // TODO: error log    
+                                        return false;
+                                    }
+                                }
+                                else
+                                {
+                                    // TODO: error log    
+                                    return false;
+                                }  
+                            }
+                            else
+                            {
+                                // NOT_YET_SUPPORTED: the local is newer so update the parent with new info
+                                // TODO: error log
+                                return false;
+                            }
+                        }                        
                     }
                     else
                     {
-                        // add it locally
+                        // add it locally, it is new to mobile
                         applicationInstanceData.Data.Households.Add(newHousehold);
                     }
                 }
                 applicationInstanceData.Data.SaveChanges();
 
-                // TODO: delete local households not on parent, i.e. not in GET but has external id, requires parent suppoorting delete
-
+                // Delete local households not on parent, i.e. not in GET but has external id, requires parent suppoorting delete
+                var idQuery = applicationInstanceData.Data.Households.Where(a => a.HasExternalId.Equals(true)).Select(a => (int)a.ExternalId).ToList();
+                var toDeleteIds = idQuery.Except(idsInParent).ToList();
+                foreach (var id in toDeleteIds)
+                {
+                    var rec = applicationInstanceData.Data.Households.Where(a => a.ExternalId.Equals(id));
+                    applicationInstanceData.Data.Households.Remove(rec.First());
+                }
+                applicationInstanceData.Data.SaveChanges();
+                
                 // post new households last
                 foreach (var household in applicationInstanceData.Data.Households.Where(a => a.ExternalId.HasValue == false))
-                {
-                    var sb = new StringBuilder();
-                    var sw = new StringWriter(sb);
-                    using (JsonWriter writer = new JsonTextWriter(sw))
-                    {
-                        writer.Formatting = Formatting.None;
-                        writer.WriteStartObject();
-                        writer.WritePropertyName(@"household");
-                        writer.WriteStartObject();
-                        writer.WritePropertyName("name");
-                        writer.WriteValue(household.HouseholdName);
-                        writer.WritePropertyName("intake_date");
-                        writer.WriteValue(household.IntakeDate.ToString("yyyy-MM-dd"));
-                        writer.WritePropertyName("address_line_1");
-                        writer.WriteValue(household.AddressLine1);
-                        writer.WritePropertyName("address_line_2");
-                        writer.WriteValue(household.AddressLine2);
-                        writer.WritePropertyName("postal_code");
-                        writer.WriteValue(household.PostalCode);
-                        writer.WritePropertyName("dependent_locality");
-                        writer.WriteValue(household.DependentLocality);
-                        writer.WritePropertyName("locality");
-                        writer.WriteValue(household.Locality);
-                        writer.WritePropertyName("adminv_area");
-                        writer.WriteValue(household.AdminvArea);
-                        writer.WritePropertyName("dependent_adminv_area");
-                        writer.WriteValue(household.DependentAdminvArea);
-                        writer.WritePropertyName("country");
-                        writer.WriteValue(household.Country);
-                        writer.WritePropertyName("address_info");
-                        writer.WriteValue(household.AddressInfo);                        
-                        writer.WriteEndObject();
-                        writer.WriteEndObject();
-                    }
+                {                    
+                    var householdJson = GetJsonFromHousehold(household);                    
                     var postSuccess = Helper.Rest.RestHelper.PerformRestPostRequestWithApiKey(
                         applicationInstanceData.SerializedApplicationInstanceData.Url,
                         @"/api/v1/households",
                         applicationInstanceData.SerializedApplicationInstanceData.ApiKey,
-                        sw.ToString());
+                        householdJson);
 
                     if (postSuccess.Item1)
                     {
@@ -192,9 +161,17 @@ namespace MDPMS.Shared.Workers
                             household.LastUpdatedAt = ((DateTime)DateTime.Parse(jsonResponseParse.updated_at.Value)).ToUniversalTime();
                             household.ExternalId = jsonResponseParse.id;
                         }
-                        // else // TODO: error log                        
+                        else
+                        {
+                            // TODO: error log    
+                            return false;
+                        }
                     }
-                    // else // TODO: error log                                     
+                    else
+                    {
+                        // TODO: error log    
+                        return false;
+                    }
                 }
                 applicationInstanceData.Data.SaveChanges();
             }
@@ -204,6 +181,163 @@ namespace MDPMS.Shared.Workers
                 return false;
             }
             return true;
+        }
+
+        public static Household GetHouseholdFromJson(dynamic householdJson)
+        {            
+            return new Household
+            {
+                ExternalId = householdJson.id,
+                CreatedAt = householdJson.created_at,
+                LastUpdatedAt = householdJson.updated_at,
+                SoftDeleted = false,
+                HouseholdName = householdJson.name,
+                IntakeDate = householdJson.intake_date,
+                AddressLine1 = householdJson.address_line_1,
+                AddressLine2 = householdJson.address_line_2,
+                PostalCode = householdJson.postal_code,
+                DependentLocality = householdJson.dependent_locality,
+                Locality = householdJson.locality,
+                AdminvArea = householdJson.adminv_area,
+                DependentAdminvArea = householdJson.dependent_adminv_area,
+                Country = householdJson.country,
+                AddressInfo = householdJson.address_info
+            };
+        }
+
+        public static string GetJsonFromHousehold(Household household)
+        {
+            var sb = new StringBuilder();
+            var sw = new StringWriter(sb);
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                writer.Formatting = Formatting.None;
+                writer.WriteStartObject();
+                writer.WritePropertyName(@"household");
+                writer.WriteStartObject();
+                writer.WritePropertyName("name");
+                writer.WriteValue(household.HouseholdName);
+                writer.WritePropertyName("intake_date");
+                writer.WriteValue(household.IntakeDate.ToString("yyyy-MM-dd"));
+                writer.WritePropertyName("address_line_1");
+                writer.WriteValue(household.AddressLine1);
+                writer.WritePropertyName("address_line_2");
+                writer.WriteValue(household.AddressLine2);
+                writer.WritePropertyName("postal_code");
+                writer.WriteValue(household.PostalCode);
+                writer.WritePropertyName("dependent_locality");
+                writer.WriteValue(household.DependentLocality);
+                writer.WritePropertyName("locality");
+                writer.WriteValue(household.Locality);
+                writer.WritePropertyName("adminv_area");
+                writer.WriteValue(household.AdminvArea);
+                writer.WritePropertyName("dependent_adminv_area");
+                writer.WriteValue(household.DependentAdminvArea);
+                writer.WritePropertyName("country");
+                writer.WriteValue(household.Country);
+                writer.WritePropertyName("address_info");
+                writer.WriteValue(household.AddressInfo);
+                writer.WriteEndObject();
+                writer.WriteEndObject();
+            }            
+            return sw.ToString();
+        }
+
+        public static void UpdateHouseholdRecord(Household recordToUpdate, Household updatedHousehold)
+        {
+            recordToUpdate.LastUpdatedAt = updatedHousehold.LastUpdatedAt;
+            recordToUpdate.HouseholdName = updatedHousehold.HouseholdName;
+            recordToUpdate.IntakeDate = updatedHousehold.IntakeDate;
+            recordToUpdate.AddressLine1 = updatedHousehold.AddressLine1;
+            recordToUpdate.AddressLine2 = updatedHousehold.AddressLine1;
+            recordToUpdate.PostalCode = updatedHousehold.PostalCode;
+            recordToUpdate.DependentLocality = updatedHousehold.DependentLocality;
+            recordToUpdate.Locality = updatedHousehold.Locality;
+            recordToUpdate.AdminvArea = updatedHousehold.AdminvArea;
+            recordToUpdate.DependentAdminvArea = updatedHousehold.DependentAdminvArea;
+            recordToUpdate.Country = updatedHousehold.Country;
+            recordToUpdate.AddressInfo = updatedHousehold.AddressInfo;
+        }
+
+        public static string GenerateUpdateJsonForHousehold(Household older, Household newer)
+        {
+            // form the json (determine the fields that need to be updated)
+            var sb = new StringBuilder();
+            var sw = new StringWriter(sb);
+            var writer = new JsonTextWriter(sw) {Formatting = Formatting.None};
+            writer.WriteStartObject();
+            writer.WritePropertyName(@"household");
+            writer.WriteStartObject();
+            
+            if (!older.HouseholdName.Equals(newer.HouseholdName))
+            {
+                writer.WritePropertyName("name");
+                writer.WriteValue(newer.HouseholdName);
+            }
+
+            if (!older.IntakeDate.Equals(newer.IntakeDate))
+            {
+                writer.WritePropertyName("intake_date");
+                writer.WriteValue(newer.IntakeDate.ToString("yyyy-MM-dd"));
+            }
+
+            if (!older.AddressLine1.Equals(newer.AddressLine1))
+            {
+                writer.WritePropertyName("address_line_1");
+                writer.WriteValue(newer.AddressLine1);
+            }
+
+            if (!older.AddressLine2.Equals(newer.AddressLine2))
+            {
+                writer.WritePropertyName("address_line_2");
+                writer.WriteValue(newer.AddressLine2);
+            }
+
+            if (!older.PostalCode.Equals(newer.PostalCode))
+            {
+                writer.WritePropertyName("postal_code");
+                writer.WriteValue(newer.PostalCode);
+            }
+
+            if (!older.DependentLocality.Equals(newer.DependentLocality))
+            {
+                writer.WritePropertyName("dependent_locality");
+                writer.WriteValue(newer.DependentLocality);
+            }
+
+            if (!older.Locality.Equals(newer.Locality))
+            {
+                writer.WritePropertyName("locality");
+                writer.WriteValue(newer.Locality);
+            }
+
+            if (!older.AdminvArea.Equals(newer.AdminvArea))
+            {
+                writer.WritePropertyName("adminv_area");
+                writer.WriteValue(newer.AdminvArea);
+            }
+
+            if (!older.DependentAdminvArea.Equals(newer.DependentAdminvArea))
+            {
+                writer.WritePropertyName("dependent_adminv_area");
+                writer.WriteValue(newer.DependentAdminvArea);
+            }
+
+            if (!older.Country.Equals(newer.Country))
+            {
+                writer.WritePropertyName("country");
+                writer.WriteValue(newer.Country);
+            }
+
+            if (!older.AddressInfo.Equals(newer.AddressInfo))
+            {
+                writer.WritePropertyName("address_info");
+                writer.WriteValue(newer.AddressInfo);
+            }
+            
+            writer.WriteEndObject();
+            writer.WriteEndObject();            
+            return sw.ToString();
         }
     }
 }
