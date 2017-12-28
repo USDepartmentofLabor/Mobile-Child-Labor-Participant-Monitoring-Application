@@ -3,10 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDPMS.Shared.Views.HouseholdsView">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Households]}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65"/>
+                <RowDefinition/>
+                <RowDefinition Height="65"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="105"/>
+                </Grid.ColumnDefinitions>
+                <Entry Grid.Column="0" Text="... search ..." HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                <Button Grid.Column="1" Text="Search"/>
+            </Grid>
+            <Label Grid.Row="1" 
+                Text="Households Search Results"
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand" />
+            <Button Grid.Row="2" Text="Add New Household"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
