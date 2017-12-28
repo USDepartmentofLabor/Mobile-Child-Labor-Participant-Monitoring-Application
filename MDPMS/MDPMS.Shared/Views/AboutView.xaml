@@ -7,6 +7,8 @@
             <Label Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[About]}"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Button Text="Test1" Command="{Binding Test1Command}"/>
+            <Button Text="Test2" Command="{Binding Test2Command}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
