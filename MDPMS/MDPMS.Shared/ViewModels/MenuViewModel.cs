@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
@@ -68,6 +69,14 @@ namespace MDPMS.Shared.ViewModels
             
             // display original view
             ApplicationInstanceData.NavigationPage = currentView;
+
+            // if HouseholdsView then refresh
+            if (currentView.Pages.First().GetType() == typeof(HouseholdsView))
+            {
+                var householdsViewModel = (HouseholdsViewModel)currentView.Pages.First().BindingContext;
+                await Task.Run(() => { householdsViewModel.RefreshCommand.Execute(null); });
+            }
+
             ApplicationInstanceData.RootPage.Detail = ApplicationInstanceData.NavigationPage;
             ApplicationInstanceData.RootPage.IsPresented = false;
 
