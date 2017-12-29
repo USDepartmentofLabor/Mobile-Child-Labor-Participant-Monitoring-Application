@@ -25,7 +25,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Grid.Row="2" Text="Add New Household"/>
+            <Button Grid.Row="2" Text="Add New Household" Command="{Binding NavigateToAddNewHouseholdCommand}"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

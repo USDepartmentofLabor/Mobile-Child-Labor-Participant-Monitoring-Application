@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
+using MDPMS.Shared.Views;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared.ViewModels
@@ -13,6 +14,7 @@ namespace MDPMS.Shared.ViewModels
         public string SearchText { get; set; } = @"";
         public ObservableCollection<Household> Households { get; set; }
         public Household SelectedHousehold { get; set; } = null;
+        public Command NavigateToAddNewHouseholdCommand { get; set; }
 
         private bool _isRefreshing;
         public bool IsRefreshing
@@ -44,6 +46,7 @@ namespace MDPMS.Shared.ViewModels
         {
             ApplicationInstanceData = applicationInstanceData;
             SearchCommand = new Command(LoadHouseholds);
+            NavigateToAddNewHouseholdCommand = new Command(ExecuteNavigateToAddNewHouseholdCommand);
             LoadHouseholds();
         }
         
@@ -58,6 +61,14 @@ namespace MDPMS.Shared.ViewModels
             if (Households.Any()) SelectedHousehold = Households.First();
             OnPropertyChanged(nameof(Households));
             OnPropertyChanged(nameof(SelectedHousehold));
-        } 
+        }
+
+        private void ExecuteNavigateToAddNewHouseholdCommand()
+        {
+            ApplicationInstanceData.GoToView(new HouseholdIntakeView
+                {
+                    BindingContext = new HouseholdIntakeViewModel(ApplicationInstanceData)
+                });
+        }
     }
 }
