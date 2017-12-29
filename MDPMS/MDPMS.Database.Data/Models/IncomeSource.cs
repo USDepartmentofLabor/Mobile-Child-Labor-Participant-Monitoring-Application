@@ -15,12 +15,12 @@ namespace MDPMS.Database.Data.Models
         /// <summary>
         /// Estimated volume produced
         /// </summary>
-        public string EstimatedVolumeProduced { get; set; }
+        public int? EstimatedVolumeProduced { get; set; }
 
         /// <summary>
         /// Estimated volume sold
         /// </summary>
-        public string EstimatedVolumeSold { get; set; }
+        public int? EstimatedVolumeSold { get; set; }
 
         /// <summary>
         /// Unit of Measure
@@ -30,7 +30,7 @@ namespace MDPMS.Database.Data.Models
         /// <summary>
         /// Estimated Income
         /// </summary>
-        public string EstimatedIncome { get; set; }
+        public decimal? EstimatedIncome { get; set; }
 
         /// <summary>
         /// Currency
