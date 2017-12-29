@@ -90,19 +90,27 @@ namespace MDPMS.Shared.Workers
                             if (updateParentIsAllowed)
                             {
                                 // IF_SUPPORTED: the local is newer so update the parent with new info
-                                var putSuccess = Helper.Rest.RestHelper.PerformRestPutRequestWithApiKeyAndId(
-                                    applicationInstanceData.SerializedApplicationInstanceData.Url,
-                                    @"/api/v1/households",
-                                    applicationInstanceData.SerializedApplicationInstanceData.ApiKey,
-                                    GenerateUpdateJsonForHousehold(newHousehold, record),
-                                    record.ExternalId.ToString());
-                                if (putSuccess.Item1)
+                                if (GetHouseholdNeedsUpdate(newHousehold, record))
                                 {
-                                    // set last updated at from JSON response
-                                    dynamic jsonResponseParse = JsonConvert.DeserializeObject(putSuccess.Item2);
-                                    if (jsonResponseParse.status.Value.ToString().Equals(@"success"))
+                                    var putSuccess = Helper.Rest.RestHelper.PerformRestPutRequestWithApiKeyAndId(
+                                        applicationInstanceData.SerializedApplicationInstanceData.Url,
+                                        @"/api/v1/households",
+                                        applicationInstanceData.SerializedApplicationInstanceData.ApiKey,
+                                        GenerateUpdateJsonForHousehold(newHousehold, record),
+                                        record.ExternalId.ToString());
+                                    if (putSuccess.Item1)
                                     {
-                                        household.LastUpdatedAt = ((DateTime)DateTime.Parse(jsonResponseParse.updated_at.Value)).ToUniversalTime();
+                                        // set last updated at from JSON response
+                                        dynamic jsonResponseParse = JsonConvert.DeserializeObject(putSuccess.Item2);
+                                        if (jsonResponseParse.status.Value.ToString().Equals(@"success"))
+                                        {
+                                            household.LastUpdatedAt = ((DateTime)DateTime.Parse(jsonResponseParse.updated_at.Value)).ToUniversalTime();
+                                        }
+                                        else
+                                        {
+                                            // TODO: error log    
+                                            return false;
+                                        }
                                     }
                                     else
                                     {
@@ -112,9 +120,8 @@ namespace MDPMS.Shared.Workers
                                 }
                                 else
                                 {
-                                    // TODO: error log    
-                                    return false;
-                                }  
+                                    record.LastUpdatedAt = newHousehold.LastUpdatedAt;
+                                }                                
                             }
                             else
                             {
@@ -175,7 +182,7 @@ namespace MDPMS.Shared.Workers
                 }
                 applicationInstanceData.Data.SaveChanges();
             }
-            catch
+            catch(Exception e)
             {
                 // TODO: error log
                 return false;
@@ -257,6 +264,22 @@ namespace MDPMS.Shared.Workers
             recordToUpdate.DependentAdminvArea = updatedHousehold.DependentAdminvArea;
             recordToUpdate.Country = updatedHousehold.Country;
             recordToUpdate.AddressInfo = updatedHousehold.AddressInfo;
+        }
+
+        public static bool GetHouseholdNeedsUpdate(Household older, Household newer)
+        {
+            if (!older.HouseholdName.Equals(newer.HouseholdName)) return true;
+            if (!older.IntakeDate.Equals(newer.IntakeDate)) return true;
+            if (!older.AddressLine1.Equals(newer.AddressLine1)) return true;
+            if (!older.AddressLine2.Equals(newer.AddressLine2)) return true;
+            if (!older.PostalCode.Equals(newer.PostalCode)) return true;
+            if (!older.DependentLocality.Equals(newer.DependentLocality)) return true;
+            if (!older.Locality.Equals(newer.Locality)) return true;
+            if (!older.AdminvArea.Equals(newer.AdminvArea)) return true;
+            if (!older.DependentAdminvArea.Equals(newer.DependentAdminvArea)) return true;
+            if (!older.Country.Equals(newer.Country)) return true;
+            if (!older.AddressInfo.Equals(newer.AddressInfo)) return true;
+            return false;
         }
 
         public static string GenerateUpdateJsonForHousehold(Household older, Household newer)
