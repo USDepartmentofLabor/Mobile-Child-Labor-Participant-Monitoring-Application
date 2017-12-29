@@ -11,7 +11,7 @@ namespace MDPMS.Shared.Workers
 {
     public static class SyncWorker
     {
-        public static bool Sync(ApplicationInstanceData applicationInstanceData, bool allowAlreadySyncedUpdateToParent)
+        public static Tuple<bool, string> Sync(ApplicationInstanceData applicationInstanceData, bool allowAlreadySyncedUpdateToParent)
         {
             /*
              SYNC STRATEGY
@@ -108,13 +108,13 @@ namespace MDPMS.Shared.Workers
                                         else
                                         {
                                             // TODO: error log    
-                                            return false;
+                                            return new Tuple<bool, string>(false, @"Update error");
                                         }
                                     }
                                     else
                                     {
                                         // TODO: error log    
-                                        return false;
+                                        return new Tuple<bool, string>(false, @"Update error");
                                     }
                                 }
                                 else
@@ -126,7 +126,7 @@ namespace MDPMS.Shared.Workers
                             {
                                 // NOT_YET_SUPPORTED: the local is newer so update the parent with new info
                                 // TODO: error log
-                                return false;
+                                return new Tuple<bool, string>(false, @"Update error, update from mobile not allowed");
                             }
                         }                        
                     }
@@ -170,13 +170,13 @@ namespace MDPMS.Shared.Workers
                         else
                         {
                             // TODO: error log    
-                            return false;
+                            return new Tuple<bool, string>(false, @"Add error");
                         }
                     }
                     else
                     {
                         // TODO: error log    
-                        return false;
+                        return new Tuple<bool, string>(false, @"Add error");
                     }
                 }
                 applicationInstanceData.Data.SaveChanges();
@@ -184,9 +184,9 @@ namespace MDPMS.Shared.Workers
             catch
             {
                 // TODO: error log
-                return false;
+                return new Tuple<bool, string>(false, @"Sync error");
             }
-            return true;
+            return new Tuple<bool, string>(true, @"");
         }
 
         public static Household GetHouseholdFromJson(dynamic householdJson)

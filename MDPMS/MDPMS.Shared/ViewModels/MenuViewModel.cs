@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
 using MDPMS.Shared.Views;
@@ -61,7 +62,7 @@ namespace MDPMS.Shared.ViewModels
             // sync            
             syncViewModel.StatusMessage = ApplicationInstanceData.SelectedLocalization.Translations[@"Syncing"];
             syncViewModel.IsBusy = true;
-            var taskResult = false;
+            var taskResult = new Tuple<bool, string>(false, @"");
             await Task.Run(() => { taskResult = Workers.SyncWorker.Sync(ApplicationInstanceData, false); });            
             syncViewModel.IsBusy = false;
             
@@ -75,13 +76,13 @@ namespace MDPMS.Shared.ViewModels
             ExecutePostExecuteSyncCommand(taskResult);
         }
 
-        private void ExecutePostExecuteSyncCommand(bool success)
+        private void ExecutePostExecuteSyncCommand(Tuple<bool, string> taskResult)
         {
             ApplicationInstanceData.App.MainPage.DisplayAlert(
                 ApplicationInstanceData.SelectedLocalization.Translations[@"Sync"],
-                success
+                taskResult.Item1
                     ? ApplicationInstanceData.SelectedLocalization.Translations[@"Yes"]
-                    : ApplicationInstanceData.SelectedLocalization.Translations[@"Error"],
+                    : ApplicationInstanceData.SelectedLocalization.Translations[@"Error"] + @" " + taskResult.Item2,
                 ApplicationInstanceData.SelectedLocalization.Translations[@"OK"]);
         }
 
