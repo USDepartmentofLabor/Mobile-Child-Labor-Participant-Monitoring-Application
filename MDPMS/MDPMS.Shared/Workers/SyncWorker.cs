@@ -11,7 +11,7 @@ namespace MDPMS.Shared.Workers
 {
     public static class SyncWorker
     {
-        public static bool Sync(ApplicationInstanceData applicationInstanceData)
+        public static bool Sync(ApplicationInstanceData applicationInstanceData, bool allowAlreadySyncedUpdateToParent)
         {
             /*
              SYNC STRATEGY
@@ -86,8 +86,7 @@ namespace MDPMS.Shared.Workers
                         if (record.LastUpdatedAt < newHousehold.LastUpdatedAt) UpdateHouseholdRecord(record, newHousehold);
                         else if (record.LastUpdatedAt > newHousehold.LastUpdatedAt)
                         {
-                            var updateParentIsAllowed = true;
-                            if (updateParentIsAllowed)
+                            if (allowAlreadySyncedUpdateToParent)
                             {
                                 // IF_SUPPORTED: the local is newer so update the parent with new info
                                 if (GetHouseholdNeedsUpdate(newHousehold, record))
@@ -182,7 +181,7 @@ namespace MDPMS.Shared.Workers
                 }
                 applicationInstanceData.Data.SaveChanges();
             }
-            catch(Exception e)
+            catch
             {
                 // TODO: error log
                 return false;

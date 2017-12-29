@@ -62,7 +62,7 @@ namespace MDPMS.Shared.ViewModels
             syncViewModel.StatusMessage = ApplicationInstanceData.SelectedLocalization.Translations[@"Syncing"];
             syncViewModel.IsBusy = true;
             var taskResult = false;
-            await Task.Run(() => { taskResult = Workers.SyncWorker.Sync(ApplicationInstanceData); });            
+            await Task.Run(() => { taskResult = Workers.SyncWorker.Sync(ApplicationInstanceData, false); });            
             syncViewModel.IsBusy = false;
             
             // display original view
