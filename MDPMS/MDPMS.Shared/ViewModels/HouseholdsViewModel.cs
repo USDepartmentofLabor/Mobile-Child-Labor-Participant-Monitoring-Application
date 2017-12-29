@@ -54,7 +54,7 @@ namespace MDPMS.Shared.ViewModels
         {
             Households = new ObservableCollection<Household>();
             var query = SearchText.Equals(string.Empty) ? ApplicationInstanceData.Data.Households : ApplicationInstanceData.Data.Households.Where(a => a.HouseholdName.Contains(SearchText));
-            foreach (var household in query)
+            foreach (var household in query.OrderBy(a => a.HouseholdName))
             {
                 Households.Add(household);
             }
