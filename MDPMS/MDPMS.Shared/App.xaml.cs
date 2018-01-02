@@ -9,12 +9,15 @@ namespace MDPMS.Shared
 {
 	public partial class App : Application
 	{
-		public App (string databasePath, string localizationDatabasePath)
+		public App ()
 		{
 			InitializeComponent();
 
+		    var databasePath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), @"DATA.db");
+		    var localizationDatabasePath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), @"LOCAL.db");
+
             // Application Instance Data
-		    var applicationInstanceData = new ApplicationInstanceData
+            var applicationInstanceData = new ApplicationInstanceData
             {
                 PlatformDataPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal),
                 ApplicationInstanceDataFileName = @"AppData.json",
