@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
@@ -11,6 +12,9 @@ namespace MDPMS.Shared.ViewModels
     {
         public Command CancelCommand { get; set; }
         public Command SubmitCommand { get; set; }
+        public Command AddIncomeSourceCommand { get; set; }
+
+        public List<IncomeSource> IncomeSources { get; set; } = new List<IncomeSource>();
 
         public string HouseholdName { get; set; }
         public DateTime IntakeDate { get; set; }
@@ -29,6 +33,7 @@ namespace MDPMS.Shared.ViewModels
             ApplicationInstanceData = applicationInstanceData;
             CancelCommand = new Command(ExecuteCancelCommand);
             SubmitCommand = new Command(ExecuteSubmitCommand);
+            AddIncomeSourceCommand = new Command(ExecuteAddIncomeSourceCommand);
         }
 
         private void ExecuteCancelCommand()
@@ -50,9 +55,14 @@ namespace MDPMS.Shared.ViewModels
                 AdminvArea = AdminvArea,
                 DependentAdminvArea = DependentAdminvArea,
                 Country = Country,
-                AddressInfo = AddressInfo
+                AddressInfo = AddressInfo,
+                IncomeSources = new List<IncomeSource>()
             };
-            ApplicationInstanceData.Data.Households.Add(newHousehold);
+            foreach (var incomeSource in IncomeSources)
+            {
+                newHousehold.IncomeSources.Add(incomeSource);
+            }
+            ApplicationInstanceData.Data.Households.Add(newHousehold);            
             ApplicationInstanceData.Data.SaveChanges();
             Exit();
         }
@@ -60,6 +70,15 @@ namespace MDPMS.Shared.ViewModels
         private void Exit()
         {
             ApplicationInstanceData.GoToView(new HouseholdsView { BindingContext = new HouseholdsViewModel(ApplicationInstanceData) });
+        }
+
+        private void ExecuteAddIncomeSourceCommand()
+        {
+            // Modal navigate to add income source and retain household before submit
+            ApplicationInstanceData.NavigationPage.PushAsync(new IncomeSourceAddView
+            {
+                BindingContext = new IncomeSourceAddViewModel(ApplicationInstanceData)
+            });            
         }
     }
 }

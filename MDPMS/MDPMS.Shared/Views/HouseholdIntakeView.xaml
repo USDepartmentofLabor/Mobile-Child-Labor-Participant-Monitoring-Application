@@ -2,22 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDPMS.Shared.Views.HouseholdIntakeView">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style x:Key="LeftLabelStyleMain" TargetType="Label">
-                <Setter Property="HorizontalOptions" Value="Center"/>
-                <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="HorizontalTextAlignment" Value="Center"/>
-                <Setter Property="VerticalTextAlignment" Value="Center"/>
-            </Style>
-            <Style x:Key="RightLabelStyleMain" TargetType="Label">
-                <Setter Property="HorizontalOptions" Value="Start"/>
-                <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="HorizontalTextAlignment" Value="Start"/>
-                <Setter Property="VerticalTextAlignment" Value="Center"/>
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
             <Grid>
@@ -38,6 +22,7 @@
                             <RowDefinition Height="65"/>
                             <RowDefinition Height="65"/>
                             <RowDefinition Height="65"/>
+                            <RowDefinition Height="80"/>
                             <RowDefinition Height="100"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
@@ -127,6 +112,9 @@
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Text="Address Info" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
                             <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding AddressInfo, Mode=TwoWay}"/>
+                        </Grid>
+                        <Grid Grid.Row="11">
+                            <Button Text="Add Income Source" Command="{Binding AddIncomeSourceCommand}"/>
                         </Grid>
                     </Grid>
                 </ScrollView>
