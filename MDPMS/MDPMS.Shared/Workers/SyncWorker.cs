@@ -211,6 +211,23 @@ namespace MDPMS.Shared.Workers
             };
         }
 
+        public static IncomeSource GetIncomeSourceFromJson(dynamic incomeSourceJson)
+        {
+            return new IncomeSource
+            {
+                ExternalId = incomeSourceJson.id,
+                CreatedAt = incomeSourceJson.created_at,
+                LastUpdatedAt = incomeSourceJson.updated_at,
+                SoftDeleted = false,
+                ProductServiceName = incomeSourceJson.name,
+                EstimatedVolumeProduced = incomeSourceJson.estimated_volume_produced,
+                EstimatedVolumeSold = incomeSourceJson.estimated_volume_sold,
+                UnitOfMeasure = incomeSourceJson.unit_of_measure,
+                EstimatedIncome = incomeSourceJson.estimated_income,
+                Currency = incomeSourceJson.currency
+            };
+        }
+
         public static string GetJsonFromHousehold(Household household)
         {
             var sb = new StringBuilder();
@@ -249,6 +266,34 @@ namespace MDPMS.Shared.Workers
             return sw.ToString();
         }
 
+        public static string GetJsonFromIncomeSource(IncomeSource incomeSource)
+        {
+            var sb = new StringBuilder();
+            var sw = new StringWriter(sb);
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                writer.Formatting = Formatting.None;
+                writer.WriteStartObject();
+                writer.WritePropertyName(@"income_source");
+                writer.WriteStartObject();
+                writer.WritePropertyName("name");
+                writer.WriteValue(incomeSource.ProductServiceName);
+                writer.WritePropertyName("estimated_volume_produced");
+                writer.WriteValue(incomeSource.EstimatedVolumeProduced);
+                writer.WritePropertyName("estimated_volume_sold");
+                writer.WriteValue(incomeSource.EstimatedVolumeSold);
+                writer.WritePropertyName("unit_of_measure");
+                writer.WriteValue(incomeSource.UnitOfMeasure);
+                writer.WritePropertyName("estimated_income");
+                writer.WriteValue(incomeSource.EstimatedIncome);
+                writer.WritePropertyName("currency");
+                writer.WriteValue(incomeSource.Currency);
+                writer.WriteEndObject();
+                writer.WriteEndObject();
+            }
+            return sw.ToString();
+        }
+
         public static void UpdateHouseholdRecord(Household recordToUpdate, Household updatedHousehold)
         {
             recordToUpdate.LastUpdatedAt = updatedHousehold.LastUpdatedAt;
@@ -265,6 +310,17 @@ namespace MDPMS.Shared.Workers
             recordToUpdate.AddressInfo = updatedHousehold.AddressInfo;
         }
 
+        public static void UpdateIncomeSourceRecord(IncomeSource recordToUpdate, IncomeSource updatedHousehold)
+        {
+            recordToUpdate.LastUpdatedAt = updatedHousehold.LastUpdatedAt;
+            recordToUpdate.ProductServiceName = updatedHousehold.ProductServiceName;
+            recordToUpdate.EstimatedVolumeProduced = updatedHousehold.EstimatedVolumeProduced;
+            recordToUpdate.EstimatedVolumeSold = updatedHousehold.EstimatedVolumeSold;
+            recordToUpdate.UnitOfMeasure = updatedHousehold.UnitOfMeasure;
+            recordToUpdate.EstimatedIncome = updatedHousehold.EstimatedIncome;
+            recordToUpdate.Currency = updatedHousehold.Currency;            
+        }
+
         public static bool GetHouseholdNeedsUpdate(Household older, Household newer)
         {
             if (!older.HouseholdName.Equals(newer.HouseholdName)) return true;
@@ -278,6 +334,17 @@ namespace MDPMS.Shared.Workers
             if (!older.DependentAdminvArea.Equals(newer.DependentAdminvArea)) return true;
             if (!older.Country.Equals(newer.Country)) return true;
             if (!older.AddressInfo.Equals(newer.AddressInfo)) return true;
+            return false;
+        }
+
+        public static bool GetIncomeSourceNeedsUpdate(IncomeSource older, IncomeSource newer)
+        {
+            if (!older.ProductServiceName.Equals(newer.ProductServiceName)) return true;
+            if (!older.EstimatedVolumeProduced.Equals(newer.EstimatedVolumeProduced)) return true;
+            if (!older.EstimatedVolumeSold.Equals(newer.EstimatedVolumeSold)) return true;
+            if (!older.UnitOfMeasure.Equals(newer.UnitOfMeasure)) return true;
+            if (!older.EstimatedIncome.Equals(newer.EstimatedIncome)) return true;
+            if (!older.Currency.Equals(newer.Currency)) return true;
             return false;
         }
 
@@ -361,5 +428,56 @@ namespace MDPMS.Shared.Workers
             writer.WriteEndObject();            
             return sw.ToString();
         }
+        
+        public static string GenerateUpdateJsonForIncomeSource(IncomeSource older, IncomeSource newer)
+        {
+            // form the json (determine the fields that need to be updated)
+            var sb = new StringBuilder();
+            var sw = new StringWriter(sb);
+            var writer = new JsonTextWriter(sw) { Formatting = Formatting.None };
+            writer.WriteStartObject();
+            writer.WritePropertyName(@"income_source");
+            writer.WriteStartObject();
+
+            if (!older.ProductServiceName.Equals(newer.ProductServiceName))
+            {
+                writer.WritePropertyName("name");
+                writer.WriteValue(newer.ProductServiceName);
+            }
+
+            if (!older.EstimatedVolumeProduced.Equals(newer.EstimatedVolumeProduced))
+            {
+                writer.WritePropertyName("estimated_volume_produced");
+                writer.WriteValue(newer.EstimatedVolumeProduced);
+            }
+
+            if (!older.EstimatedVolumeSold.Equals(newer.EstimatedVolumeSold))
+            {
+                writer.WritePropertyName("estimated_volume_sold");
+                writer.WriteValue(newer.EstimatedVolumeSold);
+            }
+
+            if (!older.UnitOfMeasure.Equals(newer.UnitOfMeasure))
+            {
+                writer.WritePropertyName("unit_of_measure");
+                writer.WriteValue(newer.UnitOfMeasure);
+            }
+
+            if (!older.EstimatedIncome.Equals(newer.EstimatedIncome))
+            {
+                writer.WritePropertyName("estimated_income");
+                writer.WriteValue(newer.EstimatedIncome);
+            }
+
+            if (!older.Currency.Equals(newer.Currency))
+            {
+                writer.WritePropertyName("currency");
+                writer.WriteValue(newer.Currency);
+            }
+            
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+            return sw.ToString();
+        }        
     }
 }
