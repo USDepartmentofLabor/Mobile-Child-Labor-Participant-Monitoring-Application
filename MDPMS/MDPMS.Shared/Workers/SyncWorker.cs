@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using Newtonsoft.Json;
@@ -73,8 +71,8 @@ namespace MDPMS.Shared.Workers
                 var idsInParent = new List<int>();
                 dynamic householdParse = JsonConvert.DeserializeObject(householdsJson);
                 foreach (var household in householdParse)
-                {                                        
-                    Household newHousehold = GetHouseholdFromJson(household);
+                {                                   
+                    Household newHousehold = new Household().GetObjectFromJson(household);
                     idsInParent.Add((int)newHousehold.ExternalId);
                     var householdDbRecord = applicationInstanceData.Data.Households.Where(a => a.ExternalId.Equals(newHousehold.ExternalId));
                     if (householdDbRecord.Any())
@@ -83,19 +81,19 @@ namespace MDPMS.Shared.Workers
                         var record = householdDbRecord.First();
                         
                         // the parent is newer so update the local
-                        if (record.LastUpdatedAt < newHousehold.LastUpdatedAt) UpdateHouseholdRecord(record, newHousehold);
+                        if (record.LastUpdatedAt < newHousehold.LastUpdatedAt) record.UpdateObject(newHousehold);
                         else if (record.LastUpdatedAt > newHousehold.LastUpdatedAt)
                         {
                             if (allowAlreadySyncedUpdateToParent)
                             {
                                 // IF_SUPPORTED: the local is newer so update the parent with new info
-                                if (GetHouseholdNeedsUpdate(newHousehold, record))
+                                if (record.GetObjectNeedsUpate(newHousehold))
                                 {
                                     var putSuccess = Helper.Rest.RestHelper.PerformRestPutRequestWithApiKeyAndId(
                                         applicationInstanceData.SerializedApplicationInstanceData.Url,
                                         @"/api/v1/households",
                                         applicationInstanceData.SerializedApplicationInstanceData.ApiKey,
-                                        GenerateUpdateJsonForHousehold(newHousehold, record),
+                                        record.GenerateUpdateJsonFromObject(newHousehold),
                                         record.ExternalId.ToString());
                                     if (putSuccess.Item1)
                                     {
@@ -150,8 +148,8 @@ namespace MDPMS.Shared.Workers
                 
                 // post new households last
                 foreach (var household in applicationInstanceData.Data.Households.Where(a => a.ExternalId.HasValue == false))
-                {                    
-                    var householdJson = GetJsonFromHousehold(household);                    
+                {
+                    var householdJson = household.GetJsonFromObject();                    
                     var postSuccess = Helper.Rest.RestHelper.PerformRestPostRequestWithApiKey(
                         applicationInstanceData.SerializedApplicationInstanceData.Url,
                         @"/api/v1/households",
@@ -187,297 +185,6 @@ namespace MDPMS.Shared.Workers
                 return new Tuple<bool, string>(false, @"Sync error");
             }
             return new Tuple<bool, string>(true, @"");
-        }
-
-        public static Household GetHouseholdFromJson(dynamic householdJson)
-        {            
-            return new Household
-            {
-                ExternalId = householdJson.id,
-                CreatedAt = householdJson.created_at,
-                LastUpdatedAt = householdJson.updated_at,
-                SoftDeleted = false,
-                HouseholdName = householdJson.name,
-                IntakeDate = householdJson.intake_date,
-                AddressLine1 = householdJson.address_line_1,
-                AddressLine2 = householdJson.address_line_2,
-                PostalCode = householdJson.postal_code,
-                DependentLocality = householdJson.dependent_locality,
-                Locality = householdJson.locality,
-                AdminvArea = householdJson.adminv_area,
-                DependentAdminvArea = householdJson.dependent_adminv_area,
-                Country = householdJson.country,
-                AddressInfo = householdJson.address_info
-            };
-        }
-
-        public static IncomeSource GetIncomeSourceFromJson(dynamic incomeSourceJson)
-        {
-            return new IncomeSource
-            {
-                ExternalId = incomeSourceJson.id,
-                CreatedAt = incomeSourceJson.created_at,
-                LastUpdatedAt = incomeSourceJson.updated_at,
-                SoftDeleted = false,
-                ProductServiceName = incomeSourceJson.name,
-                EstimatedVolumeProduced = incomeSourceJson.estimated_volume_produced,
-                EstimatedVolumeSold = incomeSourceJson.estimated_volume_sold,
-                UnitOfMeasure = incomeSourceJson.unit_of_measure,
-                EstimatedIncome = incomeSourceJson.estimated_income,
-                Currency = incomeSourceJson.currency
-            };
-        }
-
-        public static string GetJsonFromHousehold(Household household)
-        {
-            var sb = new StringBuilder();
-            var sw = new StringWriter(sb);
-            using (JsonWriter writer = new JsonTextWriter(sw))
-            {
-                writer.Formatting = Formatting.None;
-                writer.WriteStartObject();
-                writer.WritePropertyName(@"household");
-                writer.WriteStartObject();
-                writer.WritePropertyName("name");
-                writer.WriteValue(household.HouseholdName);
-                writer.WritePropertyName("intake_date");
-                writer.WriteValue(household.IntakeDate.ToString("yyyy-MM-dd"));
-                writer.WritePropertyName("address_line_1");
-                writer.WriteValue(household.AddressLine1);
-                writer.WritePropertyName("address_line_2");
-                writer.WriteValue(household.AddressLine2);
-                writer.WritePropertyName("postal_code");
-                writer.WriteValue(household.PostalCode);
-                writer.WritePropertyName("dependent_locality");
-                writer.WriteValue(household.DependentLocality);
-                writer.WritePropertyName("locality");
-                writer.WriteValue(household.Locality);
-                writer.WritePropertyName("adminv_area");
-                writer.WriteValue(household.AdminvArea);
-                writer.WritePropertyName("dependent_adminv_area");
-                writer.WriteValue(household.DependentAdminvArea);
-                writer.WritePropertyName("country");
-                writer.WriteValue(household.Country);
-                writer.WritePropertyName("address_info");
-                writer.WriteValue(household.AddressInfo);
-                writer.WriteEndObject();
-                writer.WriteEndObject();
-            }            
-            return sw.ToString();
-        }
-
-        public static string GetJsonFromIncomeSource(IncomeSource incomeSource)
-        {
-            var sb = new StringBuilder();
-            var sw = new StringWriter(sb);
-            using (JsonWriter writer = new JsonTextWriter(sw))
-            {
-                writer.Formatting = Formatting.None;
-                writer.WriteStartObject();
-                writer.WritePropertyName(@"income_source");
-                writer.WriteStartObject();
-                writer.WritePropertyName("name");
-                writer.WriteValue(incomeSource.ProductServiceName);
-                writer.WritePropertyName("estimated_volume_produced");
-                writer.WriteValue(incomeSource.EstimatedVolumeProduced);
-                writer.WritePropertyName("estimated_volume_sold");
-                writer.WriteValue(incomeSource.EstimatedVolumeSold);
-                writer.WritePropertyName("unit_of_measure");
-                writer.WriteValue(incomeSource.UnitOfMeasure);
-                writer.WritePropertyName("estimated_income");
-                writer.WriteValue(incomeSource.EstimatedIncome);
-                writer.WritePropertyName("currency");
-                writer.WriteValue(incomeSource.Currency);
-                writer.WriteEndObject();
-                writer.WriteEndObject();
-            }
-            return sw.ToString();
-        }
-
-        public static void UpdateHouseholdRecord(Household recordToUpdate, Household updatedHousehold)
-        {
-            recordToUpdate.LastUpdatedAt = updatedHousehold.LastUpdatedAt;
-            recordToUpdate.HouseholdName = updatedHousehold.HouseholdName;
-            recordToUpdate.IntakeDate = updatedHousehold.IntakeDate;
-            recordToUpdate.AddressLine1 = updatedHousehold.AddressLine1;
-            recordToUpdate.AddressLine2 = updatedHousehold.AddressLine1;
-            recordToUpdate.PostalCode = updatedHousehold.PostalCode;
-            recordToUpdate.DependentLocality = updatedHousehold.DependentLocality;
-            recordToUpdate.Locality = updatedHousehold.Locality;
-            recordToUpdate.AdminvArea = updatedHousehold.AdminvArea;
-            recordToUpdate.DependentAdminvArea = updatedHousehold.DependentAdminvArea;
-            recordToUpdate.Country = updatedHousehold.Country;
-            recordToUpdate.AddressInfo = updatedHousehold.AddressInfo;
-        }
-
-        public static void UpdateIncomeSourceRecord(IncomeSource recordToUpdate, IncomeSource updatedHousehold)
-        {
-            recordToUpdate.LastUpdatedAt = updatedHousehold.LastUpdatedAt;
-            recordToUpdate.ProductServiceName = updatedHousehold.ProductServiceName;
-            recordToUpdate.EstimatedVolumeProduced = updatedHousehold.EstimatedVolumeProduced;
-            recordToUpdate.EstimatedVolumeSold = updatedHousehold.EstimatedVolumeSold;
-            recordToUpdate.UnitOfMeasure = updatedHousehold.UnitOfMeasure;
-            recordToUpdate.EstimatedIncome = updatedHousehold.EstimatedIncome;
-            recordToUpdate.Currency = updatedHousehold.Currency;            
-        }
-
-        public static bool GetHouseholdNeedsUpdate(Household older, Household newer)
-        {
-            if (!older.HouseholdName.Equals(newer.HouseholdName)) return true;
-            if (!older.IntakeDate.Equals(newer.IntakeDate)) return true;
-            if (!older.AddressLine1.Equals(newer.AddressLine1)) return true;
-            if (!older.AddressLine2.Equals(newer.AddressLine2)) return true;
-            if (!older.PostalCode.Equals(newer.PostalCode)) return true;
-            if (!older.DependentLocality.Equals(newer.DependentLocality)) return true;
-            if (!older.Locality.Equals(newer.Locality)) return true;
-            if (!older.AdminvArea.Equals(newer.AdminvArea)) return true;
-            if (!older.DependentAdminvArea.Equals(newer.DependentAdminvArea)) return true;
-            if (!older.Country.Equals(newer.Country)) return true;
-            if (!older.AddressInfo.Equals(newer.AddressInfo)) return true;
-            return false;
-        }
-
-        public static bool GetIncomeSourceNeedsUpdate(IncomeSource older, IncomeSource newer)
-        {
-            if (!older.ProductServiceName.Equals(newer.ProductServiceName)) return true;
-            if (!older.EstimatedVolumeProduced.Equals(newer.EstimatedVolumeProduced)) return true;
-            if (!older.EstimatedVolumeSold.Equals(newer.EstimatedVolumeSold)) return true;
-            if (!older.UnitOfMeasure.Equals(newer.UnitOfMeasure)) return true;
-            if (!older.EstimatedIncome.Equals(newer.EstimatedIncome)) return true;
-            if (!older.Currency.Equals(newer.Currency)) return true;
-            return false;
-        }
-
-        public static string GenerateUpdateJsonForHousehold(Household older, Household newer)
-        {
-            // form the json (determine the fields that need to be updated)
-            var sb = new StringBuilder();
-            var sw = new StringWriter(sb);
-            var writer = new JsonTextWriter(sw) {Formatting = Formatting.None};
-            writer.WriteStartObject();
-            writer.WritePropertyName(@"household");
-            writer.WriteStartObject();
-            
-            if (!older.HouseholdName.Equals(newer.HouseholdName))
-            {
-                writer.WritePropertyName("name");
-                writer.WriteValue(newer.HouseholdName);
-            }
-
-            if (!older.IntakeDate.Equals(newer.IntakeDate))
-            {
-                writer.WritePropertyName("intake_date");
-                writer.WriteValue(newer.IntakeDate.ToString("yyyy-MM-dd"));
-            }
-
-            if (!older.AddressLine1.Equals(newer.AddressLine1))
-            {
-                writer.WritePropertyName("address_line_1");
-                writer.WriteValue(newer.AddressLine1);
-            }
-
-            if (!older.AddressLine2.Equals(newer.AddressLine2))
-            {
-                writer.WritePropertyName("address_line_2");
-                writer.WriteValue(newer.AddressLine2);
-            }
-
-            if (!older.PostalCode.Equals(newer.PostalCode))
-            {
-                writer.WritePropertyName("postal_code");
-                writer.WriteValue(newer.PostalCode);
-            }
-
-            if (!older.DependentLocality.Equals(newer.DependentLocality))
-            {
-                writer.WritePropertyName("dependent_locality");
-                writer.WriteValue(newer.DependentLocality);
-            }
-
-            if (!older.Locality.Equals(newer.Locality))
-            {
-                writer.WritePropertyName("locality");
-                writer.WriteValue(newer.Locality);
-            }
-
-            if (!older.AdminvArea.Equals(newer.AdminvArea))
-            {
-                writer.WritePropertyName("adminv_area");
-                writer.WriteValue(newer.AdminvArea);
-            }
-
-            if (!older.DependentAdminvArea.Equals(newer.DependentAdminvArea))
-            {
-                writer.WritePropertyName("dependent_adminv_area");
-                writer.WriteValue(newer.DependentAdminvArea);
-            }
-
-            if (!older.Country.Equals(newer.Country))
-            {
-                writer.WritePropertyName("country");
-                writer.WriteValue(newer.Country);
-            }
-
-            if (!older.AddressInfo.Equals(newer.AddressInfo))
-            {
-                writer.WritePropertyName("address_info");
-                writer.WriteValue(newer.AddressInfo);
-            }
-            
-            writer.WriteEndObject();
-            writer.WriteEndObject();            
-            return sw.ToString();
-        }
-        
-        public static string GenerateUpdateJsonForIncomeSource(IncomeSource older, IncomeSource newer)
-        {
-            // form the json (determine the fields that need to be updated)
-            var sb = new StringBuilder();
-            var sw = new StringWriter(sb);
-            var writer = new JsonTextWriter(sw) { Formatting = Formatting.None };
-            writer.WriteStartObject();
-            writer.WritePropertyName(@"income_source");
-            writer.WriteStartObject();
-
-            if (!older.ProductServiceName.Equals(newer.ProductServiceName))
-            {
-                writer.WritePropertyName("name");
-                writer.WriteValue(newer.ProductServiceName);
-            }
-
-            if (!older.EstimatedVolumeProduced.Equals(newer.EstimatedVolumeProduced))
-            {
-                writer.WritePropertyName("estimated_volume_produced");
-                writer.WriteValue(newer.EstimatedVolumeProduced);
-            }
-
-            if (!older.EstimatedVolumeSold.Equals(newer.EstimatedVolumeSold))
-            {
-                writer.WritePropertyName("estimated_volume_sold");
-                writer.WriteValue(newer.EstimatedVolumeSold);
-            }
-
-            if (!older.UnitOfMeasure.Equals(newer.UnitOfMeasure))
-            {
-                writer.WritePropertyName("unit_of_measure");
-                writer.WriteValue(newer.UnitOfMeasure);
-            }
-
-            if (!older.EstimatedIncome.Equals(newer.EstimatedIncome))
-            {
-                writer.WritePropertyName("estimated_income");
-                writer.WriteValue(newer.EstimatedIncome);
-            }
-
-            if (!older.Currency.Equals(newer.Currency))
-            {
-                writer.WritePropertyName("currency");
-                writer.WriteValue(newer.Currency);
-            }
-            
-            writer.WriteEndObject();
-            writer.WriteEndObject();
-            return sw.ToString();
         }        
     }
 }
