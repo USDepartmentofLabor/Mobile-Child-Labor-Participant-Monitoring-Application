@@ -9,7 +9,7 @@ namespace MDPMS.Database.Data.Models
     /// <summary>
     /// Household income source, note fields stored as string since they can be open ended answers
     /// </summary>
-    public class IncomeSource : EfBaseModel, ISyncable<IncomeSource>, ISyncableAsChild<IncomeSource>
+    public class IncomeSource : EfBaseModel, ISyncableAsChild<IncomeSource>
     {
         /// <summary>
         /// Name of product or service
@@ -40,6 +40,26 @@ namespace MDPMS.Database.Data.Models
         /// Currency
         /// </summary>
         public string Currency { get; set; }
+
+        public int? GetExternalId()
+        {
+            return ExternalId;
+        }
+
+        public DateTime? GetLastUpdatedAt()
+        {
+            return LastUpdatedAt;
+        }
+
+        public void SetLastUpdatedAt(DateTime? dateTime)
+        {
+            LastUpdatedAt = dateTime;
+        }
+
+        public void SetExternalId(int? id)
+        {
+            ExternalId = id;
+        }
 
         public IncomeSource GetObjectFromJson(dynamic json)
         {

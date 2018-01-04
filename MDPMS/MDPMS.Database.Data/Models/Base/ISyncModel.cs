@@ -2,35 +2,39 @@
 
 namespace MDPMS.Database.Data.Models.Base
 {        
-    interface ISyncable<T> :
+    public interface ISyncable<T> :
         IJsonToObjectConvertable<T>,
         IObjectToJsonConvertible<T>,
         IUpdateable<T>
     {
+        int? GetExternalId();
+        DateTime? GetLastUpdatedAt();
+        void SetLastUpdatedAt(DateTime? dateTime);
+        void SetExternalId(int? id);
     }
 
-    interface ISyncableAsChild<T> :
+    public interface ISyncableAsChild<T> :
         ISyncable<T>,
         IJsonToObjectConvertableAsChild<T>
     {        
     }
 
-    interface IJsonToObjectConvertable<T>
+    public interface IJsonToObjectConvertable<T>
     {
         T GetObjectFromJson(dynamic json);
     }
 
-    interface IJsonToObjectConvertableAsChild<T>
+    public interface IJsonToObjectConvertableAsChild<T>
     {
         Tuple<int, T> GetObjectFromJsonWithParentId(dynamic json, string parentIdPropertyName);
     }
 
-    interface IObjectToJsonConvertible<T>
+    public interface IObjectToJsonConvertible<T>
     {
         string GetJsonFromObject();
     }
 
-    interface IUpdateable<T>
+    public interface IUpdateable<T>
     {
         void UpdateObject(T updateFrom);
         bool GetObjectNeedsUpate(T checkUpdateFrom);

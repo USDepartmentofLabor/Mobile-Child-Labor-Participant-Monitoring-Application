@@ -77,6 +77,26 @@ namespace MDPMS.Database.Data.Models
         /// </summary>
         public List<Person> Members { get; set; }
 
+        public int? GetExternalId()
+        {
+            return ExternalId;
+        }
+
+        public DateTime? GetLastUpdatedAt()
+        {
+            return LastUpdatedAt;
+        }
+
+        public void SetLastUpdatedAt(DateTime? dateTime)
+        {
+            LastUpdatedAt = dateTime;
+        }
+
+        public void SetExternalId(int? id)
+        {
+            ExternalId = id;
+        }
+
         public Household GetObjectFromJson(dynamic json)
         {
             return new Household
@@ -248,6 +268,6 @@ namespace MDPMS.Database.Data.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
             return sw.ToString();
-        }
+        }        
     }
 }

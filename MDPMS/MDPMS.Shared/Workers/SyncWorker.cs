@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using MDPMS.Database.Data.Models;
+using MDPMS.Database.Data.Models.Base;
 using MDPMS.Shared.Models;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace MDPMS.Shared.Workers
 {
     public static class SyncWorker
     {
-        public static Tuple<bool, string> Sync(ApplicationInstanceData applicationInstanceData, bool allowAlreadySyncedUpdateToParent)
-        {
-            /*
+        /*
              SYNC STRATEGY
              =============
              * SUMMARY => Examine record existence and last update age
@@ -58,7 +58,9 @@ namespace MDPMS.Shared.Workers
             ALSO, deleted from parent, if already synced but no longer on parent delete on mobile, use soft delete?
             this would require the parent to support deleting households
              */
-             
+
+        public static Tuple<bool, string> Sync(ApplicationInstanceData applicationInstanceData, bool allowAlreadySyncedUpdateToParent)
+        {                         
             try
             {                                
                 // get existing Households from parent
@@ -164,6 +166,137 @@ namespace MDPMS.Shared.Workers
                         {
                             household.LastUpdatedAt = ((DateTime)DateTime.Parse(jsonResponseParse.updated_at.Value)).ToUniversalTime();
                             household.ExternalId = jsonResponseParse.id;
+                        }
+                        else
+                        {
+                            // TODO: error log    
+                            return new Tuple<bool, string>(false, @"Add error");
+                        }
+                    }
+                    else
+                    {
+                        // TODO: error log    
+                        return new Tuple<bool, string>(false, @"Add error");
+                    }
+                }
+                applicationInstanceData.Data.SaveChanges();
+            }
+            catch
+            {
+                // TODO: error log
+                return new Tuple<bool, string>(false, @"Sync error");
+            }
+            return new Tuple<bool, string>(true, @"");
+        }
+        
+        public static Tuple<bool, string> SyncObject<T>(ApplicationInstanceData applicationInstanceData, bool allowAlreadySyncedUpdateToParent, string apiPath, DbSet<T> data) where T : class, ISyncable<T>, new()
+        {
+            // parent objects
+            try
+            {
+                // get existing objects from parent
+                var existingObjectsJson = Helper.Rest.RestHelper.PerformRestGetRequestWithApiKey(
+                    applicationInstanceData.SerializedApplicationInstanceData.Url,
+                    apiPath,
+                    applicationInstanceData.SerializedApplicationInstanceData.ApiKey);
+
+                // deserialize and sync Households
+                var idsInParent = new List<int>();
+                dynamic objectParse = JsonConvert.DeserializeObject(existingObjectsJson);
+                foreach (var objectInstance in objectParse)
+                {
+                    T newObject = new T().GetObjectFromJson(objectInstance);
+                    idsInParent.Add((int)newObject.GetExternalId());                    
+                    var query = data.Where(a => a.GetExternalId().Equals(newObject.GetExternalId()));
+                    if (query.Any())
+                    {
+                        // sync non new records
+                        var record = query.First();
+
+                        // the parent is newer so update the local
+                        if (record.GetLastUpdatedAt() < newObject.GetLastUpdatedAt()) record.UpdateObject(newObject);
+                        else if (record.GetLastUpdatedAt() > newObject.GetLastUpdatedAt())
+                        {
+                            if (allowAlreadySyncedUpdateToParent)
+                            {
+                                // IF_SUPPORTED: the local is newer so update the parent with new info
+                                if (record.GetObjectNeedsUpate(newObject))
+                                {
+                                    var putSuccess = Helper.Rest.RestHelper.PerformRestPutRequestWithApiKeyAndId(
+                                        applicationInstanceData.SerializedApplicationInstanceData.Url,
+                                        apiPath,
+                                        applicationInstanceData.SerializedApplicationInstanceData.ApiKey,
+                                        newObject.GenerateUpdateJsonFromObject(record),
+                                        record.GetExternalId().ToString());
+                                    if (putSuccess.Item1)
+                                    {
+                                        // set last updated at from JSON response
+                                        dynamic jsonResponseParse = JsonConvert.DeserializeObject(putSuccess.Item2);
+                                        if (jsonResponseParse.status.Value.ToString().Equals(@"success"))
+                                        {
+                                            objectInstance.LastUpdatedAt = ((DateTime)DateTime.Parse(jsonResponseParse.updated_at.Value)).ToUniversalTime();
+                                        }
+                                        else
+                                        {
+                                            // TODO: error log    
+                                            return new Tuple<bool, string>(false, @"Update error");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // TODO: error log    
+                                        return new Tuple<bool, string>(false, @"Update error");
+                                    }
+                                }
+                                else
+                                {
+                                    record.SetLastUpdatedAt(newObject.GetLastUpdatedAt());
+                                }
+                            }
+                            else
+                            {
+                                // NOT_YET_SUPPORTED: the local is newer so update the parent with new info
+                                // TODO: error log
+                                return new Tuple<bool, string>(false, @"Update error, update from mobile not allowed");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // add it locally, it is new to mobile
+                        data.Add(newObject);
+                    }
+                }
+                applicationInstanceData.Data.SaveChanges();
+
+                // Delete local households not on parent, i.e. not in GET but has external id, requires parent suppoorting delete
+                var idQuery = data.Where(a => !a.GetExternalId().Equals(null)).Select(a => (int)a.GetExternalId()).ToList();
+                var toDeleteIds = idQuery.Except(idsInParent).ToList();
+                foreach (var id in toDeleteIds)
+                {
+                    var rec = data.Where(a => a.GetExternalId().Equals(id));
+                    data.Remove(rec.First());
+                }
+                applicationInstanceData.Data.SaveChanges();                
+
+                // post new households last
+                foreach (var objectInstance in data.Where(a => a.GetExternalId().HasValue == false))
+                {
+                    var objectJson = objectInstance.GetJsonFromObject();
+                    var postSuccess = Helper.Rest.RestHelper.PerformRestPostRequestWithApiKey(
+                        applicationInstanceData.SerializedApplicationInstanceData.Url,
+                        apiPath,
+                        applicationInstanceData.SerializedApplicationInstanceData.ApiKey,
+                        objectJson);
+
+                    if (postSuccess.Item1)
+                    {
+                        // set last updated at from JSON response
+                        dynamic jsonResponseParse = JsonConvert.DeserializeObject(postSuccess.Item2);
+                        if (jsonResponseParse.status.Value.ToString().Equals(@"success"))
+                        {
+                            objectInstance.SetLastUpdatedAt(((DateTime)DateTime.Parse(jsonResponseParse.updated_at.Value)).ToUniversalTime());
+                            objectInstance.SetExternalId((int?)jsonResponseParse.id);
                         }
                         else
                         {
