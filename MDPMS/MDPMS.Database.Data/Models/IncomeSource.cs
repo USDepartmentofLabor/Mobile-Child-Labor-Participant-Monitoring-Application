@@ -41,6 +41,8 @@ namespace MDPMS.Database.Data.Models
         /// </summary>
         public string Currency { get; set; }
 
+        public int? ExternalParentId { get; set; }
+
         public int? GetExternalId()
         {
             return ExternalId;
@@ -61,6 +63,16 @@ namespace MDPMS.Database.Data.Models
             ExternalId = id;
         }
 
+        public int? GetExternalParentId()
+        {
+            return ExternalParentId;
+        }
+
+        public void SetExternalParentId(int? id)
+        {
+            ExternalParentId = id;
+        }
+
         public IncomeSource GetObjectFromJson(dynamic json)
         {
             return new IncomeSource
@@ -74,7 +86,8 @@ namespace MDPMS.Database.Data.Models
                 EstimatedVolumeSold = json.estimated_volume_sold,
                 UnitOfMeasure = json.unit_of_measure,
                 EstimatedIncome = json.estimated_income,
-                Currency = json.currency
+                Currency = json.currency,
+                ExternalParentId = json.household_id
             };
         }
 
@@ -107,6 +120,8 @@ namespace MDPMS.Database.Data.Models
                 writer.WriteValue(EstimatedIncome);
                 writer.WritePropertyName("currency");
                 writer.WriteValue(Currency);
+                writer.WritePropertyName("household_id");
+                writer.WriteValue(ExternalParentId);
                 writer.WriteEndObject();
                 writer.WriteEndObject();
             }
@@ -122,6 +137,7 @@ namespace MDPMS.Database.Data.Models
             UnitOfMeasure = updateFrom.UnitOfMeasure;
             EstimatedIncome = updateFrom.EstimatedIncome;
             Currency = updateFrom.Currency;
+            ExternalParentId = updateFrom.ExternalParentId;
         }
 
         public bool GetObjectNeedsUpate(IncomeSource checkUpdateFrom)
@@ -132,6 +148,7 @@ namespace MDPMS.Database.Data.Models
             if (!UnitOfMeasure.Equals(checkUpdateFrom.UnitOfMeasure)) return true;
             if (!EstimatedIncome.Equals(checkUpdateFrom.EstimatedIncome)) return true;
             if (!Currency.Equals(checkUpdateFrom.Currency)) return true;
+            if (!ExternalParentId.Equals(checkUpdateFrom.ExternalParentId)) return true;
             return false;
         }
 
@@ -179,6 +196,12 @@ namespace MDPMS.Database.Data.Models
             {
                 writer.WritePropertyName("currency");
                 writer.WriteValue(updateFrom.Currency);
+            }
+
+            if (!ExternalParentId.Equals(updateFrom.ExternalParentId))
+            {
+                writer.WritePropertyName("household_id");
+                writer.WriteValue(updateFrom.ExternalParentId);
             }
 
             writer.WriteEndObject();

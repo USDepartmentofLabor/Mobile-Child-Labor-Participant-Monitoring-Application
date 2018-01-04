@@ -59,127 +59,17 @@ namespace MDPMS.Shared.Workers
             this would require the parent to support deleting households
              */
 
-        public static Tuple<bool, string> Sync(ApplicationInstanceData applicationInstanceData, bool allowAlreadySyncedUpdateToParent)
-        {                         
+        public static Tuple<bool, string> Sync(ApplicationInstanceData applicationInstanceData,
+            bool allowAlreadySyncedUpdateToParent)
+        {
             try
-            {                                
-                // get existing Households from parent
-                var householdsJson = Helper.Rest.RestHelper.PerformRestGetRequestWithApiKey(
-                    applicationInstanceData.SerializedApplicationInstanceData.Url,
-                    @"/api/v1/households",
-                    applicationInstanceData.SerializedApplicationInstanceData.ApiKey);
-
-                // deserialize and sync Households
-                var idsInParent = new List<int>();
-                dynamic householdParse = JsonConvert.DeserializeObject(householdsJson);
-                foreach (var household in householdParse)
-                {                                   
-                    Household newHousehold = new Household().GetObjectFromJson(household);
-                    idsInParent.Add((int)newHousehold.ExternalId);
-                    var householdDbRecord = applicationInstanceData.Data.Households.Where(a => a.ExternalId.Equals(newHousehold.ExternalId));
-                    if (householdDbRecord.Any())
-                    {
-                        // sync non new records
-                        var record = householdDbRecord.First();
-                        
-                        // the parent is newer so update the local
-                        if (record.LastUpdatedAt < newHousehold.LastUpdatedAt) record.UpdateObject(newHousehold);
-                        else if (record.LastUpdatedAt > newHousehold.LastUpdatedAt)
-                        {
-                            if (allowAlreadySyncedUpdateToParent)
-                            {
-                                // IF_SUPPORTED: the local is newer so update the parent with new info
-                                if (record.GetObjectNeedsUpate(newHousehold))
-                                {
-                                    var putSuccess = Helper.Rest.RestHelper.PerformRestPutRequestWithApiKeyAndId(
-                                        applicationInstanceData.SerializedApplicationInstanceData.Url,
-                                        @"/api/v1/households",
-                                        applicationInstanceData.SerializedApplicationInstanceData.ApiKey,
-                                        record.GenerateUpdateJsonFromObject(newHousehold),
-                                        record.ExternalId.ToString());
-                                    if (putSuccess.Item1)
-                                    {
-                                        // set last updated at from JSON response
-                                        dynamic jsonResponseParse = JsonConvert.DeserializeObject(putSuccess.Item2);
-                                        if (jsonResponseParse.status.Value.ToString().Equals(@"success"))
-                                        {
-                                            household.LastUpdatedAt = ((DateTime)DateTime.Parse(jsonResponseParse.updated_at.Value)).ToUniversalTime();
-                                        }
-                                        else
-                                        {
-                                            // TODO: error log    
-                                            return new Tuple<bool, string>(false, @"Update error");
-                                        }
-                                    }
-                                    else
-                                    {
-                                        // TODO: error log    
-                                        return new Tuple<bool, string>(false, @"Update error");
-                                    }
-                                }
-                                else
-                                {
-                                    record.LastUpdatedAt = newHousehold.LastUpdatedAt;
-                                }                                
-                            }
-                            else
-                            {
-                                // NOT_YET_SUPPORTED: the local is newer so update the parent with new info
-                                // TODO: error log
-                                return new Tuple<bool, string>(false, @"Update error, update from mobile not allowed");
-                            }
-                        }                        
-                    }
-                    else
-                    {
-                        // add it locally, it is new to mobile
-                        applicationInstanceData.Data.Households.Add(newHousehold);
-                    }
-                }
-                applicationInstanceData.Data.SaveChanges();
-
-                // Delete local households not on parent, i.e. not in GET but has external id, requires parent suppoorting delete
-                var idQuery = applicationInstanceData.Data.Households.Where(a => a.HasExternalId.Equals(true)).Select(a => (int)a.ExternalId).ToList();
-                var toDeleteIds = idQuery.Except(idsInParent).ToList();
-                foreach (var id in toDeleteIds)
-                {
-                    var rec = applicationInstanceData.Data.Households.Where(a => a.ExternalId.Equals(id));
-                    applicationInstanceData.Data.Households.Remove(rec.First());
-                }
-                applicationInstanceData.Data.SaveChanges();
+            {
+                var householdsResult = SyncParentObject(applicationInstanceData, false, @"/api/v1/households", applicationInstanceData.Data.Households);
+                if (!householdsResult.Item1) return new Tuple<bool, string>(false, @"Sync error");
                 
-                // post new households last
-                foreach (var household in applicationInstanceData.Data.Households.Where(a => a.ExternalId.HasValue == false))
-                {
-                    var householdJson = household.GetJsonFromObject();                    
-                    var postSuccess = Helper.Rest.RestHelper.PerformRestPostRequestWithApiKey(
-                        applicationInstanceData.SerializedApplicationInstanceData.Url,
-                        @"/api/v1/households",
-                        applicationInstanceData.SerializedApplicationInstanceData.ApiKey,
-                        householdJson);
-
-                    if (postSuccess.Item1)
-                    {
-                        // set last updated at from JSON response
-                        dynamic jsonResponseParse = JsonConvert.DeserializeObject(postSuccess.Item2);                        
-                        if (jsonResponseParse.status.Value.ToString().Equals(@"success"))
-                        {
-                            household.LastUpdatedAt = ((DateTime)DateTime.Parse(jsonResponseParse.updated_at.Value)).ToUniversalTime();
-                            household.ExternalId = jsonResponseParse.id;
-                        }
-                        else
-                        {
-                            // TODO: error log    
-                            return new Tuple<bool, string>(false, @"Add error");
-                        }
-                    }
-                    else
-                    {
-                        // TODO: error log    
-                        return new Tuple<bool, string>(false, @"Add error");
-                    }
-                }
-                applicationInstanceData.Data.SaveChanges();
+                var incomeSourcesResult = SyncChildObject<IncomeSource, Household>(applicationInstanceData, false, @"/api/v1/income_sources",
+                    applicationInstanceData.Data.IncomeSources, @"household_id", applicationInstanceData.Data.Households);
+                if (!incomeSourcesResult.Item1) return new Tuple<bool, string>(false, @"Sync error");
             }
             catch
             {
@@ -189,7 +79,7 @@ namespace MDPMS.Shared.Workers
             return new Tuple<bool, string>(true, @"");
         }
         
-        public static Tuple<bool, string> SyncObject<T>(ApplicationInstanceData applicationInstanceData, bool allowAlreadySyncedUpdateToParent, string apiPath, DbSet<T> data) where T : class, ISyncable<T>, new()
+        public static Tuple<bool, string> SyncParentObject<T>(ApplicationInstanceData applicationInstanceData, bool allowAlreadySyncedUpdateToParent, string apiPath, DbSet<T> data) where T : class, ISyncable<T>, new()
         {
             // parent objects
             try
@@ -311,6 +201,70 @@ namespace MDPMS.Shared.Workers
                     }
                 }
                 applicationInstanceData.Data.SaveChanges();
+            }
+            catch
+            {
+                // TODO: error log
+                return new Tuple<bool, string>(false, @"Sync error");
+            }
+            return new Tuple<bool, string>(true, @"");
+        }
+        
+        // T is child
+        // T2 is parent
+        public static Tuple<bool, string> SyncChildObject<T, T2>(ApplicationInstanceData applicationInstanceData,
+            bool allowAlreadySyncedUpdateToParent, string apiPath, DbSet<T> data, string parentIdName, DbSet<T2> parentData)
+            where T : class, ISyncableAsChild<T>, new()        
+            where T2 : class , ISyncable<T2>, new()
+        {
+            // similar to parent, check id link and validity of id
+            try
+            {                
+                var incomeSourcesResult = SyncParentObject(applicationInstanceData, false, apiPath, data);
+                if (!incomeSourcesResult.Item1) return new Tuple<bool, string>(false, @"Sync error");
+
+                // set foreign keys                
+                // get data again and set (TODO: do in 1 step for child objects)
+                var existingObjectsJson = Helper.Rest.RestHelper.PerformRestGetRequestWithApiKey(
+                    applicationInstanceData.SerializedApplicationInstanceData.Url,
+                    apiPath,
+                    applicationInstanceData.SerializedApplicationInstanceData.ApiKey);
+                dynamic objectParse = JsonConvert.DeserializeObject(existingObjectsJson);
+                foreach (var objectInstance in objectParse)
+                {
+                    T newObject = new T().GetObjectFromJson(objectInstance); 
+                    // find the existig object to attach
+                    var existingObjectQuery = data.Where(a => a.GetExternalId().Equals(newObject.GetExternalId()));
+                    if (existingObjectQuery.Count().Equals(1))
+                    {
+                        newObject = existingObjectQuery.First();
+                    }
+                    else
+                    {
+                        return new Tuple<bool, string>(false, @"search error");
+                    }
+                    
+                    // find its parent and attach it
+                    var parentQuery = parentData.Where(a => a.GetExternalId().Equals(newObject.GetExternalParentId()));
+                    if (parentQuery.Count().Equals(1))
+                    {
+                        if (typeof(T) == typeof(IncomeSource))
+                        {                            
+                            var parent = parentQuery.First() as Household;
+                            if (parent.IncomeSources == null) parent.IncomeSources = new List<IncomeSource>();
+                            parent.IncomeSources.Add(newObject as IncomeSource);                            
+                        }
+                        else
+                        {
+                            return new Tuple<bool, string>(false, @"parent child error");
+                        }
+                    }
+                    else
+                    {
+                        return new Tuple<bool, string>(false, @"parent child error");
+                    }                    
+                }
+                applicationInstanceData.Data.SaveChanges();                
             }
             catch
             {

@@ -16,7 +16,9 @@ namespace MDPMS.Database.Data.Models.Base
     public interface ISyncableAsChild<T> :
         ISyncable<T>,
         IJsonToObjectConvertableAsChild<T>
-    {        
+    {
+        int? GetExternalParentId();
+        void SetExternalParentId(int? id);
     }
 
     public interface IJsonToObjectConvertable<T>
