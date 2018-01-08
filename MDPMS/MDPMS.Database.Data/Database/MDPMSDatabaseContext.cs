@@ -10,6 +10,11 @@ namespace MDPMS.Database.Data.Database
         public DbSet<PersonRelationship> PersonRelationships { get; set; }
         public DbSet<ProjectDetails> ProjectDetails { get; set; }
 
+        // Status Customization Look Ups
+        public DbSet<StatusCustomizationHazardousCondition> StatusCustomizationHazardousConditions { get; set; }
+        public DbSet<StatusCustomizationHouseholdTask> StatusCustomizationHouseholdTasks { get; set; }
+        public DbSet<StatusCustomizationWorkActivity> StatusCustomizationWorkActivities { get; set; }
+
         // Data
         public DbSet<Household> Households { get; set; }
         public DbSet<Person> People { get; set; }

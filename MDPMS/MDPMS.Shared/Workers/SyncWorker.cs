@@ -64,6 +64,38 @@ namespace MDPMS.Shared.Workers
         {
             try
             {
+                // Status Customization Look Ups
+                var statusCustomizationHazardousConditionsResult = SyncObject(
+                    applicationInstanceData,
+                    allowAlreadySyncedUpdateToParent,
+                    @"/api/v1/status_customization_hazardous_conditions",
+                    applicationInstanceData.Data.StatusCustomizationHazardousConditions);
+                if (!statusCustomizationHazardousConditionsResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, @"Sync error");
+                }
+
+                var statusCustomizationHouseholdTasksResult = SyncObject(
+                    applicationInstanceData,
+                    allowAlreadySyncedUpdateToParent,
+                    @"/api/v1/status_customization_household_tasks",
+                    applicationInstanceData.Data.StatusCustomizationHouseholdTasks);
+                if (!statusCustomizationHouseholdTasksResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, @"Sync error");
+                }
+
+                var statusCustomizationWorkActivitiesResult = SyncObject(
+                    applicationInstanceData,
+                    allowAlreadySyncedUpdateToParent,
+                    @"/api/v1/status_customization_work_activities",
+                    applicationInstanceData.Data.StatusCustomizationWorkActivities);
+                if (!statusCustomizationWorkActivitiesResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, @"Sync error");
+                }
+
+                // Data
                 var householdsResult = SyncObject(
                     applicationInstanceData,
                     allowAlreadySyncedUpdateToParent,
