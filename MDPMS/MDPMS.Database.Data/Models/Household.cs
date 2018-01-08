@@ -10,7 +10,7 @@ namespace MDPMS.Database.Data.Models
     /// <summary>
     /// Household, contains 1 or more people
     /// </summary>
-    public class Household : EfBaseModel, ISyncable<Household>
+    public class Household : EfBaseModel, ISyncableWithChildren<Household>
     {
         /// <summary>
         /// Household name assigned
@@ -72,6 +72,13 @@ namespace MDPMS.Database.Data.Models
         /// </summary>
         public List<IncomeSource> IncomeSources { get; set; }
 
+        public void AddIncomeSource(IncomeSource incomeSource)
+        {
+            if (IncomeSources == null) IncomeSources = new List<IncomeSource>();
+            incomeSource.InternalParentId = InternalId;
+            IncomeSources.Add(incomeSource);
+        }
+
         /// <summary>
         /// Household members
         /// </summary>
@@ -80,6 +87,11 @@ namespace MDPMS.Database.Data.Models
         public int? GetExternalId()
         {
             return ExternalId;
+        }
+
+        public void SetExternalId(int? id)
+        {
+            ExternalId = id;
         }
 
         public DateTime? GetLastUpdatedAt()
@@ -92,11 +104,11 @@ namespace MDPMS.Database.Data.Models
             LastUpdatedAt = dateTime;
         }
 
-        public void SetExternalId(int? id)
+        public int? GetInternalId()
         {
-            ExternalId = id;
+            return InternalId;
         }
-
+        
         public Household GetObjectFromJson(dynamic json)
         {
             return new Household
@@ -268,6 +280,19 @@ namespace MDPMS.Database.Data.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
             return sw.ToString();
-        }        
+        }
+
+        public void SetParentIdsInChildObjects()
+        {
+            if (IncomeSources == null) return;            
+            foreach (var incomeSource in IncomeSources)
+            {
+                if (incomeSource.GetExternalParentId() == null & ExternalId != null)
+                {
+                    incomeSource.SetExternalParentId(ExternalId);
+                }
+                incomeSource.SetInternalParentId(InternalId);
+            }            
+        }
     }
 }

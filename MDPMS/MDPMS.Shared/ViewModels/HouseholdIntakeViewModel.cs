@@ -60,7 +60,7 @@ namespace MDPMS.Shared.ViewModels
             };
             foreach (var incomeSource in IncomeSources)
             {
-                newHousehold.IncomeSources.Add(incomeSource);
+                newHousehold.AddIncomeSource(incomeSource);
             }
             ApplicationInstanceData.Data.Households.Add(newHousehold);            
             ApplicationInstanceData.Data.SaveChanges();

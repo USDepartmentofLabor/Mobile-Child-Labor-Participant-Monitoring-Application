@@ -8,9 +8,17 @@ namespace MDPMS.Database.Data.Models.Base
         IUpdateable<T>
     {
         int? GetExternalId();
+        void SetExternalId(int? id);
+
         DateTime? GetLastUpdatedAt();
         void SetLastUpdatedAt(DateTime? dateTime);
-        void SetExternalId(int? id);
+
+        int? GetInternalId();        
+    }
+
+    public interface ISyncableWithChildren<T> : ISyncable<T>
+    {
+        void SetParentIdsInChildObjects();
     }
 
     public interface ISyncableAsChild<T> :
@@ -19,6 +27,9 @@ namespace MDPMS.Database.Data.Models.Base
     {
         int? GetExternalParentId();
         void SetExternalParentId(int? id);
+
+        int? GetInternalParentId();
+        void SetInternalParentId(int? id);
     }
 
     public interface IJsonToObjectConvertable<T>

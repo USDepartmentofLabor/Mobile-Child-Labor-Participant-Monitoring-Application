@@ -58,18 +58,54 @@ namespace MDPMS.Shared.Workers
             ALSO, deleted from parent, if already synced but no longer on parent delete on mobile, use soft delete?
             this would require the parent to support deleting households
              */
-
+             
         public static Tuple<bool, string> Sync(ApplicationInstanceData applicationInstanceData,
             bool allowAlreadySyncedUpdateToParent)
         {
             try
             {
-                var householdsResult = SyncParentObject(applicationInstanceData, false, @"/api/v1/households", applicationInstanceData.Data.Households);
-                if (!householdsResult.Item1) return new Tuple<bool, string>(false, @"Sync error");
+                var householdsResult = SyncObject(
+                    applicationInstanceData,
+                    allowAlreadySyncedUpdateToParent,
+                    @"/api/v1/households",
+                    applicationInstanceData.Data.Households);
+                if (!householdsResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, @"Sync error");
+                }
+
+                var householdsNewResult = SyncNewParentObjects(
+                    applicationInstanceData,
+                    @"/api/v1/households",
+                    applicationInstanceData.Data.Households);
+                if (!householdsNewResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, @"Sync error");
+                }
                 
-                var incomeSourcesResult = SyncChildObject<IncomeSource, Household>(applicationInstanceData, false, @"/api/v1/income_sources",
-                    applicationInstanceData.Data.IncomeSources, @"household_id", applicationInstanceData.Data.Households);
-                if (!incomeSourcesResult.Item1) return new Tuple<bool, string>(false, @"Sync error");
+                //< IncomeSource, Household >
+                var incomeSourcesResult = SyncChildObject(                     
+                    applicationInstanceData,
+                    allowAlreadySyncedUpdateToParent,
+                    @"/api/v1/income_sources",
+                    applicationInstanceData.Data.IncomeSources,
+                    @"household_id",
+                    applicationInstanceData.Data.Households);
+                if (!incomeSourcesResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, @"Sync error");
+                }
+
+                var incomeSourcesNewResult = SyncNewChildObjects(
+                    applicationInstanceData,
+                    @"/api/v1/income_sources",
+                    applicationInstanceData.Data.IncomeSources,
+                    @"household_id",
+                    applicationInstanceData.Data.Households);
+                if (!incomeSourcesNewResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, @"Sync error");
+                }
             }
             catch
             {
@@ -79,7 +115,7 @@ namespace MDPMS.Shared.Workers
             return new Tuple<bool, string>(true, @"");
         }
         
-        public static Tuple<bool, string> SyncParentObject<T>(ApplicationInstanceData applicationInstanceData, bool allowAlreadySyncedUpdateToParent, string apiPath, DbSet<T> data) where T : class, ISyncable<T>, new()
+        public static Tuple<bool, string> SyncObject<T>(ApplicationInstanceData applicationInstanceData, bool allowAlreadySyncedUpdateToParent, string apiPath, DbSet<T> data) where T : class, ISyncable<T>, new()
         {
             // parent objects
             try
@@ -164,15 +200,45 @@ namespace MDPMS.Shared.Workers
                 var toDeleteIds = idQuery.Except(idsInParent).ToList();
                 foreach (var id in toDeleteIds)
                 {
+                    // TODO: generic delete children first if contains relationship
+                    if (typeof(T) == typeof(Household))
+                    {
+                        // delete income sources related to it
+                        var children =
+                            applicationInstanceData.Data.IncomeSources.Where(a => a.GetExternalParentId().Equals(id));
+                        foreach (var incomeSource in children)
+                        {
+                            var childRecord = applicationInstanceData.Data.IncomeSources.First(a => a.InternalId.Equals(incomeSource.InternalId));
+                            applicationInstanceData.Data.IncomeSources.Remove(childRecord);
+                        }
+                        applicationInstanceData.Data.SaveChanges();                        
+                    }
+
                     var rec = data.Where(a => a.GetExternalId().Equals(id));
                     data.Remove(rec.First());
                 }
-                applicationInstanceData.Data.SaveChanges();                
+                applicationInstanceData.Data.SaveChanges();                                
+            }
+            catch
+            {
+                // TODO: error log
+                return new Tuple<bool, string>(false, @"Sync error");
+            }
+            return new Tuple<bool, string>(true, @"");
+        }
 
+        public static Tuple<bool, string> SyncNewParentObjects<T>(
+            ApplicationInstanceData applicationInstanceData,
+            string apiPath,
+            DbSet<T> data) where T : class, ISyncable<T>, new()
+        {
+            try
+            {
                 // post new households last
                 foreach (var objectInstance in data.Where(a => a.GetExternalId().HasValue == false))
                 {
                     var objectJson = objectInstance.GetJsonFromObject();
+                    // TODO: if child update parent id here before post
                     var postSuccess = Helper.Rest.RestHelper.PerformRestPostRequestWithApiKey(
                         applicationInstanceData.SerializedApplicationInstanceData.Url,
                         apiPath,
@@ -220,8 +286,11 @@ namespace MDPMS.Shared.Workers
             // similar to parent, check id link and validity of id
             try
             {                
-                var incomeSourcesResult = SyncParentObject(applicationInstanceData, false, apiPath, data);
-                if (!incomeSourcesResult.Item1) return new Tuple<bool, string>(false, @"Sync error");
+                var incomeSourcesResult = SyncObject(applicationInstanceData, allowAlreadySyncedUpdateToParent, apiPath, data);
+                if (!incomeSourcesResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, @"Sync error");
+                }
 
                 // set foreign keys                
                 // get data again and set (TODO: do in 1 step for child objects)
@@ -272,6 +341,75 @@ namespace MDPMS.Shared.Workers
                 return new Tuple<bool, string>(false, @"Sync error");
             }
             return new Tuple<bool, string>(true, @"");
-        }        
+        }
+        
+        // T is child
+        // T2 is parent
+        public static Tuple<bool, string> SyncNewChildObjects<T, T2>(
+            ApplicationInstanceData applicationInstanceData,
+            string apiPath,
+            DbSet<T> data,
+            string parentIdName,
+            DbSet<T2> parentData)
+            where T : class, ISyncableAsChild<T>, new()
+            where T2 : class, ISyncableWithChildren<T2>, new()
+        {
+            try
+            {
+                // TEMP: set external and internal parent ids on the child objects when null
+                foreach (var parent in parentData)
+                {
+                    parent.SetParentIdsInChildObjects();
+                }
+
+                applicationInstanceData.Data.SaveChanges();
+                
+                // post new households last
+                foreach (var objectInstance in data.Where(a => a.GetExternalId().HasValue == false))
+                {
+                    var objectJson = objectInstance.GetJsonFromObject();
+                    // find the parent and get its external id
+                    var query = parentData.Where(a => a.GetInternalId().Equals(objectInstance.GetInternalParentId()));
+                    if (!query.Count().Equals(1))
+                    {
+                        return new Tuple<bool, string>(false, @"Search error");
+                    }
+                    objectInstance.SetExternalParentId(query.First().GetExternalId());                    
+                    var postSuccess = Helper.Rest.RestHelper.PerformRestPostRequestWithApiKey(
+                        applicationInstanceData.SerializedApplicationInstanceData.Url,
+                        apiPath,
+                        applicationInstanceData.SerializedApplicationInstanceData.ApiKey,
+                        objectJson);
+
+                    if (postSuccess.Item1)
+                    {
+                        // set last updated at from JSON response
+                        dynamic jsonResponseParse = JsonConvert.DeserializeObject(postSuccess.Item2);
+                        if (jsonResponseParse.status.Value.ToString().Equals(@"success"))
+                        {
+                            objectInstance.SetLastUpdatedAt(((DateTime)DateTime.Parse(jsonResponseParse.updated_at.Value)).ToUniversalTime());
+                            objectInstance.SetExternalId((int?)jsonResponseParse.id);
+                        }
+                        else
+                        {
+                            // TODO: error log    
+                            return new Tuple<bool, string>(false, @"Add error");
+                        }
+                    }
+                    else
+                    {
+                        // TODO: error log    
+                        return new Tuple<bool, string>(false, @"Add error");
+                    }
+                }
+                applicationInstanceData.Data.SaveChanges();
+            }
+            catch
+            {
+                // TODO: error log
+                return new Tuple<bool, string>(false, @"Sync error");
+            }
+            return new Tuple<bool, string>(true, @"");
+        }
     }
 }

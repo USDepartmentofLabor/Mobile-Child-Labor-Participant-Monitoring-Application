@@ -41,11 +41,18 @@ namespace MDPMS.Database.Data.Models
         /// </summary>
         public string Currency { get; set; }
 
-        public int? ExternalParentId { get; set; }
+        public int? InternalParentId { get; set; } = null;
+
+        public int? ExternalParentId { get; set; } = null;
 
         public int? GetExternalId()
         {
             return ExternalId;
+        }
+
+        public void SetExternalId(int? id)
+        {
+            ExternalId = id;
         }
 
         public DateTime? GetLastUpdatedAt()
@@ -57,10 +64,10 @@ namespace MDPMS.Database.Data.Models
         {
             LastUpdatedAt = dateTime;
         }
-
-        public void SetExternalId(int? id)
+        
+        public int? GetInternalId()
         {
-            ExternalId = id;
+            return InternalId;
         }
 
         public int? GetExternalParentId()
@@ -71,6 +78,16 @@ namespace MDPMS.Database.Data.Models
         public void SetExternalParentId(int? id)
         {
             ExternalParentId = id;
+        }
+
+        public int? GetInternalParentId()
+        {
+            return InternalParentId;
+        }
+
+        public void SetInternalParentId(int? id)
+        {
+            InternalParentId = id;
         }
 
         public IncomeSource GetObjectFromJson(dynamic json)
