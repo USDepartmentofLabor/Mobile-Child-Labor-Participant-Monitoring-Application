@@ -16,17 +16,17 @@ namespace MDPMS.Shared.ViewModels
 
         public List<IncomeSource> IncomeSources { get; set; } = new List<IncomeSource>();
 
-        public string HouseholdName { get; set; }
-        public DateTime IntakeDate { get; set; }
-        public string AddressLine1 { get; set; }
-        public string AddressLine2 { get; set; }
-        public string PostalCode { get; set; }
-        public string DependentLocality { get; set; }
-        public string Locality { get; set; }
-        public string AdminvArea { get; set; }
-        public string DependentAdminvArea { get; set; }    
-        public string Country { get; set; }
-        public string AddressInfo { get; set; }
+        public string HouseholdName { get; set; } = @"";
+        public DateTime IntakeDate { get; set; } = DateTime.Today;
+        public string AddressLine1 { get; set; } = @"";
+        public string AddressLine2 { get; set; } = @"";
+        public string PostalCode { get; set; } = @"";
+        public string DependentLocality { get; set; } = @"";
+        public string Locality { get; set; } = @"";
+        public string AdminvArea { get; set; } = @"";
+        public string DependentAdminvArea { get; set; } = @"";
+        public string Country { get; set; } = @"";
+        public string AddressInfo { get; set; } = @"";
 
         public HouseholdIntakeViewModel(ApplicationInstanceData applicationInstanceData)
         {
@@ -43,6 +43,8 @@ namespace MDPMS.Shared.ViewModels
 
         private void ExecuteSubmitCommand()
         {
+            if (!NewHouseholdValidation()) return;            
+
             var newHousehold = new Household
             {
                 IntakeDate = IntakeDate,
@@ -80,5 +82,20 @@ namespace MDPMS.Shared.ViewModels
                 BindingContext = new IncomeSourceAddViewModel(ApplicationInstanceData)
             });            
         }
+
+        private bool NewHouseholdValidation()
+        {
+            // TODO: More "cheatable" char checks or find std regex
+            var validateableName = HouseholdName.Replace(" ", "");
+            if (validateableName.Equals(string.Empty))
+            {
+                ApplicationInstanceData.App.MainPage.DisplayAlert(
+                    ApplicationInstanceData.SelectedLocalization.Translations[@"Error"],
+                    @"Name can not be blank",
+                    @"OK");
+                return false;
+            }            
+            return true;
+        }        
     }
 }
