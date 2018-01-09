@@ -64,6 +64,18 @@ namespace MDPMS.Shared.Workers
         {
             try
             {
+                // Look Ups
+                // PersonRelationship
+                var personRelationshipResult = SyncObject(
+                    applicationInstanceData,
+                    false,
+                    @"/api/v1/relationships",
+                    applicationInstanceData.Data.PersonRelationships);
+                if (!personRelationshipResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, @"Sync error");
+                }
+
                 // Status Customization Look Ups
                 var statusCustomizationHazardousConditionsResult = SyncObject(
                     applicationInstanceData,
