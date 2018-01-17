@@ -9,19 +9,23 @@ namespace MDPMS.Shared
 {
 	public partial class App : Application
 	{
-		public App (string databasePath, string localizationDatabasePath)
+		public App ()
 		{
 			InitializeComponent();
 
+		    var databasePath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), @"DATA.db");
+		    var localizationDatabasePath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), @"LOCAL.db");
+
             // Application Instance Data
-		    var applicationInstanceData = new ApplicationInstanceData
+            var applicationInstanceData = new ApplicationInstanceData
             {
                 PlatformDataPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal),
                 ApplicationInstanceDataFileName = @"AppData.json",
                 DatabasePath = databasePath,
                 LocalizationDatabasePath = localizationDatabasePath,
                 SerializedApplicationInstanceData = new SerializedApplicationInstanceData(),
-                AvailableLocalizations = new ObservableCollection<Localization>()                
+                AvailableLocalizations = new ObservableCollection<Localization>(),
+                App = this
             };
 
 		    var applicationInstanceDataFilePath = System.IO.Path.Combine(applicationInstanceData.PlatformDataPath, applicationInstanceData.ApplicationInstanceDataFileName);
@@ -50,10 +54,7 @@ namespace MDPMS.Shared
             applicationInstanceData.SetLocalization(@"en");
                        
             // Load view
-            MainPage = new LandingView()
-            {
-                BindingContext = new LandingViewModel(applicationInstanceData)
-            };            
+            applicationInstanceData.NavigateToLandingView();                        
         }
 
 		protected override void OnStart ()

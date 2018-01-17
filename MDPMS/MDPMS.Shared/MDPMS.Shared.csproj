@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.1" />
+    <PackageReference Include="Xam.Plugin.Connectivity" Version="3.0.3" />
     <PackageReference Include="Xamarin.Forms" Version="2.5.0.91635" />
   </ItemGroup>
 
@@ -14,12 +15,43 @@
     <ProjectReference Include="..\MDPMS.Database.Data\MDPMS.Database.Data.csproj" />
     <ProjectReference Include="..\MDPMS.Database.Localization\MDPMS.Database.Localization.csproj" />
     <ProjectReference Include="..\MDPMS.Helper.Json\MDPMS.Helper.Json.csproj" />
+    <ProjectReference Include="..\MDPMS.Helper.Rest\MDPMS.Helper.Rest.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Views\LocalizationSelectionView.xaml.cs">
       <DependentUpon>LocalizationSelectionView.xaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="RootPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AboutView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\HouseholdIntakeView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\HouseholdsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\IncomeSourceAddView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MenuView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SettingsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SyncView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\UsernamePasswordAuthenticationView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

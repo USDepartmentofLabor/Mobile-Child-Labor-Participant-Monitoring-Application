@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDPMS.Shared.Views.HouseholdIntakeView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="65"/>
+                </Grid.RowDefinitions>
+                <ScrollView Grid.Row="0" Orientation="Vertical" VerticalOptions="FillAndExpand">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="80"/>
+                            <RowDefinition Height="100"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="Intake Date" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
+                            <DatePicker Grid.Column="1" Margin="10,5,5,5" Date="{Binding IntakeDate, Mode=TwoWay}"/>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="Household Name" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding HouseholdName, Mode=TwoWay}"/>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="Address Line 1" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding AddressLine1, Mode=TwoWay}"/>
+                        </Grid>
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="Address Line 2" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding AddressLine2, Mode=TwoWay}"/>
+                        </Grid>
+                        <Grid Grid.Row="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="Zip Code" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding PostalCode, Mode=TwoWay}"/>
+                        </Grid>
+                        <Grid Grid.Row="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="Suburb/Neighborhood" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding DependentLocality, Mode=TwoWay}"/>
+                        </Grid>
+                        <Grid Grid.Row="6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="City" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding Locality, Mode=TwoWay}"/>
+                        </Grid>
+                        <Grid Grid.Row="7">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="State" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding AdminvArea, Mode=TwoWay}"/>
+                        </Grid>
+                        <Grid Grid.Row="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="County" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding DependentAdminvArea, Mode=TwoWay}"/>
+                        </Grid>
+                        <Grid Grid.Row="9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="Country" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding Country, Mode=TwoWay}"/>
+                        </Grid>
+                        <Grid Grid.Row="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="Address Info" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding AddressInfo, Mode=TwoWay}"/>
+                        </Grid>
+                        <Grid Grid.Row="11">
+                            <Button Text="Add Income Source" Command="{Binding AddIncomeSourceCommand}"/>
+                        </Grid>
+                    </Grid>
+                </ScrollView>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Text="Cancel" Command="{Binding CancelCommand}"/>
+                    <Button Grid.Column="1" Text="Submit" Command="{Binding SubmitCommand}"/>
+                </Grid>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

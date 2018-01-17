@@ -8,10 +8,12 @@ namespace MDPMS.Shared.ViewModels
     public class LandingViewModel : ViewModelBase
     {
         public Command NavigateToLocalizationSelectionCommand { get; set; }
+        public Command NavigateToMainContentCommand { get; set; }
         
         public LandingViewModel(ApplicationInstanceData applicationInstanceData)
         {
-            NavigateToLocalizationSelectionCommand = new Command(() => ExecuteNavigateToLocalizationSelectionCommand());            
+            NavigateToLocalizationSelectionCommand = new Command(ExecuteNavigateToLocalizationSelectionCommand);    
+            NavigateToMainContentCommand = new Command(ExecuteNavigateToMainContentCommand);
             ApplicationInstanceData = applicationInstanceData;
         }
 
@@ -21,6 +23,26 @@ namespace MDPMS.Shared.ViewModels
             {
                 BindingContext = new LocalizationSelectionViewModel(ApplicationInstanceData)
             };
-        }        
+        }
+
+        private void ExecuteNavigateToMainContentCommand()
+        {
+            // TODO: can determine initial set up status and navigate to st up wizard
+            ApplicationInstanceData.NavigationPage = new NavigationPage(new HouseholdsView
+            {
+                BindingContext = new HouseholdsViewModel(ApplicationInstanceData)
+            });
+            var rootPage = new RootPage
+            {
+                Master = new MenuView
+                {
+                    BindingContext = new MenuViewModel(ApplicationInstanceData),
+                    Title = ApplicationInstanceData.Title
+                },
+                Detail = ApplicationInstanceData.NavigationPage
+            };
+            ApplicationInstanceData.RootPage = rootPage;
+            ApplicationInstanceData.App.MainPage = rootPage;
+        }
     }
 }

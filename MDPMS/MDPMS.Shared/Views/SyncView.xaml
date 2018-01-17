@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDPMS.Shared.Views.SyncView">
+    <ContentPage.Content>
+        <Grid>
+            <ActivityIndicator IsRunning="{Binding IsBusy}"/>
+            <Label Text="{Binding StatusMessage}"
+                   FontSize="48" FontAttributes="Bold"
+                   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

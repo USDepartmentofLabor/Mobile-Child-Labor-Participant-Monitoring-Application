@@ -20,11 +20,8 @@ namespace MDPMS.Droid
 			base.OnCreate (bundle);
 
 			global::Xamarin.Forms.Forms.Init (this, bundle);
-
-            var databasePath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), @"DATA.db");
-            var localizationDatabasePath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), @"LOCAL.db");
-
-            LoadApplication(new MDPMS.Shared.App (databasePath, localizationDatabasePath));
+            
+            LoadApplication(new MDPMS.Shared.App ());
 		}
 	}
 }

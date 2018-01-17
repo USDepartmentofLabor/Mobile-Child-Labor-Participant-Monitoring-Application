@@ -22,7 +22,7 @@ namespace MDPMS.Database.Data.Models.Base
         /// <summary>
         /// Check if it has an external Id
         /// </summary>
-        public bool HasExternalId { get { return ExternalId == null; } }
+        public bool HasExternalId => ExternalId != null;
 
         /// <summary>
         /// DateTime record was created

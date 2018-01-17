@@ -6,34 +6,15 @@ using Newtonsoft.Json;
 
 namespace MDPMS.Database.Data.Models
 {
-    /// <summary>
-    /// The family or social relationship of one person to another, e.g. parent, grandchild, etc.
-    /// </summary>
-    public class PersonRelationship : EfBaseModel, ISyncable<PersonRelationship>
+    public class StatusCustomizationWorkActivity : EfBaseModel, ISyncable<StatusCustomizationWorkActivity>
     {
-        /// <summary>
-        /// DPMS code field, open ended string
-        /// </summary>
         public string Code { get; set; }
-
-        /// <summary>
-        /// Display name
-        /// </summary>
+        public string CanonicalName { get; set; }
         public string DisplayName { get; set; }
 
-        /// <summary>
-        /// Canonical name
-        /// </summary>
-        public string CanonicalName { get; set; }
-
-        /// <summary>
-        /// Indicates if it is a field denoting "other", requiring special extra string
-        /// </summary>
-        //public bool IsOther { get; set; }
-
-        public PersonRelationship GetObjectFromJson(dynamic json)
+        public StatusCustomizationWorkActivity GetObjectFromJson(dynamic json)
         {
-            return new PersonRelationship
+            return new StatusCustomizationWorkActivity
             {
                 ExternalId = json.id,
                 CreatedAt = json.created_at,
@@ -65,7 +46,7 @@ namespace MDPMS.Database.Data.Models
             return sw.ToString();
         }
 
-        public void UpdateObject(PersonRelationship updateFrom)
+        public void UpdateObject(StatusCustomizationWorkActivity updateFrom)
         {
             LastUpdatedAt = updateFrom.LastUpdatedAt;
             Code = updateFrom.Code;
@@ -73,7 +54,7 @@ namespace MDPMS.Database.Data.Models
             DisplayName = updateFrom.DisplayName;
         }
 
-        public bool GetObjectNeedsUpate(PersonRelationship checkUpdateFrom)
+        public bool GetObjectNeedsUpate(StatusCustomizationWorkActivity checkUpdateFrom)
         {
             if (!Code.Equals(checkUpdateFrom.Code)) return true;
             if (!CanonicalName.Equals(checkUpdateFrom.CanonicalName)) return true;
@@ -81,7 +62,7 @@ namespace MDPMS.Database.Data.Models
             return false;
         }
 
-        public string GenerateUpdateJsonFromObject(PersonRelationship updateFrom)
+        public string GenerateUpdateJsonFromObject(StatusCustomizationWorkActivity updateFrom)
         {
             // form the json (determine the fields that need to be updated)
             var sb = new StringBuilder();
