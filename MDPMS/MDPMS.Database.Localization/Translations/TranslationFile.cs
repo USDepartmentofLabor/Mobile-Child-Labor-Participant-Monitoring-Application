@@ -93,6 +93,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"AreYouEnrolledInSchoolAndOrCollege", @"Are you enrolled in school and/or college?");
             translation.Translations.Add(@"DPMSURL", @"DPMS URL");
             translation.Translations.Add(@"ErrorNameCanNotBeBlank", @"Name can not be blank");
+            translation.Translations.Add(@"ErrorSyncError", @"Sync Error");
+            translation.Translations.Add(@"SyncSuccessful", @"Sync Successful");
             return translation;
         }
 
@@ -169,6 +171,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"AreYouEnrolledInSchoolAndOrCollege", @"¿Estás inscrito en la escuela y / o la universidad?");
             translation.Translations.Add(@"DPMSURL", @"DPMS URL");
             translation.Translations.Add(@"ErrorNameCanNotBeBlank", @"El nombre no puede estar en blanco");
+            translation.Translations.Add(@"ErrorSyncError", @"Error de sincronización");
+            translation.Translations.Add(@"SyncSuccessful", @"Sincronización exitosa");
             return translation;
         }
     }     

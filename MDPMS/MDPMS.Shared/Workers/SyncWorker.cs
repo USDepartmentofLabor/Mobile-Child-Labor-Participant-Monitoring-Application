@@ -73,7 +73,7 @@ namespace MDPMS.Shared.Workers
                     applicationInstanceData.Data.PersonRelationships);
                 if (!personRelationshipResult.Item1)
                 {
-                    return new Tuple<bool, string>(false, @"Sync error");
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
                 }
 
                 // Status Customization Look Ups
@@ -84,7 +84,7 @@ namespace MDPMS.Shared.Workers
                     applicationInstanceData.Data.StatusCustomizationHazardousConditions);
                 if (!statusCustomizationHazardousConditionsResult.Item1)
                 {
-                    return new Tuple<bool, string>(false, @"Sync error");
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
                 }
 
                 var statusCustomizationHouseholdTasksResult = SyncObject(
@@ -94,7 +94,7 @@ namespace MDPMS.Shared.Workers
                     applicationInstanceData.Data.StatusCustomizationHouseholdTasks);
                 if (!statusCustomizationHouseholdTasksResult.Item1)
                 {
-                    return new Tuple<bool, string>(false, @"Sync error");
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
                 }
 
                 var statusCustomizationWorkActivitiesResult = SyncObject(
@@ -104,7 +104,7 @@ namespace MDPMS.Shared.Workers
                     applicationInstanceData.Data.StatusCustomizationWorkActivities);
                 if (!statusCustomizationWorkActivitiesResult.Item1)
                 {
-                    return new Tuple<bool, string>(false, @"Sync error");
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
                 }
 
                 // Data
@@ -115,7 +115,7 @@ namespace MDPMS.Shared.Workers
                     applicationInstanceData.Data.Households);
                 if (!householdsResult.Item1)
                 {
-                    return new Tuple<bool, string>(false, @"Sync error");
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
                 }
 
                 var householdsNewResult = SyncNewParentObjects(
@@ -124,7 +124,7 @@ namespace MDPMS.Shared.Workers
                     applicationInstanceData.Data.Households);
                 if (!householdsNewResult.Item1)
                 {
-                    return new Tuple<bool, string>(false, @"Sync error");
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
                 }
                 
                 //< IncomeSource, Household >
@@ -137,7 +137,7 @@ namespace MDPMS.Shared.Workers
                     applicationInstanceData.Data.Households);
                 if (!incomeSourcesResult.Item1)
                 {
-                    return new Tuple<bool, string>(false, @"Sync error");
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
                 }
 
                 var incomeSourcesNewResult = SyncNewChildObjects(
@@ -148,7 +148,7 @@ namespace MDPMS.Shared.Workers
                     applicationInstanceData.Data.Households);
                 if (!incomeSourcesNewResult.Item1)
                 {
-                    return new Tuple<bool, string>(false, @"Sync error");
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
                 }
 
                 //<Person, Household>
@@ -161,7 +161,7 @@ namespace MDPMS.Shared.Workers
                     applicationInstanceData.Data.Households);
                 if (!peopleResult.Item1)
                 {
-                    return new Tuple<bool, string>(false, @"Sync error");
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
                 }
 
                 var peopleNewResult = SyncNewChildObjects(
@@ -172,13 +172,13 @@ namespace MDPMS.Shared.Workers
                     applicationInstanceData.Data.Households);
                 if (!peopleNewResult.Item1)
                 {
-                    return new Tuple<bool, string>(false, @"Sync error");
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
                 }
             }
             catch
             {
                 // TODO: error log
-                return new Tuple<bool, string>(false, @"Sync error");
+                return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
             }
             return new Tuple<bool, string>(true, @"");
         }
