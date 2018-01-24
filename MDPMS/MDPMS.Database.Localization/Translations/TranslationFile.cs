@@ -54,7 +54,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"OK", @"OK");
             translation.Translations.Add(@"Cancel", @"Cancel");
             translation.Translations.Add(@"Alert", @"Alert");
-            translation.Translations.Add(@"ConnectivityProblem", @"Connectivity Problem");            
+            translation.Translations.Add(@"ConnectivityProblem", @"Connectivity Problem");
+            translation.Translations.Add(@"AddNewHousehold", @"Add New Household");
             return translation;
         }
 
@@ -92,7 +93,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"OK", @"De acuerdo");
             translation.Translations.Add(@"Cancel", @"Cancelar");
             translation.Translations.Add(@"Alert", @"Alerta");
-            translation.Translations.Add(@"ConnectivityProblem", @"Problema de conectividad");            
+            translation.Translations.Add(@"ConnectivityProblem", @"Problema de conectividad");
+            translation.Translations.Add(@"AddNewHousehold", @"Agregar nuevo hogar");
             return translation;
         }
     }     
