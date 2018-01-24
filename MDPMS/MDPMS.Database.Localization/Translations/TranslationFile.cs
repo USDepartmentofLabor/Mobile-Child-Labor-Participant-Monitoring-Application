@@ -76,6 +76,21 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"UnitOfMeasure", @"Unit of Measure");
             translation.Translations.Add(@"EstimatedIncome", @"Estimated Income");
             translation.Translations.Add(@"Currency", @"Currency");
+            translation.Translations.Add(@"FirstNameGivenName", @"First Name (Given Name)");
+            translation.Translations.Add(@"LastNameFamilyName", @"Last Name (Family Name)");
+            translation.Translations.Add(@"MiddleName", @"Middle Name");
+            translation.Translations.Add(@"Gender", @"Gender");
+            translation.Translations.Add(@"DateOfBirth", @"Date of Birth");
+            translation.Translations.Add(@"IsTheBirthdayAnApproximateDate", @"Is the birthday an approximate date?");
+            translation.Translations.Add(@"Relationship", @"Relationship");
+            translation.Translations.Add(@"RelationshipOther", @"Relationship other");
+            translation.Translations.Add(@"WorkActivitiesQuestion", @"During the past week, did you do any of the following activities, even for only one hour?");
+            translation.Translations.Add(@"WorkActivitiesReturningQuestion", @"Even though you did not do any of these activities in the past week, do you have a job, business, or other economic or farming activity that you will definitely be returning to?");
+            translation.Translations.Add(@"WorkActivitiesHoursEngagedQuestion", @"During the past week, for how many hours did you engage in this/these activities? ");
+            translation.Translations.Add(@"HazardousConditionsQuestion", @"Where you exposed to any of the following at work?");
+            translation.Translations.Add(@"HouseholdTasksQuestion", @"During the past week, did you do any of the tasks below for this household?");
+            translation.Translations.Add(@"HouseholdTasksHoursEngagedQuestion", @"During each day of the past week, for how many hours did you engage in this/these activities? ");
+            translation.Translations.Add(@"AreYouEnrolledInSchoolAndOrCollege", @"Are you enrolled in school and/or college?");            
             return translation;
         }
 
@@ -134,7 +149,22 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"EstimatedVolumeSold", @"Volumen estimado vendido");
             translation.Translations.Add(@"UnitOfMeasure", @"Unidad de medida");
             translation.Translations.Add(@"EstimatedIncome", @"Ingresos estimados");
-            translation.Translations.Add(@"Currency", @"Moneda");            
+            translation.Translations.Add(@"Currency", @"Moneda");
+            translation.Translations.Add(@"FirstNameGivenName", @"Nombre de pila");
+            translation.Translations.Add(@"LastNameFamilyName", @"Apellido");
+            translation.Translations.Add(@"MiddleName", @"Segundo nombre");
+            translation.Translations.Add(@"Gender", @"Género");
+            translation.Translations.Add(@"DateOfBirth", @"Fecha de nacimiento");
+            translation.Translations.Add(@"IsTheBirthdayAnApproximateDate", @"¿Es el cumpleaños una fecha aproximada?");
+            translation.Translations.Add(@"Relationship", @"Relación");
+            translation.Translations.Add(@"RelationshipOther", @"Relación otra");
+            translation.Translations.Add(@"WorkActivitiesQuestion", @"Durante la última semana, ¿realizó alguna de las siguientes actividades, incluso durante solo una hora?");
+            translation.Translations.Add(@"WorkActivitiesReturningQuestion", @"Aunque no realizó ninguna de estas actividades la semana pasada, ¿tiene un trabajo, negocio u otra actividad económica o agrícola a la que definitivamente volverá?");
+            translation.Translations.Add(@"WorkActivitiesHoursEngagedQuestion", @"Durante la última semana, ¿durante cuántas horas se involucró en estas / estas actividades?");
+            translation.Translations.Add(@"HazardousConditionsQuestion", @"¿Dónde estuvo expuesto a cualquiera de los siguientes en el trabajo?");
+            translation.Translations.Add(@"HouseholdTasksQuestion", @"Durante la última semana, ¿realizó alguna de las siguientes tareas para este hogar?");
+            translation.Translations.Add(@"HouseholdTasksHoursEngagedQuestion", @"Durante cada día de la semana pasada, ¿durante cuántas horas se involucró en esta / estas actividades?");
+            translation.Translations.Add(@"AreYouEnrolledInSchoolAndOrCollege", @"¿Estás inscrito en la escuela y / o la universidad?");            
             return translation;
         }
     }     
