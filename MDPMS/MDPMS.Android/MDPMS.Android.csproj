@@ -245,9 +245,6 @@
     <AndroidResource Include="Resources\Drawable\child.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\dolseal.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\Drawable\globe_32xLG.png" />
   </ItemGroup>
   <ItemGroup>
