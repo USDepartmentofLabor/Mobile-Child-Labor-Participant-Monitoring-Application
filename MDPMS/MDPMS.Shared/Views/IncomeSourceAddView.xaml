@@ -24,7 +24,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="Name of Product or Service" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Label Grid.Column="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[NameOfProductOrService]}" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
                             <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding NameOfProductOrService, Mode=TwoWay}"/>
                         </Grid>
                         <Grid Grid.Row="1">
@@ -32,7 +32,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="Estimated Volume Produced" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Label Grid.Column="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[EstimatedVolumeProduced]}" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
                             <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding EstimatedVolumeProduced, Mode=TwoWay}" Keyboard="Numeric"/>
                         </Grid>
                         <Grid Grid.Row="2">
@@ -40,7 +40,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="Estimated Volume Sold" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Label Grid.Column="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[EstimatedVolumeSold]}" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
                             <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding EstimatedVolumeSold, Mode=TwoWay}" Keyboard="Numeric"/>
                         </Grid>
                         <Grid Grid.Row="3">
@@ -48,7 +48,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="Unit of Measure" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Label Grid.Column="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[UnitOfMeasure]}" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
                             <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding UnitOfMeasure, Mode=TwoWay}"/>
                         </Grid>
                         <Grid Grid.Row="4">
@@ -56,7 +56,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="Estimated Income" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Label Grid.Column="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[EstimatedIncome]}" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
                             <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding EstimatedIncome, Mode=TwoWay}" Keyboard="Numeric"/>
                         </Grid>
                         <Grid Grid.Row="5">
@@ -64,7 +64,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="Currency" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Label Grid.Column="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Currency]}" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
                             <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding Currency, Mode=TwoWay}"/>
                         </Grid>
                     </Grid>
@@ -74,8 +74,8 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Text="Cancel" Command="{Binding CancelCommand}"/>
-                    <Button Grid.Column="1" Text="Submit" Command="{Binding SubmitCommand}"/>
+                    <Button Grid.Column="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Cancel]}" Command="{Binding CancelCommand}"/>
+                    <Button Grid.Column="1" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Submit]}" Command="{Binding SubmitCommand}"/>
                 </Grid>
             </Grid>
         </StackLayout>
