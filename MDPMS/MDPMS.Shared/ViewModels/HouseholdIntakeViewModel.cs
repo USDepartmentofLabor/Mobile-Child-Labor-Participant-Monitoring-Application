@@ -109,8 +109,8 @@ namespace MDPMS.Shared.ViewModels
             {
                 ApplicationInstanceData.App.MainPage.DisplayAlert(
                     ApplicationInstanceData.SelectedLocalization.Translations[@"Error"],
-                    @"Name can not be blank",
-                    @"OK");
+                    ApplicationInstanceData.SelectedLocalization.Translations[@"ErrorNameCanNotBeBlank"],
+                    ApplicationInstanceData.SelectedLocalization.Translations[@"OK"]);
                 return false;
             }            
             return true;

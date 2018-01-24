@@ -90,8 +90,8 @@ namespace MDPMS.Shared.ViewModels
             ApplicationInstanceData.App.MainPage.DisplayAlert(
                 ApplicationInstanceData.SelectedLocalization.Translations[@"Sync"],
                 taskResult.Item1
-                    ? ApplicationInstanceData.SelectedLocalization.Translations[@"Yes"]
-                    : ApplicationInstanceData.SelectedLocalization.Translations[@"Error"] + @" " + taskResult.Item2,
+                    ? ApplicationInstanceData.SelectedLocalization.Translations[@"SyncSuccessful"]
+                    : ApplicationInstanceData.SelectedLocalization.Translations[@"Error"] + @" - " + taskResult.Item2,
                 ApplicationInstanceData.SelectedLocalization.Translations[@"OK"]);
         }
 
