@@ -150,6 +150,30 @@ namespace MDPMS.Shared.Workers
                 {
                     return new Tuple<bool, string>(false, @"Sync error");
                 }
+
+                //<Person, Household>
+                var peopleResult = SyncChildObject(
+                    applicationInstanceData,
+                    allowAlreadySyncedUpdateToParent,
+                    @"/api/v1/people",
+                    applicationInstanceData.Data.People,
+                    @"household_id",
+                    applicationInstanceData.Data.Households);
+                if (!peopleResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, @"Sync error");
+                }
+
+                var peopleNewResult = SyncNewChildObjects(
+                    applicationInstanceData,
+                    @"/api/v1/people",
+                    applicationInstanceData.Data.People,
+                    @"household_id",
+                    applicationInstanceData.Data.Households);
+                if (!peopleNewResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, @"Sync error");
+                }
             }
             catch
             {
@@ -175,7 +199,9 @@ namespace MDPMS.Shared.Workers
                 dynamic objectParse = JsonConvert.DeserializeObject(existingObjectsJson);
                 foreach (var objectInstance in objectParse)
                 {
-                    T newObject = new T().GetObjectFromJson(objectInstance);
+                    var tContextSet = new T();
+                    tContextSet.SetMdpmsdbContext(applicationInstanceData.Data);
+                    T newObject = tContextSet.GetObjectFromJson(objectInstance);
                     idsInParent.Add((int)newObject.GetExternalId());                    
                     var query = data.Where(a => a.GetExternalId().Equals(newObject.GetExternalId()));
                     if (query.Any())
@@ -345,7 +371,9 @@ namespace MDPMS.Shared.Workers
                 dynamic objectParse = JsonConvert.DeserializeObject(existingObjectsJson);
                 foreach (var objectInstance in objectParse)
                 {
-                    T newObject = new T().GetObjectFromJson(objectInstance); 
+                    var tContextSet = new T();
+                    tContextSet.SetMdpmsdbContext(applicationInstanceData.Data);
+                    T newObject = tContextSet.GetObjectFromJson(objectInstance); 
                     // find the existig object to attach
                     var existingObjectQuery = data.Where(a => a.GetExternalId().Equals(newObject.GetExternalId()));
                     if (existingObjectQuery.Count().Equals(1))
@@ -366,6 +394,12 @@ namespace MDPMS.Shared.Workers
                             var parent = parentQuery.First() as Household;
                             if (parent.IncomeSources == null) parent.IncomeSources = new List<IncomeSource>();
                             parent.IncomeSources.Add(newObject as IncomeSource);                            
+                        }
+                        else if (typeof(T) == typeof(Person))
+                        {
+                            var parent = parentQuery.First() as Household;
+                            if (parent.Members == null) parent.Members = new List<Person>();
+                            parent.Members.Add(newObject as Person);
                         }
                         else
                         {
@@ -411,6 +445,7 @@ namespace MDPMS.Shared.Workers
                 // post new households last
                 foreach (var objectInstance in data.Where(a => a.GetExternalId().HasValue == false))
                 {
+                    objectInstance.SetMdpmsdbContext(applicationInstanceData.Data);
                     var objectJson = objectInstance.GetJsonFromObject();
                     // find the parent and get its external id
                     var query = parentData.Where(a => a.GetInternalId().Equals(objectInstance.GetInternalParentId()));

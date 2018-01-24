@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using MDPMS.Database.Data.Database;
 using MDPMS.Database.Data.Models.Base;
 using Newtonsoft.Json;
 
@@ -68,6 +69,10 @@ namespace MDPMS.Database.Data.Models
         public int? GetInternalId()
         {
             return InternalId;
+        }
+
+        public void SetMdpmsdbContext(MDPMSDatabaseContext context)
+        {
         }
 
         public int? GetExternalParentId()

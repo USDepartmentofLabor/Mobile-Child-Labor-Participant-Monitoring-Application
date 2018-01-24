@@ -3,6 +3,7 @@ using MDPMS.Database.Data.Models.Base;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using MDPMS.Database.Data.Database;
 using Newtonsoft.Json;
 
 namespace MDPMS.Database.Data.Models
@@ -84,6 +85,13 @@ namespace MDPMS.Database.Data.Models
         /// </summary>
         public List<Person> Members { get; set; }
 
+        public void AddMember(Person person)
+        {
+            if (Members == null) Members = new List<Person>();
+            person.InternalParentId = InternalId;
+            Members.Add(person);
+        }
+
         public int? GetExternalId()
         {
             return ExternalId;
@@ -108,7 +116,11 @@ namespace MDPMS.Database.Data.Models
         {
             return InternalId;
         }
-        
+
+        public void SetMdpmsdbContext(MDPMSDatabaseContext context)
+        {
+        }
+
         public Household GetObjectFromJson(dynamic json)
         {
             return new Household
@@ -284,15 +296,28 @@ namespace MDPMS.Database.Data.Models
 
         public void SetParentIdsInChildObjects()
         {
-            if (IncomeSources == null) return;            
-            foreach (var incomeSource in IncomeSources)
+            if (IncomeSources != null)
             {
-                if (incomeSource.GetExternalParentId() == null & ExternalId != null)
+                foreach (var incomeSource in IncomeSources)
                 {
-                    incomeSource.SetExternalParentId(ExternalId);
+                    if (incomeSource.GetExternalParentId() == null & ExternalId != null)
+                    {
+                        incomeSource.SetExternalParentId(ExternalId);
+                    }
+                    incomeSource.SetInternalParentId(InternalId);
                 }
-                incomeSource.SetInternalParentId(InternalId);
-            }            
+            }
+            if (Members != null)
+            {
+                foreach (var member in Members)
+                {
+                    if (member.GetExternalParentId() == null & ExternalId != null)
+                    {
+                        member.SetExternalParentId(ExternalId);
+                    }
+                    member.SetInternalParentId(InternalId);
+                }
+            }                     
         }
     }
 }

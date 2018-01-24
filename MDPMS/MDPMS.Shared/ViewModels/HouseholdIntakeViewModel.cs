@@ -13,8 +13,10 @@ namespace MDPMS.Shared.ViewModels
         public Command CancelCommand { get; set; }
         public Command SubmitCommand { get; set; }
         public Command AddIncomeSourceCommand { get; set; }
+        public Command AddHouseholdMemberCommand { get; set; }
 
         public List<IncomeSource> IncomeSources { get; set; } = new List<IncomeSource>();
+        public List<Person> HouseholdMembers { get; set; } = new List<Person>();
 
         public string HouseholdName { get; set; } = @"";
         public DateTime IntakeDate { get; set; } = DateTime.Today;
@@ -34,6 +36,7 @@ namespace MDPMS.Shared.ViewModels
             CancelCommand = new Command(ExecuteCancelCommand);
             SubmitCommand = new Command(ExecuteSubmitCommand);
             AddIncomeSourceCommand = new Command(ExecuteAddIncomeSourceCommand);
+            AddHouseholdMemberCommand = new Command(ExecuteAddHouseholdMemberCommand);
         }
 
         private void ExecuteCancelCommand()
@@ -64,6 +67,12 @@ namespace MDPMS.Shared.ViewModels
             {
                 newHousehold.AddIncomeSource(incomeSource);
             }
+
+            foreach (var person in HouseholdMembers)
+            {
+                newHousehold.AddMember(person);
+            }
+
             ApplicationInstanceData.Data.Households.Add(newHousehold);            
             ApplicationInstanceData.Data.SaveChanges();
             Exit();
@@ -81,6 +90,15 @@ namespace MDPMS.Shared.ViewModels
             {
                 BindingContext = new IncomeSourceAddViewModel(ApplicationInstanceData)
             });            
+        }
+
+        private void ExecuteAddHouseholdMemberCommand()
+        {
+            // Modal navigate to add household member and retain household before submit
+            ApplicationInstanceData.NavigationPage.PushAsync(new HouseholdMemberIntakeView
+            {
+                BindingContext = new HouseholdMemberIntakeViewModel(ApplicationInstanceData)
+            });
         }
 
         private bool NewHouseholdValidation()

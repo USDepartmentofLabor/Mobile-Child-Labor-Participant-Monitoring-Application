@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using MDPMS.Database.Data.Database;
 using MDPMS.Database.Data.Models.Base;
 using Newtonsoft.Json;
 
@@ -11,6 +13,8 @@ namespace MDPMS.Database.Data.Models
         public string Code { get; set; }
         public string CanonicalName { get; set; }
         public string DisplayName { get; set; }
+
+        public virtual ICollection<PersonHazardousCondition> PeopleHazardousConditions { get; set; } = new List<PersonHazardousCondition>();
 
         public StatusCustomizationHazardousCondition GetObjectFromJson(dynamic json)
         {
@@ -118,6 +122,10 @@ namespace MDPMS.Database.Data.Models
         public int? GetInternalId()
         {
             return InternalId;
+        }
+
+        public void SetMdpmsdbContext(MDPMSDatabaseContext context)
+        {            
         }
     }
 }

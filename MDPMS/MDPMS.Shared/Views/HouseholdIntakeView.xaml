@@ -24,6 +24,7 @@
                             <RowDefinition Height="65"/>
                             <RowDefinition Height="80"/>
                             <RowDefinition Height="100"/>
+                            <RowDefinition Height="100"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
@@ -115,6 +116,9 @@
                         </Grid>
                         <Grid Grid.Row="11">
                             <Button Text="Add Income Source" Command="{Binding AddIncomeSourceCommand}"/>
+                        </Grid>
+                        <Grid Grid.Row="12">
+                            <Button Text="Add Household Member" Command="{Binding AddHouseholdMemberCommand}"/>
                         </Grid>
                     </Grid>
                 </ScrollView>

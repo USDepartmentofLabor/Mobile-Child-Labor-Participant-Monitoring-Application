@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDPMS.Android", "MDPMS\MDPMS.Android\MDPMS.Android.csproj", "{C3808BE9-34F9-47F7-96C8-99AC5C03CB97}"
 EndProject
@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MDPMSAssets", "MDPMSAssets"
 	ProjectSection(SolutionItems) = preProject
 		AddLocalizationMigration.ps1 = AddLocalizationMigration.ps1
 		AddMigration.ps1 = AddMigration.ps1
+		Queries.sql = Queries.sql
 		Translations.csv = Translations.csv
 	EndProjectSection
 EndProject

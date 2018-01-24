@@ -17,5 +17,10 @@ namespace MDPMS.Database.Data.Models
         /// Display name for gender
         /// </summary>
         public string GenderReadable { get; set; }
+
+        /// <summary>
+        /// Parent DPMS int value for this gender
+        /// </summary>
+        public int DpmsGenderNumber { get; set; }
     }
 }

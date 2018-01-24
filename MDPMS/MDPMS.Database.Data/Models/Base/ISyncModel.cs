@@ -13,7 +13,9 @@ namespace MDPMS.Database.Data.Models.Base
         DateTime? GetLastUpdatedAt();
         void SetLastUpdatedAt(DateTime? dateTime);
 
-        int? GetInternalId();        
+        int? GetInternalId();
+
+        void SetMdpmsdbContext(MDPMS.Database.Data.Database.MDPMSDatabaseContext context);
     }
 
     public interface ISyncableWithChildren<T> : ISyncable<T>
