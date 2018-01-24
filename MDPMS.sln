@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MDPMSAssets", "MDPMSAssets"
 		AddLocalizationMigration.ps1 = AddLocalizationMigration.ps1
 		AddMigration.ps1 = AddMigration.ps1
 		Queries.sql = Queries.sql
+		TranslationCodeGenerator.xlsx = TranslationCodeGenerator.xlsx
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDPMS.Helper.Json", "MDPMS\MDPMS.Helper.Json\MDPMS.Helper.Json.csproj", "{4D6B3D58-7040-44AC-9EA5-CEA49D841786}"
