@@ -56,6 +56,20 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Alert", @"Alert");
             translation.Translations.Add(@"ConnectivityProblem", @"Connectivity Problem");
             translation.Translations.Add(@"AddNewHousehold", @"Add New Household");
+            translation.Translations.Add(@"Submit", @"Submit");
+            translation.Translations.Add(@"AddIncomeSource", @"Add Income Source");
+            translation.Translations.Add(@"AddHouseholdMember", @"Add Household Member");
+            translation.Translations.Add(@"IntakeDate", @"Intake Date");
+            translation.Translations.Add(@"HouseholdName", @"Household Name");
+            translation.Translations.Add(@"AddressLine1", @"Address Line 1");
+            translation.Translations.Add(@"AddressLine2", @"Address Line 2");
+            translation.Translations.Add(@"ZipCode", @"Zip Code");
+            translation.Translations.Add(@"SuburbNeighborhood", @"Suburb/Neighborhood");
+            translation.Translations.Add(@"City", @"City");
+            translation.Translations.Add(@"State", @"State");
+            translation.Translations.Add(@"County", @"County");
+            translation.Translations.Add(@"Country", @"Country");
+            translation.Translations.Add(@"AddressInfo", @"Address Info");
             return translation;
         }
 
@@ -95,6 +109,20 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Alert", @"Alerta");
             translation.Translations.Add(@"ConnectivityProblem", @"Problema de conectividad");
             translation.Translations.Add(@"AddNewHousehold", @"Agregar nuevo hogar");
+            translation.Translations.Add(@"Submit", @"Enviar");
+            translation.Translations.Add(@"AddIncomeSource", @"Agregar fuente de ingresos");
+            translation.Translations.Add(@"AddHouseholdMember", @"Añadir miembro del hogar");
+            translation.Translations.Add(@"IntakeDate", @"Fecha de admisión");
+            translation.Translations.Add(@"HouseholdName", @"Nombre del hogar");
+            translation.Translations.Add(@"AddressLine1", @"Dirección Línea 1");
+            translation.Translations.Add(@"AddressLine2", @"Dirección Línea 2");
+            translation.Translations.Add(@"ZipCode", @"Código postal");
+            translation.Translations.Add(@"SuburbNeighborhood", @"Barrio");
+            translation.Translations.Add(@"City", @"Ciudad");
+            translation.Translations.Add(@"State", @"Estado");
+            translation.Translations.Add(@"County", @"Condado");
+            translation.Translations.Add(@"Country", @"País");
+            translation.Translations.Add(@"AddressInfo", @"Información de dirección");            
             return translation;
         }
     }     
