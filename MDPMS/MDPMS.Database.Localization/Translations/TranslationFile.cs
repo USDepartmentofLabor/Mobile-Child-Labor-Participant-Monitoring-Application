@@ -70,6 +70,12 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"County", @"County");
             translation.Translations.Add(@"Country", @"Country");
             translation.Translations.Add(@"AddressInfo", @"Address Info");
+            translation.Translations.Add(@"NameOfProductOrService", @"Name of Product or Service");
+            translation.Translations.Add(@"EstimatedVolumeProduced", @"Estimated Volume Produced");
+            translation.Translations.Add(@"EstimatedVolumeSold", @"Estimated Volume Sold");
+            translation.Translations.Add(@"UnitOfMeasure", @"Unit of Measure");
+            translation.Translations.Add(@"EstimatedIncome", @"Estimated Income");
+            translation.Translations.Add(@"Currency", @"Currency");
             return translation;
         }
 
@@ -122,7 +128,13 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"State", @"Estado");
             translation.Translations.Add(@"County", @"Condado");
             translation.Translations.Add(@"Country", @"País");
-            translation.Translations.Add(@"AddressInfo", @"Información de dirección");            
+            translation.Translations.Add(@"AddressInfo", @"Información de dirección");
+            translation.Translations.Add(@"NameOfProductOrService", @"Nombre del producto o servicio");
+            translation.Translations.Add(@"EstimatedVolumeProduced", @"Volumen Estimado Producido");
+            translation.Translations.Add(@"EstimatedVolumeSold", @"Volumen estimado vendido");
+            translation.Translations.Add(@"UnitOfMeasure", @"Unidad de medida");
+            translation.Translations.Add(@"EstimatedIncome", @"Ingresos estimados");
+            translation.Translations.Add(@"Currency", @"Moneda");            
             return translation;
         }
     }     
