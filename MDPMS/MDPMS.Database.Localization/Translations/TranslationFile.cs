@@ -92,6 +92,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"HouseholdTasksHoursEngagedQuestion", @"During each day of the past week, for how many hours did you engage in this/these activities? ");
             translation.Translations.Add(@"AreYouEnrolledInSchoolAndOrCollege", @"Are you enrolled in school and/or college?");
             translation.Translations.Add(@"DPMSURL", @"DPMS URL");
+            translation.Translations.Add(@"ErrorNameCanNotBeBlank", @"Name can not be blank");
             return translation;
         }
 
@@ -167,6 +168,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"HouseholdTasksHoursEngagedQuestion", @"Durante cada día de la semana pasada, ¿durante cuántas horas se involucró en esta / estas actividades?");
             translation.Translations.Add(@"AreYouEnrolledInSchoolAndOrCollege", @"¿Estás inscrito en la escuela y / o la universidad?");
             translation.Translations.Add(@"DPMSURL", @"DPMS URL");
+            translation.Translations.Add(@"ErrorNameCanNotBeBlank", @"El nombre no puede estar en blanco");
             return translation;
         }
     }     
