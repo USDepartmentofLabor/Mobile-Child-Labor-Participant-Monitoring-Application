@@ -15,6 +15,7 @@ namespace MDPMS.Database.Data.Models
         public string DisplayName { get; set; }
 
         public virtual ICollection<PersonHazardousCondition> PeopleHazardousConditions { get; set; } = new List<PersonHazardousCondition>();
+        public virtual ICollection<PersonFollowUpHazardousCondition> PeopleFollowUpHazardousConditions { get; set; } = new List<PersonFollowUpHazardousCondition>();
 
         public StatusCustomizationHazardousCondition GetObjectFromJson(dynamic json)
         {

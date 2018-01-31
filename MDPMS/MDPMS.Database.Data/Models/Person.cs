@@ -13,7 +13,7 @@ namespace MDPMS.Database.Data.Models
     /// <summary>
     /// Person, adult or child
     /// </summary>
-    public class Person : EfBaseModel, ISyncableAsChild<Person>
+    public class Person : EfBaseModel, ISyncableAsChild<Person>, ISyncableWithChildren<Person>
     {
         /// <summary>
         /// First name (given name)
@@ -71,6 +71,15 @@ namespace MDPMS.Database.Data.Models
         public virtual ICollection<PersonHazardousCondition> PeopleHazardousConditions { get; set; } = new List<PersonHazardousCondition>();
         public virtual ICollection<PersonWorkActivity> PeopleWorkActivities { get; set; } = new List<PersonWorkActivity>();
         public virtual ICollection<PersonHouseholdTask> PeopleHouseholdTasks { get; set; } = new List<PersonHouseholdTask>();
+
+        public virtual ICollection<PersonFollowUp> PeopleFollowUps { get; set; } = new List<PersonFollowUp>();
+
+        public void AddFollowUp(PersonFollowUp personFollowUp)
+        {
+            if (PeopleFollowUps == null) PeopleFollowUps = new List<PersonFollowUp>();
+            personFollowUp.InternalParentId = InternalId;
+            PeopleFollowUps.Add(personFollowUp);
+        }
 
         public int? InternalParentId { get; set; } = null;
 
@@ -168,7 +177,8 @@ namespace MDPMS.Database.Data.Models
                 EnrolledInSchool = json.enrolled_in_school,
                 PeopleHazardousConditions = new List<PersonHazardousCondition>(),
                 PeopleWorkActivities = new List<PersonWorkActivity>(),
-                PeopleHouseholdTasks = new List<PersonHouseholdTask>() 
+                PeopleHouseholdTasks = new List<PersonHouseholdTask>(),
+                PeopleFollowUps = new List<PersonFollowUp>()
             };
             
             var hazardousConditionIds = json.hazardous_condition_ids.ToObject<List<int>>();
@@ -346,7 +356,7 @@ namespace MDPMS.Database.Data.Models
             var sw = new StringWriter(sb);
             var writer = new JsonTextWriter(sw) { Formatting = Formatting.None };
             writer.WriteStartObject();
-            writer.WritePropertyName(@"income_source");
+            writer.WritePropertyName(@"person");
             writer.WriteStartObject();
 
             if (!LastName.Equals(updateFrom.LastName))
@@ -435,7 +445,7 @@ namespace MDPMS.Database.Data.Models
 
             if (!PeopleWorkActivities.Select(a => a.WorkActivity).SequenceEqual(updateFrom.PeopleWorkActivities.Select(a => a.WorkActivity)))
             {
-                writer.WritePropertyName("work_activitY_ids");
+                writer.WritePropertyName("work_activity_ids");
                 writer.WriteRawValue(GetStatusArrayAsJsonString(PeopleWorkActivities.Select(a => a.WorkActivity)));
             }
 
@@ -454,6 +464,21 @@ namespace MDPMS.Database.Data.Models
             writer.WriteEndObject();
             writer.WriteEndObject();
             return sw.ToString();
+        }
+
+        public void SetParentIdsInChildObjects()
+        {
+            if (PeopleFollowUps != null)
+            {
+                foreach (var personFollowUp in PeopleFollowUps)
+                {
+                    if (personFollowUp.GetExternalParentId() == null & ExternalId != null)
+                    {
+                        personFollowUp.SetExternalParentId(ExternalId);
+                    }
+                    personFollowUp.SetInternalParentId(InternalId);
+                }
+            }
         }
     }
 }

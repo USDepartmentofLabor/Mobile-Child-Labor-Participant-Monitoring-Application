@@ -15,6 +15,7 @@ namespace MDPMS.Database.Data.Models
         public string DisplayName { get; set; }
 
         public virtual ICollection<PersonHouseholdTask> PeopleHouseholdTasks { get; set; } = new List<PersonHouseholdTask>();
+        public virtual ICollection<PersonFollowUpHouseholdTask> PeopleFollowUpHouseholdTasks { get; set; } = new List<PersonFollowUpHouseholdTask>();
 
         public StatusCustomizationHouseholdTask GetObjectFromJson(dynamic json)
         {

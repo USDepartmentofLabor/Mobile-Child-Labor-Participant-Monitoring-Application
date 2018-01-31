@@ -174,6 +174,30 @@ namespace MDPMS.Shared.Workers
                 {
                     return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
                 }
+
+                // <PersonFollowUp, Person>
+                var peopleFollowUpResult = SyncChildObject(
+                    applicationInstanceData,
+                    allowAlreadySyncedUpdateToParent,
+                    @"/api/v1/follow_ups",
+                    applicationInstanceData.Data.PersonFollowUps,
+                    @"person_id",
+                    applicationInstanceData.Data.People);
+                if (!peopleFollowUpResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
+                }
+
+                var peopleFollowUpNewResult = SyncNewChildObjects(
+                    applicationInstanceData,
+                    @"/api/v1/follow_ups",
+                    applicationInstanceData.Data.PersonFollowUps,
+                    @"person_id",
+                    applicationInstanceData.Data.People);
+                if (!peopleFollowUpNewResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
+                }
             }
             catch
             {
@@ -400,6 +424,12 @@ namespace MDPMS.Shared.Workers
                             var parent = parentQuery.First() as Household;
                             if (parent.Members == null) parent.Members = new List<Person>();
                             parent.Members.Add(newObject as Person);
+                        }
+                        else if (typeof(T) == typeof(PersonFollowUp))
+                        {
+                            var parent = parentQuery.First() as Person;
+                            if (parent.PeopleFollowUps == null) parent.PeopleFollowUps = new List<PersonFollowUp>();
+                            parent.PeopleFollowUps.Add(newObject as PersonFollowUp);
                         }
                         else
                         {

@@ -21,6 +21,7 @@ namespace MDPMS.Database.Data.Database
         public DbSet<Household> Households { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<IncomeSource> IncomeSources { get; set; }
+        public DbSet<PersonFollowUp> PersonFollowUps { get; set; }
 
         private string DatabasePath { get; set; }
         
@@ -79,6 +80,42 @@ namespace MDPMS.Database.Data.Database
                 .HasOne(phc => phc.Person)
                 .WithMany(p => p.PeopleHouseholdTasks)
                 .HasForeignKey(phc => phc.PersonInternalId);
+
+            // ManyToMany(PersonFollowUp, HazardousConditions)
+            modelBuilder.Entity<PersonFollowUpHazardousCondition>()
+                .HasKey(a => new { a.PersonFollowUpInternalId, a.HazardousConditionInternalId });
+            modelBuilder.Entity<PersonFollowUpHazardousCondition>()
+                .HasOne(phc => phc.HazardousCondition)
+                .WithMany(hc => hc.PeopleFollowUpHazardousConditions)
+                .HasForeignKey(phc => phc.HazardousConditionInternalId);
+            modelBuilder.Entity<PersonFollowUpHazardousCondition>()
+                .HasOne(phc => phc.PersonFollowUp)
+                .WithMany(p => p.PeopleFollowUpHazardousConditions)
+                .HasForeignKey(phc => phc.PersonFollowUpInternalId);
+
+            // ManyToMany(PersonFollowUp, WorkActivity)
+            modelBuilder.Entity<PersonFollowUpWorkActivity>()
+                .HasKey(a => new { a.PersonFollowUpInternalId, a.WorkActivityInternalId });
+            modelBuilder.Entity<PersonFollowUpWorkActivity>()
+                .HasOne(phc => phc.WorkActivity)
+                .WithMany(hc => hc.PeopleFollowUpWorkActivities)
+                .HasForeignKey(phc => phc.WorkActivityInternalId);
+            modelBuilder.Entity<PersonFollowUpWorkActivity>()
+                .HasOne(phc => phc.PersonFollowUp)
+                .WithMany(p => p.PeopleFollowUpWorkActivities)
+                .HasForeignKey(phc => phc.PersonFollowUpInternalId);
+
+            // ManyToMany(PersonFollowUp, HouseholdTasks)
+            modelBuilder.Entity<PersonFollowUpHouseholdTask>()
+                .HasKey(a => new { a.PersonFollowUpInternalId, a.HouseholdTaskInternalId });
+            modelBuilder.Entity<PersonFollowUpHouseholdTask>()
+                .HasOne(phc => phc.HouseholdTask)
+                .WithMany(hc => hc.PeopleFollowUpHouseholdTasks)
+                .HasForeignKey(phc => phc.HouseholdTaskInternalId);
+            modelBuilder.Entity<PersonFollowUpHouseholdTask>()
+                .HasOne(phc => phc.PersonFollowUp)
+                .WithMany(p => p.PeopleFollowUpHouseholdTasks)
+                .HasForeignKey(phc => phc.PersonFollowUpInternalId);
         }
 
         public PersonRelationship FindPersonRelationship(int externalId)

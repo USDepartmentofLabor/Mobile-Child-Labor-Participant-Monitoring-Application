@@ -13,15 +13,17 @@ namespace MDPMS.Shared.ViewModels
         public Command HideMenuCommand { get; set; }
         public Command NavigateToLandingViewCommand { get; set; }
         public Command NavigateToHouseholdsCommand { get; set; }
+        public Command NavigateToHouseholdMembersCommand { get; set; }
         public Command SyncCommand { get; set; }
         public Command NavigateToSettingsCommand { get; set; }
         public Command NavigateToAboutCommand { get; set; }
-    
+        
         public MenuViewModel(ApplicationInstanceData applicationInstanceData)
         {
             HideMenuCommand = new Command(ExecuteHideMenuCommand);
             NavigateToLandingViewCommand = new Command(ExecuteNavigateToLandingViewCommand);
             NavigateToHouseholdsCommand = new Command(ExecuteNavigateToHouseholdsCommand);
+            NavigateToHouseholdMembersCommand = new Command(ExecuteNavigateToHouseholdMembersCommand);
             SyncCommand = new Command(ExecuteSyncCommand);
             NavigateToSettingsCommand = new Command(ExecuteNavigateToSettingsCommand);
             NavigateToAboutCommand = new Command(ExecuteNavigateToAboutCommand);
@@ -108,6 +110,14 @@ namespace MDPMS.Shared.ViewModels
             ApplicationInstanceData.GoToView(new AboutView
             {
                 BindingContext = new AboutViewModel(ApplicationInstanceData)
+            });
+        }
+
+        private void ExecuteNavigateToHouseholdMembersCommand()
+        {
+            ApplicationInstanceData.GoToView(new HouseholdMembersSearchView
+            {
+                BindingContext = new HouseholdMembersSearchViewModel(ApplicationInstanceData)
             });
         }
 

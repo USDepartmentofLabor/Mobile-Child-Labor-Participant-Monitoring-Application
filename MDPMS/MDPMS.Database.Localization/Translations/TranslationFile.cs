@@ -95,6 +95,9 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"ErrorNameCanNotBeBlank", @"Name can not be blank");
             translation.Translations.Add(@"ErrorSyncError", @"Sync Error");
             translation.Translations.Add(@"SyncSuccessful", @"Sync Successful");
+            translation.Translations.Add(@"Members", @"Members");
+            translation.Translations.Add(@"HouseholdMemberId", @"Household Member ID");
+            translation.Translations.Add(@"Age", @"Age");
             return translation;
         }
 
@@ -173,6 +176,9 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"ErrorNameCanNotBeBlank", @"El nombre no puede estar en blanco");
             translation.Translations.Add(@"ErrorSyncError", @"Error de sincronización");
             translation.Translations.Add(@"SyncSuccessful", @"Sincronización exitosa");
+            translation.Translations.Add(@"Members", @"Miembros");
+            translation.Translations.Add(@"HouseholdMemberId", @"Identificación del miembro del hogar");
+            translation.Translations.Add(@"Age", @"Años");
             return translation;
         }
     }     

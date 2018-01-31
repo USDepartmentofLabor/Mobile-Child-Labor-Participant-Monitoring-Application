@@ -63,6 +63,10 @@ namespace MDPMS.Shared.ViewModels
                 AddressInfo = AddressInfo,
                 IncomeSources = new List<IncomeSource>()
             };
+            
+            ApplicationInstanceData.Data.Households.Add(newHousehold);
+            ApplicationInstanceData.Data.SaveChanges();
+            
             foreach (var incomeSource in IncomeSources)
             {
                 newHousehold.AddIncomeSource(incomeSource);
@@ -72,8 +76,7 @@ namespace MDPMS.Shared.ViewModels
             {
                 newHousehold.AddMember(person);
             }
-
-            ApplicationInstanceData.Data.Households.Add(newHousehold);            
+            
             ApplicationInstanceData.Data.SaveChanges();
             Exit();
         }

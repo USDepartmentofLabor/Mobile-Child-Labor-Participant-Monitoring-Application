@@ -15,6 +15,7 @@ namespace MDPMS.Database.Data.Models
         public string DisplayName { get; set; }
 
         public virtual ICollection<PersonWorkActivity> PeopleWorkActivities { get; set; } = new List<PersonWorkActivity>();
+        public virtual ICollection<PersonFollowUpWorkActivity> PeopleFollowUpWorkActivities { get; set; } = new List<PersonFollowUpWorkActivity>();
 
         public StatusCustomizationWorkActivity GetObjectFromJson(dynamic json)
         {

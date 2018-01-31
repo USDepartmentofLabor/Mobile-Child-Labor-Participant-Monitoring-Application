@@ -316,6 +316,7 @@ namespace MDPMS.Database.Data.Models
                         member.SetExternalParentId(ExternalId);
                     }
                     member.SetInternalParentId(InternalId);
+                    member.SetParentIdsInChildObjects();
                 }
             }                     
         }
