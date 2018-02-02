@@ -81,6 +81,15 @@ namespace MDPMS.Database.Data.Models
             PeopleFollowUps.Add(personFollowUp);
         }
 
+        public virtual ICollection<ServiceInstance> ServiceInstances { get; set; } = new List<ServiceInstance>();
+
+        public void AddServiceInstance(ServiceInstance serviceInstance)
+        {
+            if (ServiceInstances == null) ServiceInstances = new List<ServiceInstance>();
+            serviceInstance.InternalParentId = InternalId;
+            ServiceInstances.Add(serviceInstance);
+        }
+
         public int? InternalParentId { get; set; } = null;
 
         public int? ExternalParentId { get; set; } = null;
@@ -477,6 +486,17 @@ namespace MDPMS.Database.Data.Models
                         personFollowUp.SetExternalParentId(ExternalId);
                     }
                     personFollowUp.SetInternalParentId(InternalId);
+                }
+            }
+            if (ServiceInstances != null)
+            {
+                foreach (var serviceInstance in ServiceInstances)
+                {
+                    if (serviceInstance.GetExternalParentId() == null & ExternalId != null)
+                    {
+                        serviceInstance.SetExternalParentId(ExternalId);
+                    }
+                    serviceInstance.SetInternalParentId(InternalId);
                 }
             }
         }

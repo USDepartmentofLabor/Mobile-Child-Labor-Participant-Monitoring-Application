@@ -5,6 +5,7 @@ using System.Linq;
 using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
+using MDPMS.Shared.Views;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared.ViewModels
@@ -44,6 +45,7 @@ namespace MDPMS.Shared.ViewModels
         // Commands
         public Command CancelCommand { get; set; }
         public Command SubmitCommand { get; set; }
+        public Command NavigateToAddServiceCommand { get; set; }
 
         public DateTime FollowUpDate { get; set; } = DateTime.Today;
         
@@ -111,6 +113,7 @@ namespace MDPMS.Shared.ViewModels
 
             CancelCommand = new Command(ExecuteCancelCommand);
             SubmitCommand = new Command(ExecuteSubmitCommand);
+            NavigateToAddServiceCommand = new Command(ExecuteNavigateToAddServiceCommand);
         }
 
         private void ExecuteCancelCommand()
@@ -169,6 +172,15 @@ namespace MDPMS.Shared.ViewModels
         private void Exit()
         {
             ApplicationInstanceData.NavigationPage.PopAsync();
-        }        
+        } 
+
+        private void ExecuteNavigateToAddServiceCommand()
+        {
+            // Modal navigate to assign service
+            ApplicationInstanceData.NavigationPage.PushAsync(new HouseholdMemberAssignServiceView
+            {
+                BindingContext = new HouseholdMemberAssignServiceViewModel(ApplicationInstanceData, _person)
+            });
+        }
     }
 }

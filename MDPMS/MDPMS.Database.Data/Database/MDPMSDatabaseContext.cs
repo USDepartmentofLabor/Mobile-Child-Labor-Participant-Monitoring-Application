@@ -17,11 +17,17 @@ namespace MDPMS.Database.Data.Database
         public DbSet<StatusCustomizationHouseholdTask> StatusCustomizationHouseholdTasks { get; set; }
         public DbSet<StatusCustomizationWorkActivity> StatusCustomizationWorkActivities { get; set; }
 
+        // Services
+        public DbSet<ServiceTypeCategory> ServiceTypeCategories { get; set; }
+        public DbSet<ServiceType> ServiceTypes { get; set; }
+        public DbSet<Service> Services { get; set; }
+
         // Data
         public DbSet<Household> Households { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<IncomeSource> IncomeSources { get; set; }
         public DbSet<PersonFollowUp> PersonFollowUps { get; set; }
+        public DbSet<ServiceInstance> ServiceInstances { get; set; }
 
         private string DatabasePath { get; set; }
         
@@ -121,6 +127,11 @@ namespace MDPMS.Database.Data.Database
         public PersonRelationship FindPersonRelationship(int externalId)
         {
             return FindISyncableByExternalId(externalId, PersonRelationships);
+        }
+
+        public Service FindService(int externalId)
+        {
+            return FindISyncableByExternalId(externalId, Services);
         }
 
         public StatusCustomizationHazardousCondition FindStatusCustomizationHazardousCondition(int externalId)

@@ -107,6 +107,58 @@ namespace MDPMS.Shared.Workers
                     return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
                 }
 
+                // Service Type Categories
+                // TODO: add new method for non datetime based sync for this table
+                var serviceTypeCategoriesResult = SyncObject(
+                    applicationInstanceData,
+                    allowAlreadySyncedUpdateToParent,
+                    @"/api/v1/service_type_categories",
+                    applicationInstanceData.Data.ServiceTypeCategories);
+                if (!serviceTypeCategoriesResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
+                }
+
+                // Service Types
+                var serviceTypesResult = SyncChildObject(
+                    applicationInstanceData,
+                    allowAlreadySyncedUpdateToParent,
+                    @"/api/v1/service_types",
+                    applicationInstanceData.Data.ServiceTypes,
+                    @"service_type_category_id",
+                    applicationInstanceData.Data.ServiceTypeCategories);
+                if (!serviceTypesResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
+                }
+
+                // set service type parent internal ids since not added through ui
+                // TODO: alternate method for server only child records?
+                foreach (var serviceTypeCategory in applicationInstanceData.Data.ServiceTypeCategories)
+                {
+                    serviceTypeCategory.SetParentIdsInChildObjects();
+                }
+                applicationInstanceData.Data.SaveChanges();
+
+                // Services
+                var servicesResult = SyncChildObject(
+                    applicationInstanceData,
+                    allowAlreadySyncedUpdateToParent,
+                    @"/api/v1/services",
+                    applicationInstanceData.Data.Services,
+                    @"service_type_id",
+                    applicationInstanceData.Data.ServiceTypes);
+                if (!servicesResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
+                }
+
+                foreach (var serviceType in applicationInstanceData.Data.ServiceTypes)
+                {
+                    serviceType.SetParentIdsInChildObjects();
+                }
+                applicationInstanceData.Data.SaveChanges();
+
                 // Data
                 var householdsResult = SyncObject(
                     applicationInstanceData,
@@ -195,6 +247,37 @@ namespace MDPMS.Shared.Workers
                     @"person_id",
                     applicationInstanceData.Data.People);
                 if (!peopleFollowUpNewResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
+                }
+
+                // Service Instances
+                var serviceInstancesResult = SyncChildObject(
+                    applicationInstanceData,
+                    allowAlreadySyncedUpdateToParent,
+                    @"/api/v1/service_instances",
+                    applicationInstanceData.Data.ServiceInstances,
+                    @"person_id",
+                    applicationInstanceData.Data.People);
+                if (!serviceInstancesResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
+                }
+
+                foreach (var person in applicationInstanceData.Data.People)
+                {
+                    person.SetParentIdsInChildObjects();
+                }
+                applicationInstanceData.Data.SaveChanges();
+
+                // new
+                var serviceInstancesNewResult = SyncNewChildObjects(
+                    applicationInstanceData,
+                    @"/api/v1/service_instances",
+                    applicationInstanceData.Data.ServiceInstances,
+                    @"person_id",
+                    applicationInstanceData.Data.People);
+                if (!serviceInstancesNewResult.Item1)
                 {
                     return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
                 }
@@ -430,6 +513,24 @@ namespace MDPMS.Shared.Workers
                             var parent = parentQuery.First() as Person;
                             if (parent.PeopleFollowUps == null) parent.PeopleFollowUps = new List<PersonFollowUp>();
                             parent.PeopleFollowUps.Add(newObject as PersonFollowUp);
+                        }
+                        else if (typeof(T) == typeof(ServiceType))
+                        {
+                            var parent = parentQuery.First() as ServiceTypeCategory;
+                            if (parent.ServiceTypes == null) parent.ServiceTypes = new List<ServiceType>();
+                            parent.ServiceTypes.Add(newObject as ServiceType);
+                        }
+                        else if (typeof(T) == typeof(Service))
+                        {
+                            var parent = parentQuery.First() as ServiceType;
+                            if (parent.Services == null) parent.Services = new List<Service>();
+                            parent.Services.Add(newObject as Service);
+                        }
+                        else if (typeof(T) == typeof(ServiceInstance))
+                        {
+                            var parent = parentQuery.First() as Person;
+                            if (parent.ServiceInstances == null) parent.ServiceInstances = new List<ServiceInstance>();
+                            parent.ServiceInstances.Add(newObject as ServiceInstance);
                         }
                         else
                         {

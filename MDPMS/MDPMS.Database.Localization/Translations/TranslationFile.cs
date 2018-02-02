@@ -98,6 +98,17 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Members", @"Members");
             translation.Translations.Add(@"HouseholdMemberId", @"Household Member ID");
             translation.Translations.Add(@"Age", @"Age");
+            translation.Translations.Add(@"AddService", @"Add Service");
+            translation.Translations.Add(@"Service", @"Service");
+            translation.Translations.Add(@"StartDate", @"Start Date");
+            translation.Translations.Add(@"EndDate", @"End Date");
+            translation.Translations.Add(@"Hours", @"Hours");
+            translation.Translations.Add(@"Notes", @"Notes");
+            translation.Translations.Add(@"SelectService", @"Select Service");
+            translation.Translations.Add(@"Validation", @"Validation");
+            translation.Translations.Add(@"ValidationErrorMessageNoServiceSelected", @"Please select a service");
+            translation.Translations.Add(@"ValidationErrorMessageStartDateIsAfterEndDate",@"Start date is after end date");
+            translation.Translations.Add(@"ValidationErrorMessageHoursInvalid", @"Hours value is invalid");
             return translation;
         }
 
@@ -179,6 +190,17 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Members", @"Miembros");
             translation.Translations.Add(@"HouseholdMemberId", @"Identificación del miembro del hogar");
             translation.Translations.Add(@"Age", @"Años");
+            translation.Translations.Add(@"AddService", @"Añadir servicio");
+            translation.Translations.Add(@"Service", @"Servicio");
+            translation.Translations.Add(@"StartDate", @"Fecha de inicio");
+            translation.Translations.Add(@"EndDate", @"Fecha final");
+            translation.Translations.Add(@"Hours", @"Horas");
+            translation.Translations.Add(@"Notes", @"Notas");
+            translation.Translations.Add(@"SelectService", @"Seleccionar servicio");
+            translation.Translations.Add(@"Validation", @"Validación");
+            translation.Translations.Add(@"ValidationErrorMessageNoServiceSelected", @"Por favor seleccione un servicio");
+            translation.Translations.Add(@"ValidationErrorMessageStartDateIsAfterEndDate", @"La fecha de inicio es posterior a la fecha de finalización");
+            translation.Translations.Add(@"ValidationErrorMessageHoursInvalid", @"El valor de las horas no es válido");
             return translation;
         }
     }     
