@@ -16,6 +16,7 @@ namespace MDPMS.Shared.ViewModels
     {
         Position GPSPosition;
 
+        public string CalculatedAge { get; set; }
 
         public Command CancelCommand { get; set; }
         public Command SubmitCommand { get; set; }
@@ -25,7 +26,34 @@ namespace MDPMS.Shared.ViewModels
         public string LastName { get; set; } = @"";
         public string MiddleName { get; set; } = @"";
         public Tuple<string, Gender> SelectedBindableGender { get; set; }
-        public DateTime? DateOfBirth { get; set; } = DateTime.Today;
+
+        private DateTime? _dateOfBirth = DateTime.Today;
+        public DateTime? DateOfBirth
+        {
+            get
+            {
+                return _dateOfBirth;
+            }
+            set
+            {
+                _dateOfBirth = value;
+                // Calulate age for form preview
+                if (_dateOfBirth != null)
+                {
+                    DateTime now = DateTime.Today;
+                    DateTime bday = (DateTime)_dateOfBirth;
+                    var age = now.Year - bday.Year;
+                    if (now < bday.AddYears(age)) age--;
+                    CalculatedAge = age.ToString();
+                }
+                else
+                {
+                    CalculatedAge = @"";
+                }
+                OnPropertyChanged(nameof(CalculatedAge));                
+            }
+        }
+
         public bool BirthDateIsApproximate { get; set; } = false;
 
         private Tuple<string, PersonRelationship, bool> _selectedBindablePersonRelationship = new Tuple<string, PersonRelationship, bool>(@"", null, false);
