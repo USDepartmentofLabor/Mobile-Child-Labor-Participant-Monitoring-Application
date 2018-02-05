@@ -6,7 +6,6 @@ using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
 using MDPMS.Shared.Views;
-using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using Xamarin.Forms;
 
@@ -125,23 +124,11 @@ namespace MDPMS.Shared.ViewModels
             Exit();
         }
 
-        private void ExecuteSubmitCommand()
+        private async void ExecuteSubmitCommand()
         {
-            ExecuteSubmitCommandGps();
+            IsBusy = true;
+            GPSPosition = await MDPMS.Shared.Workers.GpsHelper.GetGpsPosition();
             ExecutePostSubmitCommand();
-        }
-
-        private async void ExecuteSubmitCommandGps()
-        {
-            try
-            {
-                var position = await CrossGeolocator.Current.GetPositionAsync(new TimeSpan(0, 0, 0, 0, 100));
-                GPSPosition = position;
-            }
-            catch
-            {
-                GPSPosition = null;
-            }
         }
 
         private void ExecutePostSubmitCommand()
@@ -197,6 +184,7 @@ namespace MDPMS.Shared.ViewModels
             _person.AddFollowUp(newPersonFollowUp);
             ApplicationInstanceData.Data.SaveChanges();
 
+            IsBusy = false;
             Exit();
         }
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using MDPMS.Database.Data.Models;
-using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
@@ -48,24 +47,13 @@ namespace MDPMS.Shared.ViewModels
             Exit();
         }
 
-        private void ExecuteSubmitCommand()
+        private async void ExecuteSubmitCommand()
         {
             if (!NewHouseholdValidation()) return;
-            ExecuteSubmitCommandGps();
-            ExecutePostSubmitCommand();
-        }
 
-        private async void ExecuteSubmitCommandGps()
-        {
-            try
-            {
-                var position = await CrossGeolocator.Current.GetPositionAsync(new TimeSpan(0, 0, 0, 0, 100));            
-                GPSPosition = position;            
-            }
-            catch
-            {
-                GPSPosition = null;
-            }
+            IsBusy = true;
+            GPSPosition = await MDPMS.Shared.Workers.GpsHelper.GetGpsPosition();
+            ExecutePostSubmitCommand();
         }
 
         private void ExecutePostSubmitCommand()
@@ -108,6 +96,8 @@ namespace MDPMS.Shared.ViewModels
             }
 
             ApplicationInstanceData.Data.SaveChanges();
+
+            IsBusy = false;
             Exit();
         }
 

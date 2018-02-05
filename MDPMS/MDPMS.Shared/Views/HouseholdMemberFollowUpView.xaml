@@ -4,7 +4,7 @@
              x:Class="MDPMS.Shared.Views.HouseholdMemberFollowUpView">
     <ContentPage.Content>
         <StackLayout>
-            <Grid>
+            <Grid IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="65"/>
