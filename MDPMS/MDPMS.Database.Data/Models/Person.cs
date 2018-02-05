@@ -68,6 +68,46 @@ namespace MDPMS.Database.Data.Models
 
         public bool EnrolledInSchool { get; set; }
 
+        /// <summary>
+        /// GPS position latitude at time of submission on the mobile view
+        /// </summary>
+        public double? GpsLatitude { get; set; }
+
+        /// <summary>
+        /// GPS position longitude at time of submission on the mobile view
+        /// </summary>
+        public double? GpsLongitude { get; set; }
+
+        /// <summary>
+        /// GPS position potential position error radius in meters
+        /// </summary>
+        public double? GpsPositionAccuracy { get; set; }
+
+        /// <summary>
+        /// GPS position altitude in meters relative to sea level
+        /// </summary>
+        public double? GpsAltitude { get; set; }
+
+        /// <summary>
+        /// GPS position potential altitude error range in meters
+        /// </summary>
+        public double? GpsAltitudeAccuracy { get; set; }
+
+        /// <summary>
+        /// GPS position heading in degrees relative to true North
+        /// </summary>
+        public double? GpsHeading { get; set; }
+
+        /// <summary>
+        /// GPS position speed in meters per second
+        /// </summary>
+        public double? GpsSpeed { get; set; }
+
+        /// <summary>
+        /// GPS position date time recorded
+        /// </summary>
+        public DateTime? GpsPositionTime { get; set; }
+
         public virtual ICollection<PersonHazardousCondition> PeopleHazardousConditions { get; set; } = new List<PersonHazardousCondition>();
         public virtual ICollection<PersonWorkActivity> PeopleWorkActivities { get; set; } = new List<PersonWorkActivity>();
         public virtual ICollection<PersonHouseholdTask> PeopleHouseholdTasks { get; set; } = new List<PersonHouseholdTask>();
@@ -170,7 +210,6 @@ namespace MDPMS.Database.Data.Models
                 LastUpdatedAt = json.updated_at,
                 SoftDeleted = false,
                 ExternalParentId = json.household_id,
-
                 FirstName = json.first_name,
                 LastName = json.last_name,
                 MiddleName = json.middle_name,
@@ -184,6 +223,14 @@ namespace MDPMS.Database.Data.Models
                 HoursWorked = json.hours_worked,
                 HouseWorkedOnHousework = json.hours_worked_on_housework,
                 EnrolledInSchool = json.enrolled_in_school,
+                GpsLatitude = json.latitude,
+                GpsLongitude = json.longitude,
+                GpsPositionAccuracy = json.position_accuracy,
+                GpsAltitude = json.altitude,
+                GpsAltitudeAccuracy = json.altitude_accuracy,
+                GpsHeading = json.heading,
+                GpsSpeed = json.speed,
+                GpsPositionTime = json.gps_recorded_at,
                 PeopleHazardousConditions = new List<PersonHazardousCondition>(),
                 PeopleWorkActivities = new List<PersonWorkActivity>(),
                 PeopleHouseholdTasks = new List<PersonHouseholdTask>(),
@@ -282,7 +329,55 @@ namespace MDPMS.Database.Data.Models
                 writer.WriteValue(DateOfBirthIsApproximate);                
                 writer.WritePropertyName("household_id");
                 writer.WriteValue(ExternalParentId);
-                
+
+                if (GpsLatitude != null)
+                {
+                    writer.WritePropertyName("latitude");
+                    writer.WriteValue(GpsLatitude);
+                }
+
+                if (GpsLongitude != null)
+                {
+                    writer.WritePropertyName("longitude");
+                    writer.WriteValue(GpsLongitude);
+                }
+
+                if (GpsPositionAccuracy != null)
+                {
+                    writer.WritePropertyName("position_accuracy");
+                    writer.WriteValue(GpsPositionAccuracy);
+                }
+
+                if (GpsAltitude != null)
+                {
+                    writer.WritePropertyName("altitude");
+                    writer.WriteValue(GpsAltitude);
+                }
+
+                if (GpsAltitudeAccuracy != null)
+                {
+                    writer.WritePropertyName("altitude_accuracy");
+                    writer.WriteValue(GpsAltitudeAccuracy);
+                }
+
+                if (GpsHeading != null)
+                {
+                    writer.WritePropertyName("heading");
+                    writer.WriteValue(GpsHeading);
+                }
+
+                if (GpsSpeed != null)
+                {
+                    writer.WritePropertyName("speed");
+                    writer.WriteValue(GpsSpeed);
+                }
+
+                if (GpsPositionTime != null)
+                {
+                    writer.WritePropertyName("gps_recorded_at");
+                    writer.WriteValue(GpsPositionTime);
+                }
+
                 writer.WritePropertyName("hazardous_condition_ids");
                 writer.WriteRawValue(GetStatusArrayAsJsonString(PeopleHazardousConditions.Select(a => a.HazardousCondition)));
 
@@ -331,6 +426,14 @@ namespace MDPMS.Database.Data.Models
             HoursWorked = updateFrom.HoursWorked;
             HouseWorkedOnHousework = updateFrom.HouseWorkedOnHousework;
             EnrolledInSchool = updateFrom.EnrolledInSchool;
+            GpsLatitude = updateFrom.GpsLatitude;
+            GpsLongitude = updateFrom.GpsLongitude;
+            GpsPositionAccuracy = updateFrom.GpsPositionAccuracy;
+            GpsAltitude = updateFrom.GpsAltitude;
+            GpsAltitudeAccuracy = updateFrom.GpsAltitudeAccuracy;
+            GpsHeading = updateFrom.GpsHeading;
+            GpsSpeed = updateFrom.GpsSpeed;
+            GpsPositionTime = updateFrom.GpsPositionTime;
             PeopleHazardousConditions = updateFrom.PeopleHazardousConditions;
             PeopleWorkActivities = updateFrom.PeopleWorkActivities;
             PeopleHouseholdTasks = updateFrom.PeopleHouseholdTasks; 
@@ -351,6 +454,14 @@ namespace MDPMS.Database.Data.Models
             if (!HoursWorked.Equals(checkUpdateFrom.HoursWorked)) return true;
             if (!HouseWorkedOnHousework.Equals(checkUpdateFrom.HouseWorkedOnHousework)) return true;
             if (!EnrolledInSchool.Equals(checkUpdateFrom.EnrolledInSchool)) return true;
+            if (!GpsLatitude.Equals(checkUpdateFrom.GpsLatitude)) return true;
+            if (!GpsLongitude.Equals(checkUpdateFrom.GpsLongitude)) return true;
+            if (!GpsPositionAccuracy.Equals(checkUpdateFrom.GpsPositionAccuracy)) return true;
+            if (!GpsAltitude.Equals(checkUpdateFrom.GpsAltitude)) return true;
+            if (!GpsAltitudeAccuracy.Equals(checkUpdateFrom.GpsAltitudeAccuracy)) return true;
+            if (!GpsHeading.Equals(checkUpdateFrom.GpsHeading)) return true;
+            if (!GpsSpeed.Equals(checkUpdateFrom.GpsSpeed)) return true;
+            if (!GpsPositionTime.Equals(checkUpdateFrom.GpsPositionTime)) return true;
             if (!PeopleHazardousConditions.Select(a => a.HazardousCondition).SequenceEqual(checkUpdateFrom.PeopleHazardousConditions.Select(a => a.HazardousCondition))) return true;
             if (!PeopleWorkActivities.Select(a => a.WorkActivity).SequenceEqual(checkUpdateFrom.PeopleWorkActivities.Select(a => a.WorkActivity))) return true;
             if (!PeopleHouseholdTasks.Select(a => a.HouseholdTask).SequenceEqual(checkUpdateFrom.PeopleHouseholdTasks.Select(a => a.HouseholdTask))) return true;            
@@ -444,6 +555,54 @@ namespace MDPMS.Database.Data.Models
             {
                 writer.WritePropertyName("enrolled_in_school");
                 writer.WriteValue(updateFrom.EnrolledInSchool);
+            }
+
+            if (!GpsLatitude.Equals(updateFrom.GpsLatitude))
+            {
+                writer.WritePropertyName("latitude");
+                writer.WriteValue(updateFrom.GpsLatitude);
+            }
+
+            if (!GpsLongitude.Equals(updateFrom.GpsLongitude))
+            {
+                writer.WritePropertyName("longitude");
+                writer.WriteValue(updateFrom.GpsLongitude);
+            }
+
+            if (!GpsPositionAccuracy.Equals(updateFrom.GpsPositionAccuracy))
+            {
+                writer.WritePropertyName("position_accuracy");
+                writer.WriteValue(updateFrom.GpsPositionAccuracy);
+            }
+
+            if (!GpsAltitude.Equals(updateFrom.GpsAltitude))
+            {
+                writer.WritePropertyName("altitude");
+                writer.WriteValue(updateFrom.GpsAltitude);
+            }
+
+            if (!GpsAltitudeAccuracy.Equals(updateFrom.GpsAltitudeAccuracy))
+            {
+                writer.WritePropertyName("altitude_accuracy");
+                writer.WriteValue(updateFrom.GpsAltitudeAccuracy);
+            }
+
+            if (!GpsHeading.Equals(updateFrom.GpsHeading))
+            {
+                writer.WritePropertyName("heading");
+                writer.WriteValue(updateFrom.GpsHeading);
+            }
+
+            if (!GpsSpeed.Equals(updateFrom.GpsSpeed))
+            {
+                writer.WritePropertyName("speed");
+                writer.WriteValue(updateFrom.GpsSpeed);
+            }
+
+            if (!GpsPositionTime.Equals(updateFrom.GpsPositionTime))
+            {
+                writer.WritePropertyName("gps_recorded_at");
+                writer.WriteValue(updateFrom.GpsPositionTime);
             }
 
             if (!PeopleHazardousConditions.Select(a => a.HazardousCondition).SequenceEqual(updateFrom.PeopleHazardousConditions.Select(a => a.HazardousCondition)))

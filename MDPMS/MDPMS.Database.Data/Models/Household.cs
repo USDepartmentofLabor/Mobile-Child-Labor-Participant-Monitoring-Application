@@ -67,7 +67,47 @@ namespace MDPMS.Database.Data.Models
         /// Address info, address_info from api, en ui display localization is Other/Address Notes
         /// </summary>
         public string AddressInfo { get; set; }
-        
+
+        /// <summary>
+        /// GPS position latitude at time of submission on the mobile view
+        /// </summary>
+        public double? GpsLatitude { get; set; }
+
+        /// <summary>
+        /// GPS position longitude at time of submission on the mobile view
+        /// </summary>
+        public double? GpsLongitude { get; set; }
+
+        /// <summary>
+        /// GPS position potential position error radius in meters
+        /// </summary>
+        public double? GpsPositionAccuracy { get; set; }
+
+        /// <summary>
+        /// GPS position altitude in meters relative to sea level
+        /// </summary>
+        public double? GpsAltitude { get; set; }
+
+        /// <summary>
+        /// GPS position potential altitude error range in meters
+        /// </summary>
+        public double? GpsAltitudeAccuracy { get; set; }
+
+        /// <summary>
+        /// GPS position heading in degrees relative to true North
+        /// </summary>
+        public double? GpsHeading { get; set; }
+
+        /// <summary>
+        /// GPS position speed in meters per second
+        /// </summary>
+        public double? GpsSpeed { get; set; }
+
+        /// <summary>
+        /// GPS position date time recorded
+        /// </summary>
+        public DateTime? GpsPositionTime { get; set; }
+
         /// <summary>
         /// FK to manu income sources
         /// </summary>
@@ -139,7 +179,15 @@ namespace MDPMS.Database.Data.Models
                 AdminvArea = json.adminv_area,
                 DependentAdminvArea = json.dependent_adminv_area,
                 Country = json.country,
-                AddressInfo = json.address_info
+                AddressInfo = json.address_info,
+                GpsLatitude = json.latitude,
+                GpsLongitude = json.longitude,
+                GpsPositionAccuracy = json.position_accuracy,
+                GpsAltitude = json.altitude,
+                GpsAltitudeAccuracy = json.altitude_accuracy,
+                GpsHeading = json.heading,
+                GpsSpeed = json.speed,
+                GpsPositionTime = json.gps_recorded_at
             };
         }
 
@@ -175,6 +223,55 @@ namespace MDPMS.Database.Data.Models
                 writer.WriteValue(Country);
                 writer.WritePropertyName("address_info");
                 writer.WriteValue(AddressInfo);
+
+                if (GpsLatitude != null)
+                {
+                    writer.WritePropertyName("latitude");
+                    writer.WriteValue(GpsLatitude);                       
+                }
+
+                if (GpsLongitude != null)
+                {
+                    writer.WritePropertyName("longitude");
+                    writer.WriteValue(GpsLongitude);
+                }
+
+                if (GpsPositionAccuracy != null)
+                {
+                    writer.WritePropertyName("position_accuracy");
+                    writer.WriteValue(GpsPositionAccuracy);
+                }
+
+                if (GpsAltitude != null)
+                {
+                    writer.WritePropertyName("altitude");
+                    writer.WriteValue(GpsAltitude);
+                }
+
+                if (GpsAltitudeAccuracy != null)
+                {
+                    writer.WritePropertyName("altitude_accuracy");
+                    writer.WriteValue(GpsAltitudeAccuracy);
+                }
+
+                if (GpsHeading != null)
+                {
+                    writer.WritePropertyName("heading");
+                    writer.WriteValue(GpsHeading);
+                }
+
+                if (GpsSpeed != null)
+                {
+                    writer.WritePropertyName("speed");
+                    writer.WriteValue(GpsSpeed);
+                }
+
+                if (GpsPositionTime != null)
+                {
+                    writer.WritePropertyName("gps_recorded_at");
+                    writer.WriteValue(GpsPositionTime);
+                }
+
                 writer.WriteEndObject();
                 writer.WriteEndObject();
             }
@@ -195,6 +292,14 @@ namespace MDPMS.Database.Data.Models
             DependentAdminvArea = updateFrom.DependentAdminvArea;
             Country = updateFrom.Country;
             AddressInfo = updateFrom.AddressInfo;
+            GpsLatitude = updateFrom.GpsLatitude;
+            GpsLongitude = updateFrom.GpsLongitude;
+            GpsPositionAccuracy = updateFrom.GpsPositionAccuracy;
+            GpsAltitude = updateFrom.GpsAltitude;
+            GpsAltitudeAccuracy = updateFrom.GpsAltitudeAccuracy;
+            GpsHeading = updateFrom.GpsHeading;
+            GpsSpeed = updateFrom.GpsSpeed;
+            GpsPositionTime = updateFrom.GpsPositionTime;
         }
 
         public bool GetObjectNeedsUpate(Household checkUpdateFrom)
@@ -210,6 +315,14 @@ namespace MDPMS.Database.Data.Models
             if (!DependentAdminvArea.Equals(checkUpdateFrom.DependentAdminvArea)) return true;
             if (!Country.Equals(checkUpdateFrom.Country)) return true;
             if (!AddressInfo.Equals(checkUpdateFrom.AddressInfo)) return true;
+            if (!GpsLatitude.Equals(checkUpdateFrom.GpsLatitude)) return true;
+            if (!GpsLongitude.Equals(checkUpdateFrom.GpsLongitude)) return true;
+            if (!GpsPositionAccuracy.Equals(checkUpdateFrom.GpsPositionAccuracy)) return true;
+            if (!GpsAltitude.Equals(checkUpdateFrom.GpsAltitude)) return true;
+            if (!GpsAltitudeAccuracy.Equals(checkUpdateFrom.GpsAltitudeAccuracy)) return true;
+            if (!GpsHeading.Equals(checkUpdateFrom.GpsHeading)) return true;
+            if (!GpsSpeed.Equals(checkUpdateFrom.GpsSpeed)) return true;
+            if (!GpsPositionTime.Equals(checkUpdateFrom.GpsPositionTime)) return true;
             return false;
         }
 
@@ -287,6 +400,54 @@ namespace MDPMS.Database.Data.Models
             {
                 writer.WritePropertyName("address_info");
                 writer.WriteValue(updateFrom.AddressInfo);
+            }
+
+            if (!GpsLatitude.Equals(updateFrom.GpsLatitude))
+            {
+                writer.WritePropertyName("latitude");
+                writer.WriteValue(updateFrom.GpsLatitude);
+            }
+
+            if (!GpsLongitude.Equals(updateFrom.GpsLongitude))
+            {
+                writer.WritePropertyName("longitude");
+                writer.WriteValue(updateFrom.GpsLongitude);
+            }
+
+            if (!GpsPositionAccuracy.Equals(updateFrom.GpsPositionAccuracy))
+            {
+                writer.WritePropertyName("position_accuracy");
+                writer.WriteValue(updateFrom.GpsPositionAccuracy);
+            }
+
+            if (!GpsAltitude.Equals(updateFrom.GpsAltitude))
+            {
+                writer.WritePropertyName("altitude");
+                writer.WriteValue(updateFrom.GpsAltitude);
+            }
+
+            if (!GpsAltitudeAccuracy.Equals(updateFrom.GpsAltitudeAccuracy))
+            {
+                writer.WritePropertyName("altitude_accuracy");
+                writer.WriteValue(updateFrom.GpsAltitudeAccuracy);
+            }
+
+            if (!GpsHeading.Equals(updateFrom.GpsHeading))
+            {
+                writer.WritePropertyName("heading");
+                writer.WriteValue(updateFrom.GpsHeading);
+            }
+
+            if (!GpsSpeed.Equals(updateFrom.GpsSpeed))
+            {
+                writer.WritePropertyName("speed");
+                writer.WriteValue(updateFrom.GpsSpeed);
+            }
+
+            if (!GpsPositionTime.Equals(updateFrom.GpsPositionTime))
+            {
+                writer.WritePropertyName("gps_recorded_at");
+                writer.WriteValue(updateFrom.GpsPositionTime);
             }
 
             writer.WriteEndObject();

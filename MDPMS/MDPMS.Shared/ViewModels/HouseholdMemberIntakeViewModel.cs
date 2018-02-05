@@ -6,12 +6,17 @@ using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
 using MDPMS.Shared.Views;
+using Plugin.Geolocator;
+using Plugin.Geolocator.Abstractions;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared.ViewModels
 {
     public class HouseholdMemberIntakeViewModel : ViewModelBase
     {
+        Position GPSPosition;
+
+
         public Command CancelCommand { get; set; }
         public Command SubmitCommand { get; set; }
 
@@ -113,7 +118,14 @@ namespace MDPMS.Shared.ViewModels
             Exit();
         }
 
-        private void ExecuteSubmitCommand()
+        private async void ExecuteSubmitCommand()
+        {
+            var position = await CrossGeolocator.Current.GetPositionAsync(new TimeSpan(0, 0, 0, 0, 1000));
+            GPSPosition = position;
+            ExecutePostSubmitCommand();
+        }
+
+        private void ExecutePostSubmitCommand()
         {
             // save
             var person = new Person
@@ -121,7 +133,6 @@ namespace MDPMS.Shared.ViewModels
                 CreatedAt = DateTime.Now,
                 LastUpdatedAt = DateTime.Now,
                 SoftDeleted = false,
-
                 FirstName = FirstName,
                 LastName = LastName,
                 MiddleName = MiddleName,
@@ -135,13 +146,21 @@ namespace MDPMS.Shared.ViewModels
                 HoursWorked = WorkActivityHoursEngaged,
                 HouseWorkedOnHousework = HouseholdTasksHoursEngaged,
                 EnrolledInSchool = EnrolledInSchoolCollege,
+                GpsLatitude = GPSPosition.Latitude,
+                GpsLongitude = GPSPosition.Longitude,
+                GpsPositionAccuracy = GPSPosition.Accuracy,
+                GpsAltitude = GPSPosition.Altitude,
+                GpsAltitudeAccuracy = GPSPosition.AltitudeAccuracy,
+                GpsHeading = GPSPosition.Heading,
+                GpsSpeed = GPSPosition.Speed,
+                GpsPositionTime = DateTime.Now,
                 PeopleHazardousConditions = new List<PersonHazardousCondition>(),
                 PeopleWorkActivities = new List<PersonWorkActivity>(),
                 PeopleHouseholdTasks = new List<PersonHouseholdTask>()
             };
-            
+
             foreach (var bindableHazardousCondition in BindableHazardousConditions.Where(a => a.Item3.BoolValue))
-            {                
+            {
                 person.PeopleHazardousConditions.Add(new PersonHazardousCondition
                 {
                     Person = person,
@@ -170,10 +189,10 @@ namespace MDPMS.Shared.ViewModels
             if (ApplicationInstanceData.NavigationPage.Pages.First().GetType() == typeof(HouseholdIntakeView))
             {
                 var householdsViewModel =
-                    (HouseholdIntakeViewModel) ApplicationInstanceData.NavigationPage.Pages.First().BindingContext;
+                    (HouseholdIntakeViewModel)ApplicationInstanceData.NavigationPage.Pages.First().BindingContext;
                 householdsViewModel.HouseholdMembers.Add(person);
             }
-            
+
             Exit();
         }
 

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using MDPMS.Database.Data.Models;
+using Plugin.Geolocator;
+using Plugin.Geolocator.Abstractions;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
 using MDPMS.Shared.Views;
@@ -10,6 +12,8 @@ namespace MDPMS.Shared.ViewModels
 {
     public class HouseholdIntakeViewModel : ViewModelBase
     {
+        Position GPSPosition;
+
         public Command CancelCommand { get; set; }
         public Command SubmitCommand { get; set; }
         public Command AddIncomeSourceCommand { get; set; }
@@ -44,10 +48,16 @@ namespace MDPMS.Shared.ViewModels
             Exit();
         }
 
-        private void ExecuteSubmitCommand()
+        private async void ExecuteSubmitCommand()
         {
-            if (!NewHouseholdValidation()) return;            
+            if (!NewHouseholdValidation()) return;
+            var position = await CrossGeolocator.Current.GetPositionAsync(new TimeSpan(0, 0, 0, 0, 1000));
+            GPSPosition = position;
+            ExecutePostSubmitCommand();
+        }
 
+        private void ExecutePostSubmitCommand()
+        {            
             var newHousehold = new Household
             {
                 IntakeDate = IntakeDate,
@@ -61,12 +71,20 @@ namespace MDPMS.Shared.ViewModels
                 DependentAdminvArea = DependentAdminvArea,
                 Country = Country,
                 AddressInfo = AddressInfo,
+                GpsLatitude = GPSPosition.Latitude,
+                GpsLongitude = GPSPosition.Longitude,
+                GpsPositionAccuracy = GPSPosition.Accuracy,
+                GpsAltitude = GPSPosition.Altitude,
+                GpsAltitudeAccuracy = GPSPosition.AltitudeAccuracy,
+                GpsHeading = GPSPosition.Heading,
+                GpsSpeed = GPSPosition.Speed,
+                GpsPositionTime = DateTime.Now,
                 IncomeSources = new List<IncomeSource>()
             };
-            
+
             ApplicationInstanceData.Data.Households.Add(newHousehold);
             ApplicationInstanceData.Data.SaveChanges();
-            
+
             foreach (var incomeSource in IncomeSources)
             {
                 newHousehold.AddIncomeSource(incomeSource);
@@ -76,7 +94,7 @@ namespace MDPMS.Shared.ViewModels
             {
                 newHousehold.AddMember(person);
             }
-            
+
             ApplicationInstanceData.Data.SaveChanges();
             Exit();
         }

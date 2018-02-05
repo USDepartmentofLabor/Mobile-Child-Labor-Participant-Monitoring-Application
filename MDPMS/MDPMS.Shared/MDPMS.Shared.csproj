@@ -9,6 +9,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.1" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.0.3" />
     <PackageReference Include="Xamarin.Forms" Version="2.5.0.91635" />
+    <PackageReference Include="Xam.Plugin.Geolocator" Version="4.2.0" />
   </ItemGroup>
 
   <ItemGroup>

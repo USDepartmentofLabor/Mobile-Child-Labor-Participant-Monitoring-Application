@@ -6,12 +6,16 @@ using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
 using MDPMS.Shared.Views;
+using Plugin.Geolocator;
+using Plugin.Geolocator.Abstractions;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared.ViewModels
 {
     public class HouseholdMemberFollowUpViewModel : ViewModelBase
     {
+        Position GPSPosition;
+
         private readonly Person _person;
 
         // Person Read Only Labels and Values
@@ -121,7 +125,14 @@ namespace MDPMS.Shared.ViewModels
             Exit();
         }
 
-        private void ExecuteSubmitCommand()
+        private async void ExecuteSubmitCommand()
+        {
+            var position = await CrossGeolocator.Current.GetPositionAsync(new TimeSpan(0, 0, 0, 0, 1000));
+            GPSPosition = position;
+            ExecutePostSubmitCommand();
+        }
+
+        private void ExecutePostSubmitCommand()
         {
             var newPersonFollowUp = new PersonFollowUp
             {
@@ -131,6 +142,14 @@ namespace MDPMS.Shared.ViewModels
                 HoursWorked = WorkActivityHoursEngaged,
                 HouseWorkedOnHousework = HouseholdTasksHoursEngaged,
                 EnrolledInSchool = EnrolledInSchoolCollege,
+                GpsLatitude = GPSPosition.Latitude,
+                GpsLongitude = GPSPosition.Longitude,
+                GpsPositionAccuracy = GPSPosition.Accuracy,
+                GpsAltitude = GPSPosition.Altitude,
+                GpsAltitudeAccuracy = GPSPosition.AltitudeAccuracy,
+                GpsHeading = GPSPosition.Heading,
+                GpsSpeed = GPSPosition.Speed,
+                GpsPositionTime = DateTime.Now,
                 PeopleFollowUpHazardousConditions = new List<PersonFollowUpHazardousCondition>(),
                 PeopleFollowUpWorkActivities = new List<PersonFollowUpWorkActivity>(),
                 PeopleFollowUpHouseholdTasks = new List<PersonFollowUpHouseholdTask>()
