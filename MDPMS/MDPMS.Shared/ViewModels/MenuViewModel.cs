@@ -79,6 +79,13 @@ namespace MDPMS.Shared.ViewModels
                 await Task.Run(() => { householdsViewModel.RefreshCommand.Execute(null); });
             }
 
+            // if HouseholdMembersSearchView then refresh
+            if (currentView.Pages.First().GetType() == typeof(HouseholdMembersSearchView))
+            {
+                var viewModel = (HouseholdMembersSearchViewModel)currentView.Pages.First().BindingContext;
+                await Task.Run(() => { viewModel.RefreshCommand.Execute(null); });
+            }
+
             ApplicationInstanceData.RootPage.Detail = ApplicationInstanceData.NavigationPage;
             ApplicationInstanceData.RootPage.IsPresented = false;
 
