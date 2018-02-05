@@ -146,11 +146,23 @@ namespace MDPMS.Shared.ViewModels
             Exit();
         }
 
-        private async void ExecuteSubmitCommand()
+        private void ExecuteSubmitCommand()
         {
-            var position = await CrossGeolocator.Current.GetPositionAsync(new TimeSpan(0, 0, 0, 0, 1000));
-            GPSPosition = position;
+            ExecuteSubmitCommandGps();
             ExecutePostSubmitCommand();
+        }
+
+        private async void ExecuteSubmitCommandGps()
+        {
+            try
+            {
+                var position = await CrossGeolocator.Current.GetPositionAsync(new TimeSpan(0, 0, 0, 0, 100));            
+                GPSPosition = position;            
+            }
+            catch
+            {
+                GPSPosition = null;
+            }
         }
 
         private void ExecutePostSubmitCommand()
@@ -174,13 +186,13 @@ namespace MDPMS.Shared.ViewModels
                 HoursWorked = WorkActivityHoursEngaged,
                 HouseWorkedOnHousework = HouseholdTasksHoursEngaged,
                 EnrolledInSchool = EnrolledInSchoolCollege,
-                GpsLatitude = GPSPosition.Latitude,
-                GpsLongitude = GPSPosition.Longitude,
-                GpsPositionAccuracy = GPSPosition.Accuracy,
-                GpsAltitude = GPSPosition.Altitude,
-                GpsAltitudeAccuracy = GPSPosition.AltitudeAccuracy,
-                GpsHeading = GPSPosition.Heading,
-                GpsSpeed = GPSPosition.Speed,
+                GpsLatitude = GPSPosition?.Latitude,
+                GpsLongitude = GPSPosition?.Longitude,
+                GpsPositionAccuracy = GPSPosition?.Accuracy,
+                GpsAltitude = GPSPosition?.Altitude,
+                GpsAltitudeAccuracy = GPSPosition?.AltitudeAccuracy,
+                GpsHeading = GPSPosition?.Heading,
+                GpsSpeed = GPSPosition?.Speed,
                 GpsPositionTime = DateTime.Now,
                 PeopleHazardousConditions = new List<PersonHazardousCondition>(),
                 PeopleWorkActivities = new List<PersonWorkActivity>(),
