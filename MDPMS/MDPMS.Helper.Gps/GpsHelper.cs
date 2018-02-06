@@ -3,7 +3,7 @@ using Plugin.Geolocator.Abstractions;
 using System.Threading.Tasks;
 using System;
 
-namespace MDPMS.Shared.Workers
+namespace MDPMS.Helper.Gps
 {
     public static class GpsHelper
     {

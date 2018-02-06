@@ -148,7 +148,7 @@ namespace MDPMS.Shared.ViewModels
         private async void ExecuteSubmitCommand()
         {
             IsBusy = true;
-            GPSPosition = await MDPMS.Shared.Workers.GpsHelper.GetGpsPosition();
+            GPSPosition = await Helper.Gps.GpsHelper.GetGpsPosition();
             ExecutePostSubmitCommand();
         }
 

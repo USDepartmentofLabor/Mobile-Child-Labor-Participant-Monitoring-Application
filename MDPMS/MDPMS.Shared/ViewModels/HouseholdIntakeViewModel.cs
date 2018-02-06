@@ -52,7 +52,7 @@ namespace MDPMS.Shared.ViewModels
             if (!NewHouseholdValidation()) return;
 
             IsBusy = true;
-            GPSPosition = await MDPMS.Shared.Workers.GpsHelper.GetGpsPosition();
+            GPSPosition = await Helper.Gps.GpsHelper.GetGpsPosition();
             ExecutePostSubmitCommand();
         }
 

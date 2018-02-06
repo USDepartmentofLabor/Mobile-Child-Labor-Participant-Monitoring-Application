@@ -17,6 +17,7 @@
     <ProjectReference Include="..\MDPMS.Database.Localization\MDPMS.Database.Localization.csproj" />
     <ProjectReference Include="..\MDPMS.Helper.Json\MDPMS.Helper.Json.csproj" />
     <ProjectReference Include="..\MDPMS.Helper.Rest\MDPMS.Helper.Rest.csproj" />
+    <ProjectReference Include="..\MDPMS.Helper.Gps\MDPMS.Helper.Gps.csproj" />
   </ItemGroup>
 
   <ItemGroup>
