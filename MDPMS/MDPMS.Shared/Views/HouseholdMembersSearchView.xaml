@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDPMS.Shared.Views.HouseholdMembersSearchView">
@@ -13,33 +13,88 @@
                     <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Grid.Column="0" Text="{Binding SearchText}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
-                <Button Grid.Column="1" Margin="1" Image="ic_search_black_24dp.png" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding SearchCommand}"/>
+                <Entry Grid.Column="0"
+                       Text="{Binding SearchText}"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Center"/>
+                <Button Grid.Column="1"
+                        Margin="1"
+                        Image="ic_search_black_24dp.png"
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Command="{Binding SearchCommand}"/>
             </Grid>
-            <ListView Grid.Row="1" ItemsSource="{Binding HouseholdMembers}" SelectedItem="{Binding SelectedHouseholdMember, Mode=TwoWay}"
-                      IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+            <ListView Grid.Row="1"
+                      ItemsSource="{Binding HouseholdMembers}"
+                      SelectedItem="{Binding SelectedHouseholdMember, Mode=TwoWay}"
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      IsRefreshing="{Binding IsRefreshing}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-
                         <ViewCell>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="24"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="24"/>
                                     <ColumnDefinition Width="4*"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="24"/>
+                                    <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
                                     <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <!--    row # 1 = { HHM_id, HHM_name,   HHM_age }
-                                        row # 2 = { HH_id,  HH_name,    HHM_gender(color code also?) }  -->
-                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding HouseholdMemberId}" TextColor="Black"/>
-                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding HouseholdMemberName}" TextColor="Black"/>
-                                <Label Grid.Row="0" Grid.Column="2" Text="{Binding HouseholdMemberAge}" TextColor="Black"/>
-                                <Label Grid.Row="1" Grid.Column="0" Text="{Binding HouseholdId}" TextColor="Black"/>
-                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding HouseholdName}" TextColor="Black"/>
-                                <Label Grid.Row="1" Grid.Column="2" Text="{Binding HouseholdMemberGender}" TextColor="Black"/>
+                                </Grid.RowDefinitions>                                
+                                <!--    TEMPLATE_LAYOUT:
+                                        row # 1 = { HHM_id  |   HHM_name    |   HHM_age     }
+                                        row # 2 = { HH_id   |   HH_name     |   HHM_gender( }  -->                                                                        
+                                <Image Grid.Row="0"
+                                       Grid.Column="0"
+                                       Source="ic_person_black_24dp.png"
+                                       Opacity="0.2"/>
+                                <Label Grid.Row="0"
+                                       Grid.Column="1"
+                                       Text="{Binding HouseholdMemberId}"
+                                       TextColor="Black"/>
+                                <Image Grid.Row="0"
+                                       Grid.Column="2"
+                                       Source="ic_person_black_24dp.png"
+                                       Opacity="0.2"/>
+                                <Label Grid.Row="0"
+                                       Grid.Column="3"
+                                       Text="{Binding HouseholdMemberName}"
+                                       TextColor="Black"/>
+                                <Image Grid.Row="0"
+                                       Grid.Column="4"
+                                       Source="ic_date_range_black_24dp.png"
+                                       Opacity="0.2"/>
+                                <Label Grid.Row="0"
+                                       Grid.Column="5"
+                                       Text="{Binding HouseholdMemberAge}"
+                                       TextColor="Black"/>
+                                <Image Grid.Row="1"
+                                       Grid.Column="0"
+                                       Source="ic_home_black_24dp.png"
+                                       Opacity="0.2"/>
+                                <Label Grid.Row="1"
+                                       Grid.Column="1"
+                                       Text="{Binding HouseholdId}"
+                                       TextColor="Black"/>
+                                <Image Grid.Row="1"
+                                       Grid.Column="2"
+                                       Source="ic_home_black_24dp.png"
+                                       Opacity="0.2"/>
+                                <Label Grid.Row="1"
+                                       Grid.Column="3"
+                                       Text="{Binding HouseholdName}"
+                                       TextColor="Black"/>
+                                <Label Grid.Row="1"
+                                       Grid.Column="4"
+                                       Grid.ColumnSpan="2"
+                                       Text="{Binding HouseholdMemberGender}"
+                                       TextColor="Black"/>                                                                                                                                                                         
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
