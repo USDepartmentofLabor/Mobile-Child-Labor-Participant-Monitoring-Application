@@ -250,6 +250,7 @@
     <AndroidResource Include="Resources\Drawable\ic_settings_black_24dp.png" />
     <AndroidResource Include="Resources\Drawable\ic_sync_black_24dp.png" />
     <AndroidResource Include="Resources\Drawable\ic_touch_app_black_24dp.png" />
+    <AndroidResource Include="Resources\Drawable\ic_language_white_24dp.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
@@ -264,9 +265,6 @@
       <Project>{97a33d75-ddf7-47b7-a4c5-7ae1fa43a475}</Project>
       <Name>MDPMS.Shared</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\child.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable\ic_search_black_24dp.png" />

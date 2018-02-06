@@ -3,28 +3,54 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDPMS.Shared.Views.LandingView">
     <ContentPage.Content>
-        <Grid>
+        <Grid BackgroundColor="#0D47A1">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <Image Grid.Row="0" Grid.RowSpan="2" Source="child.png" Aspect="AspectFill"/>
-            <Grid Grid.Row="0" Grid.RowSpan="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="2*"/>
-                </Grid.RowDefinitions>
-                <Label Grid.Row="1" TextColor="White" Style="{StaticResource LabelStyleCenteredWrapped}" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[ProjectName]}" FontAttributes="Bold" FontSize="28"/>
-                <Label Grid.Row="2" TextColor="White" Style="{StaticResource LabelStyleCenteredWrapped}" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Mobile]}" FontAttributes="Bold" FontSize="24"/>
-                <Label Grid.Row="3" TextColor="White" Style="{StaticResource LabelStyleCenteredWrapped}" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[ProjectPhrase]}" FontAttributes="Bold" FontSize="24"/>
-                <Button Grid.Row="4" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Continue]}" Margin="10" Command="{Binding NavigateToMainContentCommand}"/>
-                <Button Grid.Row="5" Margin="1" Image="ic_language_black_24dp.png" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding NavigateToLocalizationSelectionCommand}"/>
-                <Label Grid.Row="5" Text="{Binding ApplicationInstanceData.SelectedLocalization.DisplayName}" Margin="5,5,15,5" TextColor="White" FontAttributes="Italic" FontSize="22" HorizontalOptions="End" VerticalOptions="Center" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
-            </Grid>
+            <Label Grid.Row="1"
+                   TextColor="White"
+                   Style="{StaticResource LabelStyleCenteredWrapped}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[ProjectName]}"
+                   FontAttributes="Bold"
+                   FontSize="28"/>
+            <Label Grid.Row="2"
+                   TextColor="White"
+                   Style="{StaticResource LabelStyleCenteredWrapped}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Mobile]}"
+                   FontAttributes="Bold"
+                   FontSize="24"/>
+            <Label Grid.Row="3"
+                   TextColor="White"
+                   Style="{StaticResource LabelStyleCenteredWrapped}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[ProjectPhrase]}"
+                   FontAttributes="Bold"
+                   FontSize="24"/>
+            <Button Grid.Row="4"
+                    Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Continue]}"
+                    Margin="10"
+                    Command="{Binding NavigateToMainContentCommand}"/>
+            <Button Grid.Row="5"
+                    Margin="1"
+                    Image="ic_language_white_24dp.png"                   
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Command="{Binding NavigateToLocalizationSelectionCommand}"/>
+            <Label Grid.Row="5"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.DisplayName}"
+                   Margin="5,5,15,5"
+                   TextColor="White"
+                   FontAttributes="Italic"
+                   FontSize="22"
+                   HorizontalOptions="End"
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="End"
+                   VerticalTextAlignment="Center"/>        
         </Grid>
     </ContentPage.Content>
 </ContentPage>
