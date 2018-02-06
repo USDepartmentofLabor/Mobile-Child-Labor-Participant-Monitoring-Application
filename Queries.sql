@@ -47,3 +47,21 @@ INNER JOIN
   StatusCustomizationHouseholdTasks S ON C.HouseholdTaskInternalId = S.InternalId
 WHERE
   People.InternalId = 1
+
+/* Search Localization DB for existing keys and show en and us translation values */
+SELECT
+  Keys.KeyName,
+  EN.KeyLocalizationValue AS EN,
+  ES.KeyLocalizationValue AS ES
+FROM
+  Keys
+LEFT JOIN
+  "Values" AS EN ON Keys.Id = EN.KeyId
+  AND
+  EN.LocalizationId = (SELECT Localizations.Id FROM Localizations WHERE Localizations.Code = 'en')
+LEFT JOIN
+  "Values" AS ES ON Keys.Id = ES.KeyId
+  AND
+  ES.LocalizationId = (SELECT Localizations.Id FROM Localizations WHERE Localizations.Code = 'es')
+WHERE
+  Keys.KeyName LIKE '%app%';
