@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDPMS.Shared.Views.LandingView">
@@ -22,7 +22,7 @@
                 <Label Grid.Row="2" TextColor="White" Style="{StaticResource LabelStyleCenteredWrapped}" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Mobile]}" FontAttributes="Bold" FontSize="24"/>
                 <Label Grid.Row="3" TextColor="White" Style="{StaticResource LabelStyleCenteredWrapped}" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[ProjectPhrase]}" FontAttributes="Bold" FontSize="24"/>
                 <Button Grid.Row="4" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Continue]}" Margin="10" Command="{Binding NavigateToMainContentCommand}"/>
-                <Button Grid.Row="5" Margin="1" Image="globe_32xLG.png" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding NavigateToLocalizationSelectionCommand}"/>
+                <Button Grid.Row="5" Margin="1" Image="ic_language_black_24dp.png" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding NavigateToLocalizationSelectionCommand}"/>
                 <Label Grid.Row="5" Text="{Binding ApplicationInstanceData.SelectedLocalization.DisplayName}" Margin="5,5,15,5" TextColor="White" FontAttributes="Italic" FontSize="22" HorizontalOptions="End" VerticalOptions="Center" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
             </Grid>
         </Grid>

@@ -239,6 +239,17 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable\Icon.png" />
+    <AndroidResource Include="Resources\Drawable\ic_check_black_24dp.png" />
+    <AndroidResource Include="Resources\Drawable\ic_close_black_24dp.png" />
+    <AndroidResource Include="Resources\Drawable\ic_home_black_24dp.png" />
+    <AndroidResource Include="Resources\Drawable\ic_language_black_24dp.png" />
+    <AndroidResource Include="Resources\Drawable\ic_menu_black_24dp.png" />
+    <AndroidResource Include="Resources\Drawable\ic_person_add_black_24dp.png" />
+    <AndroidResource Include="Resources\Drawable\ic_person_black_24dp.png" />
+    <AndroidResource Include="Resources\Drawable\ic_person_outline_black_24dp.png" />
+    <AndroidResource Include="Resources\Drawable\ic_settings_black_24dp.png" />
+    <AndroidResource Include="Resources\Drawable\ic_sync_black_24dp.png" />
+    <AndroidResource Include="Resources\Drawable\ic_touch_app_black_24dp.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
@@ -256,15 +267,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable\child.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\globe_32xLG.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\Cancel_disable_32x_orange.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\VSO_F12_Checkmark_32x_blue.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable\ic_search_black_24dp.png" />
