@@ -14,10 +14,10 @@
                 <RowDefinition Height="55"/>
             </Grid.RowDefinitions>
             <Button Grid.Row="0"
-                    Image="ic_menu_black_24dp.png"
+                    Image="ic_menu_black_24dp_rotate_90.png"
                     Command="{Binding HideMenuCommand}"/>
             <Button Grid.Row="1"
-                    Image="ic_home_black_24dp.png"
+                    Image="ic_home_black_24dp.png"                
                     Command="{Binding NavigateToLandingViewCommand}"/>
             <Button Grid.Row="2"
                     Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Households]}"
