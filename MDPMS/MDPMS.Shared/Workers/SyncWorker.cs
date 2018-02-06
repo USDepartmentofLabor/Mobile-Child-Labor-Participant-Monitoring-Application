@@ -429,6 +429,7 @@ namespace MDPMS.Shared.Workers
                         if (jsonResponseParse.status.Value.ToString().Equals(@"success"))
                         {
                             objectInstance.SetLastUpdatedAt(((DateTime)DateTime.Parse(jsonResponseParse.updated_at.Value)).ToUniversalTime());
+                            objectInstance.SetCreatedAt(((DateTime)DateTime.Parse(jsonResponseParse.created_at.Value)).ToUniversalTime());
                             objectInstance.SetExternalId((int?)jsonResponseParse.id);
                         }
                         else
@@ -598,6 +599,7 @@ namespace MDPMS.Shared.Workers
                         if (jsonResponseParse.status.Value.ToString().Equals(@"success"))
                         {
                             objectInstance.SetLastUpdatedAt(((DateTime)DateTime.Parse(jsonResponseParse.updated_at.Value)).ToUniversalTime());
+                            objectInstance.SetCreatedAt(((DateTime)DateTime.Parse(jsonResponseParse.created_at.Value)).ToUniversalTime());
                             objectInstance.SetExternalId((int?)jsonResponseParse.id);
                         }
                         else

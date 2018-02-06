@@ -152,6 +152,16 @@ namespace MDPMS.Database.Data.Models
             LastUpdatedAt = dateTime;
         }
 
+        public DateTime? GetCreatedAt()
+        {
+            return CreatedAt;
+        }
+
+        public void SetCreatedAt(DateTime? dateTime)
+        {
+            CreatedAt = dateTime;
+        }
+
         public int? GetInternalId()
         {
             return InternalId;
@@ -279,7 +289,7 @@ namespace MDPMS.Database.Data.Models
         }
 
         public void UpdateObject(Household updateFrom)
-        {            
+        {
             LastUpdatedAt = updateFrom.LastUpdatedAt;
             HouseholdName = updateFrom.HouseholdName;
             IntakeDate = updateFrom.IntakeDate;

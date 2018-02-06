@@ -13,6 +13,9 @@ namespace MDPMS.Database.Data.Models.Base
         DateTime? GetLastUpdatedAt();
         void SetLastUpdatedAt(DateTime? dateTime);
 
+        DateTime? GetCreatedAt();
+        void SetCreatedAt(DateTime? dateTime);
+
         int? GetInternalId();
 
         void SetMdpmsdbContext(MDPMS.Database.Data.Database.MDPMSDatabaseContext context);

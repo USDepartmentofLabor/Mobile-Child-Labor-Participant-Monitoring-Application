@@ -75,6 +75,16 @@ namespace MDPMS.Database.Data.Models
             LastUpdatedAt = dateTime;
         }
 
+        public DateTime? GetCreatedAt()
+        {
+            return CreatedAt;
+        }
+
+        public void SetCreatedAt(DateTime? dateTime)
+        {
+            CreatedAt = dateTime;
+        }
+
         public int? GetInternalId()
         {
             return InternalId;
