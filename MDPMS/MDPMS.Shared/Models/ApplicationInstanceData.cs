@@ -89,5 +89,11 @@ namespace MDPMS.Shared.Models
             }
             RootPage.IsPresented = false;
         }
+
+        public bool WasInitialSyncPerformed()
+        {
+            // based on last successful sync is not null
+            return !SerializedApplicationInstanceData.LastSync.Equals(null);
+        }
     }
 }
