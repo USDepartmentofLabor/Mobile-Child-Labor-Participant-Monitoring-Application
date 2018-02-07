@@ -24,7 +24,7 @@
                     Command="{Binding NavigateToHouseholdsCommand}"/>
             <Button Grid.Row="3"
                     Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Members]}"
-                    Command="{Binding NavigateToHouseholdMembersCommand}" />
+                    Command="{Binding NavigateToHouseholdMembersCommand}"/>
             <Button Grid.Row="4"
                     Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Sync]}"
                     Command="{Binding SyncCommand}"/>

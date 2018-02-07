@@ -9,7 +9,9 @@
                     <RowDefinition/>
                     <RowDefinition Height="65"/>
                 </Grid.RowDefinitions>
-                <ScrollView Grid.Row="0" Orientation="Vertical" VerticalOptions="FillAndExpand">
+                <ScrollView Grid.Row="0"
+                            Orientation="Vertical"
+                            VerticalOptions="FillAndExpand">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="65"/>
@@ -28,97 +30,154 @@
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[IntakeDate]}" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
-                            <DatePicker Grid.Column="1" Margin="10,5,5,5" Date="{Binding IntakeDate, Mode=TwoWay}"/>
+                            <Label Grid.Column="0"
+                                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[IntakeDate]}"
+                                   Margin="5"
+                                   Style="{StaticResource LeftLabelStyleMain}"/>
+                            <DatePicker Grid.Column="1"
+                                        Margin="10,5,5,5"
+                                        Date="{Binding IntakeDate, Mode=TwoWay}"/>
                         </Grid>
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HouseholdName]}" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
-                            <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding HouseholdName, Mode=TwoWay}"/>
+                            <Label Grid.Column="0"
+                                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HouseholdName]}"
+                                   Margin="5"
+                                   Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Entry Grid.Column="1"
+                                   Margin="10,5,5,5"
+                                   Text="{Binding HouseholdName, Mode=TwoWay}"/>
                         </Grid>
                         <Grid Grid.Row="2">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AddressLine1]}" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
-                            <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding AddressLine1, Mode=TwoWay}"/>
+                            <Label Grid.Column="0"
+                                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AddressLine1]}"
+                                   Margin="5"
+                                   Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Entry Grid.Column="1"
+                                   Margin="10,5,5,5"
+                                   Text="{Binding AddressLine1, Mode=TwoWay}"/>
                         </Grid>
                         <Grid Grid.Row="3">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AddressLine2]}" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
-                            <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding AddressLine2, Mode=TwoWay}"/>
+                            <Label Grid.Column="0"
+                                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AddressLine2]}"
+                                   Margin="5"
+                                   Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Entry Grid.Column="1"
+                                   Margin="10,5,5,5"
+                                   Text="{Binding AddressLine2, Mode=TwoWay}"/>
                         </Grid>
                         <Grid Grid.Row="4">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[ZipCode]}" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
-                            <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding PostalCode, Mode=TwoWay}"/>
+                            <Label Grid.Column="0"
+                                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[ZipCode]}"
+                                   Margin="5"
+                                   Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Entry Grid.Column="1"
+                                   Margin="10,5,5,5"
+                                   Text="{Binding PostalCode, Mode=TwoWay}"/>
                         </Grid>
                         <Grid Grid.Row="5">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[SuburbNeighborhood]}" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
-                            <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding DependentLocality, Mode=TwoWay}"/>
+                            <Label Grid.Column="0"
+                                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[SuburbNeighborhood]}"
+                                   Margin="5"
+                                   Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Entry Grid.Column="1"
+                                   Margin="10,5,5,5"
+                                   Text="{Binding DependentLocality, Mode=TwoWay}"/>
                         </Grid>
                         <Grid Grid.Row="6">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[City]}" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
-                            <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding Locality, Mode=TwoWay}"/>
+                            <Label Grid.Column="0"
+                                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[City]}"
+                                   Margin="5"
+                                   Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Entry Grid.Column="1"
+                                   Margin="10,5,5,5"
+                                   Text="{Binding Locality, Mode=TwoWay}"/>
                         </Grid>
                         <Grid Grid.Row="7">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[State]}" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
-                            <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding AdminvArea, Mode=TwoWay}"/>
+                            <Label Grid.Column="0"
+                                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[State]}"
+                                   Margin="5"
+                                   Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Entry Grid.Column="1"
+                                   Margin="10,5,5,5"
+                                   Text="{Binding AdminvArea, Mode=TwoWay}"/>
                         </Grid>
                         <Grid Grid.Row="8">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[County]}" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
-                            <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding DependentAdminvArea, Mode=TwoWay}"/>
+                            <Label Grid.Column="0"
+                                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[County]}"
+                                   Margin="5"
+                                   Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Entry Grid.Column="1"
+                                   Margin="10,5,5,5"
+                                   Text="{Binding DependentAdminvArea, Mode=TwoWay}"/>
                         </Grid>
                         <Grid Grid.Row="9">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Country]}" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
-                            <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding Country, Mode=TwoWay}"/>
+                            <Label Grid.Column="0"
+                                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Country]}"
+                                   Margin="5"
+                                    Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Entry Grid.Column="1"
+                                   Margin="10,5,5,5"
+                                   Text="{Binding Country, Mode=TwoWay}"/>
                         </Grid>
                         <Grid Grid.Row="10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AddressInfo]}" Margin="5" Style="{StaticResource LeftLabelStyleMain}"/>
-                            <Entry Grid.Column="1" Margin="10,5,5,5" Text="{Binding AddressInfo, Mode=TwoWay}"/>
+                            <Label Grid.Column="0"
+                                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AddressInfo]}"
+                                   Margin="5"
+                                   Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Entry Grid.Column="1"
+                                   Margin="10,5,5,5"
+                                   Text="{Binding AddressInfo, Mode=TwoWay}"/>
                         </Grid>
                         <Grid Grid.Row="11">
-                            <Button Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AddIncomeSource]}" Command="{Binding AddIncomeSourceCommand}"/>
+                            <Button Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AddIncomeSource]}"
+                                    Command="{Binding AddIncomeSourceCommand}"/>
                         </Grid>
                         <Grid Grid.Row="12">
-                            <Button Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AddHouseholdMember]}" Command="{Binding AddHouseholdMemberCommand}"/>
+                            <Button Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AddHouseholdMember]}"
+                                    Command="{Binding AddHouseholdMemberCommand}"/>
                         </Grid>
                     </Grid>
                 </ScrollView>
@@ -127,8 +186,12 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Cancel]}" Command="{Binding CancelCommand}"/>
-                    <Button Grid.Column="1" Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Submit]}" Command="{Binding SubmitCommand}"/>
+                    <Button Grid.Column="0"
+                            Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Cancel]}"
+                            Command="{Binding CancelCommand}"/>
+                    <Button Grid.Column="1"
+                            Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Submit]}"
+                            Command="{Binding SubmitCommand}"/>
                 </Grid>
             </Grid>
         </StackLayout>
