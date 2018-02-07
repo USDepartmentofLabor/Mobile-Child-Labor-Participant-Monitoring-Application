@@ -191,6 +191,10 @@ namespace MDPMS.Shared.ViewModels
         private void Exit()
         {
             ApplicationInstanceData.NavigationPage.PopAsync();
+
+            // reset member search
+            var viewModel = (HouseholdMembersSearchViewModel)ApplicationInstanceData.NavigationPage.Pages.First().BindingContext;
+            viewModel.RefreshCommand.Execute(null);
         } 
 
         private void ExecuteNavigateToAddServiceCommand()

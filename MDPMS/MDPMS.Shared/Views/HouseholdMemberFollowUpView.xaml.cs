@@ -1,10 +1,11 @@
-﻿using MDPMS.Shared.ViewModels;
+﻿using System.Linq;
+using MDPMS.Shared.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace MDPMS.Shared.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class HouseholdMemberFollowUpView : ContentPage
 	{
 		public HouseholdMemberFollowUpView ()
@@ -49,5 +50,17 @@ namespace MDPMS.Shared.Views
 	            });
 	        }
 	    }
+
+        protected override bool OnBackButtonPressed()
+        {   
+            // get this view model
+            var viewModel = (HouseholdMemberFollowUpViewModel)BindingContext;
+
+            // reset member search
+            var householdMembersSearchViewModel = (HouseholdMembersSearchViewModel)viewModel.ApplicationInstanceData.NavigationPage.Pages.First().BindingContext;
+            householdMembersSearchViewModel.RefreshCommand.Execute(null);
+
+            return base.OnBackButtonPressed();
+        }
     }
 }
