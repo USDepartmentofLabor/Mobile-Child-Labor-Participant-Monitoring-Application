@@ -65,10 +65,19 @@ namespace MDPMS.Shared.ViewModels
 
         private void ExecuteNavigateToAddNewHouseholdCommand()
         {
-            ApplicationInstanceData.GoToView(new HouseholdIntakeView
-                {
-                    BindingContext = new HouseholdIntakeViewModel(ApplicationInstanceData)
-                });
+            if (!ApplicationInstanceData.WasInitialSyncPerformed())
+            {                
+                ApplicationInstanceData.App.MainPage.DisplayAlert(
+                    ApplicationInstanceData.SelectedLocalization.Translations[@"Alert"],
+                    ApplicationInstanceData.SelectedLocalization.Translations[@"AlertMessageActionNotAllowedUntilInitialSyncIsPerformed"],
+                    ApplicationInstanceData.SelectedLocalization.Translations[@"OK"]);
+                return;
+            }
+
+            ApplicationInstanceData.GoToView(new HouseholdIntakeView               
+            {                   
+                BindingContext = new HouseholdIntakeViewModel(ApplicationInstanceData)               
+            });
         }
     }
 }
