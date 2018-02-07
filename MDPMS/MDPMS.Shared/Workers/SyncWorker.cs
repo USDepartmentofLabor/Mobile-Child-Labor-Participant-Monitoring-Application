@@ -287,6 +287,10 @@ namespace MDPMS.Shared.Workers
                 // TODO: error log
                 return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
             }
+
+            // successful sync
+            applicationInstanceData.SerializedApplicationInstanceData.LastSync = DateTime.Now;
+            applicationInstanceData.SaveSerializedApplicationInstanceData();
             return new Tuple<bool, string>(true, @"");
         }
         
