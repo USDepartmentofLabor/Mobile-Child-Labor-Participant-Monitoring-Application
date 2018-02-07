@@ -5,13 +5,13 @@
     <ContentPage.Content>
         <Grid IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="80"/>
-                <RowDefinition Height="55"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="55"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Button Grid.Row="0"
                     Image="ic_menu_black_24dp_rotate_90.png"
