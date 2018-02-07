@@ -109,6 +109,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"ValidationErrorMessageNoServiceSelected", @"Please select a service");
             translation.Translations.Add(@"ValidationErrorMessageStartDateIsAfterEndDate",@"Start date is after end date");
             translation.Translations.Add(@"ValidationErrorMessageHoursInvalid", @"Hours value is invalid");
+            translation.Translations.Add(@"AlertMessageActionNotAllowedUntilInitialSyncIsPerformed", @"Action not allowed until initial sync is performed");
             return translation;
         }
 
@@ -201,6 +202,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"ValidationErrorMessageNoServiceSelected", @"Por favor seleccione un servicio");
             translation.Translations.Add(@"ValidationErrorMessageStartDateIsAfterEndDate", @"La fecha de inicio es posterior a la fecha de finalización");
             translation.Translations.Add(@"ValidationErrorMessageHoursInvalid", @"El valor de las horas no es válido");
+            translation.Translations.Add(@"AlertMessageActionNotAllowedUntilInitialSyncIsPerformed", @"Acción no permitida hasta que se realice la sincronización inicial");
             return translation;
         }
     }     
