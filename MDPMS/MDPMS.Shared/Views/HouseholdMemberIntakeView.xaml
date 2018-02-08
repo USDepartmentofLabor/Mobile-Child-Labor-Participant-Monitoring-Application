@@ -108,18 +108,28 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="3*"/>
-                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0"
                                    Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[DateOfBirth]}"
                                    Margin="5"
                                    Style="{StaticResource LeftLabelStyleMain}"/>
-                            <DatePicker Grid.Column="1"
-                                        Margin="10,5,5,5"
-                                        Date="{Binding DateOfBirth, Mode=TwoWay}"/>
-                            <Label Grid.Column="2"
-                                   Text="{Binding CalculatedAge}"
-                                   Style="{StaticResource LeftLabelStyleMain}"/>
+                            <Grid Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <DatePicker Grid.Column="0"
+                                            Margin="10,5,5,5"
+                                            Date="{Binding DateOfBirth, Mode=TwoWay}"/>
+                                <Image Grid.Column="1"
+                                       Source="ic_date_range_black_24dp.png"
+                                       Opacity="0.2"
+                                       Scale="0.5"/>
+                                <Label Grid.Column="2"
+                                       Text="{Binding CalculatedAge}"
+                                       Style="{StaticResource LeftLabelStyleMain}"/>                                
+                            </Grid>
                         </Grid>
                         <Grid Grid.Row="6">
                             <Grid.ColumnDefinitions>
