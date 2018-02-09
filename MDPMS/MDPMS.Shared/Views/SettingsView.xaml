@@ -55,10 +55,12 @@
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0"
                         Image="ic_close_black_24dp.png"
-                        Command="{Binding RevertChangesCommand}"/>
+                        Command="{Binding RevertChangesCommand}"
+                        IsVisible="{Binding DpmsUrlChanged}"/>
                 <Button Grid.Column="1"
                         Image="ic_check_black_24dp.png"
-                        Command="{Binding CommitChangesCommand}"/>
+                        Command="{Binding CommitChangesCommand}"
+                        IsVisible="{Binding DpmsUrlChanged}"/>
             </Grid>
         </Grid>
     </ContentPage.Content>

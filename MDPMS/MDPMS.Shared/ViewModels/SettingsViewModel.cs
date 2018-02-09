@@ -12,7 +12,35 @@ namespace MDPMS.Shared.ViewModels
         public Command CommitChangesCommand { get; set; }
         public Command NavigateToGetNewApiKeyViewCommand { get; set; }
 
-        public string DpmsUrl { get; set; }
+        public bool DpmsUrlChanged { get; set; }
+
+        private string _dpmsUrl = @"";
+
+        public string DpmsUrl
+        {
+            get
+            {
+                return _dpmsUrl;
+            }
+            set
+            {
+                if (!_dpmsUrl.Equals(value))
+                {
+                    _dpmsUrl = value;
+                    DpmsUrlChanged = true;
+                    OnPropertyChanged(@"DpmsUrlChanged");
+                }
+                else
+                {
+                    if (DpmsUrlChanged)
+                    {
+                        DpmsUrlChanged = false;
+                        OnPropertyChanged(@"DpmsUrlChanged");
+                    }
+                }
+            }
+        }
+
         public string ApiKeyObtained { get; set; }
 
         public SettingsViewModel(ApplicationInstanceData applicationInstanceData)
@@ -29,6 +57,8 @@ namespace MDPMS.Shared.ViewModels
         {
             ApplicationInstanceData.SerializedApplicationInstanceData.Url = DpmsUrl;
             Helper.Json.JsonFileHelper.SaveDataToJsonFile(ApplicationInstanceData.SerializedApplicationInstanceData, System.IO.Path.Combine(ApplicationInstanceData.PlatformDataPath, ApplicationInstanceData.ApplicationInstanceDataFileName));
+            DpmsUrlChanged = false;
+            OnPropertyChanged(@"DpmsUrlChanged");
         }
 
         private void ExecuteRevertChangesCommand()
