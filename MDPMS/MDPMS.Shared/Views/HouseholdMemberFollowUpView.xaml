@@ -135,7 +135,7 @@
                             <Button Grid.Column="0"
                                     Grid.ColumnSpan="2"
                                     Grid.Row="9"
-                                    Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AddService]}"
+                                    Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AssignService]}"
                                     Command="{Binding NavigateToAddServiceCommand}"/>
                         </Grid>
                         <Grid Grid.Row="1">

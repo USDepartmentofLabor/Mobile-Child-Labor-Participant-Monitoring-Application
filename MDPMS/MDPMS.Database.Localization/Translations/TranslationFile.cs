@@ -98,7 +98,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Members", @"Members");
             translation.Translations.Add(@"HouseholdMemberId", @"Household Member ID");
             translation.Translations.Add(@"Age", @"Age");
-            translation.Translations.Add(@"AddService", @"Add Service");
+            translation.Translations.Add(@"AssignService", @"Assign Service");
             translation.Translations.Add(@"Service", @"Service");
             translation.Translations.Add(@"StartDate", @"Start Date");
             translation.Translations.Add(@"EndDate", @"End Date");
@@ -192,7 +192,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Members", @"Miembros");
             translation.Translations.Add(@"HouseholdMemberId", @"Identificación del miembro del hogar");
             translation.Translations.Add(@"Age", @"Años");
-            translation.Translations.Add(@"AddService", @"Añadir servicio");
+            translation.Translations.Add(@"AssignService", @"Asignar servicio");
             translation.Translations.Add(@"Service", @"Servicio");
             translation.Translations.Add(@"StartDate", @"Fecha de inicio");
             translation.Translations.Add(@"EndDate", @"Fecha final");
