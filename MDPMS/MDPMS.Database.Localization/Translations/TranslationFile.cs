@@ -111,6 +111,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"ValidationErrorMessageHoursInvalid", @"Hours value is invalid");
             translation.Translations.Add(@"AlertMessageActionNotAllowedUntilInitialSyncIsPerformed", @"Action not allowed until initial sync is performed");
             translation.Translations.Add(@"AlertMessageSyncCancelledNoInternetConnectivity", @"Sync cancelled there is no internet connectivity");
+            translation.Translations.Add(@"FollowUp", @"Follow Up");
+            translation.Translations.Add(@"HouseholdMembers",@"Household Members");
             return translation;
         }
 
@@ -205,6 +207,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"ValidationErrorMessageHoursInvalid", @"El valor de las horas no es válido");
             translation.Translations.Add(@"AlertMessageActionNotAllowedUntilInitialSyncIsPerformed", @"Acción no permitida hasta que se realice la sincronización inicial");
             translation.Translations.Add(@"AlertMessageSyncCancelledNoInternetConnectivity", @"Sincronización cancelada no hay conectividad a Internet");
+            translation.Translations.Add(@"FollowUp", @"Seguir");
+            translation.Translations.Add(@"HouseholdMembers", @"Los miembros del hogar");
             return translation;
         }
     }     
