@@ -47,9 +47,26 @@ namespace MDPMS.Shared.ViewModels
                 BindingContext = new HouseholdsViewModel(ApplicationInstanceData)
             });
         }
-        
+
+        private void ExecuteNoInternetConnectivityErrorMessageAction()
+        {
+            ApplicationInstanceData.App.MainPage.DisplayAlert(                   
+                ApplicationInstanceData.SelectedLocalization.Translations[@"Error"],
+                ApplicationInstanceData.SelectedLocalization.Translations[@"AlertMessageSyncCancelledNoInternetConnectivity"],
+                ApplicationInstanceData.SelectedLocalization.Translations[@"OK"]);
+        }
+
         private async void ExecuteSyncCommand()
-        {            
+        {
+            // check for internet connectivity
+            var hasInternetConnectivity = Plugin.Connectivity.CrossConnectivity.Current.IsConnected;
+            if (!hasInternetConnectivity)
+            {
+                ExecuteNoInternetConnectivityErrorMessageAction();
+                ApplicationInstanceData.RootPage.IsPresented = false;
+                return;
+            }
+
             // save current view
             var currentView = ApplicationInstanceData.NavigationPage;
             

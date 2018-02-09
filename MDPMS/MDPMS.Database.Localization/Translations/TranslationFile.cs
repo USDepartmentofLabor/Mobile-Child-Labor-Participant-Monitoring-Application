@@ -110,6 +110,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"ValidationErrorMessageStartDateIsAfterEndDate",@"Start date is after end date");
             translation.Translations.Add(@"ValidationErrorMessageHoursInvalid", @"Hours value is invalid");
             translation.Translations.Add(@"AlertMessageActionNotAllowedUntilInitialSyncIsPerformed", @"Action not allowed until initial sync is performed");
+            translation.Translations.Add(@"AlertMessageSyncCancelledNoInternetConnectivity", @"Sync cancelled there is no internet connectivity");
             return translation;
         }
 
@@ -203,6 +204,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"ValidationErrorMessageStartDateIsAfterEndDate", @"La fecha de inicio es posterior a la fecha de finalización");
             translation.Translations.Add(@"ValidationErrorMessageHoursInvalid", @"El valor de las horas no es válido");
             translation.Translations.Add(@"AlertMessageActionNotAllowedUntilInitialSyncIsPerformed", @"Acción no permitida hasta que se realice la sincronización inicial");
+            translation.Translations.Add(@"AlertMessageSyncCancelledNoInternetConnectivity", @"Sincronización cancelada no hay conectividad a Internet");
             return translation;
         }
     }     
