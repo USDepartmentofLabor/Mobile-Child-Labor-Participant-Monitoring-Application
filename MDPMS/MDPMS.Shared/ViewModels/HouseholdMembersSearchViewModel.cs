@@ -6,6 +6,7 @@ using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
 using MDPMS.Shared.Views;
+using Microsoft.EntityFrameworkCore;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared.ViewModels
@@ -71,7 +72,7 @@ namespace MDPMS.Shared.ViewModels
             // Search on { HH_id, HH_name, HHM_id, HHM_name }            
             var today = DateTime.Today;            
             var youthsAsOfToday =
-                ApplicationInstanceData.Data.People.Join(ApplicationInstanceData.Data.Households,
+                ApplicationInstanceData.Data.People.Include(a => a.Gender).Join(ApplicationInstanceData.Data.Households,
                     ppl => ppl.InternalParentId,
                     hh => hh.InternalId,
                     (ppl, hh) => new { Person = ppl, Household = hh,
