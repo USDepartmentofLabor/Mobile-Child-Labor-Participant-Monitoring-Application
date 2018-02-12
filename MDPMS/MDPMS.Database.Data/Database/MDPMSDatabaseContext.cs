@@ -10,7 +10,6 @@ namespace MDPMS.Database.Data.Database
         // Look ups
         public DbSet<Gender> Genders { get; set; }
         public DbSet<PersonRelationship> PersonRelationships { get; set; }
-        public DbSet<ProjectDetails> ProjectDetails { get; set; }
 
         // Status Customization Look Ups
         public DbSet<StatusCustomizationHazardousCondition> StatusCustomizationHazardousConditions { get; set; }
