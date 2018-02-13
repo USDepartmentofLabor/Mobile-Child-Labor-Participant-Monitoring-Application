@@ -210,43 +210,51 @@ namespace MDPMS.Database.Data.Models
             }
             else { throw new Exception(@"Gender Search Error"); }
 
-            var selectedPersonRelationship = MdpmsDatabaseContext.FindPersonRelationship((int)json.relationship_id.Value);
-            if (selectedPersonRelationship == null) throw new Exception(@"Person Relationship Search Error");
-            
             var person = new Person
             {
                 ExternalId = json.id,
                 CreatedAt = json.created_at,
                 LastUpdatedAt = json.updated_at,
                 SoftDeleted = false,
-                ExternalParentId = json.household_id,
-                FirstName = json.first_name,
-                LastName = json.last_name,
-                MiddleName = json.middle_name,
+                ExternalParentId = json.household_id,            
                 Gender = selectedGender,
-                DateOfBirth = json.dob,
-                DateOfBirthIsApproximate = json.is_birthdate_approximate,
-                RelationshipToHeadOfHousehold = selectedPersonRelationship,
-                RelationshipIfOther = json.relationship_other,
-                IntakeDate = json.intake_date,
-                HaveJobReturningTo = json.have_job_returning_to,
-                HoursWorked = json.hours_worked,
-                HouseWorkedOnHousework = json.hours_worked_on_housework,
-                EnrolledInSchool = json.enrolled_in_school,
-                GpsLatitude = json.latitude,
-                GpsLongitude = json.longitude,
-                GpsPositionAccuracy = json.position_accuracy,
-                GpsAltitude = json.altitude,
-                GpsAltitudeAccuracy = json.altitude_accuracy,
-                GpsHeading = json.heading,
-                GpsSpeed = json.speed,
-                GpsPositionTime = json.gps_recorded_at,
                 PeopleHazardousConditions = new List<PersonHazardousCondition>(),
                 PeopleWorkActivities = new List<PersonWorkActivity>(),
                 PeopleHouseholdTasks = new List<PersonHouseholdTask>(),
                 PeopleFollowUps = new List<PersonFollowUp>()
             };
-            
+
+            person.FirstName = json.first_name ?? @"";
+            person.LastName = json.last_name ?? @"";
+            person.MiddleName = json.middle_name ?? @"";
+            person.DateOfBirth = json.dob ?? null;
+
+            if (json.relationship_id.Value is null)
+            {
+                person.RelationshipToHeadOfHousehold = null;
+            }
+            else
+            {
+                var selectedPersonRelationship = MdpmsDatabaseContext.FindPersonRelationship((int)json.relationship_id.Value);            
+                if (selectedPersonRelationship == null) throw new Exception(@"Person Relationship Search Error");
+            }
+
+            person.DateOfBirthIsApproximate = json.is_birthdate_approximate.Value ?? false;
+            person.RelationshipIfOther = json.relationship_other.Value ?? @"";
+            person.IntakeDate = json.intake_date ?? null;
+            person.HaveJobReturningTo = json.have_job_returning_to.Value ?? false;
+            person.HoursWorked = json.hours_worked.Value ?? 0;
+            person.HouseWorkedOnHousework = json.hours_worked_on_housework.Value ?? 0;
+            person.EnrolledInSchool = json.enrolled_in_school.Value ?? false;
+            person.GpsLatitude = json.latitude.Value ?? null;
+            person.GpsLongitude = json.longitude.Value ?? null;
+            person.GpsPositionAccuracy = json.position_accuracy.Value ?? null;
+            person.GpsAltitude = json.altitude.Value ?? null;
+            person.GpsAltitudeAccuracy = json.altitude_accuracy.Value ?? null;
+            person.GpsHeading = json.heading.Value ?? null;
+            person.GpsSpeed = json.speed.Value ?? null;
+            person.GpsPositionTime = json.gps_recorded_at.Value ?? null;
+
             var hazardousConditionIds = json.hazardous_condition_ids.ToObject<List<int>>();
             foreach (var hazardousConditionId in hazardousConditionIds)
             {
