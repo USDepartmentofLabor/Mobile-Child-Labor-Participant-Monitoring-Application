@@ -16,57 +16,77 @@ namespace MDPMS.Database.Data.Models
     public class Person : EfBaseModel, ISyncableAsChild<Person>, ISyncableWithChildren<Person>
     {
         /// <summary>
-        /// First name (given name)
+        /// First name (given name) (REQUIRED)
         /// </summary>
         public string FirstName { get; set; }
 
         /// <summary>
-        /// Last name (family name)
+        /// Last name (family name) (REQUIRED)
         /// </summary>
         public string LastName { get; set; }
         
         /// <summary>
-        /// Middle name
+        /// Middle name (OPTIONAL)
         /// </summary>
         public string MiddleName { get; set; }
 
         /// <summary>
         /// Gender
         /// </summary>
-        // ForeignKey to Gender     
+        // ForeignKey to Gender (REQUIRED)
         [ForeignKey("Genders")]
         public virtual Gender Gender { get; set; }
 
         /// <summary>
-        /// Date of birth, DateTime
+        /// Date of birth, DateTime (REQUIRED)
         /// </summary>
         public DateTime? DateOfBirth { get; set; }
 
         /// <summary>
-        /// Date of birth is approximate date?, true = yes, false = no
+        /// Date of birth is approximate date?, true = yes, false = no (OPTIONAL)
         /// </summary>
-        public bool DateOfBirthIsApproximate { get; set; }
+        public bool? DateOfBirthIsApproximate { get; set; }
 
         /// <summary>
-        /// Relationship to head of household
+        /// Relationship to head of household (OPTIONAL)
         /// </summary>      
         [ForeignKey("PersonRelationships")]
         public virtual PersonRelationship RelationshipToHeadOfHousehold { get; set; }
 
         /// <summary>
-        /// Optional, relationship to head of household if other
+        /// Optional, relationship to head of household if other (OPTIONAL)
         /// </summary>
         public string RelationshipIfOther { get; set; }
 
+        /// <summary>
+        /// Date of intake  (REQUIRED)
+        /// </summary>
+        /// <value>The intake date.</value>
         public DateTime? IntakeDate { get; set; }
 
-        public bool HaveJobReturningTo { get; set; }
+        /// <summary>
+        /// Have jop returning to (OPTIONAL)
+        /// </summary>
+        /// <value>The have job returning to.</value>
+        public bool? HaveJobReturningTo { get; set; }
 
-        public int HoursWorked { get; set; }
+        /// <summary>
+        /// Hours worked (OPTIONAL)
+        /// </summary>
+        /// <value>The hours worked.</value>
+        public int? HoursWorked { get; set; }
 
-        public int HouseWorkedOnHousework { get; set; }
+        /// <summary>
+        /// House worked on housework (OPTIONAL)
+        /// </summary>
+        /// <value>The house worked on housework.</value>
+        public int? HouseWorkedOnHousework { get; set; }
 
-        public bool EnrolledInSchool { get; set; }
+        /// <summary>
+        /// Enrolled in school (OPTIONAL)
+        /// </summary>
+        /// <value>The enrolled in school.</value>
+        public bool? EnrolledInSchool { get; set; }
 
         /// <summary>
         /// GPS position latitude at time of submission on the mobile view
@@ -218,16 +238,30 @@ namespace MDPMS.Database.Data.Models
                 SoftDeleted = false,
                 ExternalParentId = json.household_id,            
                 Gender = selectedGender,
+                FirstName = json.first_name ?? @"",
+                LastName = json.last_name ?? @"",
+                MiddleName = json.middle_name ?? @"",
+                DateOfBirth = json.dob ?? null,
+                DateOfBirthIsApproximate = json.is_birthdate_approximate ?? null,
+                RelationshipIfOther = json.relationship_other ?? null,
+                IntakeDate = json.intake_date ?? null,
+                HaveJobReturningTo = json.have_job_returning_to ?? false,
+                HoursWorked = json.hours_worked ?? null,
+                HouseWorkedOnHousework = json.hours_worked_on_housework ?? null,
+                EnrolledInSchool = json.enrolled_in_school ?? false,
+                GpsLatitude = json.latitude ?? null,
+                GpsLongitude = json.longitude ?? null,
+                GpsPositionAccuracy = json.position_accuracy ?? null,
+                GpsAltitude = json.altitude ?? null,
+                GpsAltitudeAccuracy = json.altitude_accuracy ?? null,
+                GpsHeading = json.heading ?? null,
+                GpsSpeed = json.speed ?? null,
+                GpsPositionTime = json.gps_recorded_at ?? null,
                 PeopleHazardousConditions = new List<PersonHazardousCondition>(),
                 PeopleWorkActivities = new List<PersonWorkActivity>(),
                 PeopleHouseholdTasks = new List<PersonHouseholdTask>(),
                 PeopleFollowUps = new List<PersonFollowUp>()
             };
-
-            person.FirstName = json.first_name ?? @"";
-            person.LastName = json.last_name ?? @"";
-            person.MiddleName = json.middle_name ?? @"";
-            person.DateOfBirth = json.dob ?? null;
 
             if (json.relationship_id.Value is null)
             {
@@ -238,22 +272,6 @@ namespace MDPMS.Database.Data.Models
                 var selectedPersonRelationship = MdpmsDatabaseContext.FindPersonRelationship((int)json.relationship_id.Value);            
                 if (selectedPersonRelationship == null) throw new Exception(@"Person Relationship Search Error");
             }
-
-            person.DateOfBirthIsApproximate = json.is_birthdate_approximate.Value ?? false;
-            person.RelationshipIfOther = json.relationship_other.Value ?? @"";
-            person.IntakeDate = json.intake_date ?? null;
-            person.HaveJobReturningTo = json.have_job_returning_to.Value ?? false;
-            person.HoursWorked = json.hours_worked.Value ?? 0;
-            person.HouseWorkedOnHousework = json.hours_worked_on_housework.Value ?? 0;
-            person.EnrolledInSchool = json.enrolled_in_school.Value ?? false;
-            person.GpsLatitude = json.latitude.Value ?? null;
-            person.GpsLongitude = json.longitude.Value ?? null;
-            person.GpsPositionAccuracy = json.position_accuracy.Value ?? null;
-            person.GpsAltitude = json.altitude.Value ?? null;
-            person.GpsAltitudeAccuracy = json.altitude_accuracy.Value ?? null;
-            person.GpsHeading = json.heading.Value ?? null;
-            person.GpsSpeed = json.speed.Value ?? null;
-            person.GpsPositionTime = json.gps_recorded_at.Value ?? null;
 
             var hazardousConditionIds = json.hazardous_condition_ids.ToObject<List<int>>();
             foreach (var hazardousConditionId in hazardousConditionIds)
@@ -312,39 +330,75 @@ namespace MDPMS.Database.Data.Models
                 writer.WritePropertyName(@"person");
                 writer.WriteStartObject();
                 writer.WritePropertyName("first_name");
-                writer.WriteValue(FirstName);
+                writer.WriteValue(FirstName ?? @"");
                 writer.WritePropertyName("last_name");
-                writer.WriteValue(LastName);
-                writer.WritePropertyName("middle_name");
-                writer.WriteValue(MiddleName);
+                writer.WriteValue(LastName ?? @"");
+
+                if (MiddleName != null)
+                {
+                    writer.WritePropertyName("middle_name");
+                    writer.WriteValue(MiddleName);
+                }
+
                 writer.WritePropertyName("sex");
-                writer.WriteValue(Gender.DpmsGenderNumber);                
+                writer.WriteValue(Gender.DpmsGenderNumber);
+
                 if (DateOfBirth != null)
                 {
                     var dob = (DateTime) DateOfBirth;
                     writer.WritePropertyName("dob");
                     writer.WriteValue(dob.ToString("yyyy-MM-dd"));
                 }
+
                 if (IntakeDate != null)
                 {
                     var intakeDate = (DateTime)IntakeDate;
                     writer.WritePropertyName("intake_date");
                     writer.WriteValue(intakeDate.ToString("yyyy-MM-dd"));
                 }
-                writer.WritePropertyName("relationship_id");
-                writer.WriteValue(RelationshipToHeadOfHousehold.GetExternalId());
-                writer.WritePropertyName("relationship_other");
-                writer.WriteValue(RelationshipIfOther);
-                writer.WritePropertyName("have_job_returning_to");
-                writer.WriteValue(HaveJobReturningTo);
-                writer.WritePropertyName("hours_worked");
-                writer.WriteValue(HoursWorked);                
-                writer.WritePropertyName("hours_worked_on_housework");
-                writer.WriteValue(HouseWorkedOnHousework);
-                writer.WritePropertyName("enrolled_in_school");
-                writer.WriteValue(EnrolledInSchool);
-                writer.WritePropertyName("is_birthdate_approximate");
-                writer.WriteValue(DateOfBirthIsApproximate);                
+
+                if (RelationshipToHeadOfHousehold != null)
+                {
+                    writer.WritePropertyName("relationship_id");
+                    writer.WriteValue(RelationshipToHeadOfHousehold.GetExternalId());
+                }
+
+                if (RelationshipIfOther != null)
+                {
+                    writer.WritePropertyName("relationship_other");
+                    writer.WriteValue(RelationshipIfOther);
+                }
+
+                if (HaveJobReturningTo != null)
+                {
+                    writer.WritePropertyName("have_job_returning_to");
+                    writer.WriteValue(HaveJobReturningTo);
+                }
+
+                if (HoursWorked != null)
+                {
+                    writer.WritePropertyName("hours_worked");                
+                    writer.WriteValue(HoursWorked);                
+                }
+
+                if (HouseWorkedOnHousework != null)
+                {
+                    writer.WritePropertyName("hours_worked_on_housework");
+                    writer.WriteValue(HouseWorkedOnHousework);
+                }
+
+                if (EnrolledInSchool != null)
+                {
+                    writer.WritePropertyName("enrolled_in_school");
+                    writer.WriteValue(EnrolledInSchool);
+                }
+
+                if (DateOfBirthIsApproximate != null)
+                {
+                    writer.WritePropertyName("is_birthdate_approximate");
+                    writer.WriteValue(DateOfBirthIsApproximate);   
+                }
+
                 writer.WritePropertyName("household_id");
                 writer.WriteValue(ExternalParentId);
 
