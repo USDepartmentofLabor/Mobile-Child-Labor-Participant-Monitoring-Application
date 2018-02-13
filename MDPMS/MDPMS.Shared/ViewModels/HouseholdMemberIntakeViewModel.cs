@@ -106,7 +106,7 @@ namespace MDPMS.Shared.ViewModels
                 new Tuple<string, PersonRelationship, bool>(@"Select Relationship", null, false),
                 new Tuple<string, PersonRelationship, bool>(@"", null, false)
             };
-            foreach (var personRelationship in ApplicationInstanceData.Data.PersonRelationships)
+            foreach (var personRelationship in ApplicationInstanceData.Data.PersonRelationships.OrderBy(a => a.Code))
             {
                 BindablePersonRelationships.Add(new Tuple<string, PersonRelationship, bool>(personRelationship.DisplayName, personRelationship, personRelationship.CanonicalName.Equals(@"OTHER")));
             }
