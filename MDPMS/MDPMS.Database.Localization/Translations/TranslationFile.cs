@@ -113,6 +113,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"AlertMessageSyncCancelledNoInternetConnectivity", @"Sync cancelled there is no internet connectivity");
             translation.Translations.Add(@"FollowUp", @"Follow Up");
             translation.Translations.Add(@"HouseholdMembers",@"Household Members");
+            translation.Translations.Add(@"FollowUpDate", @"Follow Up Date");
             return translation;
         }
 
@@ -209,6 +210,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"AlertMessageSyncCancelledNoInternetConnectivity", @"Sincronización cancelada no hay conectividad a Internet");
             translation.Translations.Add(@"FollowUp", @"Seguir");
             translation.Translations.Add(@"HouseholdMembers", @"Los miembros del hogar");
+            translation.Translations.Add(@"FollowUpDate", @"Fecha de seguimiento");
             return translation;
         }
     }     

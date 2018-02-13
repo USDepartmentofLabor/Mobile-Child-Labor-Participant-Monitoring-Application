@@ -145,7 +145,7 @@
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0"
-                                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[IntakeDate]}"
+                                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[FollowUpDate]}"
                                    Margin="5"
                                    Style="{StaticResource LeftLabelStyleMain}"/>
                             <DatePicker Grid.Column="1"
