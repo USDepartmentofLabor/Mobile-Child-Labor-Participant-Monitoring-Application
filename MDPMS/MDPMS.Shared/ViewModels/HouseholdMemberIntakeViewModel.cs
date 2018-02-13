@@ -95,7 +95,7 @@ namespace MDPMS.Shared.ViewModels
                 new Tuple<string, Gender>(@"Select Gender", null),
                 new Tuple<string, Gender>(@"", null)
             };
-            foreach (var gender in ApplicationInstanceData.Data.Genders)
+            foreach (var gender in ApplicationInstanceData.Data.Genders.OrderBy(a => a.DpmsGenderNumber))
             {
                 BindableGenders.Add(new Tuple<string, Gender>(gender.GenderReadable, gender));
             }
