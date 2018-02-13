@@ -8,32 +8,32 @@ using Newtonsoft.Json;
 namespace MDPMS.Database.Data.Models
 {
     /// <summary>
-    /// Household income source, note fields stored as string since they can be open ended answers
+    /// Household income source, note fields stored as string since they can be open ended answers (NOTE: at this time all that it required is at least 1 field is filled in)
     /// </summary>
     public class IncomeSource : EfBaseModel, ISyncableAsChild<IncomeSource>
     {
         /// <summary>
-        /// Name of product or service
+        /// Name of product or service (OPTIONAL)
         /// </summary>
         public string ProductServiceName { get; set; }
 
         /// <summary>
-        /// Estimated volume produced
+        /// Estimated volume produced (OPTIONAL)
         /// </summary>
         public int? EstimatedVolumeProduced { get; set; }
 
         /// <summary>
-        /// Estimated volume sold
+        /// Estimated volume sold (OPTIONAL)
         /// </summary>
         public int? EstimatedVolumeSold { get; set; }
 
         /// <summary>
-        /// Unit of Measure
+        /// Unit of Measure (OPTIONAL)
         /// </summary>
         public string UnitOfMeasure { get; set; }
 
         /// <summary>
-        /// Estimated Income
+        /// Estimated Income (OPTIONAL)
         /// </summary>
         public decimal? EstimatedIncome { get; set; }
 
@@ -113,12 +113,12 @@ namespace MDPMS.Database.Data.Models
                 CreatedAt = json.created_at,
                 LastUpdatedAt = json.updated_at,
                 SoftDeleted = false,
-                ProductServiceName = json.name,
-                EstimatedVolumeProduced = json.estimated_volume_produced,
-                EstimatedVolumeSold = json.estimated_volume_sold,
-                UnitOfMeasure = json.unit_of_measure,
-                EstimatedIncome = json.estimated_income,
-                Currency = json.currency,
+                ProductServiceName = json.name ?? @"",
+                EstimatedVolumeProduced = json.estimated_volume_produced ?? null,
+                EstimatedVolumeSold = json.estimated_volume_sold ?? null,
+                UnitOfMeasure = json.unit_of_measure ?? @"",
+                EstimatedIncome = json.estimated_income ?? null,
+                Currency = json.currency ?? @"",
                 ExternalParentId = json.household_id
             };
         }
@@ -141,17 +141,38 @@ namespace MDPMS.Database.Data.Models
                 writer.WritePropertyName(@"income_source");
                 writer.WriteStartObject();
                 writer.WritePropertyName("name");
-                writer.WriteValue(ProductServiceName);
-                writer.WritePropertyName("estimated_volume_produced");
-                writer.WriteValue(EstimatedVolumeProduced);
-                writer.WritePropertyName("estimated_volume_sold");
-                writer.WriteValue(EstimatedVolumeSold);
-                writer.WritePropertyName("unit_of_measure");
-                writer.WriteValue(UnitOfMeasure);
-                writer.WritePropertyName("estimated_income");
-                writer.WriteValue(EstimatedIncome);
-                writer.WritePropertyName("currency");
-                writer.WriteValue(Currency);
+                writer.WriteValue(ProductServiceName ?? @"");
+
+                if (EstimatedVolumeProduced != null)
+                {
+                    writer.WritePropertyName("estimated_volume_produced");
+                    writer.WriteValue(EstimatedVolumeProduced ?? null);
+                }
+
+                if (EstimatedVolumeSold != null)
+                {
+                    writer.WritePropertyName("estimated_volume_sold");
+                    writer.WriteValue(EstimatedVolumeSold ?? null);
+                }
+
+                if (EstimatedIncome != null)
+                {
+                    writer.WritePropertyName("estimated_income");
+                    writer.WriteValue(EstimatedIncome ?? null);
+                }
+
+                if (UnitOfMeasure != null | UnitOfMeasure != @"")
+                {
+                    writer.WritePropertyName("unit_of_measure");
+                    writer.WriteValue(UnitOfMeasure);
+                }
+
+                if (Currency != @"" | Currency != @"")
+                {
+                    writer.WritePropertyName("currency");
+                    writer.WriteValue(Currency);
+                }
+
                 writer.WritePropertyName("household_id");
                 writer.WriteValue(ExternalParentId);
                 writer.WriteEndObject();
@@ -197,37 +218,37 @@ namespace MDPMS.Database.Data.Models
             if (!ProductServiceName.Equals(updateFrom.ProductServiceName))
             {
                 writer.WritePropertyName("name");
-                writer.WriteValue(updateFrom.ProductServiceName);
+                writer.WriteValue(updateFrom.ProductServiceName ?? @"");
             }
 
             if (!EstimatedVolumeProduced.Equals(updateFrom.EstimatedVolumeProduced))
             {
                 writer.WritePropertyName("estimated_volume_produced");
-                writer.WriteValue(updateFrom.EstimatedVolumeProduced);
+                writer.WriteValue(updateFrom.EstimatedVolumeProduced ?? null);
             }
 
             if (!EstimatedVolumeSold.Equals(updateFrom.EstimatedVolumeSold))
             {
                 writer.WritePropertyName("estimated_volume_sold");
-                writer.WriteValue(updateFrom.EstimatedVolumeSold);
+                writer.WriteValue(updateFrom.EstimatedVolumeSold ?? null);
             }
 
             if (!UnitOfMeasure.Equals(updateFrom.UnitOfMeasure))
             {
                 writer.WritePropertyName("unit_of_measure");
-                writer.WriteValue(updateFrom.UnitOfMeasure);
+                writer.WriteValue(updateFrom.UnitOfMeasure ?? @"");
             }
 
             if (!EstimatedIncome.Equals(updateFrom.EstimatedIncome))
             {
                 writer.WritePropertyName("estimated_income");
-                writer.WriteValue(updateFrom.EstimatedIncome);
+                writer.WriteValue(updateFrom.EstimatedIncome ?? null);
             }
 
             if (!Currency.Equals(updateFrom.Currency))
             {
                 writer.WritePropertyName("currency");
-                writer.WriteValue(updateFrom.Currency);
+                writer.WriteValue(updateFrom.Currency ?? @"");
             }
 
             if (!ExternalParentId.Equals(updateFrom.ExternalParentId))
