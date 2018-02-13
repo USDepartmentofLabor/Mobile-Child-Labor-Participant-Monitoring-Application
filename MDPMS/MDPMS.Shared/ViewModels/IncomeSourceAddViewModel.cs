@@ -12,12 +12,12 @@ namespace MDPMS.Shared.ViewModels
         public Command CancelCommand { get; set; }
         public Command SubmitCommand { get; set; }
 
-        public string NameOfProductOrService { get; set; }
-        public int EstimatedVolumeProduced { get; set; }
-        public int EstimatedVolumeSold { get; set; }
-        public string UnitOfMeasure { get; set; }
-        public decimal EstimatedIncome { get; set; }
-        public string Currency { get; set; }
+        public string NameOfProductOrService { get; set; } = @"";
+        public int EstimatedVolumeProduced { get; set; } = 0;
+        public int EstimatedVolumeSold { get; set; } = 0;
+        public string UnitOfMeasure { get; set; } = @"";
+        public decimal EstimatedIncome { get; set; } = 0.0m;
+        public string Currency { get; set; } = @"";
 
         public IncomeSourceAddViewModel(ApplicationInstanceData applicationInstanceData)
         {
@@ -33,6 +33,7 @@ namespace MDPMS.Shared.ViewModels
 
         private void ExecuteSubmitCommand()
         {
+            if (!NewValidation()) return;
             var incomeSource = new IncomeSource
             {
                 ExternalId = null,
@@ -58,6 +59,21 @@ namespace MDPMS.Shared.ViewModels
         {
             // Back to add household view
             ApplicationInstanceData.NavigationPage.PopAsync();
+        }
+
+        private bool NewValidation()
+        {
+            // TODO: More "cheatable" char checks or find std regex
+            var validateableName = NameOfProductOrService.Replace(" ", "");
+            if (validateableName.Equals(string.Empty))
+            {
+                ApplicationInstanceData.App.MainPage.DisplayAlert(
+                    ApplicationInstanceData.SelectedLocalization.Translations[@"Error"],
+                    ApplicationInstanceData.SelectedLocalization.Translations[@"ErrorNameCanNotBeBlank"],
+                    ApplicationInstanceData.SelectedLocalization.Translations[@"OK"]);
+                return false;
+            }
+            return true;
         }
     }
 }
