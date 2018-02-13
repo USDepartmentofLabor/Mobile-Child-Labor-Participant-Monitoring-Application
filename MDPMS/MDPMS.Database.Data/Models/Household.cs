@@ -14,97 +14,97 @@ namespace MDPMS.Database.Data.Models
     public class Household : EfBaseModel, ISyncableWithChildren<Household>
     {
         /// <summary>
-        /// Household name assigned
+        /// Household name assigned (REQUIRED)
         /// </summary>
         public string HouseholdName { get; set; }
 
         /// <summary>
-        /// Intake date
+        /// Intake date (REQUIRED)
         /// </summary>
         public DateTime IntakeDate { get; set; }
 
         /// <summary>
-        /// Address line 1, address_line_1 from api
+        /// Address line 1, address_line_1 from api (OPTIONAL)
         /// </summary>
         public string AddressLine1 { get; set; }
 
         /// <summary>
-        /// Address line 2, address_line_2 from api
+        /// Address line 2, address_line_2 from api (OPTIONAL)
         /// </summary>
         public string AddressLine2 { get; set; }
 
         /// <summary>
-        /// Postal code, postal_code from api, en ui display localization is Zip Code
+        /// Postal code, postal_code from api, en ui display localization is Zip Code (OPTIONAL)
         /// </summary>
         public string PostalCode { get; set; }
 
         /// <summary>
-        /// Dependent locality, dependent_locality from api, en ui display localization is Suburb/Neighborhood
+        /// Dependent locality, dependent_locality from api, en ui display localization is Suburb/Neighborhood (OPTIONAL)
         /// </summary>
         public string DependentLocality { get; set; }
 
         /// <summary>
-        /// Locality, locality from api, en ui display localization is City
+        /// Locality, locality from api, en ui display localization is City (OPTIONAL)
         /// </summary>
         public string Locality { get; set; }
 
         /// <summary>
-        /// Administrative area, adminv_area from api, en ui display localization is State
+        /// Administrative area, adminv_area from api, en ui display localization is State (OPTIONAL)
         /// </summary>
         public string AdminvArea { get; set; }
 
         /// <summary>
-        /// Dependent administrative area, dependent_adminv_area from api, en ui display localization is County
+        /// Dependent administrative area, dependent_adminv_area from api, en ui display localization is County (OPTIONAL)
         /// </summary>
         public string DependentAdminvArea { get; set; }
 
         /// <summary>
-        /// Country, country from api, en ui display localization is Country
+        /// Country, country from api, en ui display localization is Country (OPTIONAL)
         /// </summary>
         public string Country { get; set; }
 
         /// <summary>
-        /// Address info, address_info from api, en ui display localization is Other/Address Notes
+        /// Address info, address_info from api, en ui display localization is Other/Address Notes (OPTIONAL)
         /// </summary>
         public string AddressInfo { get; set; }
 
         /// <summary>
-        /// GPS position latitude at time of submission on the mobile view
+        /// GPS position latitude at time of submission on the mobile view (OPTIONAL)
         /// </summary>
         public double? GpsLatitude { get; set; }
 
         /// <summary>
-        /// GPS position longitude at time of submission on the mobile view
+        /// GPS position longitude at time of submission on the mobile view (OPTIONAL)
         /// </summary>
         public double? GpsLongitude { get; set; }
 
         /// <summary>
-        /// GPS position potential position error radius in meters
+        /// GPS position potential position error radius in meters (OPTIONAL)
         /// </summary>
         public double? GpsPositionAccuracy { get; set; }
 
         /// <summary>
-        /// GPS position altitude in meters relative to sea level
+        /// GPS position altitude in meters relative to sea level (OPTIONAL)
         /// </summary>
         public double? GpsAltitude { get; set; }
 
         /// <summary>
-        /// GPS position potential altitude error range in meters
+        /// GPS position potential altitude error range in meters (OPTIONAL)
         /// </summary>
         public double? GpsAltitudeAccuracy { get; set; }
 
         /// <summary>
-        /// GPS position heading in degrees relative to true North
+        /// GPS position heading in degrees relative to true North (OPTIONAL)
         /// </summary>
         public double? GpsHeading { get; set; }
 
         /// <summary>
-        /// GPS position speed in meters per second
+        /// GPS position speed in meters per second (OPTIONAL)
         /// </summary>
         public double? GpsSpeed { get; set; }
 
         /// <summary>
-        /// GPS position date time recorded
+        /// GPS position date time recorded (OPTIONAL)
         /// </summary>
         public DateTime? GpsPositionTime { get; set; }
 
@@ -181,23 +181,23 @@ namespace MDPMS.Database.Data.Models
                 SoftDeleted = false,
                 HouseholdName = json.name,
                 IntakeDate = json.intake_date,
-                AddressLine1 = json.address_line_1,
-                AddressLine2 = json.address_line_2,
-                PostalCode = json.postal_code,
-                DependentLocality = json.dependent_locality,
-                Locality = json.locality,
-                AdminvArea = json.adminv_area,
-                DependentAdminvArea = json.dependent_adminv_area,
-                Country = json.country,
-                AddressInfo = json.address_info,
-                GpsLatitude = json.latitude,
-                GpsLongitude = json.longitude,
-                GpsPositionAccuracy = json.position_accuracy,
-                GpsAltitude = json.altitude,
-                GpsAltitudeAccuracy = json.altitude_accuracy,
-                GpsHeading = json.heading,
-                GpsSpeed = json.speed,
-                GpsPositionTime = json.gps_recorded_at
+                AddressLine1 = json.address_line_1 ?? @"",
+                AddressLine2 = json.address_line_2 ?? @"",
+                PostalCode = json.postal_code ?? @"",
+                DependentLocality = json.dependent_locality ?? @"",
+                Locality = json.locality ?? @"",
+                AdminvArea = json.adminv_area ?? @"",
+                DependentAdminvArea = json.dependent_adminv_area ?? @"",
+                Country = json.country ?? @"",
+                AddressInfo = json.address_info ?? @"",
+                GpsLatitude = json.latitude ?? null,
+                GpsLongitude = json.longitude ?? null,
+                GpsPositionAccuracy = json.position_accuracy ?? null,
+                GpsAltitude = json.altitude ?? null,
+                GpsAltitudeAccuracy = json.altitude_accuracy ?? null,
+                GpsHeading = json.heading ?? null,
+                GpsSpeed = json.speed ?? null,
+                GpsPositionTime = json.gps_recorded_at ?? null
             };
         }
 
@@ -415,49 +415,49 @@ namespace MDPMS.Database.Data.Models
             if (!GpsLatitude.Equals(updateFrom.GpsLatitude))
             {
                 writer.WritePropertyName("latitude");
-                writer.WriteValue(updateFrom.GpsLatitude);
+                writer.WriteValue(updateFrom.GpsLatitude ?? null);
             }
 
             if (!GpsLongitude.Equals(updateFrom.GpsLongitude))
             {
                 writer.WritePropertyName("longitude");
-                writer.WriteValue(updateFrom.GpsLongitude);
+                writer.WriteValue(updateFrom.GpsLongitude ?? null);
             }
 
             if (!GpsPositionAccuracy.Equals(updateFrom.GpsPositionAccuracy))
             {
                 writer.WritePropertyName("position_accuracy");
-                writer.WriteValue(updateFrom.GpsPositionAccuracy);
+                writer.WriteValue(updateFrom.GpsPositionAccuracy ?? null);
             }
 
             if (!GpsAltitude.Equals(updateFrom.GpsAltitude))
             {
                 writer.WritePropertyName("altitude");
-                writer.WriteValue(updateFrom.GpsAltitude);
+                writer.WriteValue(updateFrom.GpsAltitude ?? null);
             }
 
             if (!GpsAltitudeAccuracy.Equals(updateFrom.GpsAltitudeAccuracy))
             {
                 writer.WritePropertyName("altitude_accuracy");
-                writer.WriteValue(updateFrom.GpsAltitudeAccuracy);
+                writer.WriteValue(updateFrom.GpsAltitudeAccuracy ?? null);
             }
 
             if (!GpsHeading.Equals(updateFrom.GpsHeading))
             {
                 writer.WritePropertyName("heading");
-                writer.WriteValue(updateFrom.GpsHeading);
+                writer.WriteValue(updateFrom.GpsHeading ?? null);
             }
 
             if (!GpsSpeed.Equals(updateFrom.GpsSpeed))
             {
                 writer.WritePropertyName("speed");
-                writer.WriteValue(updateFrom.GpsSpeed);
+                writer.WriteValue(updateFrom.GpsSpeed ?? null);
             }
 
             if (!GpsPositionTime.Equals(updateFrom.GpsPositionTime))
             {
                 writer.WritePropertyName("gps_recorded_at");
-                writer.WriteValue(updateFrom.GpsPositionTime);
+                writer.WriteValue(updateFrom.GpsPositionTime ?? null);
             }
 
             writer.WriteEndObject();
