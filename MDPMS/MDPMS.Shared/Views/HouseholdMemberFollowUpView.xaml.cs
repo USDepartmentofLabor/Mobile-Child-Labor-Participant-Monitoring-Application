@@ -50,17 +50,5 @@ namespace MDPMS.Shared.Views
 	            });
 	        }
 	    }
-
-        protected override bool OnBackButtonPressed()
-        {   
-            // get this view model
-            var viewModel = (HouseholdMemberFollowUpViewModel)BindingContext;
-
-            // reset member search
-            var householdMembersSearchViewModel = (HouseholdMembersSearchViewModel)viewModel.ApplicationInstanceData.NavigationPage.Pages.First().BindingContext;
-            householdMembersSearchViewModel.RefreshCommand.Execute(null);
-
-            return base.OnBackButtonPressed();
-        }
     }
 }

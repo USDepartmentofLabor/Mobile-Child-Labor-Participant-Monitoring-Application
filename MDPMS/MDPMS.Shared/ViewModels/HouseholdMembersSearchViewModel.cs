@@ -98,6 +98,11 @@ namespace MDPMS.Shared.ViewModels
             OnPropertyChanged(nameof(HouseholdMembers));
             OnPropertyChanged(nameof(SelectedHouseholdMember));
         }
+
+        public void ExecuteAppearingCommand()
+        {
+            RefreshCommand.Execute(null);
+        }
     }
 
     public class HouseholdMemberSearchResultCellModel
