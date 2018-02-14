@@ -25,6 +25,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDPMS.Helper.Rest", "MDPMS\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDPMS.Helper.Gps", "MDPMS\MDPMS.Helper.Gps\MDPMS.Helper.Gps.csproj", "{AAC91703-F622-404F-80B0-6AE5E508C9C9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Art", "Art", "{C2280EC0-67C1-4D7F-B43B-ABA667F1FECA}"
+	ProjectSection(SolutionItems) = preProject
+		IconHighRes.jpeg = IconHighRes.jpeg
+		IconLowRes.png = IconLowRes.png
+		LandingPictureHighRes.jpeg = LandingPictureHighRes.jpeg
+		LandingPictureLowRes.jpeg = LandingPictureLowRes.jpeg
+		LandingPictureMedRes.jpeg = LandingPictureMedRes.jpeg
+		pexels-photo-754769.jpeg = pexels-photo-754769.jpeg
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
@@ -227,5 +237,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {420C0587-8E6A-4A15-9E63-41F9609B4368}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C2280EC0-67C1-4D7F-B43B-ABA667F1FECA} = {EFA69BDC-A43B-4FBE-8710-5C9C40818EC3}
 	EndGlobalSection
 EndGlobal
