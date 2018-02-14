@@ -2952,7 +2952,7 @@ namespace MDPMS.Droid
 			public const int ic_vol_type_tv_light = 2130837786;
 			
 			// aapt resource value: 0x7f02011b
-			public const int Icon = 2130837787;
+			public const int icon = 2130837787;
 			
 			// aapt resource value: 0x7f02011c
 			public const int LandingPictureMedRes = 2130837788;
