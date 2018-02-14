@@ -40,9 +40,9 @@ namespace MDPMS.Database.Data.Models
                 CreatedAt = json.created_at,
                 LastUpdatedAt = json.updated_at,
                 SoftDeleted = false,
-                Code = json.code,
-                CanonicalName = json.canonical_name,
-                DisplayName = json.display_name
+                Code = json.code ?? @"",
+                CanonicalName = json.canonical_name ?? @"",
+                DisplayName = json.display_name ?? @""
             };
         }
 
@@ -55,11 +55,11 @@ namespace MDPMS.Database.Data.Models
                 writer.Formatting = Formatting.None;
                 writer.WriteStartObject();
                 writer.WritePropertyName("code");
-                writer.WriteValue(Code);
+                writer.WriteValue(Code ?? @"");
                 writer.WritePropertyName("canonical_name");
-                writer.WriteValue(CanonicalName);
+                writer.WriteValue(CanonicalName ?? @"");
                 writer.WritePropertyName("display_name");
-                writer.WriteValue(DisplayName);
+                writer.WriteValue(DisplayName ?? @"");
                 writer.WriteEndObject();
                 writer.WriteEndObject();
             }
@@ -95,19 +95,19 @@ namespace MDPMS.Database.Data.Models
             if (!Code.Equals(updateFrom.Code))
             {
                 writer.WritePropertyName("code");
-                writer.WriteValue(updateFrom.Code);
+                writer.WriteValue(updateFrom.Code ?? @"");
             }
 
             if (!CanonicalName.Equals(updateFrom.CanonicalName))
             {
                 writer.WritePropertyName("canonical_name");
-                writer.WriteValue(updateFrom.CanonicalName);
+                writer.WriteValue(updateFrom.CanonicalName ?? @"");
             }
 
             if (!DisplayName.Equals(updateFrom.DisplayName))
             {
                 writer.WritePropertyName("display_name");
-                writer.WriteValue(updateFrom.DisplayName);
+                writer.WriteValue(updateFrom.DisplayName ?? @"");
             }
 
             writer.WriteEndObject();
