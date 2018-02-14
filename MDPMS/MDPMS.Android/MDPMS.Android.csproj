@@ -253,6 +253,7 @@
     <AndroidResource Include="Resources\Drawable\ic_language_white_24dp.png" />
     <AndroidResource Include="Resources\Drawable\ic_menu_black_24dp_rotate_90.png" />
     <AndroidResource Include="Resources\Drawable\ic_date_range_black_24dp.png" />
+    <AndroidResource Include="Resources\Drawable\LandingPictureMedRes.jpeg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
