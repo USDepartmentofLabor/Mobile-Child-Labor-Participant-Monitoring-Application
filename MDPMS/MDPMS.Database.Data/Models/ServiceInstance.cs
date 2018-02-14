@@ -10,7 +10,7 @@ namespace MDPMS.Database.Data.Models
 {
     public class ServiceInstance : EfBaseModel, ISyncableAsChild<ServiceInstance>
     {
-        public int Hours { get; set; }
+        public int? Hours { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Notes { get; set; }
@@ -100,7 +100,7 @@ namespace MDPMS.Database.Data.Models
                 Service = selectedService,
                 StartDate = json.start_date,
                 EndDate = json.end_date,
-                Hours = json.hours,
+                Hours = json.hours ?? null,
                 Notes = json.notes
             };
         }
@@ -131,7 +131,7 @@ namespace MDPMS.Database.Data.Models
                 writer.WritePropertyName("person_id");
                 writer.WriteValue(ExternalParentId);
                 writer.WritePropertyName("hours");
-                writer.WriteValue(Hours);
+                writer.WriteValue(Hours ?? null);
                 writer.WritePropertyName("notes");
                 writer.WriteValue(Notes);
                 writer.WriteEndObject();
