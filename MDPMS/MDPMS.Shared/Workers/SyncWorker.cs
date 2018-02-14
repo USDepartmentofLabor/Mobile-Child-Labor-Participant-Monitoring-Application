@@ -341,7 +341,7 @@ namespace MDPMS.Shared.Workers
                                         dynamic jsonResponseParse = JsonConvert.DeserializeObject(putSuccess.Item2);
                                         if (jsonResponseParse.status.Value.ToString().Equals(@"success"))
                                         {
-                                            objectInstance.LastUpdatedAt = ((DateTime)DateTime.Parse(jsonResponseParse.updated_at.Value)).ToUniversalTime();
+                                            objectInstance.SetLastUpdatedAt(jsonResponseParse.updated_at.Value);
                                         }
                                         else
                                         {
@@ -432,8 +432,8 @@ namespace MDPMS.Shared.Workers
                         dynamic jsonResponseParse = JsonConvert.DeserializeObject(postSuccess.Item2);
                         if (jsonResponseParse.status.Value.ToString().Equals(@"success"))
                         {
-                            objectInstance.SetLastUpdatedAt(((DateTime)DateTime.Parse(jsonResponseParse.updated_at.Value)).ToUniversalTime());
-                            objectInstance.SetCreatedAt(((DateTime)DateTime.Parse(jsonResponseParse.created_at.Value)).ToUniversalTime());
+                            objectInstance.SetLastUpdatedAt(jsonResponseParse.updated_at.Value);
+                            objectInstance.SetCreatedAt(jsonResponseParse.created_at.Value);
                             objectInstance.SetExternalId((int?)jsonResponseParse.id);
                         }
                         else
@@ -602,8 +602,8 @@ namespace MDPMS.Shared.Workers
                         dynamic jsonResponseParse = JsonConvert.DeserializeObject(postSuccess.Item2);
                         if (jsonResponseParse.status.Value.ToString().Equals(@"success"))
                         {
-                            objectInstance.SetLastUpdatedAt(((DateTime)DateTime.Parse(jsonResponseParse.updated_at.Value)).ToUniversalTime());
-                            objectInstance.SetCreatedAt(((DateTime)DateTime.Parse(jsonResponseParse.created_at.Value)).ToUniversalTime());
+                            objectInstance.SetLastUpdatedAt(jsonResponseParse.updated_at.Value);
+                            objectInstance.SetCreatedAt(jsonResponseParse.created_at.Value);
                             objectInstance.SetExternalId((int?)jsonResponseParse.id);
                         }
                         else
