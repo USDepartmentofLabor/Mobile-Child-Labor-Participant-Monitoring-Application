@@ -16,67 +16,67 @@ namespace MDPMS.Database.Data.Models
     public class PersonFollowUp : EfBaseModel, ISyncableAsChild<PersonFollowUp>
     {
         /// <summary>
-        /// Follow up date, ror_name: follow_date
+        /// Follow up date, ror_name: follow_date (REQUIRED)
         /// </summary>
-        public DateTime FollowUpDate { get; set; }
+        public DateTime? FollowUpDate { get; set; }
 
         /// <summary>
-        /// Have job returning to, ror_name: have_job_returning_to
+        /// Have job returning to, ror_name: have_job_returning_to (OPTIONAL)
         /// </summary>
-        public bool HaveJobReturningTo { get; set; }
+        public bool? HaveJobReturningTo { get; set; }
 
         /// <summary>
-        /// Hours Worked, ror_name: hours_worked
+        /// Hours Worked, ror_name: hours_worked (OPTIONAL)
         /// </summary>
-        public int HoursWorked { get; set; }
+        public int? HoursWorked { get; set; }
 
         /// <summary>
-        /// Hours Worked on housework, ror_name: hours_worked_on_housework
+        /// Hours Worked on housework, ror_name: hours_worked_on_housework (OPTIONAL)
         /// </summary>
-        public int HouseWorkedOnHousework { get; set; }
+        public int? HouseWorkedOnHousework { get; set; }
 
         /// <summary>
-        /// Enrolled in school, ror_name: enrolled_in_school
+        /// Enrolled in school, ror_name: enrolled_in_school (OPTIONAL)
         /// </summary>
-        public bool EnrolledInSchool { get; set; }
+        public bool? EnrolledInSchool { get; set; }
 
         /// <summary>
-        /// GPS position latitude at time of submission on the mobile view
+        /// GPS position latitude at time of submission on the mobile view (OPTIONAL)
         /// </summary>
         public double? GpsLatitude { get; set; }
 
         /// <summary>
-        /// GPS position longitude at time of submission on the mobile view
+        /// GPS position longitude at time of submission on the mobile view (OPTIONAL)
         /// </summary>
         public double? GpsLongitude { get; set; }
 
         /// <summary>
-        /// GPS position potential position error radius in meters
+        /// GPS position potential position error radius in meters (OPTIONAL)
         /// </summary>
         public double? GpsPositionAccuracy { get; set; }
 
         /// <summary>
-        /// GPS position altitude in meters relative to sea level
+        /// GPS position altitude in meters relative to sea level (OPTIONAL)
         /// </summary>
         public double? GpsAltitude { get; set; }
 
         /// <summary>
-        /// GPS position potential altitude error range in meters
+        /// GPS position potential altitude error range in meters (OPTIONAL)
         /// </summary>
         public double? GpsAltitudeAccuracy { get; set; }
 
         /// <summary>
-        /// GPS position heading in degrees relative to true North
+        /// GPS position heading in degrees relative to true North (OPTIONAL)
         /// </summary>
         public double? GpsHeading { get; set; }
 
         /// <summary>
-        /// GPS position speed in meters per second
+        /// GPS position speed in meters per second (OPTIONAL)
         /// </summary>
         public double? GpsSpeed { get; set; }
 
         /// <summary>
-        /// GPS position date time recorded
+        /// GPS position date time recorded (OPTIONAL)
         /// </summary>
         public DateTime? GpsPositionTime { get; set; }
 
@@ -171,24 +171,24 @@ namespace MDPMS.Database.Data.Models
                 LastUpdatedAt = json.updated_at,
                 SoftDeleted = false,
                 ExternalParentId = json.person_id,
-                FollowUpDate = json.follow_date,
-                HaveJobReturningTo = json.have_job_returning_to.Value ?? false,
-                HoursWorked = json.hours_worked.Value ?? 0,
-                HouseWorkedOnHousework = json.hours_worked_on_housework.Value ?? 0,
-                EnrolledInSchool = json.enrolled_in_school.Value ?? false,
-                GpsLatitude = json.latitude.Value ?? null,
-                GpsLongitude = json.longitude.Value ?? null,
-                GpsPositionAccuracy = json.position_accuracy.Value ?? null,
-                GpsAltitude = json.altitude.Value ?? null,
-                GpsAltitudeAccuracy = json.altitude_accuracy.Value ?? null,
-                GpsHeading = json.heading.Value ?? null,
-                GpsSpeed = json.speed.Value ?? null,
-                GpsPositionTime = json.gps_recorded_at.Value ?? null,
+                FollowUpDate = json.follow_date ?? null,
+                HaveJobReturningTo = json.have_job_returning_to ?? null,
+                HoursWorked = json.hours_worked ?? null,
+                HouseWorkedOnHousework = json.hours_worked_on_housework ?? null,
+                EnrolledInSchool = json.enrolled_in_school ?? null,
+                GpsLatitude = json.latitude ?? null,
+                GpsLongitude = json.longitude ?? null,
+                GpsPositionAccuracy = json.position_accuracy ?? null,
+                GpsAltitude = json.altitude ?? null,
+                GpsAltitudeAccuracy = json.altitude_accuracy ?? null,
+                GpsHeading = json.heading ?? null,
+                GpsSpeed = json.speed ?? null,
+                GpsPositionTime = json.gps_recorded_at ?? null,
                 PeopleFollowUpHazardousConditions = new List<PersonFollowUpHazardousCondition>(),
                 PeopleFollowUpWorkActivities = new List<PersonFollowUpWorkActivity>(),
                 PeopleFollowUpHouseholdTasks = new List<PersonFollowUpHouseholdTask>()
             };
-            
+
             var hazardousConditionIds = json.hazardous_condition_ids.ToObject<List<int>>();
             foreach (var hazardousConditionId in hazardousConditionIds)
             {
@@ -245,16 +245,37 @@ namespace MDPMS.Database.Data.Models
                 writer.WriteStartObject();
                 writer.WritePropertyName(@"follow_up");
                 writer.WriteStartObject();
-                writer.WritePropertyName("follow_date");
-                writer.WriteValue(FollowUpDate.ToString("yyyy-MM-dd"));
-                writer.WritePropertyName("have_job_returning_to");
-                writer.WriteValue(HaveJobReturningTo);
-                writer.WritePropertyName("hours_worked");
-                writer.WriteValue(HoursWorked);
-                writer.WritePropertyName("hours_worked_on_housework");
-                writer.WriteValue(HouseWorkedOnHousework);
-                writer.WritePropertyName("enrolled_in_school");
-                writer.WriteValue(EnrolledInSchool);
+
+                if (FollowUpDate != null)
+                {
+                    var followDate = (DateTime)FollowUpDate;
+                    writer.WritePropertyName("follow_date");
+                    writer.WriteValue(followDate.ToString("yyyy-MM-dd"));
+                }
+
+                if (HaveJobReturningTo != null)
+                {
+                    writer.WritePropertyName("have_job_returning_to");
+                    writer.WriteValue(HaveJobReturningTo);                    
+                }
+
+                if (HoursWorked != null)
+                {
+                    writer.WritePropertyName("hours_worked");
+                    writer.WriteValue(HoursWorked);
+                }
+
+                if (HouseWorkedOnHousework != null)
+                {
+                    writer.WritePropertyName("hours_worked_on_housework");
+                    writer.WriteValue(HouseWorkedOnHousework);
+                }
+
+                if (EnrolledInSchool != null)
+                {
+                    writer.WritePropertyName("enrolled_in_school");
+                    writer.WriteValue(EnrolledInSchool);
+                }
 
                 if (GpsLatitude != null)
                 {
