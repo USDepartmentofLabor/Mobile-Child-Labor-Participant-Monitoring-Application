@@ -69,7 +69,7 @@ namespace MDPMS.Shared.Workers
                 var personRelationshipResult = SyncObject(
                     applicationInstanceData,
                     false,
-                    @"/api/v1/relationships",
+                    @"/api/relationships",
                     applicationInstanceData.Data.PersonRelationships);
                 if (!personRelationshipResult.Item1)
                 {
@@ -80,7 +80,7 @@ namespace MDPMS.Shared.Workers
                 var statusCustomizationHazardousConditionsResult = SyncObject(
                     applicationInstanceData,
                     allowAlreadySyncedUpdateToParent,
-                    @"/api/v1/status_customization_hazardous_conditions",
+                    @"/api/status_customization_hazardous_conditions",
                     applicationInstanceData.Data.StatusCustomizationHazardousConditions);
                 if (!statusCustomizationHazardousConditionsResult.Item1)
                 {
@@ -90,7 +90,7 @@ namespace MDPMS.Shared.Workers
                 var statusCustomizationHouseholdTasksResult = SyncObject(
                     applicationInstanceData,
                     allowAlreadySyncedUpdateToParent,
-                    @"/api/v1/status_customization_household_tasks",
+                    @"/api/status_customization_household_tasks",
                     applicationInstanceData.Data.StatusCustomizationHouseholdTasks);
                 if (!statusCustomizationHouseholdTasksResult.Item1)
                 {
@@ -100,7 +100,7 @@ namespace MDPMS.Shared.Workers
                 var statusCustomizationWorkActivitiesResult = SyncObject(
                     applicationInstanceData,
                     allowAlreadySyncedUpdateToParent,
-                    @"/api/v1/status_customization_work_activities",
+                    @"/api/status_customization_work_activities",
                     applicationInstanceData.Data.StatusCustomizationWorkActivities);
                 if (!statusCustomizationWorkActivitiesResult.Item1)
                 {
@@ -112,7 +112,7 @@ namespace MDPMS.Shared.Workers
                 var serviceTypeCategoriesResult = SyncObject(
                     applicationInstanceData,
                     allowAlreadySyncedUpdateToParent,
-                    @"/api/v1/service_type_categories",
+                    @"/api/service_type_categories",
                     applicationInstanceData.Data.ServiceTypeCategories);
                 if (!serviceTypeCategoriesResult.Item1)
                 {
@@ -123,7 +123,7 @@ namespace MDPMS.Shared.Workers
                 var serviceTypesResult = SyncChildObject(
                     applicationInstanceData,
                     allowAlreadySyncedUpdateToParent,
-                    @"/api/v1/service_types",
+                    @"/api/service_types",
                     applicationInstanceData.Data.ServiceTypes,
                     @"service_type_category_id",
                     applicationInstanceData.Data.ServiceTypeCategories);
@@ -144,7 +144,7 @@ namespace MDPMS.Shared.Workers
                 var servicesResult = SyncChildObject(
                     applicationInstanceData,
                     allowAlreadySyncedUpdateToParent,
-                    @"/api/v1/services",
+                    @"/api/services",
                     applicationInstanceData.Data.Services,
                     @"service_type_id",
                     applicationInstanceData.Data.ServiceTypes);
@@ -163,7 +163,7 @@ namespace MDPMS.Shared.Workers
                 var householdsResult = SyncObject(
                     applicationInstanceData,
                     allowAlreadySyncedUpdateToParent,
-                    @"/api/v1/households",
+                    @"/api/households",
                     applicationInstanceData.Data.Households);
                 if (!householdsResult.Item1)
                 {
@@ -172,7 +172,7 @@ namespace MDPMS.Shared.Workers
 
                 var householdsNewResult = SyncNewParentObjects(
                     applicationInstanceData,
-                    @"/api/v1/households",
+                    @"/api/households",
                     applicationInstanceData.Data.Households);
                 if (!householdsNewResult.Item1)
                 {
@@ -183,7 +183,7 @@ namespace MDPMS.Shared.Workers
                 var incomeSourcesResult = SyncChildObject(                     
                     applicationInstanceData,
                     allowAlreadySyncedUpdateToParent,
-                    @"/api/v1/income_sources",
+                    @"/api/income_sources",
                     applicationInstanceData.Data.IncomeSources,
                     @"household_id",
                     applicationInstanceData.Data.Households);
@@ -194,7 +194,7 @@ namespace MDPMS.Shared.Workers
 
                 var incomeSourcesNewResult = SyncNewChildObjects(
                     applicationInstanceData,
-                    @"/api/v1/income_sources",
+                    @"/api/income_sources",
                     applicationInstanceData.Data.IncomeSources,
                     @"household_id",
                     applicationInstanceData.Data.Households);
@@ -207,7 +207,7 @@ namespace MDPMS.Shared.Workers
                 var peopleResult = SyncChildObject(
                     applicationInstanceData,
                     allowAlreadySyncedUpdateToParent,
-                    @"/api/v1/people",
+                    @"/api/people",
                     applicationInstanceData.Data.People,
                     @"household_id",
                     applicationInstanceData.Data.Households);
@@ -218,7 +218,7 @@ namespace MDPMS.Shared.Workers
 
                 var peopleNewResult = SyncNewChildObjects(
                     applicationInstanceData,
-                    @"/api/v1/people",
+                    @"/api/people",
                     applicationInstanceData.Data.People,
                     @"household_id",
                     applicationInstanceData.Data.Households);
@@ -231,7 +231,7 @@ namespace MDPMS.Shared.Workers
                 var peopleFollowUpResult = SyncChildObject(
                     applicationInstanceData,
                     allowAlreadySyncedUpdateToParent,
-                    @"/api/v1/follow_ups",
+                    @"/api/follow_ups",
                     applicationInstanceData.Data.PersonFollowUps,
                     @"person_id",
                     applicationInstanceData.Data.People);
@@ -242,7 +242,7 @@ namespace MDPMS.Shared.Workers
 
                 var peopleFollowUpNewResult = SyncNewChildObjects(
                     applicationInstanceData,
-                    @"/api/v1/follow_ups",
+                    @"/api/follow_ups",
                     applicationInstanceData.Data.PersonFollowUps,
                     @"person_id",
                     applicationInstanceData.Data.People);
@@ -255,7 +255,7 @@ namespace MDPMS.Shared.Workers
                 var serviceInstancesResult = SyncChildObject(
                     applicationInstanceData,
                     allowAlreadySyncedUpdateToParent,
-                    @"/api/v1/service_instances",
+                    @"/api/service_instances",
                     applicationInstanceData.Data.ServiceInstances,
                     @"person_id",
                     applicationInstanceData.Data.People);
@@ -273,7 +273,7 @@ namespace MDPMS.Shared.Workers
                 // new
                 var serviceInstancesNewResult = SyncNewChildObjects(
                     applicationInstanceData,
-                    @"/api/v1/service_instances",
+                    @"/api/service_instances",
                     applicationInstanceData.Data.ServiceInstances,
                     @"person_id",
                     applicationInstanceData.Data.People);

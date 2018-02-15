@@ -38,13 +38,13 @@ namespace MDPMS.Shared.ViewModels
             // TODO: on check connectivity also check if DPMS is reachable, separate msgs for internet vs. DPMS problems
             if (CrossConnectivity.Current.IsConnected)
             {
-                // get api key from URL/api/v1/tokens - http basicauth - username + password
+                // get api key from URL/api/tokens - http basicauth - username + password
 
                 try
                 {
                     var apiKeyResponse = Helper.Rest.RestHelper.PerformRestGetRequestWithHttpBasicAuth(
                         ApplicationInstanceData.SerializedApplicationInstanceData.Url,
-                        @"/api/v1/tokens",
+                        @"/api/tokens",
                         Username,
                         Password);
                     // parse json response to get api key and store it
