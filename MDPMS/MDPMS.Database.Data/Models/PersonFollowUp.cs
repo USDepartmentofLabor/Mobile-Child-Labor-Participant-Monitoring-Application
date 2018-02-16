@@ -343,7 +343,7 @@ namespace MDPMS.Database.Data.Models
         {
             if (!data.Any())
             {
-                return @"[" + '"' + '"' + ']';
+                return @"[]";
             }
             var sb = new StringBuilder(@"[");
             foreach (var x in data)
