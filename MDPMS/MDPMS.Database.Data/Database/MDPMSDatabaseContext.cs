@@ -43,6 +43,9 @@ namespace MDPMS.Database.Data.Database
         public void LoadRelatedData()
         {
             People.Include(a => a.Gender).Include(a => a.RelationshipToHeadOfHousehold).Load();
+            PersonFollowUps.Include(a => a.PeopleFollowUpHouseholdTasks)
+                           .Include(a => a.PeopleFollowUpWorkActivities)
+                           .Include(a => a.PeopleFollowUpHazardousConditions).Load();
             ServiceInstances.Include(a => a.Service).Load();
         }
 
