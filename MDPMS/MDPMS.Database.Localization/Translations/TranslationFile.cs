@@ -114,6 +114,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"FollowUp", @"Follow Up");
             translation.Translations.Add(@"HouseholdMembers",@"Household Members");
             translation.Translations.Add(@"FollowUpDate", @"Follow Up Date");
+            translation.Translations.Add(@"AlertMessageActionNotAllowedNoServices", @"Action not allowed, no services exist");
             return translation;
         }
 
@@ -211,6 +212,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"FollowUp", @"Seguir");
             translation.Translations.Add(@"HouseholdMembers", @"Los miembros del hogar");
             translation.Translations.Add(@"FollowUpDate", @"Fecha de seguimiento");
+            translation.Translations.Add(@"AlertMessageActionNotAllowedNoServices", @"Acción no permitida, no hay servicios");
             return translation;
         }
     }     

@@ -195,6 +195,16 @@ namespace MDPMS.Shared.ViewModels
 
         private void ExecuteNavigateToAddServiceCommand()
         {
+            // First check that at least 1 service exists in the local database
+            if (!ApplicationInstanceData.Data.Services.Any())
+            {
+                ApplicationInstanceData.App.MainPage.DisplayAlert(
+                    ApplicationInstanceData.SelectedLocalization.Translations[@"Alert"],
+                    ApplicationInstanceData.SelectedLocalization.Translations[@"AlertMessageActionNotAllowedNoServices"],
+                    ApplicationInstanceData.SelectedLocalization.Translations[@"OK"]);                
+                return;
+            }
+
             // Modal navigate to assign service
             ApplicationInstanceData.NavigationPage.PushAsync(new HouseholdMemberAssignServiceView
             {
