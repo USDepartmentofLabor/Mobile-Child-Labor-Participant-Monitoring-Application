@@ -38,8 +38,10 @@ namespace MDPMS.Database.Data.Database
         public MDPMSDatabaseContext(string databasePath)
         {
             DatabasePath = databasePath;
+        }
 
-            // load related data
+        public void LoadRelatedData()
+        {
             People.Include(a => a.Gender).Include(a => a.RelationshipToHeadOfHousehold).Load();
         }
 
