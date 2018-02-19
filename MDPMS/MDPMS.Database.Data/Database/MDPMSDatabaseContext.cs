@@ -38,6 +38,9 @@ namespace MDPMS.Database.Data.Database
         public MDPMSDatabaseContext(string databasePath)
         {
             DatabasePath = databasePath;
+
+            // load related data
+            People.Include(a => a.Gender).Include(a => a.RelationshipToHeadOfHousehold).Load();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
