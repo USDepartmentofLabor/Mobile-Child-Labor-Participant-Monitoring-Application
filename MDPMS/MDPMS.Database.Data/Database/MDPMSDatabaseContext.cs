@@ -43,6 +43,7 @@ namespace MDPMS.Database.Data.Database
         public void LoadRelatedData()
         {
             People.Include(a => a.Gender).Include(a => a.RelationshipToHeadOfHousehold).Load();
+            ServiceInstances.Include(a => a.Service).Load();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
