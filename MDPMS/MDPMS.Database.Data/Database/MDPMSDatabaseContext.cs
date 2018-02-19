@@ -42,10 +42,16 @@ namespace MDPMS.Database.Data.Database
 
         public void LoadRelatedData()
         {
-            People.Include(a => a.Gender).Include(a => a.RelationshipToHeadOfHousehold).Load();
+            People.Include(a => a.Gender)
+                  .Include(a => a.RelationshipToHeadOfHousehold)
+                  .Include(a => a.PeopleHouseholdTasks)
+                  .Include(a => a.PeopleWorkActivities)
+                  .Include(a => a.PeopleHazardousConditions)
+                  .Load();
             PersonFollowUps.Include(a => a.PeopleFollowUpHouseholdTasks)
                            .Include(a => a.PeopleFollowUpWorkActivities)
-                           .Include(a => a.PeopleFollowUpHazardousConditions).Load();
+                           .Include(a => a.PeopleFollowUpHazardousConditions)
+                           .Load();
             ServiceInstances.Include(a => a.Service).Load();
         }
 
