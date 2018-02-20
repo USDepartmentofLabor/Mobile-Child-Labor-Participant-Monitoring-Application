@@ -35,6 +35,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Art", "Art", "{C2280EC0-67C
 		pexels-photo-754769.jpeg = pexels-photo-754769.jpeg
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PlayStoreArt", "PlayStoreArt", "{3CA1DEFC-AA67-4C49-AA6F-10DD7E33D4A6}"
+	ProjectSection(SolutionItems) = preProject
+		AddHousehold_320_480.png = AddHousehold_320_480.png
+		icon_512_512.png = icon_512_512.png
+		LandingView_180_120.png = LandingView_180_120.png
+		LandingView_320_480.png = LandingView_320_480.png
+		LandingView_1024_500.png = LandingView_1024_500.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PlayStoreAPKs", "PlayStoreAPKs", "{031A5046-2949-4CE9-8A92-354BA9CD1960}"
+	ProjectSection(SolutionItems) = preProject
+		mDPMSALPHA_1_0.apk = mDPMSALPHA_1_0.apk
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
@@ -240,5 +254,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C2280EC0-67C1-4D7F-B43B-ABA667F1FECA} = {EFA69BDC-A43B-4FBE-8710-5C9C40818EC3}
+		{3CA1DEFC-AA67-4C49-AA6F-10DD7E33D4A6} = {EFA69BDC-A43B-4FBE-8710-5C9C40818EC3}
+		{031A5046-2949-4CE9-8A92-354BA9CD1960} = {EFA69BDC-A43B-4FBE-8710-5C9C40818EC3}
 	EndGlobalSection
 EndGlobal
