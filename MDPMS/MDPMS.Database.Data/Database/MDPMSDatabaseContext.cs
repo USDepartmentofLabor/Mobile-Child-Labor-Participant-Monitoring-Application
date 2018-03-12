@@ -25,6 +25,7 @@ namespace MDPMS.Database.Data.Database
         public DbSet<CustomField> CustomFields { get; set; }
         public DbSet<CustomHouseholdValue> CustomHouseholdValues { get; set; }
         public DbSet<CustomPersonValue> CustomPersonValues { get; set; }
+        public DbSet<CustomPersonFollowUpValue> CustomPersonFollowUpValues { get; set; }
 
         // Data
         public DbSet<Household> Households { get; set; }

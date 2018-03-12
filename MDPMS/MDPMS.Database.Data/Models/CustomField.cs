@@ -68,6 +68,7 @@ namespace MDPMS.Database.Data.Models
 
         public List<CustomHouseholdValue> CustomHouseholdValues { get; set; } = new List<CustomHouseholdValue>();
         public List<CustomPersonValue> CustomPersonValues { get; set; } = new List<CustomPersonValue>();
+        public List<CustomPersonFollowUpValue> CustomPersonFollowUpValues { get; set; } = new List<CustomPersonFollowUpValue>();
 
         // NOT_CURRENTLY_USED_SYNCED_OR_STORED_FROM_DPMS:
         // validation_rules

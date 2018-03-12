@@ -310,7 +310,14 @@ namespace MDPMS.Shared.Workers
                 {
                     return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
                 }
-
+                var postNewCustomPersonFollowUpValuesResult = PostCustomValues(
+                    applicationInstanceData,
+                    @"/api/custom_values",
+                    applicationInstanceData.Data.CustomPersonFollowUpValues);
+                if (!postNewCustomPersonFollowUpValuesResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
+                }
             }
             catch
             {

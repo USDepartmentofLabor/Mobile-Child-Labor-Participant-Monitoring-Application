@@ -32,6 +32,7 @@
                             <RowDefinition Height="65"/>
                             <RowDefinition Height="65"/>
                             <RowDefinition Height="65"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
@@ -198,6 +199,10 @@
                         <Switch Grid.Row="15"
                                 IsToggled="{Binding EnrolledInSchoolCollege, Mode=TwoWay}"
                                 HorizontalOptions="CenterAndExpand"/>
+                        <StackLayout Grid.Row="16"
+                                     x:Name="CustomFieldContent"
+                                     HorizontalOptions="FillAndExpand"
+                                     VerticalOptions="StartAndExpand"/>
                     </Grid>
                 </ScrollView>
                 <Grid Grid.Row="1">
