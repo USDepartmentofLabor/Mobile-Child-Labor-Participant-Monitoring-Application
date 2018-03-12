@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
@@ -86,6 +87,10 @@ namespace MDPMS.Shared.ViewModels
         public ObservableCollection<Tuple<bool, StatusCustomizationHazardousCondition, GenericSwitchTextViewModel>> BindableHazardousConditions { get; set; }
         public ObservableCollection<Tuple<bool, StatusCustomizationHouseholdTask, GenericSwitchTextViewModel>> BindableHouseholdTasks { get; set; }
 
+        // Custom fields
+        public List<CustomField> CustomFields { get; set; }
+        public List<ContentView> CustomFieldControls { get; set; }
+
         public HouseholdMemberIntakeViewModel(ApplicationInstanceData applicationInstanceData)
         {
             ApplicationInstanceData = applicationInstanceData;
@@ -136,6 +141,106 @@ namespace MDPMS.Shared.ViewModels
                     new GenericSwitchTextViewModel(householdTask.DisplayName)));
             }
 
+            // Custom Fields
+            CustomFields = new List<CustomField>();
+            CustomFieldControls = new List<ContentView>();
+            CustomFields = ApplicationInstanceData.Data.CustomFields.Where(a => a.ModelType.Equals(@"Person")).OrderBy(b => b.SortOrder).ToList();
+            foreach (var customField in CustomFields)
+            {
+                switch (customField.FieldType)
+                {
+                    case @"text":
+                        CustomFieldControls.Add(new CustomFieldEntryView
+                        {
+                            BindingContext = new CustomFieldStringValueViewModel(customField.Name, customField.HelpText),
+                            Margin = new Thickness(15, 5)
+                        });
+                        break;
+                    case @"textarea":
+                        CustomFieldControls.Add(new CustomFieldEditorView
+                        {
+                            BindingContext = new CustomFieldStringValueViewModel(customField.Name, customField.HelpText),
+                            Margin = new Thickness(15, 5)
+                        });
+                        break;
+                    case @"check_box":
+                        var checkBoxViewModel = new CustomFieldSwitchArrayViewModel(customField.Name, customField.HelpText);
+                        checkBoxViewModel.Content = new List<Tuple<bool, string>>();
+                        var checkBoxValues = customField.GetOptions();
+                        foreach (var option in checkBoxValues)
+                        {
+                            checkBoxViewModel.Content.Add(new Tuple<bool, string>(false, option));
+                        }
+                        var checkBoxView = new CustomFieldSwitchArrayView
+                        {
+                            BindingContext = checkBoxViewModel,
+                            Margin = new Thickness(15, 5)
+                        };
+                        CustomFieldControls.Add(checkBoxView);
+                        checkBoxView.OnAppearing();
+                        break;
+                    case @"radio_button":
+                        var bindableOptions = new ObservableCollection<string>();
+                        bindableOptions.Add(@"");
+                        var pickerValues = customField.GetOptions();
+                        foreach (var option in pickerValues)
+                        {
+                            bindableOptions.Add(option);
+                        }
+                        CustomFieldControls.Add(new CustomFieldPickerView
+                        {
+                            BindingContext = new CustomFieldPickerViewModel(customField.Name, customField.HelpText)
+                            {
+                                BindableOptions = bindableOptions,
+                                SelectedBindableOption = bindableOptions.First()
+                            },
+                            Margin = new Thickness(15, 5)
+                        });
+                        break;
+                    case @"select":
+                        var bindableSelectOptions = new ObservableCollection<string>();
+                        bindableSelectOptions.Add(@"");
+                        var selectValues = customField.GetOptions();
+                        foreach (var option in selectValues)
+                        {
+                            bindableSelectOptions.Add(option);
+                        }
+                        CustomFieldControls.Add(new CustomFieldPickerView
+                        {
+                            BindingContext = new CustomFieldPickerViewModel(customField.Name, customField.HelpText)
+                            {
+                                BindableOptions = bindableSelectOptions,
+                                SelectedBindableOption = bindableSelectOptions.First()
+                            },
+                            Margin = new Thickness(15, 5)
+                        });
+                        break;
+                    case @"number":
+                        CustomFieldControls.Add(new CustomFieldNumericView
+                        {
+                            BindingContext = new CustomFieldDoubleValueViewModel(customField.Name, customField.HelpText),
+                            Margin = new Thickness(15, 5)
+                        });
+                        break;
+                    case @"date":
+                        CustomFieldControls.Add(new CustomFieldDateTimeView
+                        {
+                            BindingContext = new CustomFieldDateTimeValueViewModel(customField.Name, customField.HelpText),
+                            Margin = new Thickness(15, 5)
+                        });
+                        break;
+                    case @"rank_list":
+                        CustomFieldControls.Add(new CustomFieldRankListView
+                        {
+                            Margin = new Thickness(15, 5)
+                        });
+                        break;
+                    default:
+                        // TODO: error log but for now just fail silently
+                        break;
+                }
+            }
+
             CancelCommand = new Command(ExecuteCancelCommand);
             SubmitCommand = new Command(ExecuteSubmitCommand);
         }
@@ -147,6 +252,8 @@ namespace MDPMS.Shared.ViewModels
 
         private async void ExecuteSubmitCommand()
         {
+            if (!NewHouseholdMemberValidation()) return;
+
             IsBusy = true;
             GPSPosition = await Helper.Gps.GpsHelper.GetGpsPosition();
             ExecutePostSubmitCommand();
@@ -213,6 +320,96 @@ namespace MDPMS.Shared.ViewModels
                 });
             }
 
+            // get custom field values
+            for (var i = 0; i < CustomFields.Count; i++)
+            {
+                var newCustomValue = new CustomPersonValue
+                {
+                    CreatedAt = DateTime.Now,
+                    LastUpdatedAt = DateTime.Now,
+                    SoftDeleted = false,
+                    CustomField = CustomFields[i],
+                    Value = "",
+                    Person = person
+                };
+
+                switch (CustomFields[i].FieldType)
+                {                    
+                    case @"text":     
+                        var textValue = ((CustomFieldStringValueViewModel)CustomFieldControls[i].BindingContext).EntryValue;
+                        if (textValue!= null && !textValue.Equals(string.Empty))
+                        {
+                            newCustomValue.Value = textValue;
+                            ApplicationInstanceData.Data.CustomPersonValues.Add(newCustomValue);
+                        }
+                        break;
+                    case @"textarea":
+                        var textAreaValue = ((CustomFieldStringValueViewModel)CustomFieldControls[i].BindingContext).EntryValue;
+                        if (textAreaValue != null && !textAreaValue.Equals(string.Empty))
+                        {
+                            newCustomValue.Value = textAreaValue;
+                            ApplicationInstanceData.Data.CustomPersonValues.Add(newCustomValue);
+                        }
+                        break;
+                    case @"check_box":
+                        var checkBoxValue = @"";
+                        var checkBoxValues = ((CustomFieldSwitchArrayView)CustomFieldControls[i]).GetValues();
+                        for (var j = 0; j < checkBoxValues.Count; j++)
+                        {
+                            if (checkBoxValues[j].Item2)
+                            {                                
+                                checkBoxValue += checkBoxValues[j].Item1;
+                                if (j != checkBoxValues.Count - 1) checkBoxValue += "\r\n";
+                            }
+                        }
+                        if (!checkBoxValue.Equals(string.Empty))
+                        {
+                            newCustomValue.Value = checkBoxValue;
+                            ApplicationInstanceData.Data.CustomPersonValues.Add(newCustomValue);
+                        }
+                        break;
+                    case @"radio_button":
+                        var radioButtonValue = ((CustomFieldPickerViewModel)CustomFieldControls[i].BindingContext).SelectedBindableOption;
+                        if (radioButtonValue != null && !radioButtonValue.Equals(string.Empty))
+                        {
+                            newCustomValue.Value = radioButtonValue;
+                            ApplicationInstanceData.Data.CustomPersonValues.Add(newCustomValue);
+                        }
+                        break;
+                    case @"select":
+                        var selectValue = ((CustomFieldPickerViewModel)CustomFieldControls[i].BindingContext).SelectedBindableOption;
+                        if (selectValue != null && !selectValue.Equals(string.Empty))
+                        {
+                            newCustomValue.Value = selectValue;
+                            ApplicationInstanceData.Data.CustomPersonValues.Add(newCustomValue);
+                        }
+                        break;
+                    case @"number":
+                        // TODO: saves zero values on no data entered, add value was changed bool to see if value is needed?
+                        var numberValue = ((CustomFieldDoubleValueViewModel)CustomFieldControls[i].BindingContext).EntryValue;
+                        var numberValueString = numberValue.ToString();
+                        if (numberValueString != null && !numberValueString.Equals(string.Empty))
+                        {
+                            newCustomValue.Value = numberValueString;
+                            ApplicationInstanceData.Data.CustomPersonValues.Add(newCustomValue);
+                        }
+                        break;
+                    case @"date":
+                        var dateValue = ((CustomFieldDateTimeValueViewModel)CustomFieldControls[i].BindingContext).EntryValue;
+                        var dateValueString = dateValue.ToString();
+                        if (dateValueString != null && !dateValueString.Equals(string.Empty))
+                        {
+                            newCustomValue.Value = dateValueString;
+                            ApplicationInstanceData.Data.CustomPersonValues.Add(newCustomValue);
+                        }
+                        break;
+                    case @"rank_list":
+                        break;
+                    default:
+                        break;
+                }
+            }
+
             if (ApplicationInstanceData.NavigationPage.Pages.First().GetType() == typeof(HouseholdIntakeView))
             {
                 var householdsViewModel =
@@ -222,6 +419,40 @@ namespace MDPMS.Shared.ViewModels
 
             IsBusy = false;
             Exit();
+        }
+
+        private bool NewHouseholdMemberValidation()
+        {
+            var validationMessages = new List<string>();
+
+            if (SelectedBindableGender.Item2 == null)
+            {
+                validationMessages.Add(ApplicationInstanceData.SelectedLocalization.Translations[@"ErrorGenderMustBeSelected"]);
+            }
+
+            var validateableLastName = LastName.Replace(" ", "");
+            if (validateableLastName.Equals(string.Empty))
+            {
+                validationMessages.Add(ApplicationInstanceData.SelectedLocalization.Translations[@"ErrorLastNameCanNotBeBlank"]);
+            }
+
+            var validateableFirstName = FirstName.Replace(" ", "");
+            if (validateableFirstName.Equals(string.Empty))
+            {
+                validationMessages.Add(ApplicationInstanceData.SelectedLocalization.Translations[@"ErrorFirstNameCanNotBeBlank"]);
+            }
+
+            if (validationMessages.Any())
+            {
+                var messageContent = new StringBuilder();
+                foreach (var message in validationMessages) messageContent.AppendLine(message);
+                ApplicationInstanceData.App.MainPage.DisplayAlert(
+                    ApplicationInstanceData.SelectedLocalization.Translations[@"Error"],
+                    messageContent.ToString(),
+                    ApplicationInstanceData.SelectedLocalization.Translations[@"OK"]);
+                return false;
+            }
+            return true;
         }
 
         private void Exit()

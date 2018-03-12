@@ -22,6 +22,7 @@ namespace MDPMS.Shared.Views
 	        DynamicWorkActivities.Children.Clear();
             DynamicHazardousConditions.Children.Clear();
             DynamicHouseholdTasks.Children.Clear();
+            CustomFieldContent.Children.Clear();
 
             // set dynamic content from the data in the vm
             foreach (var bindableWorkActivity in viewModel.BindableWorkActivities)
@@ -48,6 +49,12 @@ namespace MDPMS.Shared.Views
                     MinimumHeightRequest = 65
                 });
 	        }
+
+            // Custom fields
+            foreach (var control in viewModel.CustomFieldControls)
+            {
+                CustomFieldContent.Children.Add(control);
+            }
         }        
     }
 }

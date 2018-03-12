@@ -38,7 +38,8 @@
                             <RowDefinition Height="65"/>
                             <RowDefinition Height="65"/>
                             <RowDefinition Height="65"/>
-                        </Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -223,6 +224,10 @@
                         <Switch Grid.Row="22"
                                 IsToggled="{Binding EnrolledInSchoolCollege, Mode=TwoWay}"
                                 HorizontalOptions="CenterAndExpand"/>
+                        <StackLayout Grid.Row="23"
+                                     x:Name="CustomFieldContent"
+                                     HorizontalOptions="FillAndExpand"
+                                     VerticalOptions="StartAndExpand"/>
                     </Grid>
                 </ScrollView>
                 <Grid Grid.Row="1">
@@ -235,7 +240,7 @@
                             Command="{Binding CancelCommand}"/>
                     <Button Grid.Column="1"
                             Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Submit]}"
-                            Command="{Binding SubmitCommand}"/>
+                            Command="{Binding SubmitCommand}"/>                    
                 </Grid>
             </Grid>
         </StackLayout>

@@ -21,6 +21,11 @@ namespace MDPMS.Database.Data.Database
         public DbSet<ServiceType> ServiceTypes { get; set; }
         public DbSet<Service> Services { get; set; }
 
+        // Custom Fields
+        public DbSet<CustomField> CustomFields { get; set; }
+        public DbSet<CustomHouseholdValue> CustomHouseholdValues { get; set; }
+        public DbSet<CustomPersonValue> CustomPersonValues { get; set; }
+
         // Data
         public DbSet<Household> Households { get; set; }
         public DbSet<Person> People { get; set; }

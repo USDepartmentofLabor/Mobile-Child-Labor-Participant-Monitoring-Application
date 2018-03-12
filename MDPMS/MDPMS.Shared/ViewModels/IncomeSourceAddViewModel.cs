@@ -69,7 +69,7 @@ namespace MDPMS.Shared.ViewModels
             {
                 ApplicationInstanceData.App.MainPage.DisplayAlert(
                     ApplicationInstanceData.SelectedLocalization.Translations[@"Error"],
-                    ApplicationInstanceData.SelectedLocalization.Translations[@"ErrorNameCanNotBeBlank"],
+                    ApplicationInstanceData.SelectedLocalization.Translations[@"ErrorIncomeSourceNameCanNotBeBlank"],
                     ApplicationInstanceData.SelectedLocalization.Translations[@"OK"]);
                 return false;
             }

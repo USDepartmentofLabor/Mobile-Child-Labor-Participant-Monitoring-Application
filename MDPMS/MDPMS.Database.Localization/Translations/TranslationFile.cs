@@ -93,6 +93,11 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"AreYouEnrolledInSchoolAndOrCollege", @"Are you enrolled in school and/or college?");
             translation.Translations.Add(@"DPMSURL", @"DPMS URL");
             translation.Translations.Add(@"ErrorNameCanNotBeBlank", @"Name can not be blank");
+            translation.Translations.Add(@"ErrorHouseholdNameCanNotBeBlank", @"Household name can not be blank");
+            translation.Translations.Add(@"ErrorIncomeSourceNameCanNotBeBlank", @"Income source name can not be blank");
+            translation.Translations.Add(@"ErrorLastNameCanNotBeBlank", @"Last name can not be blank");
+            translation.Translations.Add(@"ErrorFirstNameCanNotBeBlank", @"First name can not be blank");
+            translation.Translations.Add(@"ErrorGenderMustBeSelected", @"A gender must be selected");
             translation.Translations.Add(@"ErrorSyncError", @"Sync Error");
             translation.Translations.Add(@"SyncSuccessful", @"Sync Successful");
             translation.Translations.Add(@"Members", @"Members");
@@ -191,6 +196,11 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"AreYouEnrolledInSchoolAndOrCollege", @"¿Estás inscrito en la escuela y / o la universidad?");
             translation.Translations.Add(@"DPMSURL", @"DPMS URL");
             translation.Translations.Add(@"ErrorNameCanNotBeBlank", @"El nombre no puede estar en blanco");
+            translation.Translations.Add(@"ErrorHouseholdNameCanNotBeBlank", @"El nombre del hogar no puede estar en blanco");
+            translation.Translations.Add(@"ErrorIncomeSourceNameCanNotBeBlank", @"El nombre de la fuente de ingresos no puede estar en blanco");
+            translation.Translations.Add(@"ErrorLastNameCanNotBeBlank", @"El apellido no puede estar en blanco");
+            translation.Translations.Add(@"ErrorFirstNameCanNotBeBlank", @"El primer nombre no puede estar en blanco");
+            translation.Translations.Add(@"ErrorGenderMustBeSelected", @"Se debe seleccionar un género");
             translation.Translations.Add(@"ErrorSyncError", @"Error de sincronización");
             translation.Translations.Add(@"SyncSuccessful", @"Sincronización exitosa");
             translation.Translations.Add(@"Members", @"Miembros");

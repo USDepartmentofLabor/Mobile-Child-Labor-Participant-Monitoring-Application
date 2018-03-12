@@ -76,6 +76,17 @@ namespace MDPMS.Shared.Workers
                     return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
                 }
 
+                // Custom Fields
+                var customFieldResult = SyncObject(
+                    applicationInstanceData,
+                    false,
+                    @"/api/custom_fields",
+                    applicationInstanceData.Data.CustomFields);
+                if (!customFieldResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
+                }
+
                 // Status Customization Look Ups
                 var statusCustomizationHazardousConditionsResult = SyncObject(
                     applicationInstanceData,
@@ -281,6 +292,25 @@ namespace MDPMS.Shared.Workers
                 {
                     return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
                 }
+
+                // Post custom values
+                var postNewCustomHouseholdValuesResult = PostCustomValues(
+                    applicationInstanceData,
+                    @"/api/custom_values",
+                    applicationInstanceData.Data.CustomHouseholdValues);
+                if (!postNewCustomHouseholdValuesResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
+                }
+                var postNewCustomPersonValuesResult = PostCustomValues(
+                    applicationInstanceData,
+                    @"/api/custom_values",
+                    applicationInstanceData.Data.CustomPersonValues);
+                if (!postNewCustomPersonValuesResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
+                }
+
             }
             catch
             {
@@ -293,7 +323,51 @@ namespace MDPMS.Shared.Workers
             applicationInstanceData.SaveSerializedApplicationInstanceData();
             return new Tuple<bool, string>(true, @"");
         }
-        
+
+        public static Tuple<bool, string> PostCustomValues<T>(ApplicationInstanceData applicationInstanceData, string apiPath, DbSet<T> data) where T : class, IObjectToJsonConvertible<T>, new()
+        {
+            try
+            {                
+                foreach (var objectInstance in data)
+                {
+                    var objectJson = objectInstance.GetJsonFromObject();
+                    var postSuccess = Helper.Rest.RestHelper.PerformRestPostRequestWithApiKey(
+                        applicationInstanceData.SerializedApplicationInstanceData.Url,
+                        apiPath,
+                        applicationInstanceData.SerializedApplicationInstanceData.ApiKey,
+                        objectJson);
+
+                    if (postSuccess.Item1)
+                    {
+                        // set last updated at from JSON response
+                        dynamic jsonResponseParse = JsonConvert.DeserializeObject(postSuccess.Item2);
+                        if (jsonResponseParse.status.Value.ToString().Equals(@"success"))
+                        {
+                            // delete it for now
+                            data.Remove(objectInstance);
+                        }
+                        else
+                        {
+                            // TODO: error log    
+                            return new Tuple<bool, string>(false, @"Add error");
+                        }
+                    }
+                    else
+                    {
+                        // TODO: error log    
+                        return new Tuple<bool, string>(false, @"Add error");
+                    }
+                }
+                applicationInstanceData.Data.SaveChanges();
+            }
+            catch
+            {
+                // TODO: error log
+                return new Tuple<bool, string>(false, @"Sync error");
+            }
+            return new Tuple<bool, string>(true, @"");
+        }
+
         public static Tuple<bool, string> SyncObject<T>(ApplicationInstanceData applicationInstanceData, bool allowAlreadySyncedUpdateToParent, string apiPath, DbSet<T> data) where T : class, ISyncable<T>, new()
         {
             // parent objects

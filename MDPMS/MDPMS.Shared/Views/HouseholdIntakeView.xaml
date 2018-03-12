@@ -26,6 +26,7 @@
                             <RowDefinition Height="65"/>
                             <RowDefinition Height="65"/>
                             <RowDefinition Height="80"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="100"/>
                             <RowDefinition Height="100"/>
                         </Grid.RowDefinitions>
@@ -172,13 +173,17 @@
                                    Margin="10,5,5,5"
                                    Text="{Binding AddressInfo, Mode=TwoWay}"/>
                         </Grid>
-                        <Grid Grid.Row="11">
+                        <StackLayout Grid.Row="11"
+                                     x:Name="CustomFieldContent"
+                                     HorizontalOptions="FillAndExpand"
+                                     VerticalOptions="StartAndExpand"/>
+                        <Grid Grid.Row="12">
                             <Button Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AddIncomeSource]}"
                                     Command="{Binding AddIncomeSourceCommand}"/>
                         </Grid>
-                        <Grid Grid.Row="12">
+                        <Grid Grid.Row="13">
                             <Button Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AddHouseholdMember]}"
-                                    Command="{Binding AddHouseholdMemberCommand}"/>
+                                    Command="{Binding AddHouseholdMemberCommand}"/>                        
                         </Grid>
                     </Grid>
                 </ScrollView>
