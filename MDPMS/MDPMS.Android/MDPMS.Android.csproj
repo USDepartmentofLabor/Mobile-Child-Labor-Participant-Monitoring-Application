@@ -18,7 +18,7 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <AndroidStoreUncompressedFileExtensions />
     <MandroidI18n />
     <JavaMaximumHeapSize />
@@ -254,6 +254,10 @@
     <AndroidResource Include="Resources\Drawable\ic_date_range_black_24dp.png" />
     <AndroidResource Include="Resources\Drawable\LandingPictureMedRes.jpeg" />
     <AndroidResource Include="Resources\Drawable\icon.png" />
+    <AndroidResource Include="Resources\Drawable\ic_keyboard_arrow_down_black_24dp.png" />
+    <AndroidResource Include="Resources\Drawable\ic_keyboard_arrow_left_black_24dp.png" />
+    <AndroidResource Include="Resources\Drawable\ic_keyboard_arrow_right_black_24dp.png" />
+    <AndroidResource Include="Resources\Drawable\ic_keyboard_arrow_up_black_24dp.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.axml" />

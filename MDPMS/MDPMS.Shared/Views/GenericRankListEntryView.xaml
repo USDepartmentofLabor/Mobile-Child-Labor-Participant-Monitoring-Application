@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDPMS.Shared.Views.GenericRankListEntryView">
+    <ContentView.Content>
+        <Grid BackgroundColor="White">
+            <BoxView BackgroundColor="Black"/>
+            <Grid Margin="3"
+                  BackgroundColor="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0"
+                            Image="ic_keyboard_arrow_up_black_24dp.png"
+                            Command="{Binding MoveEntryUpCommand}"/>
+                    <Button Grid.Row="1"
+                            Image="ic_keyboard_arrow_down_black_24dp.png"
+                            Command="{Binding MoveEntryDownCommand}"/>
+                </Grid>
+                <Label Grid.Column="1"
+                       Text="{Binding Entry.Item2}"
+                       Margin="5"
+                       Style="{StaticResource LeftLabelStyleMain}"/>
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

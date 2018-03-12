@@ -230,10 +230,21 @@ namespace MDPMS.Shared.ViewModels
                         });
                         break;
                     case @"rank_list":
-                        CustomFieldControls.Add(new CustomFieldRankListView
+                        var customFieldRankListViewModel = new CustomFieldRankListViewModel(customField.Name, customField.HelpText);
+                        customFieldRankListViewModel.Entries = new ObservableCollection<Tuple<int, string>>();
+                        var rankValues = customField.GetOptions();
+                        for (var j = 0; j < rankValues.Count; j++)
                         {
+                            customFieldRankListViewModel.Entries.Add(new Tuple<int, string>(j, rankValues[j]));
+                        }
+                        var rankListView = new CustomFieldRankListView
+                        {
+                            BindingContext = customFieldRankListViewModel,
                             Margin = new Thickness(15, 5)
-                        });
+                        };
+                        customFieldRankListViewModel.View = rankListView;
+                        CustomFieldControls.Add(rankListView);
+                        rankListView.OnAppearing();
                         break;
                     default:
                         // TODO: error log but for now just fail silently
@@ -404,6 +415,9 @@ namespace MDPMS.Shared.ViewModels
                         }
                         break;
                     case @"rank_list":
+                        var rankedValues = ((CustomFieldRankListViewModel)CustomFieldControls[i].BindingContext).GetRankedValues();
+                        newCustomValue.Value = rankedValues;
+                        ApplicationInstanceData.Data.CustomPersonValues.Add(newCustomValue);
                         break;
                     default:
                         break;
