@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using MDPMS.Shared.ViewModels;
 using Xamarin.Forms;
 
@@ -22,6 +24,18 @@ namespace MDPMS.Shared.Views
                 rtn.Add(new Tuple<string, bool>(vm.Content[i].Item2,value));
             }
             return rtn;
+        }
+
+        public string GetSelectedValues()
+        {
+            var rtn = new StringBuilder();
+            var values = GetValues().Where(a => a.Item2).ToList();
+            for (var i = 0; i < values.Count; i++)
+            {
+                if (i == (values.Count - 1)) rtn.Append(values[i].Item1);
+                else rtn.AppendLine(values[i].Item1);
+            }
+            return rtn.ToString();
         }
 
         public void OnAppearing()

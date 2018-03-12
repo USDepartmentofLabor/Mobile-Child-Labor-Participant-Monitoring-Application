@@ -363,16 +363,7 @@ namespace MDPMS.Shared.ViewModels
                         }
                         break;
                     case @"check_box":
-                        var checkBoxValue = @"";
-                        var checkBoxValues = ((CustomFieldSwitchArrayView)CustomFieldControls[i]).GetValues();
-                        for (var j = 0; j < checkBoxValues.Count; j++)
-                        {
-                            if (checkBoxValues[j].Item2)
-                            {                                
-                                checkBoxValue += checkBoxValues[j].Item1;
-                                if (j != checkBoxValues.Count - 1) checkBoxValue += "\r\n";
-                            }
-                        }
+                        var checkBoxValue = ((CustomFieldSwitchArrayView)CustomFieldControls[i]).GetSelectedValues();
                         if (!checkBoxValue.Equals(string.Empty))
                         {
                             newCustomValue.Value = checkBoxValue;
