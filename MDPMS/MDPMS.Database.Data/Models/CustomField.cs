@@ -58,7 +58,7 @@ namespace MDPMS.Database.Data.Models
         {
             var rtn = new List<string>();
             if (Options == null || Options.Equals(String.Empty)) return rtn;
-            var selectionParse = Options.Split();
+            var selectionParse = Options.Split(new string[] { "\r\n" }, StringSplitOptions.None);
             foreach (var selection in selectionParse)
             {
                 if (!selection.Equals(string.Empty)) rtn.Add(selection);
