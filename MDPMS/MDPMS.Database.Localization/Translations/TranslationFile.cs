@@ -120,6 +120,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"HouseholdMembers",@"Household Members");
             translation.Translations.Add(@"FollowUpDate", @"Follow Up Date");
             translation.Translations.Add(@"AlertMessageActionNotAllowedNoServices", @"Action not allowed, no services exist");
+            translation.Translations.Add(@"Version", @"Version");
+            translation.Translations.Add(@"APK", @"APK");
             return translation;
         }
 
@@ -223,6 +225,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"HouseholdMembers", @"Los miembros del hogar");
             translation.Translations.Add(@"FollowUpDate", @"Fecha de seguimiento");
             translation.Translations.Add(@"AlertMessageActionNotAllowedNoServices", @"Acción no permitida, no hay servicios");
+            translation.Translations.Add(@"Version", @"Versión");
+            translation.Translations.Add(@"APK", @"APK");
             return translation;
         }
     }     
