@@ -47,6 +47,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PlayStoreAPKs", "PlayStoreAPKs", "{031A5046-2949-4CE9-8A92-354BA9CD1960}"
 	ProjectSection(SolutionItems) = preProject
 		mDPMSALPHA_1_0.apk = mDPMSALPHA_1_0.apk
+		mDPMSALPHA_1_1.apk = mDPMSALPHA_1_1.apk
 	EndProjectSection
 EndProject
 Global
