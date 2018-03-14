@@ -4,7 +4,7 @@ namespace MDPMS.Shared.ViewModels
 {
     public class CustomFieldDoubleValueViewModel : ViewModelBase
     {
-        public double EntryValue { get; set; }
+        public string EntryValue { get; set; }
         public string Name { get; set; }
         public string HelpText { get; set; }
 
@@ -12,6 +12,14 @@ namespace MDPMS.Shared.ViewModels
         {
             Name = name;
             HelpText = helpText;
+        }
+
+        public double? GetDoubleValue()
+        {
+            if (EntryValue == null || EntryValue.Equals(@"")) return null;
+            double rtnValue = 0.0;
+            if (double.TryParse(EntryValue, out rtnValue)) return rtnValue;
+            return null;
         }
     }
 }

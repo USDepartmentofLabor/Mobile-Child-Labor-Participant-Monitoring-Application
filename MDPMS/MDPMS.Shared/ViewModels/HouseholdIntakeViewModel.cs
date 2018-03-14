@@ -256,12 +256,10 @@ namespace MDPMS.Shared.ViewModels
                         }
                         break;
                     case @"number":
-                        // TODO: saves zero values on no data entered, add value was changed bool to see if value is needed?
-                        var numberValue = ((CustomFieldDoubleValueViewModel)CustomFieldControls[i].BindingContext).EntryValue;
-                        var numberValueString = numberValue.ToString();
-                        if (numberValueString != null && !numberValueString.Equals(string.Empty))
+                        var numberValue = ((CustomFieldDoubleValueViewModel)CustomFieldControls[i].BindingContext).GetDoubleValue();
+                        if (numberValue != null)
                         {
-                            newCustomValue.Value = numberValueString;
+                            newCustomValue.Value = numberValue.ToString();
                             ApplicationInstanceData.Data.CustomHouseholdValues.Add(newCustomValue);
                         }
                         break;
