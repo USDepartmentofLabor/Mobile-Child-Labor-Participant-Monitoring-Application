@@ -35,6 +35,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Continue", @"Continue");
             translation.Translations.Add(@"SelectLocalization", @"Select Localization");
             translation.Translations.Add(@"Home", @"Home");
+            translation.Translations.Add(@"Household", @"Household");
             translation.Translations.Add(@"Households", @"Households");
             translation.Translations.Add(@"Settings", @"Settings");
             translation.Translations.Add(@"About", @"About");
@@ -140,6 +141,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Continue", @"Continuar");
             translation.Translations.Add(@"SelectLocalization", @"Seleccionar localización");
             translation.Translations.Add(@"Home", @"Casa");
+            translation.Translations.Add(@"Household", @"Casa");
             translation.Translations.Add(@"Households", @"Hogares");
             translation.Translations.Add(@"Settings", @"Configuraciones");
             translation.Translations.Add(@"About", @"Acerca de");
@@ -245,6 +247,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Continue", @"Continuer");
             translation.Translations.Add(@"SelectLocalization", @"Sélectionner la localisation");
             translation.Translations.Add(@"Home", @"Accueil");
+            translation.Translations.Add(@"Household", @"Ménage");
             translation.Translations.Add(@"Households", @"Ménages");
             translation.Translations.Add(@"Settings", @"Paramètres");
             translation.Translations.Add(@"About", @"Sur");
