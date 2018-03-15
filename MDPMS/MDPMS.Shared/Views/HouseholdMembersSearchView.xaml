@@ -9,6 +9,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"/>
                 <RowDefinition/>
+                <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
@@ -102,6 +103,20 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                       Text="{Binding HouseholdMembers.Count}"
+                       VerticalOptions="End"
+                       HorizontalOptions="Center"/>
+                <Label Grid.Row="1"
+                       Text="{Binding BeneficiaryNoun}"
+                       VerticalOptions="Start"
+                       HorizontalOptions="Center"/>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
