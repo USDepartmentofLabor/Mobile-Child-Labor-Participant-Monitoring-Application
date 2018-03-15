@@ -124,6 +124,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"AlertMessageActionNotAllowedNoServices", @"Action not allowed, no services exist");
             translation.Translations.Add(@"Version", @"Version");
             translation.Translations.Add(@"APK", @"APK");
+            translation.Translations.Add(@"Beneficiary", @"Beneficiary");
+            translation.Translations.Add(@"Beneficiaries", @"Beneficiaries");
             return translation;
         }
 
@@ -230,6 +232,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"AlertMessageActionNotAllowedNoServices", @"Acción no permitida, no hay servicios");
             translation.Translations.Add(@"Version", @"Versión");
             translation.Translations.Add(@"APK", @"APK");
+            translation.Translations.Add(@"Beneficiary", @"Beneficiario");
+            translation.Translations.Add(@"Beneficiaries", @"Beneficiarios");
             return translation;
         }
 
@@ -336,6 +340,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"AlertMessageActionNotAllowedNoServices", @"Action non autorisée, aucun service n'existe");
             translation.Translations.Add(@"Version", @"Version");
             translation.Translations.Add(@"APK", @"APK");
+            translation.Translations.Add(@"Beneficiary", @"Bénéficiaire");
+            translation.Translations.Add(@"Beneficiaries", @"Les bénéficiaires");
             return translation;
         }
     }     
