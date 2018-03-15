@@ -40,9 +40,29 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Grid.Row="2"
-                    Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AddNewHousehold]}"
-                    Command="{Binding NavigateToAddNewHouseholdCommand}"/>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                        Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AddNewHousehold]}"
+                        Command="{Binding NavigateToAddNewHouseholdCommand}"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0"
+                           Text="{Binding Households.Count}"
+                           VerticalOptions="End"
+                           HorizontalOptions="Center"/>
+                    <Label Grid.Row="1"
+                           Text="{Binding HouseholdNoun}"
+                           VerticalOptions="Start"
+                           HorizontalOptions="Center"/>
+                </Grid>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

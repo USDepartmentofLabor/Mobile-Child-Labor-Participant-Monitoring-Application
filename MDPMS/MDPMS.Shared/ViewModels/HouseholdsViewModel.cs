@@ -15,6 +15,7 @@ namespace MDPMS.Shared.ViewModels
         public ObservableCollection<Household> Households { get; set; }
         public Household SelectedHousehold { get; set; } = null;
         public Command NavigateToAddNewHouseholdCommand { get; set; }
+        public string HouseholdNoun { get; set; }
 
         private bool _isRefreshing;
         public bool IsRefreshing
@@ -61,6 +62,10 @@ namespace MDPMS.Shared.ViewModels
             if (Households.Any()) SelectedHousehold = Households.First();
             OnPropertyChanged(nameof(Households));
             OnPropertyChanged(nameof(SelectedHousehold));
+
+            HouseholdNoun = Households.Count().Equals(1) ?
+                ApplicationInstanceData.SelectedLocalization.Translations[@"Household"] :
+                ApplicationInstanceData.SelectedLocalization.Translations[@"Households"];
         }
 
         private void ExecuteNavigateToAddNewHouseholdCommand()
