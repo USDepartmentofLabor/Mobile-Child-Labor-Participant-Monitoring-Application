@@ -52,7 +52,7 @@
                                 </Grid.RowDefinitions>                                
                                 <!--    TEMPLATE_LAYOUT:
                                         row # 1 = { HHM_id  |   HHM_name    |   HHM_age     }
-                                        row # 2 = {         |               |   HHM_gender( }  -->
+                                        row # 2 = {    |    |      |        |   HHM_gender  }  -->
                                 <Image Grid.Row="0"
                                        Grid.RowSpan="2"
                                        Grid.Column="0"
