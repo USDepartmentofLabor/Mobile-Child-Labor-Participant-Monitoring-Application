@@ -88,9 +88,9 @@ namespace MDPMS.Shared.ViewModels
             FirstNameGivenNameValue = person.FirstName;
             MiddleNameValue = person.MiddleName;
             LastNameFamilyNameValue = person.LastName;
-            IntakeDateValue = person.IntakeDate == null ? @"" : person.IntakeDate.ToString();
+            IntakeDateValue = person.IntakeDate == null ? @"" : ((DateTime)person.IntakeDate).ToShortDateString();
             GenderValue = person.Gender == null ? @"" : person.Gender.GenderReadable;
-            DateOfBirthValue = person.DateOfBirth == null ? @"" : person.DateOfBirth.ToString();
+            DateOfBirthValue = person.DateOfBirth == null ? @"" : ((DateTime)person.DateOfBirth).ToShortDateString();
             IsTheBirthdayAnApproximateDateValue = person.DateOfBirthIsApproximate.ToString();
             AgeValue = person.DateOfBirth == null ? @"" : (DateTime.UtcNow.Year - ((DateTime)person.DateOfBirth).Year).ToString();
             
