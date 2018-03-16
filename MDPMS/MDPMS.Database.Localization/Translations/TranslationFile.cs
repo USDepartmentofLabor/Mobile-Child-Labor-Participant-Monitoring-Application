@@ -127,6 +127,10 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"APK", @"APK");
             translation.Translations.Add(@"Beneficiary", @"Beneficiary");
             translation.Translations.Add(@"Beneficiaries", @"Beneficiaries");
+            translation.Translations.Add(@"Male", @"Male");
+            translation.Translations.Add(@"Female", @"Female");
+            translation.Translations.Add(@"SelectGender", @"Select Gender");
+            translation.Translations.Add(@"SelectRelationship", @"Select Relationship");
             return translation;
         }
 
@@ -235,6 +239,10 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"APK", @"APK");
             translation.Translations.Add(@"Beneficiary", @"Beneficiario");
             translation.Translations.Add(@"Beneficiaries", @"Beneficiarios");
+            translation.Translations.Add(@"Male", @"Masculino");
+            translation.Translations.Add(@"Female", @"Hembra");
+            translation.Translations.Add(@"SelectGender", @"Seleccione género");
+            translation.Translations.Add(@"SelectRelationship", @"Seleccionar relación");
             return translation;
         }
 
@@ -343,6 +351,10 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"APK", @"APK");
             translation.Translations.Add(@"Beneficiary", @"Bénéficiaire");
             translation.Translations.Add(@"Beneficiaries", @"Les bénéficiaires");
+            translation.Translations.Add(@"Male", @"Mâle");
+            translation.Translations.Add(@"Female", @"Femelle");
+            translation.Translations.Add(@"SelectGender", @"Sélectionnez le sexe");
+            translation.Translations.Add(@"SelectRelationship", @"Sélectionner une relation");
             return translation;
         }
 
@@ -451,6 +463,10 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"APK", @"APK");
             translation.Translations.Add(@"Beneficiary", @"Beneficiário");
             translation.Translations.Add(@"Beneficiaries", @"Beneficiários");
+            translation.Translations.Add(@"Male", @"Masculino");
+            translation.Translations.Add(@"Female", @"Fêmea");
+            translation.Translations.Add(@"SelectGender", @"Selecione gênero");
+            translation.Translations.Add(@"SelectRelationship", @"Selecione Relacionamento");
             return translation;
         }
     }     
