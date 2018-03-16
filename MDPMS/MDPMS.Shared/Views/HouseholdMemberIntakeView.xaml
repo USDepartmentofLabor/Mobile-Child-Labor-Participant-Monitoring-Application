@@ -179,48 +179,47 @@
                                    Text="{Binding RelationshipOther, Mode=TwoWay}"/>
                         </Grid>
                         <Label Grid.Row="9"
-                               Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[WorkActivitiesQuestion]}"/>
+                               Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[WorkActivitiesQuestion]}"
+                               Margin="15"/>
                         <StackLayout Grid.Row="10"
                                      x:Name="DynamicWorkActivities"
                                      HorizontalOptions="FillAndExpand"
                                      VerticalOptions="StartAndExpand"/>
                         <Label Grid.Row="11"
                                Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[WorkActivitiesReturningQuestion]}"
-                               Margin="5"
-                               Style="{StaticResource LeftLabelStyleMain}"/>
+                               Margin="15"/>
                         <Switch Grid.Row="12"
                                 IsToggled="{Binding WorkActivityNoActivityQuestionAnswer, Mode=TwoWay}"
                                 HorizontalOptions="CenterAndExpand"/>
                         <Label Grid.Row="13"
                                Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[WorkActivitiesHoursEngagedQuestion]}"
-                               Margin="5"
-                               Style="{StaticResource LeftLabelStyleMain}"/>
+                               Margin="15"/>
                         <Entry Grid.Row="14"
                                Text="{Binding WorkActivityHoursEngaged, Mode=TwoWay}"
                                Keyboard="Numeric"/>
                         <Label Grid.Row="15"
-                               Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HazardousConditionsQuestion]}"/>
+                               Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HazardousConditionsQuestion]}"
+                               Margin="15"/>
                         <StackLayout Grid.Row="16"
                                      x:Name="DynamicHazardousConditions"
                                      HorizontalOptions="FillAndExpand"
                                      VerticalOptions="StartAndExpand"/>
                         <Label Grid.Row="17"
-                               Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HouseholdTasksQuestion]}"/>
+                               Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HouseholdTasksQuestion]}"
+                               Margin="15"/>
                         <StackLayout Grid.Row="18"
                                      x:Name="DynamicHouseholdTasks"
                                      HorizontalOptions="FillAndExpand"
                                      VerticalOptions="StartAndExpand"/>
                         <Label Grid.Row="19"
                                Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HouseholdTasksHoursEngagedQuestion]}"
-                               Margin="5"
-                               Style="{StaticResource LeftLabelStyleMain}"/>
+                               Margin="15"/>
                         <Entry Grid.Row="20"
                                Text="{Binding HouseholdTasksHoursEngaged, Mode=TwoWay}"
                                Keyboard="Numeric"/>
                         <Label Grid.Row="21"
                                Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AreYouEnrolledInSchoolAndOrCollege]}"
-                               Margin="5"
-                               Style="{StaticResource LeftLabelStyleMain}"/>
+                               Margin="15"/>
                         <Switch Grid.Row="22"
                                 IsToggled="{Binding EnrolledInSchoolCollege, Mode=TwoWay}"
                                 HorizontalOptions="CenterAndExpand"/>
