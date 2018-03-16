@@ -17,7 +17,8 @@ namespace MDPMS.Database.Localization.Translations
             {
                 GetTranslationValues_en_English(),
                 GetTranslationValues_es_Español(),
-                GetTranslationValues_fr_Français()
+                GetTranslationValues_fr_Français(),
+                GetTranslationValues_pt_Português()
             };
         }
         
@@ -342,6 +343,114 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"APK", @"APK");
             translation.Translations.Add(@"Beneficiary", @"Bénéficiaire");
             translation.Translations.Add(@"Beneficiaries", @"Les bénéficiaires");
+            return translation;
+        }
+
+        public static Translation GetTranslationValues_pt_Português()
+        {
+            var translation = new Translation
+            {
+                Abbreviation = @"pt",
+                Name = @"Português",
+                Translations = new Dictionary<string, string>()
+            };
+            translation.Translations.Add(@"ProjectName", @"Sistema de monitoramento direto do participante");
+            translation.Translations.Add(@"Mobile", @"Móvel");
+            translation.Translations.Add(@"ProjectPhrase", @"Quanto mais nos conectarmos, melhor será.");
+            translation.Translations.Add(@"Continue", @"Continuar");
+            translation.Translations.Add(@"SelectLocalization", @"Selecionar localização");
+            translation.Translations.Add(@"Home", @"Casa");
+            translation.Translations.Add(@"Household", @"Casa");
+            translation.Translations.Add(@"Households", @"Famílias");
+            translation.Translations.Add(@"Settings", @"Configurações");
+            translation.Translations.Add(@"About", @"Sobre");
+            translation.Translations.Add(@"ApiKey", @"Chave API");
+            translation.Translations.Add(@"Sync", @"Sincronizar");
+            translation.Translations.Add(@"Syncing", @"Sincronização");
+            translation.Translations.Add(@"Obtained", @"Obtido");
+            translation.Translations.Add(@"Username", @"Nome de usuário");
+            translation.Translations.Add(@"Password", @"Senha");
+            translation.Translations.Add(@"True", @"Verdade");
+            translation.Translations.Add(@"False", @"Falso");
+            translation.Translations.Add(@"Yes", @"Sim");
+            translation.Translations.Add(@"No", @"Não");
+            translation.Translations.Add(@"Error", @"Erro");
+            translation.Translations.Add(@"GetNewApiKey", @"Obter nova chave da API");
+            translation.Translations.Add(@"ShowPassword", @"Mostrar Senha");
+            translation.Translations.Add(@"Authenticate", @"Autenticar");
+            translation.Translations.Add(@"OK", @"Está bem");
+            translation.Translations.Add(@"Cancel", @"Cancelar");
+            translation.Translations.Add(@"Alert", @"Alerta");
+            translation.Translations.Add(@"ConnectivityProblem", @"Problema de conectividade");
+            translation.Translations.Add(@"AddNewHousehold", @"Adicionar nova casa");
+            translation.Translations.Add(@"Submit", @"Enviar");
+            translation.Translations.Add(@"AddIncomeSource", @"Adicionar fonte de rendimento");
+            translation.Translations.Add(@"AddHouseholdMember", @"Adicionar membro do agregado familiar");
+            translation.Translations.Add(@"IntakeDate", @"Data de entrada");
+            translation.Translations.Add(@"HouseholdName", @"Nome familiar");
+            translation.Translations.Add(@"AddressLine1", @"Endereço Linha 1");
+            translation.Translations.Add(@"AddressLine2", @"Endereço Linha 2");
+            translation.Translations.Add(@"ZipCode", @"Código postal");
+            translation.Translations.Add(@"SuburbNeighborhood", @"Suburbano / Bairro");
+            translation.Translations.Add(@"City", @"Cidade");
+            translation.Translations.Add(@"State", @"Estado");
+            translation.Translations.Add(@"County", @"Município");
+            translation.Translations.Add(@"Country", @"País");
+            translation.Translations.Add(@"AddressInfo", @"Informação de endereço");
+            translation.Translations.Add(@"NameOfProductOrService", @"Nome do Produto ou Serviço");
+            translation.Translations.Add(@"EstimatedVolumeProduced", @"Volume Estimado Produzido");
+            translation.Translations.Add(@"EstimatedVolumeSold", @"Volume Estimado Vendido");
+            translation.Translations.Add(@"UnitOfMeasure", @"Unidade de medida");
+            translation.Translations.Add(@"EstimatedIncome", @"Renda estimada");
+            translation.Translations.Add(@"Currency", @"Moeda");
+            translation.Translations.Add(@"FirstNameGivenName", @"Nome");
+            translation.Translations.Add(@"LastNameFamilyName", @"Sobrenome");
+            translation.Translations.Add(@"MiddleName", @"Nome do meio");
+            translation.Translations.Add(@"Gender", @"Gênero");
+            translation.Translations.Add(@"DateOfBirth", @"Data de nascimento");
+            translation.Translations.Add(@"IsTheBirthdayAnApproximateDate", @"O aniversário é uma data aproximada?");
+            translation.Translations.Add(@"Relationship", @"Relação");
+            translation.Translations.Add(@"RelationshipOther", @"Outro relacionamento");
+            translation.Translations.Add(@"WorkActivitiesQuestion", @"Durante a semana passada, você fez alguma das seguintes atividades, mesmo por apenas uma hora?");
+            translation.Translations.Add(@"WorkActivitiesReturningQuestion", @"Embora você não tenha feito nenhuma dessas atividades na semana passada, você tem um emprego, negócios ou outras atividades econômicas ou agrícolas que você certamente irá retornar?");
+            translation.Translations.Add(@"WorkActivitiesHoursEngagedQuestion", @"Durante a semana passada, por quantas horas você participou dessas atividades?");
+            translation.Translations.Add(@"HazardousConditionsQuestion", @"Você esteve exposto a qualquer um dos seguintes no trabalho?");
+            translation.Translations.Add(@"HouseholdTasksQuestion", @"Durante a semana passada, você fez alguma das tarefas abaixo para esta casa?");
+            translation.Translations.Add(@"HouseholdTasksHoursEngagedQuestion", @"Durante cada dia da semana passada, por quantas horas você participou dessas atividades?");
+            translation.Translations.Add(@"AreYouEnrolledInSchoolAndOrCollege", @"Você está matriculado na escola e / ou na faculdade?");
+            translation.Translations.Add(@"DPMSURL", @"URL do DPMS");
+            translation.Translations.Add(@"ErrorNameCanNotBeBlank", @"O nome não pode estar em branco");
+            translation.Translations.Add(@"ErrorHouseholdNameCanNotBeBlank", @"O nome do agregado familiar não pode estar em branco");
+            translation.Translations.Add(@"ErrorIncomeSourceNameCanNotBeBlank", @"O nome da fonte de renda não pode estar em branco");
+            translation.Translations.Add(@"ErrorLastNameCanNotBeBlank", @"O apelido não pode estar em branco");
+            translation.Translations.Add(@"ErrorFirstNameCanNotBeBlank", @"O primeiro nome não pode estar em branco");
+            translation.Translations.Add(@"ErrorGenderMustBeSelected", @"Um gênero deve ser selecionado");
+            translation.Translations.Add(@"ErrorSyncError", @"Erro de sincronização");
+            translation.Translations.Add(@"SyncSuccessful", @"Sync Successful");
+            translation.Translations.Add(@"Members", @"Membros");
+            translation.Translations.Add(@"HouseholdMemberId", @"ID do membro do agregado familiar");
+            translation.Translations.Add(@"Age", @"Era");
+            translation.Translations.Add(@"AssignService", @"Atribuir Serviço");
+            translation.Translations.Add(@"Service", @"Serviço");
+            translation.Translations.Add(@"StartDate", @"Data de início");
+            translation.Translations.Add(@"EndDate", @"Data final");
+            translation.Translations.Add(@"Hours", @"Horas");
+            translation.Translations.Add(@"Notes", @"Notas");
+            translation.Translations.Add(@"SelectService", @"Selecione Serviço");
+            translation.Translations.Add(@"Validation", @"Validação");
+            translation.Translations.Add(@"ValidationErrorMessageNoServiceSelected", @"Selecione um serviço");
+            translation.Translations.Add(@"ValidationErrorMessageStartDateIsAfterEndDate", @"A data de início é após a data de término");
+            translation.Translations.Add(@"ValidationErrorMessageHoursInvalid", @"O valor das horas é inválido");
+            translation.Translations.Add(@"AlertMessageActionNotAllowedUntilInitialSyncIsPerformed", @"Ação não é permitida até que a sincronização inicial seja realizada");
+            translation.Translations.Add(@"AlertMessageSyncCancelledNoInternetConnectivity", @"Sincronização cancelada, não há conectividade com a internet");
+            translation.Translations.Add(@"FollowUp", @"Acompanhamento");
+            translation.Translations.Add(@"HouseholdMembers", @"Membros do lar");
+            translation.Translations.Add(@"FollowUpDate", @"Data de acompanhamento");
+            translation.Translations.Add(@"AlertMessageActionNotAllowedNoServices", @"Ação não permitida, nenhum serviço existe");
+            translation.Translations.Add(@"Version", @"Versão");
+            translation.Translations.Add(@"APK", @"APK");
+            translation.Translations.Add(@"Beneficiary", @"Beneficiário");
+            translation.Translations.Add(@"Beneficiaries", @"Beneficiários");
             return translation;
         }
     }     
