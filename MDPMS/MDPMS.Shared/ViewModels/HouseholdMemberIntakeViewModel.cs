@@ -97,18 +97,18 @@ namespace MDPMS.Shared.ViewModels
             
             BindableGenders = new ObservableCollection<Tuple<string, Gender>>
             {
-                new Tuple<string, Gender>(@"Select Gender", null),
+                new Tuple<string, Gender>(ApplicationInstanceData.SelectedLocalization.Translations[@"SelectGender"], null),
                 new Tuple<string, Gender>(@"", null)
             };
             foreach (var gender in ApplicationInstanceData.Data.Genders.OrderBy(a => a.DpmsGenderNumber))
             {
-                BindableGenders.Add(new Tuple<string, Gender>(gender.GenderReadable, gender));
+                BindableGenders.Add(new Tuple<string, Gender>(ApplicationInstanceData.SelectedLocalization.Translations[gender.GenderReadable], gender));
             }
             SelectedBindableGender = BindableGenders.First();
 
             BindablePersonRelationships = new ObservableCollection<Tuple<string, PersonRelationship, bool>>
             {
-                new Tuple<string, PersonRelationship, bool>(@"Select Relationship", null, false),
+                new Tuple<string, PersonRelationship, bool>(ApplicationInstanceData.SelectedLocalization.Translations[@"SelectRelationship"], null, false),
                 new Tuple<string, PersonRelationship, bool>(@"", null, false)
             };
             foreach (var personRelationship in ApplicationInstanceData.Data.PersonRelationships.OrderBy(a => a.Code))
