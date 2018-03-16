@@ -131,6 +131,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Female", @"Female");
             translation.Translations.Add(@"SelectGender", @"Select Gender");
             translation.Translations.Add(@"SelectRelationship", @"Select Relationship");
+            translation.Translations.Add(@"OTHER", @"OTHER");
             return translation;
         }
 
@@ -243,6 +244,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Female", @"Hembra");
             translation.Translations.Add(@"SelectGender", @"Seleccione género");
             translation.Translations.Add(@"SelectRelationship", @"Seleccionar relación");
+            translation.Translations.Add(@"OTHER", @"OTRO");
             return translation;
         }
 
@@ -355,6 +357,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Female", @"Femelle");
             translation.Translations.Add(@"SelectGender", @"Sélectionnez le sexe");
             translation.Translations.Add(@"SelectRelationship", @"Sélectionner une relation");
+            translation.Translations.Add(@"OTHER", @"AUTRE");
             return translation;
         }
 
@@ -467,6 +470,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Female", @"Fêmea");
             translation.Translations.Add(@"SelectGender", @"Selecione gênero");
             translation.Translations.Add(@"SelectRelationship", @"Selecione Relacionamento");
+            translation.Translations.Add(@"OTHER", @"DE OUTROS");
             return translation;
         }
     }     
