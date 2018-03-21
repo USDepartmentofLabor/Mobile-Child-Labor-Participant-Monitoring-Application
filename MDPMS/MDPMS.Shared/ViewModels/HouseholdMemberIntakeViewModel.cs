@@ -395,11 +395,10 @@ namespace MDPMS.Shared.ViewModels
                         }
                         break;
                     case @"date":
-                        var dateValue = ((CustomFieldDateTimeValueViewModel)CustomFieldControls[i].BindingContext).EntryValue;
-                        var dateValueString = dateValue.ToString();
-                        if (dateValueString != null && !dateValueString.Equals(string.Empty))
+                        var dateValue = ((CustomFieldDateTimeValueViewModel)CustomFieldControls[i].BindingContext).DateValue;
+                        if (dateValue != null && !dateValue.ToString().Equals(string.Empty))
                         {
-                            newCustomValue.Value = dateValueString;
+                            newCustomValue.Value = dateValue.ToString();
                             ApplicationInstanceData.Data.CustomPersonValues.Add(newCustomValue);
                         }
                         break;

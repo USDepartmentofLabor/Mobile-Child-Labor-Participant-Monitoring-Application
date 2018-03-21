@@ -14,8 +14,26 @@
                    Font="Bold"/>
             <Label Grid.Row="1"
                    Text="{Binding HelpText}"/>
-            <DatePicker Grid.Row="2"
-                        Date="{Binding EntryValue, Mode=TwoWay}"/>
-        </Grid>        
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                        Text="{Binding DateValueReadable, Mode=OneWay}"
+                        Clicked="Handle_Clicked"/>
+                <DatePicker Grid.Column="0"
+                            x:Name="DatePickerControl"
+                            IsVisible="false"
+                            DateSelected="DateSelectedEventHandler"/>
+                <Button Grid.Column="1"
+                        Text="Today"
+                        Command="{Binding SetDateTodayCommand}"/>
+                <Button Grid.Column="2"
+                        Text="Clear"
+                        Command="{Binding ClearDateCommand}"/>
+            </Grid>
+        </Grid>
     </ContentView.Content>
 </ContentView>

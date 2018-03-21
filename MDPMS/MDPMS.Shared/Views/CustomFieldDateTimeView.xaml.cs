@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using MDPMS.Shared.ViewModels;
+using Xamarin.Forms;
 
 namespace MDPMS.Shared.Views
 {
@@ -7,6 +8,17 @@ namespace MDPMS.Shared.Views
         public CustomFieldDateTimeView()
         {
             InitializeComponent();
+        }
+
+        void DateSelectedEventHandler(object sender, DateChangedEventArgs e)
+        {
+            var vm = (CustomFieldDateTimeValueViewModel)BindingContext;
+            vm.SetDateValue(DatePickerControl.Date);
+        }
+
+        void Handle_Clicked(object sender, System.EventArgs e)
+        {
+            DatePickerControl.Focus();
         }
     }
 }
