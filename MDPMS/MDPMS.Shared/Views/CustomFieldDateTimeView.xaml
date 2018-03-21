@@ -22,7 +22,7 @@
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0"
                         Text="{Binding DateValueReadable, Mode=OneWay}"
-                        Clicked="Handle_Clicked"/>
+                        Clicked="DateValueButtonClicked"/>
                 <DatePicker Grid.Column="0"
                             x:Name="DatePickerControl"
                             IsVisible="false"

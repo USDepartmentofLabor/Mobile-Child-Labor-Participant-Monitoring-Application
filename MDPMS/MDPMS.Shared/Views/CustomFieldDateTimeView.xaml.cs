@@ -16,7 +16,7 @@ namespace MDPMS.Shared.Views
             vm.SetDateValue(DatePickerControl.Date);
         }
 
-        void Handle_Clicked(object sender, System.EventArgs e)
+        void DateValueButtonClicked(object sender, System.EventArgs e)
         {
             DatePickerControl.Focus();
         }
