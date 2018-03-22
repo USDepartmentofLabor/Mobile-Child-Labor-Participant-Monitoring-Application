@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Text;
+using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
 using MDPMS.Shared.Views;
+using Xamarin.Forms;
 
 namespace MDPMS.Shared.ViewModels
 {
     public class CustomFieldRankListViewModel : ViewModelBase
     {
+        public Command AddAnswerCommand { get; set; }
+        public Command ClearAnswerCommand { get; set; }
+
         public string Name { get; set; }
         public string HelpText { get; set; }
 
@@ -16,14 +21,21 @@ namespace MDPMS.Shared.ViewModels
 
         public CustomFieldRankListView View { get; set; }
 
-        public CustomFieldRankListViewModel(string name, string helpText)
+        public CustomFieldRankListViewModel(ApplicationInstanceData applicationInstanceData, string name, string helpText)
         {
+            ApplicationInstanceData = applicationInstanceData;
+
             Name = name;
             HelpText = helpText;
+
+            AddAnswerCommand = new Command(ExecuteAddAnswerCommand);
+            ClearAnswerCommand = new Command(ExecuteClearAnswerCommand);
         }
 
         public string GetRankedValues()
         {
+            if (!View.IsParticipating) return @"";
+
             var rtn = new StringBuilder();
             for (var i = 0; i < Entries.Count; i++)
             {
@@ -31,6 +43,18 @@ namespace MDPMS.Shared.ViewModels
                 else rtn.AppendLine(Entries[i].Item2);
             }
             return rtn.ToString();
+        }
+
+        private void ExecuteAddAnswerCommand()
+        {
+            View.IsParticipating = true;
+            View.Refresh();
+        }
+
+        private void ExecuteClearAnswerCommand()
+        {
+            View.IsParticipating = false;
+            View.Refresh();
         }
     }
 }

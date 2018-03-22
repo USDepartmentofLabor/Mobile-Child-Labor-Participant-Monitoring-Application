@@ -132,6 +132,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"SelectGender", @"Select Gender");
             translation.Translations.Add(@"SelectRelationship", @"Select Relationship");
             translation.Translations.Add(@"OTHER", @"OTHER");
+            translation.Translations.Add(@"AddAnswer", @"Add Answer");
+            translation.Translations.Add(@"RemoveAnswer", @"Remove Answer");
             return translation;
         }
 
@@ -245,6 +247,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"SelectGender", @"Seleccione género");
             translation.Translations.Add(@"SelectRelationship", @"Seleccionar relación");
             translation.Translations.Add(@"OTHER", @"OTRO");
+            translation.Translations.Add(@"AddAnswer", @"Agregar respuesta");
+            translation.Translations.Add(@"RemoveAnswer", @"Eliminar respuesta");
             return translation;
         }
 
@@ -358,6 +362,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"SelectGender", @"Sélectionnez le sexe");
             translation.Translations.Add(@"SelectRelationship", @"Sélectionner une relation");
             translation.Translations.Add(@"OTHER", @"AUTRE");
+            translation.Translations.Add(@"AddAnswer", @"Ajouter une réponse");
+            translation.Translations.Add(@"RemoveAnswer", @"Supprimer la réponse");
             return translation;
         }
 
@@ -471,6 +477,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"SelectGender", @"Selecione gênero");
             translation.Translations.Add(@"SelectRelationship", @"Selecione Relacionamento");
             translation.Translations.Add(@"OTHER", @"DE OUTROS");
+            translation.Translations.Add(@"AddAnswer", @"Adicionar Resposta");
+            translation.Translations.Add(@"RemoveAnswer", @"Remover Resposta");
             return translation;
         }
     }     

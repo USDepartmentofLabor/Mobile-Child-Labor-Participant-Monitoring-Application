@@ -207,7 +207,7 @@ namespace MDPMS.Shared.ViewModels
                         });
                         break;
                     case @"rank_list":
-                        var customFieldRankListViewModel = new CustomFieldRankListViewModel(customField.Name, customField.HelpText);
+                        var customFieldRankListViewModel = new CustomFieldRankListViewModel(ApplicationInstanceData, customField.Name, customField.HelpText);
                         customFieldRankListViewModel.Entries = new ObservableCollection<Tuple<int, string>>();
                         var rankValues = customField.GetOptions();
                         for (var j = 0; j < rankValues.Count; j++)
@@ -369,8 +369,11 @@ namespace MDPMS.Shared.ViewModels
                         break;
                     case @"rank_list":
                         var rankedValues = ((CustomFieldRankListViewModel)CustomFieldControls[i].BindingContext).GetRankedValues();
-                        newCustomValue.Value = rankedValues;
-                        ApplicationInstanceData.Data.CustomPersonFollowUpValues.Add(newCustomValue);
+                        if (!rankedValues.Equals(@""))
+                        {
+                            newCustomValue.Value = rankedValues;
+                            ApplicationInstanceData.Data.CustomPersonFollowUpValues.Add(newCustomValue);
+                        }
                         break;
                     default:
                         break;

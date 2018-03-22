@@ -25,7 +25,7 @@ namespace MDPMS.Shared.ViewModels
             {
                 ParentViewModel.Entries.Move(indexOfObject, indexOfObject - 1);
             }
-            ParentViewModel.View.OnAppearing();
+            ParentViewModel.View.Refresh();
         }
 
         private void ExecuteMoveEntryDownCommand()
@@ -35,7 +35,7 @@ namespace MDPMS.Shared.ViewModels
             {
                 ParentViewModel.Entries.Move(indexOfObject, indexOfObject + 1);
             }
-            ParentViewModel.View.OnAppearing();
+            ParentViewModel.View.Refresh();
         }
     }
 }
