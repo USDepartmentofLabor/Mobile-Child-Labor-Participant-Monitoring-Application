@@ -20,7 +20,7 @@
                    Style="{StaticResource AboutPageLabel}"/>
             <Label Grid.Column="1"
                    Grid.Row="0"
-                   Text="Alpha 1.1"
+                   Text="Alpha 1.2"
                    Style="{StaticResource AboutPageLabel}"/>
             <Label Grid.Column="0"
                    Grid.Row="1"
@@ -28,7 +28,7 @@
                    Style="{StaticResource AboutPageLabel}"/>
             <Label Grid.Column="1"
                    Grid.Row="1"
-                   Text="2"
+                   Text="3"
                    Style="{StaticResource AboutPageLabel}"/>
         </Grid>        
     </ContentPage.Content>
