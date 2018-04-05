@@ -422,7 +422,7 @@ namespace MDPMS.Shared.Workers
                                         dynamic jsonResponseParse = JsonConvert.DeserializeObject(putSuccess.Item2);
                                         if (jsonResponseParse.status.Value.ToString().Equals(@"success"))
                                         {
-                                            objectInstance.SetLastUpdatedAt(jsonResponseParse.updated_at.Value);
+                                            record.SetLastUpdatedAt(jsonResponseParse.updated_at.Value);
                                         }
                                         else
                                         {
