@@ -294,7 +294,7 @@ namespace MDPMS.Database.Data.Models
             HouseholdName = updateFrom.HouseholdName;
             IntakeDate = updateFrom.IntakeDate;
             AddressLine1 = updateFrom.AddressLine1;
-            AddressLine2 = updateFrom.AddressLine1;
+            AddressLine2 = updateFrom.AddressLine2;
             PostalCode = updateFrom.PostalCode;
             DependentLocality = updateFrom.DependentLocality;
             Locality = updateFrom.Locality;
