@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDPMS.Shared.Views.HouseholdMembersSearchView"
-             Title="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Beneficiaries]}"
+             Title="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Participants]}"
              Appearing="Handle_Appearing">
     <ContentPage.Content>
         <Grid>
@@ -103,7 +103,7 @@
                        VerticalOptions="End"
                        HorizontalOptions="Center"/>
                 <Label Grid.Row="1"
-                       Text="{Binding BeneficiaryNoun}"
+                       Text="{Binding HouseholdMemberNoun}"
                        VerticalOptions="Start"
                        HorizontalOptions="Center"/>
             </Grid>

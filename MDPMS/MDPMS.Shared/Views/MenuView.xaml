@@ -23,7 +23,7 @@
                     Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Households]}"
                     Command="{Binding NavigateToHouseholdsCommand}"/>
             <Button Grid.Row="3"
-                    Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Beneficiaries]}"
+                    Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Participants]}"
                     Command="{Binding NavigateToHouseholdMembersCommand}"/>
             <Button Grid.Row="4"
                     Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Sync]}"

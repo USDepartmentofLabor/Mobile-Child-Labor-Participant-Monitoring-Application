@@ -13,7 +13,7 @@ namespace MDPMS.Shared.ViewModels
 {
     public class HouseholdMembersSearchViewModel : ViewModelBase
     {
-        public string BeneficiaryNoun { get; set; }
+        public string HouseholdMemberNoun { get; set; }
         public string SearchText { get; set; } = @"";
         public ObservableCollection<HouseholdMemberSearchResultCellModel> HouseholdMembers { get; set; }
 
@@ -99,9 +99,9 @@ namespace MDPMS.Shared.ViewModels
             OnPropertyChanged(nameof(HouseholdMembers));
             OnPropertyChanged(nameof(SelectedHouseholdMember));
 
-            BeneficiaryNoun = HouseholdMembers.Count().Equals(1) ?
-                ApplicationInstanceData.SelectedLocalization.Translations[@"Beneficiary"] :
-                ApplicationInstanceData.SelectedLocalization.Translations[@"Beneficiaries"];
+            HouseholdMemberNoun = HouseholdMembers.Count().Equals(1) ?
+                ApplicationInstanceData.SelectedLocalization.Translations[@"Participant"] :
+                ApplicationInstanceData.SelectedLocalization.Translations[@"Participants"];
         }
 
         public void ExecuteAppearingCommand()

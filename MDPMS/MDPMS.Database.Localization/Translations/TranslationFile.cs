@@ -125,8 +125,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"AlertMessageActionNotAllowedNoServices", @"Action not allowed, no services exist");
             translation.Translations.Add(@"Version", @"Version");
             translation.Translations.Add(@"APK", @"APK");
-            translation.Translations.Add(@"Beneficiary", @"Beneficiary");
-            translation.Translations.Add(@"Beneficiaries", @"Beneficiaries");
+            translation.Translations.Add(@"Participant", @"Participant");
+            translation.Translations.Add(@"Participants", @"Participants");
             translation.Translations.Add(@"Male", @"Male");
             translation.Translations.Add(@"Female", @"Female");
             translation.Translations.Add(@"SelectGender", @"Select Gender");
@@ -240,8 +240,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"AlertMessageActionNotAllowedNoServices", @"Acción no permitida, no hay servicios");
             translation.Translations.Add(@"Version", @"Versión");
             translation.Translations.Add(@"APK", @"APK");
-            translation.Translations.Add(@"Beneficiary", @"Beneficiario");
-            translation.Translations.Add(@"Beneficiaries", @"Beneficiarios");
+            translation.Translations.Add(@"Participant", @"Partícipe");
+            translation.Translations.Add(@"Participants", @"Participantes");
             translation.Translations.Add(@"Male", @"Masculino");
             translation.Translations.Add(@"Female", @"Hembra");
             translation.Translations.Add(@"SelectGender", @"Seleccione género");
@@ -355,8 +355,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"AlertMessageActionNotAllowedNoServices", @"Action non autorisée, aucun service n'existe");
             translation.Translations.Add(@"Version", @"Version");
             translation.Translations.Add(@"APK", @"APK");
-            translation.Translations.Add(@"Beneficiary", @"Bénéficiaire");
-            translation.Translations.Add(@"Beneficiaries", @"Les bénéficiaires");
+            translation.Translations.Add(@"Participant", @"Participant");
+            translation.Translations.Add(@"Participants", @"Participants");
             translation.Translations.Add(@"Male", @"Mâle");
             translation.Translations.Add(@"Female", @"Femelle");
             translation.Translations.Add(@"SelectGender", @"Sélectionnez le sexe");
@@ -470,8 +470,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"AlertMessageActionNotAllowedNoServices", @"Ação não permitida, nenhum serviço existe");
             translation.Translations.Add(@"Version", @"Versão");
             translation.Translations.Add(@"APK", @"APK");
-            translation.Translations.Add(@"Beneficiary", @"Beneficiário");
-            translation.Translations.Add(@"Beneficiaries", @"Beneficiários");
+            translation.Translations.Add(@"Participant", @"Participante");
+            translation.Translations.Add(@"Participants", @"Participantes");
             translation.Translations.Add(@"Male", @"Masculino");
             translation.Translations.Add(@"Female", @"Fêmea");
             translation.Translations.Add(@"SelectGender", @"Selecione gênero");
