@@ -47,7 +47,8 @@
                        Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[MemberSearchResultsGridHeaderTitleFirstMiddleName]}"/>
                 <Label Grid.Column="4"
                        Grid.ColumnSpan="2"
-                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[MemberSearchResultsGridHeaderTitleBio]}"/>
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[MemberSearchResultsGridHeaderTitleBio]}"
+                       HorizontalTextAlignment="Center"/>
             </Grid>
             <ListView Grid.Row="2"
                       ItemsSource="{Binding HouseholdMembers}"
@@ -100,7 +101,8 @@
                                 <Label Grid.Row="0"
                                        Grid.Column="5"
                                        Text="{Binding HouseholdMemberAge}"
-                                       TextColor="Black"/>
+                                       TextColor="Black"
+                                       HorizontalTextAlignment="Center"/>
                                 <Label Grid.Row="1"
                                        Grid.Column="4"
                                        Grid.ColumnSpan="2"
