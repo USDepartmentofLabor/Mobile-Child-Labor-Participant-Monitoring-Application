@@ -35,7 +35,8 @@
                     <ColumnDefinition Width="48"/>
                     <ColumnDefinition/> 
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="48"/>
+                    <ColumnDefinition Width="24"/>
+                    <ColumnDefinition Width="24"/>
                     <ColumnDefinition Width="5"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="1"
@@ -45,6 +46,7 @@
                 <Label Grid.Column="3"
                        Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[MemberSearchResultsGridHeaderTitleFirstMiddleName]}"/>
                 <Label Grid.Column="4"
+                       Grid.ColumnSpan="2"
                        Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[MemberSearchResultsGridHeaderTitleBio]}"/>
             </Grid>
             <ListView Grid.Row="2"
@@ -62,7 +64,8 @@
                                     <ColumnDefinition Width="48"/>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
-                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="24"/>
+                                    <ColumnDefinition Width="24"/>
                                     <ColumnDefinition Width="5"/>                                                                       
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
@@ -90,14 +93,20 @@
                                        Text="{Binding HouseholdMemberFirstAndMiddleName}"
                                        TextColor="Black"
                                        VerticalTextAlignment="Center"/>
-                                <Label Grid.Row="0"
+                                <Image Grid.Row="0"
                                        Grid.Column="4"
+                                       Source="ic_date_range_black_24dp.png"
+                                       Opacity="0.2"/>
+                                <Label Grid.Row="0"
+                                       Grid.Column="5"
                                        Text="{Binding HouseholdMemberAge}"
                                        TextColor="Black"/>
                                 <Label Grid.Row="1"
                                        Grid.Column="4"
+                                       Grid.ColumnSpan="2"
                                        Text="{Binding HouseholdMemberGender}"
-                                       TextColor="Black"/>
+                                       TextColor="Black"
+                                       HorizontalTextAlignment="Center"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
