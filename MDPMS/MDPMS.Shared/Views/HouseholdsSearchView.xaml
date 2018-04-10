@@ -7,6 +7,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition/>
                 <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
@@ -27,7 +28,27 @@
                         VerticalOptions="Center"
                         Command="{Binding SearchCommand}"/>
             </Grid>
-            <ListView Grid.Row="1"
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="48"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="5"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="1"
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[GridHeaderTitleID]}"/>
+                <Label Grid.Column="2"
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HouseholdName]}"/>
+                <Label Grid.Column="3"
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Youth]}"
+                       HorizontalTextAlignment="Center"/>
+                <Label Grid.Column="4"
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Adult]}"
+                       HorizontalTextAlignment="Center"/>
+            </Grid>
+            <ListView Grid.Row="2"
                       ItemsSource="{Binding Households}"
                       SelectedItem="{Binding SelectedHousehold, Mode=TwoWay}"
                       IsPullToRefreshEnabled="True"
@@ -35,12 +56,40 @@
                       IsRefreshing="{Binding IsRefreshing}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding HouseholdName}"
-                                  TextColor="Black"/>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="70"/>
+                                    <ColumnDefinition Width="70"/>
+                                    <ColumnDefinition Width="5"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="1"
+                                       Text="{Binding Household.ExternalId}"
+                                       TextColor="Black"
+                                       VerticalTextAlignment="Center"/>
+                                <Label Grid.Column="2"
+                                       Text="{Binding Household.HouseholdName}"
+                                       TextColor="Black"
+                                       VerticalTextAlignment="Center"/>
+                                <Label Grid.Column="3"
+                                       Text="{Binding BeneficiaryCount}"
+                                       TextColor="Black"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center"/>
+                                <Label Grid.Column="4"
+                                       Text="{Binding AdultCount}"
+                                       TextColor="Black"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center"/>
+                            </Grid>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="120"/>
