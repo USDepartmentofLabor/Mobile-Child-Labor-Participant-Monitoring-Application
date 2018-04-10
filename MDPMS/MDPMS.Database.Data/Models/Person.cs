@@ -128,6 +128,28 @@ namespace MDPMS.Database.Data.Models
         /// </summary>
         public DateTime? GpsPositionTime { get; set; }
 
+        public bool IsBeneficiary()
+        {
+            // Beneficiary is defined as age range either at the current time or time of intake
+            var isBeneficiaryNow = IsBeneficiaryBasedOnDate(DateTime.Now);
+            if (IntakeDate != null) return WasBeneficiaryAtTimeOfIntake() | isBeneficiaryNow;
+            return isBeneficiaryNow;
+        }
+
+        public bool WasBeneficiaryAtTimeOfIntake()
+        {
+            if (IntakeDate == null) return false;
+            return IsBeneficiaryBasedOnDate((DateTime)IntakeDate);
+        }
+
+        public bool IsBeneficiaryBasedOnDate(DateTime dateTime)
+        {
+            // aged 5 to 17 based on a date
+            if (DateOfBirth == null) return false;
+            return (DateOfBirth >= new DateTime(dateTime.Year - 17, dateTime.Month, dateTime.Day)
+                    & DateOfBirth <= new DateTime(dateTime.Year - 5, dateTime.Month, dateTime.Day));
+        }
+
         public virtual ICollection<PersonHazardousCondition> PeopleHazardousConditions { get; set; } = new List<PersonHazardousCondition>();
         public virtual ICollection<PersonWorkActivity> PeopleWorkActivities { get; set; } = new List<PersonWorkActivity>();
         public virtual ICollection<PersonHouseholdTask> PeopleHouseholdTasks { get; set; } = new List<PersonHouseholdTask>();
