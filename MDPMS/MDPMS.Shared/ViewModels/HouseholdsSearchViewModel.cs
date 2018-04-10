@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace MDPMS.Shared.ViewModels
 {
-    public class HouseholdsViewModel : ViewModelBase
+    public class HouseholdsSearchViewModel : ViewModelBase
     {
         public string SearchText { get; set; } = @"";
         public ObservableCollection<Household> Households { get; set; }
@@ -43,7 +43,7 @@ namespace MDPMS.Shared.ViewModels
 
         public Command SearchCommand { get; set; }
 
-        public HouseholdsViewModel(ApplicationInstanceData applicationInstanceData)
+        public HouseholdsSearchViewModel(ApplicationInstanceData applicationInstanceData)
         {
             ApplicationInstanceData = applicationInstanceData;
             SearchCommand = new Command(LoadHouseholds);

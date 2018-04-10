@@ -305,7 +305,7 @@ namespace MDPMS.Shared.ViewModels
 
         private void Exit()
         {
-            ApplicationInstanceData.GoToView(new HouseholdsView { BindingContext = new HouseholdsViewModel(ApplicationInstanceData) });
+            ApplicationInstanceData.GoToView(new HouseholdsSearchView { BindingContext = new HouseholdsSearchViewModel(ApplicationInstanceData) });
         }
 
         private void ExecuteAddIncomeSourceCommand()

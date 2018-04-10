@@ -42,9 +42,9 @@ namespace MDPMS.Shared.ViewModels
 
         private void ExecuteNavigateToHouseholdsCommand()
         {
-            ApplicationInstanceData.GoToView(new HouseholdsView
+            ApplicationInstanceData.GoToView(new HouseholdsSearchView
             {
-                BindingContext = new HouseholdsViewModel(ApplicationInstanceData)
+                BindingContext = new HouseholdsSearchViewModel(ApplicationInstanceData)
             });
         }
 
@@ -90,10 +90,10 @@ namespace MDPMS.Shared.ViewModels
             ApplicationInstanceData.NavigationPage = currentView;
 
             // if HouseholdsView then refresh
-            if (currentView.Pages.First().GetType() == typeof(HouseholdsView))
+            if (currentView.Pages.First().GetType() == typeof(HouseholdsSearchView))
             {
-                var householdsViewModel = (HouseholdsViewModel)currentView.Pages.First().BindingContext;
-                await Task.Run(() => { householdsViewModel.RefreshCommand.Execute(null); });
+                var householdsSearchViewModel = (HouseholdsSearchViewModel)currentView.Pages.First().BindingContext;
+                await Task.Run(() => { householdsSearchViewModel.RefreshCommand.Execute(null); });
             }
 
             // if HouseholdMembersSearchView then refresh

@@ -28,9 +28,9 @@ namespace MDPMS.Shared.ViewModels
         private void ExecuteNavigateToMainContentCommand()
         {
             // TODO: can determine initial set up status and navigate to st up wizard
-            ApplicationInstanceData.NavigationPage = new NavigationPage(new HouseholdsView
+            ApplicationInstanceData.NavigationPage = new NavigationPage(new HouseholdsSearchView
             {
-                BindingContext = new HouseholdsViewModel(ApplicationInstanceData)
+                BindingContext = new HouseholdsSearchViewModel(ApplicationInstanceData)
             });
             var rootPage = new RootPage
             {

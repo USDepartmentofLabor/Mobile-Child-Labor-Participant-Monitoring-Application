@@ -69,6 +69,12 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\CustomFieldRankListView.xaml.cs">
       <DependentUpon>CustomFieldRankListView.xaml</DependentUpon>
     </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\HouseholdsView.xaml.cs">
+      <DependentUpon>HouseholdsSearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\HouseholdsSearchView.xaml.cs">
+      <DependentUpon>HouseholdsSearchView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
