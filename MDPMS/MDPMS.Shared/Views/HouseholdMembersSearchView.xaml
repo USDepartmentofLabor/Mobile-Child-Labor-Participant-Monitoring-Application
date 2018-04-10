@@ -40,14 +40,14 @@
                     <ColumnDefinition Width="5"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="1"
-                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[MemberSearchResultsGridHeaderTitleID]}"/>
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[GridHeaderTitleID]}"/>
                 <Label Grid.Column="2"
-                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[MemberSearchResultsGridHeaderTitleLastName]}"/>
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[GridHeaderTitleLastName]}"/>
                 <Label Grid.Column="3"
-                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[MemberSearchResultsGridHeaderTitleFirstMiddleName]}"/>
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[GridHeaderTitleFirstMiddleName]}"/>
                 <Label Grid.Column="4"
                        Grid.ColumnSpan="2"
-                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[MemberSearchResultsGridHeaderTitleBio]}"
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[GridHeaderTitleBio]}"
                        HorizontalTextAlignment="Center"/>
             </Grid>
             <ListView Grid.Row="2"
