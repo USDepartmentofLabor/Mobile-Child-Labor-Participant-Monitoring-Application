@@ -52,7 +52,9 @@ WHERE
 SELECT
   Keys.KeyName,
   EN.KeyLocalizationValue AS EN,
-  ES.KeyLocalizationValue AS ES
+  ES.KeyLocalizationValue AS ES,
+  FR.KeyLocalizationValue AS FR,
+  PT.KeyLocalizationValue AS PT
 FROM
   Keys
 LEFT JOIN
@@ -63,5 +65,13 @@ LEFT JOIN
   "Values" AS ES ON Keys.Id = ES.KeyId
   AND
   ES.LocalizationId = (SELECT Localizations.Id FROM Localizations WHERE Localizations.Code = 'es')
+LEFT JOIN
+  "Values" AS FR ON Keys.Id = FR.KeyId
+  AND
+  FR.LocalizationId = (SELECT Localizations.Id FROM Localizations WHERE Localizations.Code = 'fr')
+LEFT JOIN
+  "Values" AS PT ON Keys.Id = PT.KeyId
+  AND
+  PT.LocalizationId = (SELECT Localizations.Id FROM Localizations WHERE Localizations.Code = 'pt')
 WHERE
-  Keys.KeyName LIKE '%app%';
+  Keys.KeyName LIKE '%%';
