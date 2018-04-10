@@ -138,6 +138,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"GridHeaderTitleLastName", @"Last Name");
             translation.Translations.Add(@"GridHeaderTitleFirstMiddleName", @"First, Middle");
             translation.Translations.Add(@"GridHeaderTitleBio", @"Bio");
+            translation.Translations.Add(@"Youth", @"Youth");
+            translation.Translations.Add(@"Adult", @"Adult");
             return translation;
         }
 
@@ -257,6 +259,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"GridHeaderTitleLastName", @"Apellido");
             translation.Translations.Add(@"GridHeaderTitleFirstMiddleName", @"Primera, Mitad");
             translation.Translations.Add(@"GridHeaderTitleBio", @"Bio");
+            translation.Translations.Add(@"Youth", @"Joven");
+            translation.Translations.Add(@"Adult", @"Adulto");
             return translation;
         }
 
@@ -376,6 +380,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"GridHeaderTitleLastName", @"Nom de famille");
             translation.Translations.Add(@"GridHeaderTitleFirstMiddleName", @"Premier, Milieu");
             translation.Translations.Add(@"GridHeaderTitleBio", @"Bio");
+            translation.Translations.Add(@"Youth", @"Jeunes");
+            translation.Translations.Add(@"Adult", @"Adulte");
             return translation;
         }
 
@@ -495,6 +501,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"GridHeaderTitleLastName", @"Último nome");
             translation.Translations.Add(@"GridHeaderTitleFirstMiddleName", @"Primeiro, Meio");
             translation.Translations.Add(@"GridHeaderTitleBio", @"Bio");
+            translation.Translations.Add(@"Youth", @"Juventude");
+            translation.Translations.Add(@"Adult", @"Adulto");
             return translation;
         }
     }     
