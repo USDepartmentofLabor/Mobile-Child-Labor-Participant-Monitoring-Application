@@ -12,10 +12,25 @@ namespace MDPMS.Shared.ViewModels
     public class HouseholdsSearchViewModel : ViewModelBase
     {
         public string SearchText { get; set; } = @"";
-        public ObservableCollection<HouseholdSearchResultCellModel> Households { get; set; }
-        public HouseholdSearchResultCellModel SelectedHousehold { get; set; } = null;
         public Command NavigateToAddNewHouseholdCommand { get; set; }
         public string HouseholdNoun { get; set; }
+
+        public ObservableCollection<HouseholdSearchResultCellModel> Households { get; set; }
+
+        private HouseholdSearchResultCellModel _selectedHousehold;
+        public HouseholdSearchResultCellModel SelectedHousehold
+        {
+            get => _selectedHousehold;
+            set
+            {
+                _selectedHousehold = value;
+                if (_selectedHousehold == null) return;
+                ApplicationInstanceData.NavigationPage.PushAsync(new HouseholdView
+                {
+                    BindingContext = new HouseholdViewModel(ApplicationInstanceData, value.Household)
+                });
+            }
+        }
 
         private bool _isRefreshing;
         public bool IsRefreshing
@@ -59,7 +74,6 @@ namespace MDPMS.Shared.ViewModels
             {
                 Households.Add(new HouseholdSearchResultCellModel(household));
             }
-            if (Households.Any()) SelectedHousehold = Households.First();
             OnPropertyChanged(nameof(Households));
             OnPropertyChanged(nameof(SelectedHousehold));
 
