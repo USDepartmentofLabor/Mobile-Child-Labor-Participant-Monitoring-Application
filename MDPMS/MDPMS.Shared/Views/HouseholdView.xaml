@@ -38,6 +38,7 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="30"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Label Grid.Column="0"
                            Grid.Row="0"
@@ -127,6 +128,12 @@
                            Grid.Row="10"
                            Style="{StaticResource LabelValue}"
                            Text="{Binding Household.AddressInfo}"/>
+                    <StackLayout Grid.Column="0"
+                                 Grid.ColumnSpan="2"
+                                 Grid.Row="11"
+                                 x:Name="CustomFieldContent"
+                                 HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="StartAndExpand"/>
                 </Grid>
             </ScrollView>
             <Grid Grid.Row="1">
