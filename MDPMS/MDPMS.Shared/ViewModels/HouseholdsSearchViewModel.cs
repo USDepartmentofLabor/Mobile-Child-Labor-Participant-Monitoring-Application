@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using MDPMS.Database.Data.Models;
@@ -110,7 +111,7 @@ namespace MDPMS.Shared.ViewModels
         {
             Household = household;
             BeneficiaryCount = household.Members.Count(a => a.IsBeneficiary());
-            AdultCount = household.Members.Count - BeneficiaryCount;
+            AdultCount = household.Members.Count(a => a.IsInAgeRaneBasedOnDate(DateTime.Now, 18, 200));
         }
     }
 }

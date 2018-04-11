@@ -131,7 +131,7 @@ namespace MDPMS.Database.Data.Models
         public bool IsBeneficiary()
         {
             // Beneficiary is defined as age range either at the current time or time of intake
-            var isBeneficiaryNow = IsBeneficiaryBasedOnDate(DateTime.Now);
+            var isBeneficiaryNow = IsInAgeRaneBasedOnDate(DateTime.Now, 5, 17);
             if (IntakeDate != null) return WasBeneficiaryAtTimeOfIntake() | isBeneficiaryNow;
             return isBeneficiaryNow;
         }
@@ -139,15 +139,15 @@ namespace MDPMS.Database.Data.Models
         public bool WasBeneficiaryAtTimeOfIntake()
         {
             if (IntakeDate == null) return false;
-            return IsBeneficiaryBasedOnDate((DateTime)IntakeDate);
+            return IsInAgeRaneBasedOnDate((DateTime)IntakeDate, 5, 17);
         }
 
-        public bool IsBeneficiaryBasedOnDate(DateTime dateTime)
+        public bool IsInAgeRaneBasedOnDate(DateTime dateTime, int startAgeRange, int endAgeRange)
         {
             // aged 5 to 17 based on a date
             if (DateOfBirth == null) return false;
-            return (DateOfBirth >= new DateTime(dateTime.Year - 17, dateTime.Month, dateTime.Day)
-                    & DateOfBirth <= new DateTime(dateTime.Year - 5, dateTime.Month, dateTime.Day));
+            return (DateOfBirth >= new DateTime(dateTime.Year - endAgeRange, dateTime.Month, dateTime.Day)
+                    & DateOfBirth <= new DateTime(dateTime.Year - startAgeRange, dateTime.Month, dateTime.Day));
         }
 
         public virtual ICollection<PersonHazardousCondition> PeopleHazardousConditions { get; set; } = new List<PersonHazardousCondition>();
