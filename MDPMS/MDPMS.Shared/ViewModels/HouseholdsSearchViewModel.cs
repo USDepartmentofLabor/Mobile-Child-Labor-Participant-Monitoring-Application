@@ -110,8 +110,9 @@ namespace MDPMS.Shared.ViewModels
         public HouseholdSearchResultCellModel(Household household)
         {
             Household = household;
-            BeneficiaryCount = household.Members.Count(a => a.IsBeneficiary());
-            AdultCount = household.Members.Count(a => a.IsInAgeRaneBasedOnDate(DateTime.Now, 18, 200));
+            var now = DateTime.Now;
+            BeneficiaryCount = household.Members.Count(a => a.IsYouthNow(now));
+            AdultCount = household.Members.Count(a => !a.IsYouthNow(now));
         }
     }
 }

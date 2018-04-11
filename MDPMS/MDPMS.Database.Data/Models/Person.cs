@@ -142,6 +142,12 @@ namespace MDPMS.Database.Data.Models
             return IsInAgeRaneBasedOnDate((DateTime)IntakeDate, 5, 17);
         }
 
+        public bool IsYouthNow(DateTime now)
+        {
+            if (DateOfBirth == null) return false;
+            return DateOfBirth >= new DateTime(now.Year - 17, now.Month, now.Day);
+        }
+
         public bool IsInAgeRaneBasedOnDate(DateTime dateTime, int startAgeRange, int endAgeRange)
         {
             // aged 5 to 17 based on a date
