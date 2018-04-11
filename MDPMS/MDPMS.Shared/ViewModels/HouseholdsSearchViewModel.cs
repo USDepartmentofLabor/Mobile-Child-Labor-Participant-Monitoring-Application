@@ -111,8 +111,8 @@ namespace MDPMS.Shared.ViewModels
         {
             Household = household;
             var now = DateTime.Now;
-            BeneficiaryCount = household.Members.Count(a => a.IsYouthNow(now));
-            AdultCount = household.Members.Count(a => !a.IsYouthNow(now));
+            BeneficiaryCount = household.Members == null ? 0 : household.Members.Count(a => a.IsYouthNow(now));
+            AdultCount = household.Members == null ? 0 : household.Members.Count(a => !a.IsYouthNow(now));
         }
     }
 }
