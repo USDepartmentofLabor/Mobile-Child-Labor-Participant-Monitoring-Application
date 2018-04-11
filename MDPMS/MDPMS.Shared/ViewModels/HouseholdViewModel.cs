@@ -8,10 +8,15 @@ namespace MDPMS.Shared.ViewModels
     {
         public Household Household { get; set; }
 
+        public bool AllowEditDelete { get; set; }
+        public Xamarin.Forms.GridLength EditDeleteRowHeight { get; set; }
+
         public HouseholdViewModel(ApplicationInstanceData applicationInstanceData, Household household)
         {
             ApplicationInstanceData = applicationInstanceData;
             Household = household;
+            AllowEditDelete = !household.HasExternalId;
+            EditDeleteRowHeight = AllowEditDelete ? 80 : 0;
         }
     }
 }
