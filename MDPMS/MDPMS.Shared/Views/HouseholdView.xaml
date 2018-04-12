@@ -144,10 +144,11 @@
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0"
                         Margin="5,5,1,5"
-                        Text="Edit"/>
+                        Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Edit]}"/>
                 <Button Grid.Column="1"
                         Margin="1,5,5,5"
-                        Text="Delete"/>
+                        Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Delete]}"
+                        Command="{Binding DeleteCommand}"/>
             </Grid>
         </Grid>
     </ContentPage.Content>

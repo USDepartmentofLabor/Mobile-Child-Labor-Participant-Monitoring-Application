@@ -140,6 +140,10 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"GridHeaderTitleBio", @"Bio");
             translation.Translations.Add(@"Youth", @"Youth");
             translation.Translations.Add(@"Adult", @"Adult");
+            translation.Translations.Add(@"Confirm", @"Confirm");
+            translation.Translations.Add(@"ConfirmationMessageDeleteHousehold", @"Are you sure you want to delete this household?  All associated income sources, household members, follow ups, and service assignments will also be removed.");
+            translation.Translations.Add(@"Edit", @"Edit");
+            translation.Translations.Add(@"Delete", @"Delete");
             return translation;
         }
 
@@ -261,6 +265,10 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"GridHeaderTitleBio", @"Bio");
             translation.Translations.Add(@"Youth", @"Joven");
             translation.Translations.Add(@"Adult", @"Adulto");
+            translation.Translations.Add(@"Confirm", @"Confirm");
+            translation.Translations.Add(@"ConfirmationMessageDeleteHousehold", @"¿Seguro que quieres eliminar esta casa? También se eliminarán todas las fuentes de ingresos asociadas, los miembros del hogar, los seguimientos y las asignaciones de servicios.");
+            translation.Translations.Add(@"Edit", @"Editar");
+            translation.Translations.Add(@"Delete", @"Borrar");
             return translation;
         }
 
@@ -382,6 +390,10 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"GridHeaderTitleBio", @"Bio");
             translation.Translations.Add(@"Youth", @"Jeunes");
             translation.Translations.Add(@"Adult", @"Adulte");
+            translation.Translations.Add(@"Confirm", @"Confirm");
+            translation.Translations.Add(@"ConfirmationMessageDeleteHousehold", @"Êtes-vous sûr de vouloir supprimer ce ménage? Toutes les sources de revenu associées, les membres du ménage, les suivis et les affectations de service seront également supprimés.");
+            translation.Translations.Add(@"Edit", @"Modifier");
+            translation.Translations.Add(@"Delete", @"Effacer");
             return translation;
         }
 
@@ -503,6 +515,10 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"GridHeaderTitleBio", @"Bio");
             translation.Translations.Add(@"Youth", @"Juventude");
             translation.Translations.Add(@"Adult", @"Adulto");
+            translation.Translations.Add(@"Confirm", @"Confirm");
+            translation.Translations.Add(@"ConfirmationMessageDeleteHousehold", @"Tem certeza de que deseja excluir este domicílio? Todas as fontes de renda associadas, membros do agregado familiar, acompanhamentos e atribuições de serviços também serão removidos.");
+            translation.Translations.Add(@"Edit", @"Editar");
+            translation.Translations.Add(@"Delete", @"Excluir");
             return translation;
         }
     }     
