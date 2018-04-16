@@ -119,4 +119,7 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\Helpers\" />
+  </ItemGroup>
 </Project>
