@@ -38,6 +38,16 @@ namespace MDPMS.Shared.Views
             return rtn.ToString();
         }
 
+        public List<string> GetSelectedValuesAsList()
+        {
+            var rtn = new List<string>();
+            foreach (var value in GetValues())
+            {
+                if (value.Item2) rtn.Add(value.Item1);
+            }
+            return rtn;
+        }
+
         public void OnAppearing()
         {
             var vm = (CustomFieldSwitchArrayViewModel)BindingContext;

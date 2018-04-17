@@ -209,7 +209,7 @@ namespace MDPMS.Shared.ViewModels
                         var textValue = ((CustomFieldStringValueViewModel)CustomFieldControls[i].BindingContext).EntryValue;
                         if (textValue != null && !textValue.Equals(string.Empty))
                         {
-                            newCustomValue.Value = textValue;
+                            newCustomValue.Value = Helpers.CustomValueConverter.ConvertCustomValueToJsonText(textValue);
                             ApplicationInstanceData.Data.CustomPersonFollowUpValues.Add(newCustomValue);
                         }
                         break;
@@ -217,15 +217,15 @@ namespace MDPMS.Shared.ViewModels
                         var textAreaValue = ((CustomFieldStringValueViewModel)CustomFieldControls[i].BindingContext).EntryValue;
                         if (textAreaValue != null && !textAreaValue.Equals(string.Empty))
                         {
-                            newCustomValue.Value = textAreaValue;
+                            newCustomValue.Value = Helpers.CustomValueConverter.ConvertCustomValueToJsonTextArea(textAreaValue);
                             ApplicationInstanceData.Data.CustomPersonFollowUpValues.Add(newCustomValue);
                         }
                         break;
                     case @"check_box":
-                        var checkBoxValue = ((CustomFieldSwitchArrayView)CustomFieldControls[i]).GetSelectedValues();
-                        if (!checkBoxValue.Equals(string.Empty))
+                        var checkBoxValues = ((CustomFieldSwitchArrayView)CustomFieldControls[i]).GetSelectedValuesAsList();
+                        if (checkBoxValues.Any())
                         {
-                            newCustomValue.Value = checkBoxValue;
+                            newCustomValue.Value = Helpers.CustomValueConverter.ConvertCustomValueToJsonCheckBox(checkBoxValues);
                             ApplicationInstanceData.Data.CustomPersonFollowUpValues.Add(newCustomValue);
                         }
                         break;
@@ -233,7 +233,7 @@ namespace MDPMS.Shared.ViewModels
                         var radioButtonValue = ((CustomFieldPickerViewModel)CustomFieldControls[i].BindingContext).SelectedBindableOption;
                         if (radioButtonValue != null && !radioButtonValue.Equals(string.Empty))
                         {
-                            newCustomValue.Value = radioButtonValue;
+                            newCustomValue.Value = Helpers.CustomValueConverter.ConvertCustomValueToJsonRadioButton(radioButtonValue);
                             ApplicationInstanceData.Data.CustomPersonFollowUpValues.Add(newCustomValue);
                         }
                         break;
@@ -241,7 +241,7 @@ namespace MDPMS.Shared.ViewModels
                         var selectValue = ((CustomFieldPickerViewModel)CustomFieldControls[i].BindingContext).SelectedBindableOption;
                         if (selectValue != null && !selectValue.Equals(string.Empty))
                         {
-                            newCustomValue.Value = selectValue;
+                            newCustomValue.Value = Helpers.CustomValueConverter.ConvertCustomValueToJsonSelect(selectValue);
                             ApplicationInstanceData.Data.CustomPersonFollowUpValues.Add(newCustomValue);
                         }
                         break;
@@ -249,7 +249,7 @@ namespace MDPMS.Shared.ViewModels
                         var numberValue = ((CustomFieldDoubleValueViewModel)CustomFieldControls[i].BindingContext).GetDoubleValue();
                         if (numberValue != null)
                         {
-                            newCustomValue.Value = numberValue.ToString();
+                            newCustomValue.Value = Helpers.CustomValueConverter.ConvertCustomValueToJsonNumber((double)numberValue);
                             ApplicationInstanceData.Data.CustomPersonFollowUpValues.Add(newCustomValue);
                         }
                         break;
@@ -257,7 +257,7 @@ namespace MDPMS.Shared.ViewModels
                         var dateValue = ((CustomFieldDateTimeValueViewModel)CustomFieldControls[i].BindingContext).DateValue;
                         if (dateValue != null && !dateValue.ToString().Equals(string.Empty))
                         {
-                            newCustomValue.Value = dateValue.ToString();
+                            newCustomValue.Value = Helpers.CustomValueConverter.ConvertCustomValueToJsonDate((DateTime)dateValue);
                             ApplicationInstanceData.Data.CustomPersonFollowUpValues.Add(newCustomValue);
                         }
                         break;
@@ -265,7 +265,7 @@ namespace MDPMS.Shared.ViewModels
                         var rankedValues = ((CustomFieldRankListViewModel)CustomFieldControls[i].BindingContext).GetRankedValues();
                         if (!rankedValues.Equals(@""))
                         {
-                            newCustomValue.Value = rankedValues;
+                            newCustomValue.Value = Helpers.CustomValueConverter.ConvertCustomValueToJsonRankList(((CustomFieldRankListViewModel)CustomFieldControls[i].BindingContext).Entries.ToList());
                             ApplicationInstanceData.Data.CustomPersonFollowUpValues.Add(newCustomValue);
                         }
                         break;
