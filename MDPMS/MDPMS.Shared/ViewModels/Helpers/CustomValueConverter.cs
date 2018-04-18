@@ -65,7 +65,7 @@ namespace MDPMS.Shared.ViewModels.Helpers
             foreach (var value in valueArray)
             {
                 rtn.Append(value);
-                if (i != (valueArray.Count - 1)) rtn.Append(@",");
+                if (i != (valueArray.Count - 1)) rtn.Append(@", ");
                 i++;
             }
             return rtn.ToString();
@@ -201,6 +201,20 @@ namespace MDPMS.Shared.ViewModels.Helpers
             }
 
             return rtn;
+        }
+
+        public static string GetDisplayValueFromJsonRankList(string json)
+        {
+            var values = GetValueFromJsonRankList(json);
+            var sb = new StringBuilder();
+            var i = 0;
+            foreach (var value in values)
+            {
+                sb.Append(value.Item2);
+                if (i != (values.Count - 1)) sb.Append(@", ");
+                i++;
+            }
+            return sb.ToString();
         }
     }
 }

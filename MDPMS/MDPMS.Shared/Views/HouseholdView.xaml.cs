@@ -47,22 +47,30 @@ namespace MDPMS.Shared.Views
                     switch (customField.FieldType)
                     {
                         case @"text":
+                            valueString = ViewModels.Helpers.CustomValueConverter.GetValueFromJsonText(valueString);
                             break;
                         case @"textarea":
+                            valueString = ViewModels.Helpers.CustomValueConverter.GetValueFromJsonTextArea(valueString);
                             rowDefinition.Height = GridLength.Auto;
                             break;
                         case @"check_box":
+                            valueString = ViewModels.Helpers.CustomValueConverter.GetValueFromJsonCheckBox(valueString);
                             rowDefinition.Height = GridLength.Auto;
                             break;
                         case @"radio_button":
+                            valueString = ViewModels.Helpers.CustomValueConverter.GetValueFromJsonRadioButton(valueString);
                             break;
                         case @"select":
+                            valueString = ViewModels.Helpers.CustomValueConverter.GetValueFromJsonSelect(valueString);
                             break;
                         case @"number":
+                            valueString = ViewModels.Helpers.CustomValueConverter.GetValueFromJsonNumber(valueString).ToString();
                             break;
                         case @"date":
+                            valueString = ViewModels.Helpers.CustomValueConverter.GetValueFromJsonDate(valueString).ToShortDateString();
                             break;
                         case @"rank_list":
+                            valueString = ViewModels.Helpers.CustomValueConverter.GetDisplayValueFromJsonRankList(valueString);
                             rowDefinition.Height = GridLength.Auto;
                             break;
                     }
