@@ -42,9 +42,9 @@
                 <Label Grid.Column="1"
                        Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[GridHeaderTitleID]}"/>
                 <Label Grid.Column="2"
-                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[GridHeaderTitleLastName]}"/>
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[LastNameFamilyName]}"/>
                 <Label Grid.Column="3"
-                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[GridHeaderTitleFirstMiddleName]}"/>
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[FirstNameGivenName]}"/>
                 <Label Grid.Column="4"
                        Grid.ColumnSpan="2"
                        Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[GridHeaderTitleBio]}"
@@ -91,7 +91,7 @@
                                 <Label Grid.Row="0"
                                        Grid.RowSpan="2"
                                        Grid.Column="3"
-                                       Text="{Binding HouseholdMemberFirstAndMiddleName}"
+                                       Text="{Binding HouseholdMemberFirstName}"
                                        TextColor="Black"
                                        VerticalTextAlignment="Center"/>
                                 <Image Grid.Row="0"

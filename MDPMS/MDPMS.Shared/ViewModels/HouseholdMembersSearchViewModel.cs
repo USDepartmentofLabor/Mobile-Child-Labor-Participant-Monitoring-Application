@@ -116,7 +116,7 @@ namespace MDPMS.Shared.ViewModels
         public Household Household { get; set; }
         
         public string HouseholdMemberId { get; set; }
-        public string HouseholdMemberFirstAndMiddleName { get; set; }
+        public string HouseholdMemberFirstName { get; set; }
         public string HouseholdMemberLastName { get; set; }
         public string HouseholdMemberAge { get; set; }
         public string HouseholdId { get; set; }
@@ -128,7 +128,7 @@ namespace MDPMS.Shared.ViewModels
             Person = person;
             Household = household;
             HouseholdMemberId = person.HasExternalId ? HouseholdMemberId = person.GetExternalId().ToString() : @"";
-            HouseholdMemberFirstAndMiddleName = person.FirstName + @", " + person.MiddleName;
+            HouseholdMemberFirstName = person.FirstName;
             HouseholdMemberLastName = person.LastName;
             if (person.DateOfBirth != null) HouseholdMemberAge = (DateTime.UtcNow.Year - ((DateTime)person.DateOfBirth).Year).ToString();
             HouseholdId = @"";

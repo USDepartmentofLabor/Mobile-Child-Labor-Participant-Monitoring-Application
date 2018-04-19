@@ -135,8 +135,6 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"AddAnswer", @"Add Answer");
             translation.Translations.Add(@"RemoveAnswer", @"Remove Answer");
             translation.Translations.Add(@"GridHeaderTitleID", @"ID");
-            translation.Translations.Add(@"GridHeaderTitleLastName", @"Last Name");
-            translation.Translations.Add(@"GridHeaderTitleFirstMiddleName", @"First, Middle");
             translation.Translations.Add(@"GridHeaderTitleBio", @"Bio");
             translation.Translations.Add(@"Youth", @"Youth");
             translation.Translations.Add(@"Adult", @"Adult");
@@ -260,8 +258,6 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"AddAnswer", @"Agregar respuesta");
             translation.Translations.Add(@"RemoveAnswer", @"Eliminar respuesta");
             translation.Translations.Add(@"GridHeaderTitleID", @"ID");
-            translation.Translations.Add(@"GridHeaderTitleLastName", @"Apellido");
-            translation.Translations.Add(@"GridHeaderTitleFirstMiddleName", @"Primera, Mitad");
             translation.Translations.Add(@"GridHeaderTitleBio", @"Bio");
             translation.Translations.Add(@"Youth", @"Joven");
             translation.Translations.Add(@"Adult", @"Adulto");
@@ -385,8 +381,6 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"AddAnswer", @"Ajouter une réponse");
             translation.Translations.Add(@"RemoveAnswer", @"Supprimer la réponse");
             translation.Translations.Add(@"GridHeaderTitleID", @"ID");
-            translation.Translations.Add(@"GridHeaderTitleLastName", @"Nom de famille");
-            translation.Translations.Add(@"GridHeaderTitleFirstMiddleName", @"Premier, Milieu");
             translation.Translations.Add(@"GridHeaderTitleBio", @"Bio");
             translation.Translations.Add(@"Youth", @"Jeunes");
             translation.Translations.Add(@"Adult", @"Adulte");
@@ -510,8 +504,6 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"AddAnswer", @"Adicionar Resposta");
             translation.Translations.Add(@"RemoveAnswer", @"Remover Resposta");
             translation.Translations.Add(@"GridHeaderTitleID", @"ID");
-            translation.Translations.Add(@"GridHeaderTitleLastName", @"Último nome");
-            translation.Translations.Add(@"GridHeaderTitleFirstMiddleName", @"Primeiro, Meio");
             translation.Translations.Add(@"GridHeaderTitleBio", @"Bio");
             translation.Translations.Add(@"Youth", @"Juventude");
             translation.Translations.Add(@"Adult", @"Adulto");
