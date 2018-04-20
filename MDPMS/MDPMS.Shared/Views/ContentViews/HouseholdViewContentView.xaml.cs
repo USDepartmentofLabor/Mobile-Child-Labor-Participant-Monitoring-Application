@@ -1,21 +1,20 @@
 ﻿using System.Linq;
-using MDPMS.Shared.ViewModels;
+using MDPMS.Shared.ViewModels.ContentViewModels;
+using MDPMS.Shared.ViewModels.Helpers;
 using Xamarin.Forms;
 
-namespace MDPMS.Shared.Views
+namespace MDPMS.Shared.Views.ContentViews
 {
-    public partial class HouseholdView : ContentPage
+    public partial class HouseholdViewContentView : ContentView
     {
-        public HouseholdView()
+        public HouseholdViewContentView()
         {
             InitializeComponent();
         }
 
-		protected override void OnAppearing()
-		{
-			base.OnAppearing();
-
-            var viewModel = (HouseholdViewModel)BindingContext;
+        public void OnAppearing()
+        {
+            var viewModel = (HouseholdViewContentViewModel)BindingContext;
 
             CustomFieldContent.Children.Clear();
 
@@ -47,30 +46,30 @@ namespace MDPMS.Shared.Views
                     switch (customField.FieldType)
                     {
                         case @"text":
-                            valueString = ViewModels.Helpers.CustomValueConverter.GetValueFromJsonText(valueString);
+                            valueString = CustomValueConverter.GetValueFromJsonText(valueString);
                             break;
                         case @"textarea":
-                            valueString = ViewModels.Helpers.CustomValueConverter.GetValueFromJsonTextArea(valueString);
+                            valueString = CustomValueConverter.GetValueFromJsonTextArea(valueString);
                             rowDefinition.Height = GridLength.Auto;
                             break;
                         case @"check_box":
-                            valueString = ViewModels.Helpers.CustomValueConverter.GetValueFromJsonCheckBox(valueString);
+                            valueString = CustomValueConverter.GetValueFromJsonCheckBox(valueString);
                             rowDefinition.Height = GridLength.Auto;
                             break;
                         case @"radio_button":
-                            valueString = ViewModels.Helpers.CustomValueConverter.GetValueFromJsonRadioButton(valueString);
+                            valueString = CustomValueConverter.GetValueFromJsonRadioButton(valueString);
                             break;
                         case @"select":
-                            valueString = ViewModels.Helpers.CustomValueConverter.GetValueFromJsonSelect(valueString);
+                            valueString = CustomValueConverter.GetValueFromJsonSelect(valueString);
                             break;
                         case @"number":
-                            valueString = ViewModels.Helpers.CustomValueConverter.GetValueFromJsonNumber(valueString).ToString();
+                            valueString = CustomValueConverter.GetValueFromJsonNumber(valueString).ToString();
                             break;
                         case @"date":
-                            valueString = ViewModels.Helpers.CustomValueConverter.GetValueFromJsonDate(valueString).ToShortDateString();
+                            valueString = CustomValueConverter.GetValueFromJsonDate(valueString).ToShortDateString();
                             break;
                         case @"rank_list":
-                            valueString = ViewModels.Helpers.CustomValueConverter.GetDisplayValueFromJsonRankList(valueString);
+                            valueString = CustomValueConverter.GetDisplayValueFromJsonRankList(valueString);
                             rowDefinition.Height = GridLength.Auto;
                             break;
                     }
@@ -95,6 +94,6 @@ namespace MDPMS.Shared.Views
                 i++;
             }
             CustomFieldContent.Children.Add(grid);
-		}
-	}
+        }
+    }
 }

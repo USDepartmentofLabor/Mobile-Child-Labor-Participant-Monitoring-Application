@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDPMS.Shared.Views.ContentViews.HouseholdViewContentView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelDescription" TargetType="Label">
+                <Setter Property="TextColor" Value="Blue"/>
+                <Setter Property="Margin" Value="10,5"/>
+            </Style>
+            <Style x:Key="LabelValue" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="Margin" Value="10,5"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0"
+                   Grid.Row="0"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HouseholdName]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="0"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding Household.HouseholdName}"/>
+            <Label Grid.Column="0"
+                   Grid.Row="1"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[IntakeDate]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="1"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding Household.IntakeDate, StringFormat='{0:M/d/yyyy}'}"/>
+            <Label Grid.Column="0"
+                   Grid.Row="2"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AddressLine1]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="2"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding Household.AddressLine1}"/>
+            <Label Grid.Column="0"
+                   Grid.Row="3"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AddressLine2]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="3"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding Household.AddressLine2}"/>
+            <Label Grid.Column="0"
+                   Grid.Row="4"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[ZipCode]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="4"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding Household.PostalCode}"/>
+            <Label Grid.Column="0"
+                   Grid.Row="5"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[SuburbNeighborhood]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="5"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding Household.DependentLocality}"/>
+            <Label Grid.Column="0"
+                   Grid.Row="6"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[City]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="6"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding Household.Locality}"/>
+            <Label Grid.Column="0"
+                   Grid.Row="7"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[State]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="7"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding Household.AdminvArea}"/>
+            <Label Grid.Column="0"
+                   Grid.Row="8"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[County]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="8"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding Household.DependentAdminvArea}"/>
+            <Label Grid.Column="0"
+                   Grid.Row="9"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Country]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="9"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding Household.Country}"/>
+            <Label Grid.Column="0"
+                   Grid.Row="10"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AddressInfo]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="10"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding Household.AddressInfo}"/>
+            <StackLayout Grid.Column="0"
+                         Grid.ColumnSpan="2"
+                         Grid.Row="11"
+                         x:Name="CustomFieldContent"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="StartAndExpand"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

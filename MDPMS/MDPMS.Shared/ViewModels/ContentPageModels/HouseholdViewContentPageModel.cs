@@ -5,9 +5,9 @@ using MDPMS.Shared.ViewModels.Base;
 using MDPMS.Shared.Views;
 using Xamarin.Forms;
 
-namespace MDPMS.Shared.ViewModels
+namespace MDPMS.Shared.ViewModels.ContentPageModels
 {
-    public class HouseholdViewModel : ViewModelBase
+    public class HouseholdViewContentPageModel : ViewModelBase
     {
         public Household Household { get; set; }
 
@@ -16,13 +16,11 @@ namespace MDPMS.Shared.ViewModels
 
         public Command DeleteCommand { get; set; }
 
-        public HouseholdViewModel(ApplicationInstanceData applicationInstanceData, Household household)
+        public HouseholdViewContentPageModel(ApplicationInstanceData applicationInstanceData, Household household)
         {
             ApplicationInstanceData = applicationInstanceData;
-
-            DeleteCommand = new Command(ExecuteDeleteCommand);
-
             Household = household;
+            DeleteCommand = new Command(ExecuteDeleteCommand);
             AllowEditDelete = !household.HasExternalId;
             EditDeleteRowHeight = AllowEditDelete ? 80 : 0;
         }

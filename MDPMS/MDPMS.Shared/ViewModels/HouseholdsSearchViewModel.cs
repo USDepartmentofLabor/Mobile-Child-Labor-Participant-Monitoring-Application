@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
+using MDPMS.Shared.ViewModels.ContentPageModels;
 using MDPMS.Shared.Views;
+using MDPMS.Shared.Views.ContentPages;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared.ViewModels
@@ -26,9 +28,9 @@ namespace MDPMS.Shared.ViewModels
             {
                 _selectedHousehold = value;
                 if (_selectedHousehold == null) return;
-                ApplicationInstanceData.NavigationPage.PushAsync(new HouseholdView
+                ApplicationInstanceData.NavigationPage.PushAsync(new HouseholdViewContentPage
                 {
-                    BindingContext = new HouseholdViewModel(ApplicationInstanceData, value.Household)
+                    BindingContext = new HouseholdViewContentPageModel(ApplicationInstanceData, value.Household)
                 });
             }
         }

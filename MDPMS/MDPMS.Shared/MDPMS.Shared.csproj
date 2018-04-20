@@ -75,8 +75,14 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\HouseholdsSearchView.xaml.cs">
       <DependentUpon>HouseholdsSearchView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\ContentPages\HouseholdViewContentPage.xaml.cs">
+      <DependentUpon>HouseholdViewContentPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\HouseholdView.xaml" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="RootPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -121,5 +127,9 @@
 
   <ItemGroup>
     <Folder Include="ViewModels\Helpers\" />
+    <Folder Include="Views\ContentViews\" />
+    <Folder Include="ViewModels\ContentViewModels\" />
+    <Folder Include="ViewModels\ContentPageModels\" />
+    <Folder Include="Views\ContentPages\" />
   </ItemGroup>
 </Project>
