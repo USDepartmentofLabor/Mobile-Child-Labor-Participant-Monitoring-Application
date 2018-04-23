@@ -78,6 +78,12 @@
     <Compile Update="Views\ContentPages\HouseholdViewContentPage.xaml.cs">
       <DependentUpon>HouseholdViewContentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\ContentPages\HouseholdEditContentPage.xaml.cs">
+      <DependentUpon>HouseholdEditContentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ContentViews\HouseholdEditContentView.xaml.cs">
+      <DependentUpon>HouseholdEditContentView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

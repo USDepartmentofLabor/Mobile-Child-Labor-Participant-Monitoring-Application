@@ -3,6 +3,7 @@ using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
 using MDPMS.Shared.Views;
+using MDPMS.Shared.Views.ContentPages;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared.ViewModels.ContentPageModels
@@ -14,15 +15,25 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
         public bool AllowEditDelete { get; set; }
         public Xamarin.Forms.GridLength EditDeleteRowHeight { get; set; }
 
+        public Command EditCommand { get; set; }
         public Command DeleteCommand { get; set; }
 
         public HouseholdViewContentPageModel(ApplicationInstanceData applicationInstanceData, Household household)
         {
             ApplicationInstanceData = applicationInstanceData;
             Household = household;
+            EditCommand = new Command(ExecuteEditCommand);
             DeleteCommand = new Command(ExecuteDeleteCommand);
             AllowEditDelete = !household.HasExternalId;
             EditDeleteRowHeight = AllowEditDelete ? 80 : 0;
+        }
+
+        private void ExecuteEditCommand()
+        {
+            // is it allowed?
+            if (Household.HasExternalId) return;
+            ApplicationInstanceData.NavigationPage.PushAsync(new HouseholdEditContentPage { BindingContext = new HouseholdEditContentPageModel(ApplicationInstanceData, Household) });
+
         }
 
         private async void ExecuteDeleteCommand()

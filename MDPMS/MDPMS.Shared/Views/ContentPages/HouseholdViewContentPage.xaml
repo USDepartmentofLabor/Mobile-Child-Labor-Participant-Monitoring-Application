@@ -18,7 +18,8 @@
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0"
                         Margin="5,5,1,5"
-                        Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Edit]}"/>
+                        Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Edit]}"
+                        Command="{Binding EditCommand}"/>
                 <Button Grid.Column="1"
                         Margin="1,5,5,5"
                         Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Delete]}"
