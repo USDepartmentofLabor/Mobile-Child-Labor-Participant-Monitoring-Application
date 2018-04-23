@@ -22,6 +22,7 @@ namespace MDPMS.Shared.Views.ContentPages
             viewModel.HouseholdEditContentView.BindingContext = viewModel.HouseholdEditContentViewModel;
 
             Scrollview.Content = viewModel.HouseholdEditContentView;
+            viewModel.HouseholdEditContentView.OnAppearing(true);
 		}
 	}
 }

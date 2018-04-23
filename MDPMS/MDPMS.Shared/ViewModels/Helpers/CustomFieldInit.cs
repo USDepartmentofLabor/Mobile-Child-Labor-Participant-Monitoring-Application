@@ -126,5 +126,83 @@ namespace MDPMS.Shared.ViewModels.Helpers
 
             return new Tuple<List<CustomField>, List<ContentView>>(CustomFields, CustomFieldControls);
         }
+
+        public static void LoadCustomFieldValues(List<CustomField> customFields, List<ContentView> customControls, List<Tuple<CustomField, string>> values)
+        {
+            var i = 0;
+            foreach (var customField in customFields)
+            {
+                // get value
+                var query = values.Where(a => a.Item1.InternalId == customField.InternalId);
+                if (query.Count() == 1)
+                {
+                    var value = query.First().Item2;
+                    switch (customField.FieldType)
+                    {
+                        case "text":
+                            var textViewModel = (CustomFieldStringValueViewModel)customControls[i].BindingContext;
+                            textViewModel.EntryValue = CustomValueConverter.GetValueFromJsonText(value);
+                            textViewModel.NotifyPropertyChange(nameof(textViewModel.EntryValue));
+                            break;
+                        case "textarea":
+                            var textAreaViewModel = (CustomFieldStringValueViewModel)customControls[i].BindingContext;
+                            textAreaViewModel.EntryValue = CustomValueConverter.GetValueFromJsonText(value);
+                            textAreaViewModel.NotifyPropertyChange(nameof(textAreaViewModel.EntryValue));
+                            break;
+                        case "check_box":
+                            var checkBoxViewModel = (CustomFieldSwitchArrayViewModel)customControls[i].BindingContext;
+                            var checkBoxContent = new List<Tuple<bool, string>>();
+                            var checkBoxSelectedValues = CustomValueConverter.GetValuesFromJsonCheckBox(value);
+                            foreach (var checkBoxPossibleValue in customField.GetOptions())
+                            {
+                                checkBoxContent.Add(new Tuple<bool, string>(checkBoxSelectedValues.Contains(checkBoxPossibleValue), checkBoxPossibleValue));
+                            }
+                            checkBoxViewModel.Content = checkBoxContent;
+                            checkBoxViewModel.NotifyPropertyChange(nameof(CustomFieldSwitchArrayViewModel.Content));
+                            var checkBoxView = (CustomFieldSwitchArrayView)customControls[i];
+                            checkBoxView.OnAppearing();
+                            break;
+                        case "radio_button":
+                            var radioButtonViewModel = (CustomFieldPickerViewModel)customControls[i].BindingContext;
+                            radioButtonViewModel.SelectedBindableOption = CustomValueConverter.GetValueFromJsonRadioButton(value);
+                            radioButtonViewModel.NotifyPropertyChange(nameof(CustomFieldPickerViewModel.SelectedBindableOption));
+                            break;
+                        case "select":
+                            var selectViewModel = (CustomFieldPickerViewModel)customControls[i].BindingContext;
+                            selectViewModel.SelectedBindableOption = CustomValueConverter.GetValueFromJsonSelect(value);
+                            selectViewModel.NotifyPropertyChange(nameof(CustomFieldPickerViewModel.SelectedBindableOption));
+                            break;
+                        case "number":
+                            var numberViewModel = (CustomFieldDoubleValueViewModel)customControls[i].BindingContext;
+                            numberViewModel.EntryValue = CustomValueConverter.GetValueFromJsonNumber(value).ToString();
+                            numberViewModel.NotifyPropertyChange(nameof(CustomFieldDoubleValueViewModel.EntryValue));
+                            break;
+                        case "date":
+                            var dateViewModel = (CustomFieldDateTimeValueViewModel)customControls[i].BindingContext;
+                            dateViewModel.DateValue = CustomValueConverter.GetValueFromJsonDate(value);
+                            dateViewModel.NotifyPropertyChange(nameof(CustomFieldDateTimeValueViewModel.DateValueReadable));
+                            break;
+                        case "rank_list":
+                            var rankListViewModel = (CustomFieldRankListViewModel)customControls[i].BindingContext;
+                            var rankListValues = new ObservableCollection<Tuple<int, string>>();
+                            foreach (var rankValue in CustomValueConverter.GetValueFromJsonRankList(value))
+                            {
+                                rankListValues.Add(rankValue);
+                            }
+                            rankListViewModel.Entries = rankListValues;
+                            rankListViewModel.NotifyPropertyChange(nameof(CustomFieldRankListViewModel.Entries));
+                            if (rankListValues.Any())
+                            {
+                                var rankListView = (CustomFieldRankListView)customControls[i];
+                                rankListView.IsParticipating = true;
+                                rankListView.ShowParticipatingViewContent();
+                            }
+                            break;
+                    }
+                }
+                // TODO error log else if > 1, zero is ok as it inly indicated the absence of a value where > 1 is an error
+                i++;
+            }
+        }
     }
 }

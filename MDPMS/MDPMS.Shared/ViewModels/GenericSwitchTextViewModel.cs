@@ -10,6 +10,13 @@ namespace MDPMS.Shared.ViewModels
         public GenericSwitchTextViewModel(string textValue)
         {
             TextValue = textValue;
+            BoolValue = false;
+        }
+
+        public GenericSwitchTextViewModel(string textValue, bool boolValue)
+        {
+            TextValue = textValue;
+            BoolValue = boolValue;
         }
     }
 }

@@ -36,5 +36,10 @@ namespace MDPMS.Shared.ViewModels.Base
                 RaisePropertyChanged(() => ApplicationInstanceData);
             }
         }
+
+        public void NotifyPropertyChange(string propertyName)
+        {
+            OnPropertyChanged(propertyName);
+        }
     }
 }

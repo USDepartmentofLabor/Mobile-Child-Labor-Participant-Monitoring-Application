@@ -56,7 +56,7 @@ namespace MDPMS.Shared.Views
             {
                 var switchControl = new GenericSwitchTextView
                 {
-                    BindingContext = new GenericSwitchTextViewModel(content.Item2)
+                    BindingContext = new GenericSwitchTextViewModel(content.Item2, content.Item1)
                 };
                 ContentArea.Children.Add(switchControl);
             }

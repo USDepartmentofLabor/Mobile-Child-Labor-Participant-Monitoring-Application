@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
+using Xamarin.Forms;
 
 namespace MDPMS.Shared.ViewModels.ContentViewModels
 {
@@ -22,6 +24,10 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
         public string Country { get; set; }
         public string AddressInfo { get; set; }
 
+        // Custom fields
+        public List<CustomField> CustomFields { get; set; }
+        public List<ContentView> CustomFieldControls { get; set; }
+
         public HouseholdEditContentViewModel(ApplicationInstanceData applicationInstanceData, Household household)
         {
             ApplicationInstanceData = applicationInstanceData;
@@ -39,6 +45,11 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
             DependentAdminvArea = Household.DependentAdminvArea;
             Country = Household.Country;
             AddressInfo = Household.AddressInfo;
+
+            // Custom Fields
+            var customFieldInit = Helpers.CustomFieldInit.InitCustomFields(@"Household", applicationInstanceData);
+            CustomFields = customFieldInit.Item1;
+            CustomFieldControls = customFieldInit.Item2;
         }
 
         public bool ValidateHousehold()
