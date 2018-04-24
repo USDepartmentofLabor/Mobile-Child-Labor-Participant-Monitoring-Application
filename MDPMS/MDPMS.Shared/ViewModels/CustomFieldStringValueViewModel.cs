@@ -13,5 +13,15 @@ namespace MDPMS.Shared.ViewModels
             Name = name;
             HelpText = helpText;
         }
+
+        public string GetEntryValueWithCrlf()
+        {
+            var rtn = @"";
+            foreach (var line in EntryValue.Split('\n'))
+            {
+                rtn += line + @"\r\n";
+            }
+            return rtn;
+        }
     }
 }

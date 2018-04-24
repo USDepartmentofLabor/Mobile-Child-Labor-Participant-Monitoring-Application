@@ -118,7 +118,7 @@ namespace MDPMS.Shared.ViewModels
                         }
                         break;
                     case @"textarea":
-                        var textAreaValue = ((CustomFieldStringValueViewModel)CustomFieldControls[i].BindingContext).EntryValue;
+                        var textAreaValue = ((CustomFieldStringValueViewModel)CustomFieldControls[i].BindingContext).GetEntryValueWithCrlf();
                         if (textAreaValue != null && !textAreaValue.Equals(string.Empty))
                         {
                             newCustomValue.Value = Helpers.CustomValueConverter.ConvertCustomValueToJsonTextArea(textAreaValue);
