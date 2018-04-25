@@ -1,6 +1,7 @@
 ﻿using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
+using MDPMS.Shared.Views.ContentPages;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared.ViewModels.ContentPageModels
@@ -29,7 +30,7 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
         {
             // is it allowed?
             if (IncomeSource.HasExternalId) return;
-            //ApplicationInstanceData.NavigationPage.PushAsync(new IncomeSourceEditContentPage { BindingContext = new IncomeSourceEditContentPageModel(ApplicationInstanceData, IncomeSource) });
+            ApplicationInstanceData.NavigationPage.PushAsync(new IncomeSourceEditContentPage { BindingContext = new IncomeSourceEditContentPageModel(ApplicationInstanceData, IncomeSource) });
         }
 
         private async void ExecuteDeleteCommand()
