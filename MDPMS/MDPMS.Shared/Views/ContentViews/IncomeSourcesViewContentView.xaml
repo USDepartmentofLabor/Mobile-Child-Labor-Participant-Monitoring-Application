@@ -21,6 +21,7 @@
                 <RowDefinition Height="35"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition/>
+                <RowDefinition Height="{Binding AllowAddIncomeSourceButtonRowHeight}"/>
             </Grid.RowDefinitions>
             <BoxView Grid.Row="0"
                      HeightRequest="1"
@@ -69,6 +70,9 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button Grid.Row="4"
+                    Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AddIncomeSource]}"
+                    Command="{Binding AddIncomeSourceCommand}"/>
         </Grid>
     </ContentView.Content>
 </ContentView>
