@@ -144,6 +144,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Delete", @"Delete");
             translation.Translations.Add(@"IncomeSources",@"Income Sources");
             translation.Translations.Add(@"ConfirmationMessageDeleteIncomeSource", @"Are you sure you want to delete this income source?");
+            translation.Translations.Add(@"Save", @"Save");
             return translation;
         }
 
@@ -269,6 +270,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Delete", @"Borrar");
             translation.Translations.Add(@"IncomeSources", @"Fuentes de ingresos");
             translation.Translations.Add(@"ConfirmationMessageDeleteIncomeSource", @"¿Seguro que quieres eliminar esta fuente de ingresos?");
+            translation.Translations.Add(@"Save", @"Guardar");
             return translation;
         }
 
@@ -394,6 +396,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Delete", @"Effacer");
             translation.Translations.Add(@"IncomeSources", @"Sources de revenus");
             translation.Translations.Add(@"ConfirmationMessageDeleteIncomeSource", @"Êtes-vous sûr de vouloir supprimer cette source de revenus?");
+            translation.Translations.Add(@"Save", @"Enregistrer");
             return translation;
         }
 
@@ -519,6 +522,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Delete", @"Excluir");
             translation.Translations.Add(@"IncomeSources", @"Fontes de Renda");
             translation.Translations.Add(@"ConfirmationMessageDeleteIncomeSource", @"Tem certeza de que deseja excluir essa fonte de receita?");
+            translation.Translations.Add(@"Save", @"Salvar");
             return translation;
         }
     }     
