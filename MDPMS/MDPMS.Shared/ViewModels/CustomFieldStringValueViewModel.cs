@@ -16,6 +16,7 @@ namespace MDPMS.Shared.ViewModels
 
         public string GetEntryValueWithCrlf()
         {
+            if (EntryValue == null) return @"";
             var rtn = @"";
             foreach (var line in EntryValue.Split('\n'))
             {
