@@ -16,10 +16,10 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0"
-                        Text="Cancel"
+                        Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Cancel]}"
                         Command="{Binding CancelCommand}"/>
                 <Button Grid.Column="1"
-                        Text="Save"
+                        Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Save]}"
                         Command="{Binding SaveCommand}"/>
             </Grid>
         </Grid>
