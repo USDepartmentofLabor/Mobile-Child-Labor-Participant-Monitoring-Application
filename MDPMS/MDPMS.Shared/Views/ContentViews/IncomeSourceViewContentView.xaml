@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDPMS.Shared.Views.ContentViews.IncomeSourceViewContentView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelDescription" TargetType="Label">
+                <Setter Property="TextColor" Value="Blue"/>
+                <Setter Property="Margin" Value="10,5"/>
+            </Style>
+            <Style x:Key="LabelValue" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="Margin" Value="10,5"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <!-- Name of Product or Service -->
+            <Label Grid.Column="0"
+                   Grid.Row="0"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[NameOfProductOrService]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="0"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding IncomeSource.ProductServiceName}"/>
+            
+            <!-- Estimated Volume Produced -->
+            <Label Grid.Column="0"
+                   Grid.Row="1"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[EstimatedVolumeProduced]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="1"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding IncomeSource.EstimatedVolumeProduced}"/>
+            
+            <!-- Estimated Volume Sold -->
+            <Label Grid.Column="0"
+                   Grid.Row="2"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[EstimatedVolumeSold]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="2"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding IncomeSource.EstimatedVolumeSold}"/>
+            
+            <!-- Unit of Measure -->
+            <Label Grid.Column="0"
+                   Grid.Row="3"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[UnitOfMeasure]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="3"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding IncomeSource.UnitOfMeasure}"/>
+            
+            <!-- Estimated Income -->
+            <Label Grid.Column="0"
+                   Grid.Row="4"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[EstimatedIncome]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="4"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding IncomeSource.EstimatedIncome}"/>
+            
+            <!-- Currency -->
+            <Label Grid.Column="0"
+                   Grid.Row="5"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Currency]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="5"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding IncomeSource.Currency}"/>
+            
+        </Grid>
+    </ContentView.Content>
+</ContentView>

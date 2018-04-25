@@ -94,6 +94,12 @@ namespace MDPMS.Shared.Views.ContentViews
                 i++;
             }
             CustomFieldContent.Children.Add(grid);
+
+            IncomeSourcesContent.Children.Clear();
+            IncomeSourcesContent.Children.Add(new IncomeSourcesViewContentView
+            {
+                BindingContext = new IncomeSourcesViewContentViewModel(viewModel.ApplicationInstanceData, viewModel.Household)
+            });
         }
     }
 }

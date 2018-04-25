@@ -33,6 +33,7 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="300"/>
             </Grid.RowDefinitions>
             <Label Grid.Column="0"
                    Grid.Row="0"
@@ -128,6 +129,10 @@
                          x:Name="CustomFieldContent"
                          HorizontalOptions="FillAndExpand"
                          VerticalOptions="StartAndExpand"/>
+            <StackLayout Grid.Column="0"
+                         Grid.ColumnSpan="2"
+                         Grid.Row="12"
+                         x:Name="IncomeSourcesContent"/>
         </Grid>
     </ContentView.Content>
 </ContentView>
