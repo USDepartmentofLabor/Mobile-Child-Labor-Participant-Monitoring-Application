@@ -20,7 +20,7 @@
                 <RowDefinition Height="1"/>
                 <RowDefinition Height="35"/>
                 <RowDefinition Height="40"/>
-                <RowDefinition/>
+                <RowDefinition x:Name="ListViewRowDefinition"/>
                 <RowDefinition Height="{Binding AllowAddIncomeSourceButtonRowHeight}"/>
             </Grid.RowDefinitions>
             <BoxView Grid.Row="0"

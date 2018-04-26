@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using MDPMS.Shared.ViewModels.ContentViewModels;
+using Xamarin.Forms;
 
 namespace MDPMS.Shared.Views.ContentViews
 {
@@ -7,6 +8,15 @@ namespace MDPMS.Shared.Views.ContentViews
         public IncomeSourcesViewContentView()
         {
             InitializeComponent();
+        }
+
+        public void OnAppearing()
+        {
+            // fix for list view height being too tall
+            var viewModel = (IncomeSourcesViewContentViewModel)BindingContext;
+            var incomeSourceCount = viewModel.Household.IncomeSources.Count;
+            var gridHeight = 30.0 + (45.0 * incomeSourceCount);
+            ListViewRowDefinition.Height = new GridLength(gridHeight, GridUnitType.Absolute);
         }
     }
 }

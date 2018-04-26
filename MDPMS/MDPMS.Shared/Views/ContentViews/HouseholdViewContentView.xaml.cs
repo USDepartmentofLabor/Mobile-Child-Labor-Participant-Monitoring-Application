@@ -96,10 +96,12 @@ namespace MDPMS.Shared.Views.ContentViews
             CustomFieldContent.Children.Add(grid);
 
             IncomeSourcesContent.Children.Clear();
-            IncomeSourcesContent.Children.Add(new IncomeSourcesViewContentView
-            {
-                BindingContext = new IncomeSourcesViewContentViewModel(viewModel.ApplicationInstanceData, viewModel.Household)
-            });
+
+            var incomeSourcesViewContentView = new IncomeSourcesViewContentView();
+            var incomeSourcesViewContentViewModel = new IncomeSourcesViewContentViewModel(viewModel.ApplicationInstanceData, viewModel.Household);
+            incomeSourcesViewContentView.BindingContext = incomeSourcesViewContentViewModel;
+            IncomeSourcesContent.Children.Add(incomeSourcesViewContentView);
+            incomeSourcesViewContentView.OnAppearing();
         }
     }
 }
