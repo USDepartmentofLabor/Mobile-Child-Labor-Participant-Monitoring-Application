@@ -19,7 +19,7 @@
                         Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Cancel]}"
                         Command="{Binding CancelCommand}"/>
                 <Button Grid.Column="1"
-                        Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Save]}"
+                        Text="{Binding SaveCommandVerb}"
                         Command="{Binding SaveCommand}"/>
             </Grid>
         </Grid>

@@ -11,23 +11,52 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
 
         // temp/locally cached properties
         public string ProductServiceName { get; set; }
-        public int? EstimatedVolumeProduced { get; set; }
-        public int? EstimatedVolumeSold { get; set; }
+        public int EstimatedVolumeProduced { get; set; }
+        public int EstimatedVolumeSold { get; set; }
         public string UnitOfMeasure { get; set; }
-        public decimal? EstimatedIncome { get; set; }
+        public decimal EstimatedIncome { get; set; }
         public string Currency { get; set; }
+
+        private readonly bool isCreate;
+        private readonly Household household;
+
+        public IncomeSourceEditContentViewModel(ApplicationInstanceData applicationInstanceData, Household parentHousehold)
+        {
+            isCreate = true;
+            household = parentHousehold;
+            Init(applicationInstanceData);
+        }
 
         public IncomeSourceEditContentViewModel(ApplicationInstanceData applicationInstanceData, IncomeSource incomeSource)
         {
-            ApplicationInstanceData = applicationInstanceData;
             IncomeSource = incomeSource;
+            isCreate = false;
+            Init(applicationInstanceData);
+        }
+
+        private void Init(ApplicationInstanceData applicationInstanceData)
+        {
+            ApplicationInstanceData = applicationInstanceData;
+            if (isCreate)
+            {
+                IncomeSource = new IncomeSource
+                {
+                    ProductServiceName = @"",
+                    EstimatedVolumeProduced = 0,
+                    EstimatedVolumeSold = 0,
+                    UnitOfMeasure = @"",
+                    EstimatedIncome = 0.0m,
+                    Currency = @""
+                };
+
+            }
 
             // set temp/locally cached properties to support save/cancel
             ProductServiceName = IncomeSource.ProductServiceName;
-            EstimatedVolumeProduced = IncomeSource.EstimatedVolumeProduced;
-            EstimatedVolumeSold = IncomeSource.EstimatedVolumeSold;
+            EstimatedVolumeProduced = (IncomeSource.EstimatedVolumeProduced == null) ? 0 : (int)IncomeSource.EstimatedVolumeProduced;
+            EstimatedVolumeSold = (IncomeSource.EstimatedVolumeSold == null) ? 0 : (int)IncomeSource.EstimatedVolumeSold;
             UnitOfMeasure = IncomeSource.UnitOfMeasure;
-            EstimatedIncome = IncomeSource.EstimatedIncome;
+            EstimatedIncome = (IncomeSource.EstimatedIncome == null) ? 0.0m : (decimal)IncomeSource.EstimatedIncome;
             Currency = IncomeSource.Currency;
         }
 
@@ -55,7 +84,17 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
             IncomeSource.UnitOfMeasure = UnitOfMeasure;
             IncomeSource.EstimatedIncome = EstimatedIncome;
             IncomeSource.Currency = Currency;
-            IncomeSource.LastUpdatedAt = DateTime.UtcNow;
+
+            var now = DateTime.UtcNow;
+            IncomeSource.LastUpdatedAt = now;
+
+            if (isCreate)
+            {
+                IncomeSource.ExternalId = null;
+                IncomeSource.CreatedAt = null;
+                IncomeSource.SoftDeleted = false;
+                household.AddIncomeSource(IncomeSource);
+            }
 
             ApplicationInstanceData.Data.SaveChanges();
         }

@@ -46,6 +46,7 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
             if (Household.HasExternalId) return;
 
             // go to add view here
+            ApplicationInstanceData.NavigationPage.PushAsync(new IncomeSourceEditContentPage { BindingContext = new IncomeSourceEditContentPageModel(ApplicationInstanceData, Household) });
         }
     }
 }

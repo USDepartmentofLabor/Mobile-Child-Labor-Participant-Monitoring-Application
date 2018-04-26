@@ -17,7 +17,16 @@ namespace MDPMS.Shared.Views.ContentPages
             base.OnAppearing();
 
             var viewModel = (IncomeSourceEditContentPageModel)BindingContext;
-            viewModel.IncomeSourceEditContentViewModel = new IncomeSourceEditContentViewModel(viewModel.ApplicationInstanceData, viewModel.IncomeSource);
+
+            if (viewModel.IsCreate)
+            {
+                viewModel.IncomeSourceEditContentViewModel = new IncomeSourceEditContentViewModel(viewModel.ApplicationInstanceData, viewModel.ParentHousehold);
+            }
+            else
+            {
+                viewModel.IncomeSourceEditContentViewModel = new IncomeSourceEditContentViewModel(viewModel.ApplicationInstanceData, viewModel.IncomeSource);
+            }
+
             viewModel.IncomeSourceEditContentView = new IncomeSourceEditContentView();
             viewModel.IncomeSourceEditContentView.BindingContext = viewModel.IncomeSourceEditContentViewModel;
 

@@ -9,7 +9,7 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
 {
     public class IncomeSourceEditContentPageModel : ViewModelBase
     {
-        
+        public string SaveCommandVerb { get; set; }
 
         public Command CancelCommand { get; set; }
         public Command SaveCommand { get; set; }
@@ -19,15 +19,31 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
 
         public IncomeSource IncomeSource { get; set; }
 
+        public bool IsCreate { get; set; }
+        public Household ParentHousehold { get; set; }
+
+        public IncomeSourceEditContentPageModel(ApplicationInstanceData applicationInstanceData, Household parentHousehold)
+        {
+            IsCreate = true;
+            SaveCommandVerb = applicationInstanceData.SelectedLocalization.Translations[@"Submit"];
+            ParentHousehold = parentHousehold;
+            Init(applicationInstanceData);
+        }
 
         public IncomeSourceEditContentPageModel(ApplicationInstanceData applicationInstanceData, IncomeSource incomeSource)
+        {
+            IsCreate = false;
+            SaveCommandVerb = applicationInstanceData.SelectedLocalization.Translations[@"Save"];
+            IncomeSource = incomeSource;
+            Init(applicationInstanceData);
+        }
+
+        private void Init(ApplicationInstanceData applicationInstanceData)
         {
             ApplicationInstanceData = applicationInstanceData;
 
             CancelCommand = new Command(ExecuteCancelCommand);
             SaveCommand = new Command(ExecuteSaveCommand);
-
-            IncomeSource = incomeSource;
         }
 
         private void ExecuteCancelCommand()
