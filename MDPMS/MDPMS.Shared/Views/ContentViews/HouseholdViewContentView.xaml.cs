@@ -16,6 +16,7 @@ namespace MDPMS.Shared.Views.ContentViews
         {
             var viewModel = (HouseholdViewContentViewModel)BindingContext;
 
+            // Custom Fields
             CustomFieldContent.Children.Clear();
 
             var grid = new Grid();
@@ -95,6 +96,7 @@ namespace MDPMS.Shared.Views.ContentViews
             }
             CustomFieldContent.Children.Add(grid);
 
+            // Income Sources
             IncomeSourcesContent.Children.Clear();
 
             var incomeSourcesViewContentView = new IncomeSourcesViewContentView();
@@ -102,6 +104,15 @@ namespace MDPMS.Shared.Views.ContentViews
             incomeSourcesViewContentView.BindingContext = incomeSourcesViewContentViewModel;
             IncomeSourcesContent.Children.Add(incomeSourcesViewContentView);
             incomeSourcesViewContentView.OnAppearing();
+
+            // Household Members
+            HouseholdMembersContent.Children.Clear();
+
+            var householdMembersViewContentView = new HouseholdMembersViewContentView();
+            var householdMembersViewContentViewModel = new HouseholdMembersViewContentViewModel(viewModel.ApplicationInstanceData, viewModel.Household);
+            householdMembersViewContentView.BindingContext = householdMembersViewContentViewModel;
+            HouseholdMembersContent.Children.Add(householdMembersViewContentView);
+            householdMembersViewContentView.OnAppearing();
         }
     }
 }
