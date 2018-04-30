@@ -299,6 +299,7 @@ namespace MDPMS.Database.Data.Models
             {
                 var selectedPersonRelationship = MdpmsDatabaseContext.FindPersonRelationship((int)json.relationship_id.Value);            
                 if (selectedPersonRelationship == null) throw new Exception(@"Person Relationship Search Error");
+                person.RelationshipToHeadOfHousehold = selectedPersonRelationship;
             }
 
             var hazardousConditionIds = json.hazardous_condition_ids.ToObject<List<int>>();
