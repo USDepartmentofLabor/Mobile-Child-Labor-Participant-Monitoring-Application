@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDPMS.Shared.Views.ContentViews.PersonViewContentView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelDescription" TargetType="Label">
+                <Setter Property="TextColor" Value="Blue"/>
+                <Setter Property="Margin" Value="10,5"/>
+            </Style>
+            <Style x:Key="LabelValue" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="Margin" Value="10,5"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <!-- Intake Date -->
+            <Label Grid.Column="0"
+                   Grid.Row="0"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[IntakeDate]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="0"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding Person.IntakeDate, StringFormat='{0:M/d/yyyy}'}"/>
+            
+            <!-- First Name -->
+            <Label Grid.Column="0"
+                   Grid.Row="1"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[FirstNameGivenName]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="1"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding Person.FirstName}"/>
+
+            <!-- Last Name -->
+            <Label Grid.Column="0"
+                   Grid.Row="2"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[LastNameFamilyName]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="2"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding Person.LastName}"/>
+
+            <!-- Middle Name -->
+            <Label Grid.Column="0"
+                   Grid.Row="3"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[MiddleName]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="3"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding Person.MiddleName}"/>
+
+            <!-- Gender -->
+            <Label Grid.Column="0"
+                   Grid.Row="4"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Gender]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="4"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding GenderTranslated}"/>
+            
+            <!-- Date Of Birth -->
+            <Label Grid.Column="0"
+                   Grid.Row="5"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[DateOfBirth]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="5"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding Person.DateOfBirth, StringFormat='{0:M/d/yyyy}'}"/>
+
+            <!-- Is the Birthday an Approximate Date -->
+            <Label Grid.Column="0"
+                   Grid.Row="6"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[IsTheBirthdayAnApproximateDate]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="6"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding IsTheBirthdayAnApproximateDateTranslated}"/>
+
+            <!-- Relationship -->
+            <Label Grid.Column="0"
+                   Grid.Row="7"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Relationship]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="7"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding Person.RelationshipToHeadOfHousehold.DisplayName}"/>
+
+            <!-- Relationship if Other -->
+            <Label Grid.Column="0"
+                   Grid.Row="8"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[RelationshipOther]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="8"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding Person.RelationshipIfOther}"/>
+            
+            <!-- NOTE, not showing all intake properties on view to mimic web app -->
+            
+        </Grid>
+    </ContentView.Content>
+</ContentView>
