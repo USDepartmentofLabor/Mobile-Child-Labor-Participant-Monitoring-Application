@@ -93,6 +93,12 @@
     <Compile Update="Views\ContentPages\PersonViewContentPage.xaml.cs">
       <DependentUpon>PersonViewContentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\ContentPages\PersonEditContentPage.xaml.cs">
+      <DependentUpon>PersonEditContentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ContentViews\PersonEditContentView.xaml.cs">
+      <DependentUpon>PersonEditContentView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -146,5 +152,6 @@
     <Folder Include="ViewModels\ContentViewModels\" />
     <Folder Include="ViewModels\ContentPageModels\" />
     <Folder Include="Views\ContentPages\" />
+    <Folder Include="Views\CustomControls\" />
   </ItemGroup>
 </Project>

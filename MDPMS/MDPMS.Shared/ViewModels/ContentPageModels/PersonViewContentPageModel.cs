@@ -2,6 +2,7 @@
 using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
+using MDPMS.Shared.Views.ContentPages;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared.ViewModels.ContentPageModels
@@ -30,7 +31,7 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
         {
             // is it allowed?
             if (Person.HasExternalId) return;
-            //ApplicationInstanceData.NavigationPage.PushAsync(new PersonEditContentPage { BindingContext = new PersonEditContentPageModel(ApplicationInstanceData, Person) });
+            ApplicationInstanceData.NavigationPage.PushAsync(new PersonEditContentPage { BindingContext = new PersonEditContentPageModel(ApplicationInstanceData, Person) });
         }
 
         private async void ExecuteDeleteCommand()

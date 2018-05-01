@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDPMS.Shared.Views.CustomControls.NewGenericSwitchTextView">
+    <ContentView.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Switch Grid.Column="0"
+                    IsToggled="{Binding BoolValue, Mode=TwoWay}"
+                    HorizontalOptions="Center"/>
+            <Label Grid.Column="1"
+                   Text="{Binding TextValue}"
+                   Margin="5"
+                   TextColor="Black"
+                   VerticalOptions="Center"
+                   VerticalTextAlignment="Center"
+                   HorizontalOptions="Start"
+                   HorizontalTextAlignment="Start"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

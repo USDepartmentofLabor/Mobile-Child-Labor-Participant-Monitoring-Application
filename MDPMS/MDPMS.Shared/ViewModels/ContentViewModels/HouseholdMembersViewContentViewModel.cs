@@ -44,7 +44,7 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
             if (Household.HasExternalId) return;
 
             // go to add view here
-            //ApplicationInstanceData.NavigationPage.PushAsync(new PersonEditContentPage { BindingContext = new PersonEditContentPageModel(ApplicationInstanceData, SelectedHouseholdMember) });
+            ApplicationInstanceData.NavigationPage.PushAsync(new PersonEditContentPage { BindingContext = new PersonEditContentPageModel(ApplicationInstanceData, Household) });
         }
 
     }

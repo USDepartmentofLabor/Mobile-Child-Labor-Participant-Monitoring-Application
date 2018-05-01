@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDPMS.Shared.Views.ContentViews.PersonEditContentView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="EditLabelDescription" TargetType="Label">
+                <Setter Property="TextColor" Value="Blue"/>
+                <Setter Property="Margin" Value="10,5"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="{Binding SelectedBindablePersonRelationshipIsOtherRowHeight}"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="130"/>
+                <RowDefinition Height="130"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="130"/>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Intake Date -->
+            <Label Grid.Column="0"
+                   Grid.Row="0"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[IntakeDate]}"
+                   Margin="5"
+                   Style="{StaticResource EditLabelDescription}"/>
+            <DatePicker Grid.Column="1"
+                        Grid.Row="0"
+                        Margin="10,5,5,5"
+                        Date="{Binding IntakeDate, Mode=TwoWay}"/>
+            
+            <!-- First Name (Given Name) -->
+            <Label Grid.Column="0"
+                   Grid.Row="1"
+                   Style="{StaticResource EditLabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[FirstNameGivenName]}"/>
+            <Entry Grid.Column="1"
+                   Grid.Row="1"
+                   Margin="10,5,5,5"
+                   VerticalOptions="Center"
+                   Text="{Binding FirstName, Mode=TwoWay}"/>
+
+            <!-- Last Name (Family Name) -->
+            <Label Grid.Column="0"
+                   Grid.Row="2"
+                   Style="{StaticResource EditLabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[LastNameFamilyName]}"/>
+            <Entry Grid.Column="1"
+                   Grid.Row="2"
+                   Margin="10,5,5,5"
+                   VerticalOptions="Center"
+                   Text="{Binding LastName, Mode=TwoWay}"/>
+                              
+            <!-- Middle Name -->
+            <Label Grid.Column="0"
+                   Grid.Row="3"
+                   Style="{StaticResource EditLabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[MiddleName]}"/>
+            <Entry Grid.Column="1"
+                   Grid.Row="3"
+                   Margin="10,5,5,5"
+                   VerticalOptions="Center"
+                   Text="{Binding MiddleName, Mode=TwoWay}"/>
+                               
+            <!-- Gender -->
+            <Label Grid.Column="0"
+                   Grid.Row="4"
+                   Style="{StaticResource EditLabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Gender]}"/>
+            <Picker Grid.Column="1"
+                    Grid.Row="4"
+                    Margin="10,5,5,5"
+                    VerticalOptions="Center"
+                    ItemsSource="{Binding BindableGenders}"
+                    ItemDisplayBinding="{Binding Item1}"
+                    SelectedItem="{Binding SelectedBindableGender}"/>
+
+            <!-- Date of Birth (show calculated age) -->
+            <Label Grid.Column="0"
+                   Grid.Row="5"
+                   Style="{StaticResource EditLabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[DateOfBirth]}"/>
+            <Grid Grid.Column="1"
+                  Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <DatePicker Grid.Column="0"
+                            Margin="10,5,5,5"
+                            Date="{Binding DateOfBirth, Mode=TwoWay}"/>
+                <Image Grid.Column="1"
+                       Source="ic_date_range_black_24dp.png"
+                       Opacity="0.2"
+                       Scale="0.5"/>
+                <Label Grid.Column="2"
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Age]}"
+                       Style="{StaticResource LeftLabelStyleMain}"/>
+                <Label Grid.Column="3"
+                       Text="{Binding CalculatedAge}"
+                       Style="{StaticResource LeftLabelStyleMain}"/>
+            </Grid>
+
+            <!-- Is the Birthday an Approximate Date? -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="6">
+                <StackLayout Orientation="Horizontal">
+                    <Label Style="{StaticResource EditLabelDescription}"
+                           Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[IsTheBirthdayAnApproximateDate]}"/>
+                    <Switch IsToggled="{Binding DateOfBirthIsApproximate, Mode=TwoWay}"
+                            HorizontalOptions="Center"/>
+                </StackLayout>
+            </Grid>
+            
+            <!-- Relationship -->
+            <Label Grid.Column="0"
+                   Grid.Row="7"
+                   Style="{StaticResource EditLabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Relationship]}"/>
+            <Picker Grid.Column="1"
+                    Grid.Row="7"
+                    Margin="10,5,5,5"
+                    VerticalOptions="Center"
+                    ItemsSource="{Binding BindablePersonRelationships}"
+                    ItemDisplayBinding="{Binding Item1}"
+                    SelectedItem="{Binding SelectedBindablePersonRelationship}"/>
+            
+            <!-- Relationship if Other (hide/show based on person relationship canonical name is "OTHER") -->
+            <Label Grid.Column="0"
+                   Grid.Row="8"
+                   Style="{StaticResource EditLabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[RelationshipOther]}"/>
+            <Entry Grid.Column="1"
+                   Grid.Row="8"
+                   Margin="10,5,5,5"
+                   VerticalOptions="Center"
+                   Text="{Binding RelationshipIfOther, Mode=TwoWay}"/>
+            
+            <!-- Work Activities Question -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="9">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                       Style="{StaticResource EditLabelDescription}"                       
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[WorkActivitiesQuestion]}"/>
+                <StackLayout Grid.Row="1"
+                             x:Name="DynamicWorkActivities"/>
+            </Grid>
+
+            <!-- Work Activities Returning Question -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="10">
+                <StackLayout>
+                    <Label Style="{StaticResource EditLabelDescription}"
+                           Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[WorkActivitiesReturningQuestion]}"/>
+                    <Switch IsToggled="{Binding HaveJobReturningTo, Mode=TwoWay}"
+                            HorizontalOptions="Center"/>
+                </StackLayout>
+            </Grid>
+
+            <!-- Work Activities Hours Engaged Question -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="11">
+                <StackLayout>
+                    <Label Style="{StaticResource EditLabelDescription}"
+                           Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[WorkActivitiesHoursEngagedQuestion]}"/>
+                    <Entry Text="{Binding HoursWorked, Mode=TwoWay}"
+                           Keyboard="Numeric"/>
+                </StackLayout>
+            </Grid>
+
+            <!-- Hazardous Conditions Question -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                       Style="{StaticResource EditLabelDescription}"                       
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HazardousConditionsQuestion]}"/>
+                <StackLayout Grid.Row="1"
+                             x:Name="DynamicHazardousConditions"/>
+            </Grid>
+
+            <!-- Household Tasks Question -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="13">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                       Style="{StaticResource EditLabelDescription}"                       
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HouseholdTasksQuestion]}"/>
+                <StackLayout Grid.Row="1"
+                             x:Name="DynamicHouseholdTasks"/>
+            </Grid>
+
+            <!-- Household Tasks Hours Engaged Question -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="14">
+                <StackLayout>
+                    <Label Style="{StaticResource EditLabelDescription}"
+                           Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HouseholdTasksHoursEngagedQuestion]}"/>
+                    <Entry Text="{Binding HoursWorkedOnHousework, Mode=TwoWay}"
+                           Keyboard="Numeric"/>
+                </StackLayout>
+            </Grid>
+
+            <!-- Are You Enrolled In School And Or College -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="15">
+                <StackLayout>
+                    <Label Style="{StaticResource EditLabelDescription}"
+                           Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AreYouEnrolledInSchoolAndOrCollege]}"/>
+                    <Switch IsToggled="{Binding EnrolledInSchool, Mode=TwoWay}"
+                            HorizontalOptions="Center"/>
+                </StackLayout>
+            </Grid>
+                        
+            <!-- CustomFieldContent -->
+            <StackLayout Grid.Column="0"
+                         Grid.ColumnSpan="2"
+                         Grid.Row="16"
+                         x:Name="CustomFieldContent"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="StartAndExpand"/>
+            
+        </Grid>
+    </ContentView.Content>
+</ContentView>
