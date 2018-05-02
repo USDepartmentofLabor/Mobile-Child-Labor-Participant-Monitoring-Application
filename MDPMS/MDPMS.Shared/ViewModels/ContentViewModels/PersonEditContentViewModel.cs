@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
@@ -203,11 +204,36 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
 
         public bool ValidatePerson()
         {
-            // TODO
+            // Required { DOB, Gender, First Name, Last Name }
+            var validationMessages = new List<string>();
 
-            // Gender required
-            // Date of Birth required
+            if (SelectedBindableGender.Item2 == null)
+            {
+                validationMessages.Add(ApplicationInstanceData.SelectedLocalization.Translations[@"ErrorGenderMustBeSelected"]);
+            }
 
+            var validateableLastName = LastName.Replace(" ", "");
+            if (validateableLastName.Equals(string.Empty))
+            {
+                validationMessages.Add(ApplicationInstanceData.SelectedLocalization.Translations[@"ErrorLastNameCanNotBeBlank"]);
+            }
+
+            var validateableFirstName = FirstName.Replace(" ", "");
+            if (validateableFirstName.Equals(string.Empty))
+            {
+                validationMessages.Add(ApplicationInstanceData.SelectedLocalization.Translations[@"ErrorFirstNameCanNotBeBlank"]);
+            }
+
+            if (validationMessages.Any())
+            {
+                var messageContent = new StringBuilder();
+                foreach (var message in validationMessages) messageContent.AppendLine(message);
+                ApplicationInstanceData.App.MainPage.DisplayAlert(
+                    ApplicationInstanceData.SelectedLocalization.Translations[@"Error"],
+                    messageContent.ToString(),
+                    ApplicationInstanceData.SelectedLocalization.Translations[@"OK"]);
+                return false;
+            }
             return true;
         }
 
