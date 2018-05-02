@@ -275,7 +275,7 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
             }
             else
             {
-                UpdateExisting();
+                UpdateExisting(now);
             }
         }
 
@@ -407,7 +407,7 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
             ApplicationInstanceData.Data.SaveChanges();
         }
 
-        private void UpdateExisting()
+        private void UpdateExisting(DateTime now)
         {
             // Status Customizations edit
             foreach (var bindableHazardousCondition in BindableHazardousConditions)
@@ -496,7 +496,121 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
             }
 
             // Custom Values edit
+            for (var i = 0; i < CustomFields.Count(); i++)
+            {
+                // has value
+                // is same
+                // delete if no value but previously existed
+                // add if has value but not existing
+                // edit value if it changed
 
+                var jsonValue = @"";
+                var hasValue = false;
+
+                switch (CustomFields[i].FieldType)
+                {
+                    case @"text":
+                        var textValue = ((CustomFieldStringValueViewModel)CustomFieldControls[i].BindingContext).EntryValue;
+                        if (textValue != null && !textValue.Equals(string.Empty))
+                        {
+                            hasValue = true;
+                            jsonValue = Helpers.CustomValueConverter.ConvertCustomValueToJsonText(textValue);
+                        }
+                        break;
+                    case @"textarea":
+                        var textAreaValue = ((CustomFieldStringValueViewModel)CustomFieldControls[i].BindingContext).EntryValue;
+                        if (textAreaValue != null && !textAreaValue.Equals(string.Empty))
+                        {
+                            hasValue = true;
+                            jsonValue = Helpers.CustomValueConverter.ConvertCustomValueToJsonTextArea(textAreaValue);
+                        }
+                        break;
+                    case @"check_box":
+                        var checkBoxValues = ((CustomFieldSwitchArrayView)CustomFieldControls[i]).GetSelectedValuesAsList();
+                        if (checkBoxValues.Any())
+                        {
+                            hasValue = true;
+                            jsonValue = Helpers.CustomValueConverter.ConvertCustomValueToJsonCheckBox(checkBoxValues);
+                        }
+                        break;
+                    case @"radio_button":
+                        var radioButtonValue = ((CustomFieldPickerViewModel)CustomFieldControls[i].BindingContext).SelectedBindableOption;
+                        if (radioButtonValue != null && !radioButtonValue.Equals(string.Empty))
+                        {
+                            hasValue = true;
+                            jsonValue = Helpers.CustomValueConverter.ConvertCustomValueToJsonRadioButton(radioButtonValue);
+                        }
+                        break;
+                    case @"select":
+                        var selectValue = ((CustomFieldPickerViewModel)CustomFieldControls[i].BindingContext).SelectedBindableOption;
+                        if (selectValue != null && !selectValue.Equals(string.Empty))
+                        {
+                            hasValue = true;
+                            jsonValue = Helpers.CustomValueConverter.ConvertCustomValueToJsonSelect(selectValue);
+                        }
+                        break;
+                    case @"number":
+                        var numberValue = ((CustomFieldDoubleValueViewModel)CustomFieldControls[i].BindingContext).GetDoubleValue();
+                        if (numberValue != null)
+                        {
+                            hasValue = true;
+                            jsonValue = Helpers.CustomValueConverter.ConvertCustomValueToJsonNumber((double)numberValue);
+                        }
+                        break;
+                    case @"date":
+                        var dateValue = ((CustomFieldDateTimeValueViewModel)CustomFieldControls[i].BindingContext).DateValue;
+                        if (dateValue != null && !dateValue.ToString().Equals(string.Empty))
+                        {
+                            hasValue = true;
+                            jsonValue = Helpers.CustomValueConverter.ConvertCustomValueToJsonDate((DateTime)dateValue);
+                        }
+                        break;
+                    case @"rank_list":
+                        var rankedValues = ((CustomFieldRankListViewModel)CustomFieldControls[i].BindingContext).GetRankedValues();
+                        if (!rankedValues.Equals(@""))
+                        {
+                            hasValue = true;
+                            jsonValue = Helpers.CustomValueConverter.ConvertCustomValueToJsonRankList(((CustomFieldRankListViewModel)CustomFieldControls[i].BindingContext).Entries.ToList());
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+                var existingValueQuery = ApplicationInstanceData.Data.CustomPersonValues
+                                                                .Where(a => a.Person.InternalId == Person.InternalId && a.CustomField.InternalId == CustomFields[i].InternalId);
+                
+                if (hasValue)
+                {
+                    // check to see if new needed
+                    if (!existingValueQuery.Any())
+                    {
+                        // add a record
+                        var newCustomValue = new CustomPersonValue
+                        {
+                            CreatedAt = now,
+                            LastUpdatedAt = now,
+                            SoftDeleted = false,
+                            CustomField = CustomFields[i],
+                            Value = jsonValue,
+                            Person = Person
+                        };
+                    }
+                    else
+                    {
+                        // if existing compare and update if necesary
+                        if (existingValueQuery.First().Value != jsonValue)
+                        {
+                            existingValueQuery.First().Value = jsonValue;
+                        }
+                    }
+                }
+                else
+                {
+                    // delete value if it exists
+                    if (existingValueQuery.Any()) ApplicationInstanceData.Data.CustomPersonValues.Remove(existingValueQuery.First());
+                }
+            }                
 
             ApplicationInstanceData.Data.SaveChanges();
         }
