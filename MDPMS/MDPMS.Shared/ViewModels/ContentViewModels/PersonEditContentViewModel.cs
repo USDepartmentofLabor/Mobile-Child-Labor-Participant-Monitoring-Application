@@ -410,8 +410,95 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
         private void UpdateExisting()
         {
             // Status Customizations edit
+            foreach (var bindableHazardousCondition in BindableHazardousConditions)
+            {
+                if (bindableHazardousCondition.Item3.BoolValue)
+                {
+                    // true
+                    if (!Person.PeopleHazardousConditions.Any(a => a.HazardousConditionInternalId == bindableHazardousCondition.Item2.InternalId))
+                    {
+                        // add value
+                        Person.PeopleHazardousConditions.Add(new PersonHazardousCondition
+                        {
+                            Person = Person,
+                            HazardousCondition = bindableHazardousCondition.Item2
+                        });
+                    }
+                }
+                else
+                {
+                    // false
+                    var query = Person.PeopleHazardousConditions.Where(a => a.HazardousConditionInternalId == bindableHazardousCondition.Item2.InternalId);
+                    if (query.Any())
+                    {
+                        // delete the value
+                        var ids = query.Select(a => a.HazardousConditionInternalId).ToList();
+                        foreach (var x in ids)
+                        {
+                            Person.PeopleHazardousConditions.Remove(Person.PeopleHazardousConditions.First(a => a.HazardousConditionInternalId == x));
+                        }
+                    }
+                }
+            }
+
+            foreach (var bindableWorkActivity in BindableWorkActivities)
+            {
+                if (bindableWorkActivity.Item3.BoolValue)
+                {
+                    if (!Person.PeopleWorkActivities.Any(a => a.WorkActivityInternalId == bindableWorkActivity.Item2.InternalId))
+                    {
+                        Person.PeopleWorkActivities.Add(new PersonWorkActivity
+                        {
+                            Person = Person,
+                            WorkActivity = bindableWorkActivity.Item2
+                        });
+                    }
+                }
+                else
+                {
+                    var query = Person.PeopleWorkActivities.Where(a => a.WorkActivityInternalId == bindableWorkActivity.Item2.InternalId);
+                    if (query.Any())
+                    {
+                        var ids = query.Select(a => a.WorkActivityInternalId).ToList();
+                        foreach (var x in ids)
+                        {
+                            Person.PeopleWorkActivities.Remove(Person.PeopleWorkActivities.First(a => a.WorkActivityInternalId == x));
+                        }
+                    }
+                }
+            }
+
+            foreach (var bindableHouseholdTask in BindableHouseholdTasks)
+            {
+                if (bindableHouseholdTask.Item3.BoolValue)
+                {
+                    if (!Person.PeopleHouseholdTasks.Any(a => a.HouseholdTaskInternalId == bindableHouseholdTask.Item2.InternalId))
+                    {
+                        Person.PeopleHouseholdTasks.Add(new PersonHouseholdTask
+                        {
+                            Person = Person,
+                            HouseholdTask = bindableHouseholdTask.Item2
+                        });
+                    }
+                }
+                else
+                {
+                    var query = Person.PeopleHouseholdTasks.Where(a => a.HouseholdTaskInternalId == bindableHouseholdTask.Item2.InternalId);
+                    if (query.Any())
+                    {
+                        var ids = query.Select(a => a.HouseholdTaskInternalId).ToList();
+                        foreach (var x in ids)
+                        {
+                            Person.PeopleHouseholdTasks.Remove(Person.PeopleHouseholdTasks.First(a => a.HouseholdTaskInternalId == x));
+                        }
+                    }
+                }
+            }
 
             // Custom Values edit
+
+
+            ApplicationInstanceData.Data.SaveChanges();
         }
 
     }
