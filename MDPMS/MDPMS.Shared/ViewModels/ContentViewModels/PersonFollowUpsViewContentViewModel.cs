@@ -23,10 +23,10 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
             {
                 _selectedPersonFollowUp = value;
                 if (_selectedPersonFollowUp == null) return;
-                //ApplicationInstanceData.NavigationPage.PushAsync(new PersonFollowUpViewContentPage
-                //{
-                //    BindingContext = new PersonFollowUpViewContentPageModel(ApplicationInstanceData, value)
-                //});
+                ApplicationInstanceData.NavigationPage.PushAsync(new PersonFollowUpViewContentPage
+                {
+                    BindingContext = new PersonFollowUpViewContentPageModel(ApplicationInstanceData, value)
+                });
             }
         }
 
