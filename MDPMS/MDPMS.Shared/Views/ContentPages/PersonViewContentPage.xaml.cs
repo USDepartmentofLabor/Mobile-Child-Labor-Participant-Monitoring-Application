@@ -21,6 +21,7 @@ namespace MDPMS.Shared.Views.ContentPages
             var childViewModel = new PersonViewContentViewModel(viewModel.ApplicationInstanceData, viewModel.Person);
             childView.BindingContext = childViewModel;
             this.ScrollView.Content = childView;
+            childView.OnAppearing();
         }
     }
 }

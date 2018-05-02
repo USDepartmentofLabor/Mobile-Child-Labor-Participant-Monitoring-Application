@@ -30,6 +30,7 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <!-- Intake Date -->
@@ -123,6 +124,12 @@
                    Text="{Binding Person.RelationshipIfOther}"/>
             
             <!-- NOTE, not showing all intake properties on view to mimic web app -->
+
+            <!-- Person Follow Ups -->
+            <StackLayout Grid.Column="0"
+                         Grid.ColumnSpan="2"
+                         Grid.Row="9"
+                         x:Name="PersonFollowUpsContent"/>
             
         </Grid>
     </ContentView.Content>
