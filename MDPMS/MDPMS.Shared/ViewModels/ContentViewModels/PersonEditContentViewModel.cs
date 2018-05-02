@@ -6,12 +6,15 @@ using System.Text;
 using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
+using MDPMS.Shared.Views;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared.ViewModels.ContentViewModels
 {
     public class PersonEditContentViewModel : ViewModelBase
     {
+        Plugin.Geolocator.Abstractions.Position GPSPosition;
+
         public Person Person { get; set; }
 
         // temp/locally cached properties
@@ -48,8 +51,8 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
         public string RelationshipIfOther { get; set; }
         public DateTime? IntakeDate { get; set; }
         public bool? HaveJobReturningTo { get; set; }
-        public int? HoursWorked { get; set; }
-        public int? HoursWorkedOnHousework { get; set; }
+        public int HoursWorked { get; set; }
+        public int HoursWorkedOnHousework { get; set; }
         public bool? EnrolledInSchool { get; set; }
 
         // *** cached look ups and view helper vars ***
@@ -170,6 +173,7 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
             {
                 Person = new Person
                 {
+                    SoftDeleted = false,
                     LastName = @"",
                     FirstName = @"",
                     MiddleName = @"",
@@ -197,8 +201,8 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
             RelationshipIfOther = Person.RelationshipIfOther;
             IntakeDate = Person.IntakeDate;
             HaveJobReturningTo = Person.HaveJobReturningTo;
-            HoursWorked = Person.HoursWorked;
-            HoursWorkedOnHousework = Person.HouseWorkedOnHousework;
+            HoursWorked = (Person.HoursWorked == null) ? 0 : (int)Person.HoursWorked;
+            HoursWorkedOnHousework = (Person.HouseWorkedOnHousework == null) ? 0 : (int)Person.HouseWorkedOnHousework;
             EnrolledInSchool = Person.EnrolledInSchool;
         }
 
@@ -237,11 +241,178 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
             return true;
         }
 
-        public void SavePerson()
+        public async void SavePerson()
         {
-            // TODO
-
-            // Create vs. Edit
+            if (isCreate) GPSPosition = await Helper.Gps.GpsHelper.GetGpsPosition();
+            SavePersonCommon();
         }
+
+        private void SavePersonCommon()
+        {
+            // Create vs. Edit
+
+            // Common
+            var now = DateTime.UtcNow;
+            Person.LastUpdatedAt = now;
+            Person.FirstName = FirstName;
+            Person.LastName = LastName;
+            Person.MiddleName = MiddleName;
+            Person.Gender = SelectedBindableGender.Item2;
+            Person.DateOfBirth = DateOfBirth;
+            Person.DateOfBirthIsApproximate = DateOfBirthIsApproximate;
+            Person.IntakeDate = IntakeDate;
+            if (SelectedBindablePersonRelationship != null) Person.RelationshipToHeadOfHousehold = SelectedBindablePersonRelationship.Item2;
+            Person.RelationshipIfOther = RelationshipIfOther;
+            Person.HaveJobReturningTo = HaveJobReturningTo;
+            Person.HoursWorked = HoursWorked;
+            Person.HouseWorkedOnHousework = HoursWorkedOnHousework;
+            Person.EnrolledInSchool = EnrolledInSchool;
+
+            if (isCreate)
+            {
+                Person.CreatedAt = now;
+                SaveNew(now);
+            }
+            else
+            {
+                UpdateExisting();
+            }
+        }
+
+        private void SaveNew(DateTime now)
+        {
+            // GPS location
+            Person.GpsLatitude = GPSPosition?.Latitude;
+            Person.GpsLongitude = GPSPosition?.Longitude;
+            Person.GpsPositionAccuracy = GPSPosition?.Accuracy;
+            Person.GpsAltitude = GPSPosition?.Altitude;
+            Person.GpsAltitudeAccuracy = GPSPosition?.AltitudeAccuracy;
+            Person.GpsHeading = GPSPosition?.Heading;
+            Person.GpsSpeed = GPSPosition?.Speed;
+            Person.GpsPositionTime = now;
+
+            // Status Customizations
+            foreach (var bindableHazardousCondition in BindableHazardousConditions.Where(a => a.Item3.BoolValue))
+            {
+                Person.PeopleHazardousConditions.Add(new PersonHazardousCondition
+                {
+                    Person = Person,
+                    HazardousCondition = bindableHazardousCondition.Item2
+                });
+            }
+
+            foreach (var bindableWorkActivity in BindableWorkActivities.Where(a => a.Item3.BoolValue))
+            {
+                Person.PeopleWorkActivities.Add(new PersonWorkActivity
+                {
+                    Person = Person,
+                    WorkActivity = bindableWorkActivity.Item2
+                });
+            }
+
+            foreach (var bindableHouseholdTask in BindableHouseholdTasks.Where(a => a.Item3.BoolValue))
+            {
+                Person.PeopleHouseholdTasks.Add(new PersonHouseholdTask
+                {
+                    Person = Person,
+                    HouseholdTask = bindableHouseholdTask.Item2
+                });
+            }
+
+            // Custom Values
+            for (var i = 0; i < CustomFields.Count; i++)
+            {
+                var newCustomValue = new CustomPersonValue
+                {
+                    CreatedAt = DateTime.Now,
+                    LastUpdatedAt = DateTime.Now,
+                    SoftDeleted = false,
+                    CustomField = CustomFields[i],
+                    Value = "",
+                    Person = Person
+                };
+
+                switch (CustomFields[i].FieldType)
+                {
+                    case @"text":
+                        var textValue = ((CustomFieldStringValueViewModel)CustomFieldControls[i].BindingContext).EntryValue;
+                        if (textValue != null && !textValue.Equals(string.Empty))
+                        {
+                            newCustomValue.Value = Helpers.CustomValueConverter.ConvertCustomValueToJsonText(textValue);
+                            ApplicationInstanceData.Data.CustomPersonValues.Add(newCustomValue);
+                        }
+                        break;
+                    case @"textarea":
+                        var textAreaValue = ((CustomFieldStringValueViewModel)CustomFieldControls[i].BindingContext).EntryValue;
+                        if (textAreaValue != null && !textAreaValue.Equals(string.Empty))
+                        {
+                            newCustomValue.Value = Helpers.CustomValueConverter.ConvertCustomValueToJsonTextArea(textAreaValue);
+                            ApplicationInstanceData.Data.CustomPersonValues.Add(newCustomValue);
+                        }
+                        break;
+                    case @"check_box":
+                        var checkBoxValues = ((CustomFieldSwitchArrayView)CustomFieldControls[i]).GetSelectedValuesAsList();
+                        if (checkBoxValues.Any())
+                        {
+                            newCustomValue.Value = Helpers.CustomValueConverter.ConvertCustomValueToJsonCheckBox(checkBoxValues);
+                            ApplicationInstanceData.Data.CustomPersonValues.Add(newCustomValue);
+                        }
+                        break;
+                    case @"radio_button":
+                        var radioButtonValue = ((CustomFieldPickerViewModel)CustomFieldControls[i].BindingContext).SelectedBindableOption;
+                        if (radioButtonValue != null && !radioButtonValue.Equals(string.Empty))
+                        {
+                            newCustomValue.Value = Helpers.CustomValueConverter.ConvertCustomValueToJsonRadioButton(radioButtonValue);
+                            ApplicationInstanceData.Data.CustomPersonValues.Add(newCustomValue);
+                        }
+                        break;
+                    case @"select":
+                        var selectValue = ((CustomFieldPickerViewModel)CustomFieldControls[i].BindingContext).SelectedBindableOption;
+                        if (selectValue != null && !selectValue.Equals(string.Empty))
+                        {
+                            newCustomValue.Value = Helpers.CustomValueConverter.ConvertCustomValueToJsonSelect(selectValue);
+                            ApplicationInstanceData.Data.CustomPersonValues.Add(newCustomValue);
+                        }
+                        break;
+                    case @"number":
+                        var numberValue = ((CustomFieldDoubleValueViewModel)CustomFieldControls[i].BindingContext).GetDoubleValue();
+                        if (numberValue != null)
+                        {
+                            newCustomValue.Value = Helpers.CustomValueConverter.ConvertCustomValueToJsonNumber((double)numberValue);
+                            ApplicationInstanceData.Data.CustomPersonValues.Add(newCustomValue);
+                        }
+                        break;
+                    case @"date":
+                        var dateValue = ((CustomFieldDateTimeValueViewModel)CustomFieldControls[i].BindingContext).DateValue;
+                        if (dateValue != null && !dateValue.ToString().Equals(string.Empty))
+                        {
+                            newCustomValue.Value = Helpers.CustomValueConverter.ConvertCustomValueToJsonDate((DateTime)dateValue);
+                            ApplicationInstanceData.Data.CustomPersonValues.Add(newCustomValue);
+                        }
+                        break;
+                    case @"rank_list":
+                        var rankedValues = ((CustomFieldRankListViewModel)CustomFieldControls[i].BindingContext).GetRankedValues();
+                        if (!rankedValues.Equals(@""))
+                        {
+                            newCustomValue.Value = Helpers.CustomValueConverter.ConvertCustomValueToJsonRankList(((CustomFieldRankListViewModel)CustomFieldControls[i].BindingContext).Entries.ToList());
+                            ApplicationInstanceData.Data.CustomPersonValues.Add(newCustomValue);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            household.AddMember(Person);
+            ApplicationInstanceData.Data.SaveChanges();
+        }
+
+        private void UpdateExisting()
+        {
+            // Status Customizations edit
+
+            // Custom Values edit
+        }
+
     }
 }
