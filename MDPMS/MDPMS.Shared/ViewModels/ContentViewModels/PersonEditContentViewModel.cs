@@ -138,7 +138,7 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
             foreach (var workActivity in ApplicationInstanceData.Data.StatusCustomizationWorkActivities)
             {
                 var value = false;
-                if (!isCreate) value = Person.PeopleWorkActivities.Any(a => a.WorkActivity.InternalId == workActivity.InternalId);
+                if (!isCreate) value = Person.PeopleWorkActivities.Select(a => a.WorkActivityInternalId).Contains(workActivity.InternalId);
                 BindableWorkActivities.Add(new Tuple<bool, StatusCustomizationWorkActivity, GenericSwitchTextViewModel>(value, workActivity,
                     new GenericSwitchTextViewModel(workActivity.DisplayName, value)));
             }
@@ -148,7 +148,7 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
             foreach (var hazardousCondition in ApplicationInstanceData.Data.StatusCustomizationHazardousConditions)
             {
                 var value = false;
-                if (!isCreate) value = Person.PeopleHazardousConditions.Any(a => a.HazardousCondition.InternalId == hazardousCondition.InternalId);
+                if (!isCreate) value = Person.PeopleHazardousConditions.Select(a => a.HazardousConditionInternalId).Contains(hazardousCondition.InternalId);
                 BindableHazardousConditions.Add(new Tuple<bool, StatusCustomizationHazardousCondition, GenericSwitchTextViewModel>(value, hazardousCondition,
                     new GenericSwitchTextViewModel(hazardousCondition.DisplayName, value)));
             }
@@ -158,7 +158,7 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
             foreach (var householdTask in ApplicationInstanceData.Data.StatusCustomizationHouseholdTasks)
             {
                 var value = false;
-                if (!isCreate) value = Person.PeopleHouseholdTasks.Any(a => a.HouseholdTask.InternalId == householdTask.InternalId);
+                if (!isCreate) value = Person.PeopleHouseholdTasks.Select(a => a.HouseholdTaskInternalId).Contains(householdTask.InternalId);
                 BindableHouseholdTasks.Add(new Tuple<bool, StatusCustomizationHouseholdTask, GenericSwitchTextViewModel>(value, householdTask,
                     new GenericSwitchTextViewModel(householdTask.DisplayName, value)));
             }
