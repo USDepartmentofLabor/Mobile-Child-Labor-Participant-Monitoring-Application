@@ -147,6 +147,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Save", @"Save");
             translation.Translations.Add(@"ConfirmationMessageDeleteHouseholdMember", @"Are you sure you want to delete this household member?  All associated follow ups and service assignments will also be removed.");
             translation.Translations.Add(@"FollowUps", @"Follow Ups");
+            translation.Translations.Add(@"AddFollowUp", @"Add Follow Up");
             return translation;
         }
 
@@ -275,6 +276,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Save", @"Guardar");
             translation.Translations.Add(@"ConfirmationMessageDeleteHouseholdMember", @"¿Confirma que desea eliminar este miembro del hogar?  También se eliminarán todos los seguimientos y asignaciones de servicios asociados.");
             translation.Translations.Add(@"FollowUps", @"Seguimiento de");
+            translation.Translations.Add(@"AddFollowUp", @"Agregar seguimiento");
             return translation;
         }
 
@@ -403,6 +405,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Save", @"Enregistrer");
             translation.Translations.Add(@"ConfirmationMessageDeleteHouseholdMember", @"Êtes-vous sûr de vouloir supprimer ce membre du ménage?  Tous les suivis associés et les affectations de service seront également supprimés.");
             translation.Translations.Add(@"FollowUps", @"Suivis");
+            translation.Translations.Add(@"AddFollowUp", @"Ajouter un suivi");
             return translation;
         }
 
@@ -531,6 +534,7 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"Save", @"Salvar");
             translation.Translations.Add(@"ConfirmationMessageDeleteHouseholdMember", @"Tem certeza de que deseja excluir este membro do agregado familiar?  Todos os follow ups associados e atribuições de serviço também serão removidos.");
             translation.Translations.Add(@"FollowUps", @"Na sequência");
+            translation.Translations.Add(@"AddFollowUp", @"Adicionar Acompanhamento");
             return translation;
         }
     }     
