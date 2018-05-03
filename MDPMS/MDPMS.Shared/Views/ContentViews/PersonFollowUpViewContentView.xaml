@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDPMS.Shared.Views.ContentViews.PersonFollowUpViewContentView">
+    <ContentView.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Follow Up Date -->
+            <Label Grid.Column="0"
+                   Grid.Row="0"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[FollowUpDate]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="0"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding PersonFollowUp.FollowUpDate, StringFormat='{0:M/d/yyyy}'}"/>
+
+            <!-- Work Activities (Status Customization) -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[WorkActivitiesQuestion]}"/>
+            <Label Grid.Row="1"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding WorkActivitiesReadableList}"/>
+            </Grid>
+
+            <!-- Work Activities Returning -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[WorkActivitiesReturningQuestion]}"/>
+            <Label Grid.Row="1"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding HaveJobReturningToReadable}"/>
+            </Grid>
+
+            <!-- Work Activities Hours Engaged -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[WorkActivitiesHoursEngagedQuestion]}"/>
+            <Label Grid.Row="1"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding PersonFollowUp.HoursWorked}"/>
+            </Grid>
+
+            <!-- Hazardous Conditions Status Customization) -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HazardousConditionsQuestion]}"/>
+            <Label Grid.Row="1"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding HazardousConditionsReadableList}"/>
+            </Grid>
+            
+            <!-- Household Tasks (Status Customization) -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HouseholdTasksQuestion]}"/>
+            <Label Grid.Row="1"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding HouseholdTasksReadableList}"/>
+            </Grid>
+            
+            <!-- Household Tasks Hours Engaged -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="6">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HouseholdTasksHoursEngagedQuestion]}"/>
+            <Label Grid.Row="1"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding PersonFollowUp.HouseWorkedOnHousework}"/>
+            </Grid>
+
+            <!-- Are You Enrolled In School And Or College -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="7">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AreYouEnrolledInSchoolAndOrCollege]}"/>
+            <Label Grid.Row="1"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding EnrolledInSchoolReadable}"/>
+            </Grid>
+
+            <!-- Custom Fields -->
+                        
+        </Grid>
+    </ContentView.Content>
+</ContentView>

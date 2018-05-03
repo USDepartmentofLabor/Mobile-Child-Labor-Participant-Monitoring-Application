@@ -29,6 +29,16 @@
                 <Setter Property="Font" Value="Bold"/>
             </Style>
 
+            <Style x:Key="LabelDescription" TargetType="Label">
+                <Setter Property="TextColor" Value="Blue"/>
+                <Setter Property="Margin" Value="10,5"/>
+            </Style>
+
+            <Style x:Key="LabelValue" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="Margin" Value="10,5"/>
+            </Style>
+
             <!-- Converters -->
             <converters:ReverseBooleanConverter x:Key="ReverseBooleanConverter"/>
 
