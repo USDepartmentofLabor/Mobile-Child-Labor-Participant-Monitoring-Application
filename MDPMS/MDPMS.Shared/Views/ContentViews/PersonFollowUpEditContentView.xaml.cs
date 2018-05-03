@@ -1,0 +1,63 @@
+﻿using MDPMS.Shared.ViewModels.ContentViewModels;
+using Xamarin.Forms;
+
+namespace MDPMS.Shared.Views.ContentViews
+{
+    public partial class PersonFollowUpEditContentView : ContentView
+    {
+        public PersonFollowUpEditContentView()
+        {
+            InitializeComponent();
+        }
+
+        public void OnAppearing(bool loadValues)
+        {
+            var viewModel = (PersonFollowUpEditContentViewModel)BindingContext;
+
+            // Work Activities
+            DynamicWorkActivities.Children.Clear();
+            var workActivitiesGrid = new Grid();
+            var i = 0;
+            foreach (var bindableWorkActivity in viewModel.BindableWorkActivities)
+            {
+                var newWorkActivitiesGridRow = new RowDefinition();
+                newWorkActivitiesGridRow.Height = 80;
+                var newWorkActivityContent = new CustomControls.NewGenericSwitchTextView { BindingContext = bindableWorkActivity.Item3 };
+                newWorkActivityContent.SetValue(Grid.RowProperty, i);
+                workActivitiesGrid.Children.Add(newWorkActivityContent);
+                i++;
+            }
+            DynamicWorkActivities.Children.Add(workActivitiesGrid);
+
+            // Hazardous Conditions
+            DynamicHazardousConditions.Children.Clear();
+            var hazardousConditionsGrid = new Grid();
+            i = 0;
+            foreach (var bindableHazardousCondition in viewModel.BindableHazardousConditions)
+            {
+                var newHazardousConditionsGridRow = new RowDefinition();
+                newHazardousConditionsGridRow.Height = 80;
+                var newHazardousConditionContent = new CustomControls.NewGenericSwitchTextView { BindingContext = bindableHazardousCondition.Item3 };
+                newHazardousConditionContent.SetValue(Grid.RowProperty, i);
+                hazardousConditionsGrid.Children.Add(newHazardousConditionContent);
+                i++;
+            }
+            DynamicHazardousConditions.Children.Add(hazardousConditionsGrid);
+
+            // Household Tasks
+            DynamicHouseholdTasks.Children.Clear();
+            var householdTasksGrid = new Grid();
+            i = 0;
+            foreach (var bindableHouseholdTask in viewModel.BindableHouseholdTasks)
+            {
+                var newHouseholdTasksGridRow = new RowDefinition();
+                newHouseholdTasksGridRow.Height = 80;
+                var newHouseholdTaskContent = new CustomControls.NewGenericSwitchTextView { BindingContext = bindableHouseholdTask.Item3 };
+                newHouseholdTaskContent.SetValue(Grid.RowProperty, i);
+                householdTasksGrid.Children.Add(newHouseholdTaskContent);
+                i++;
+            }
+            DynamicHouseholdTasks.Children.Add(householdTasksGrid);
+        }
+    }
+}

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDPMS.Shared.Views.ContentViews.PersonFollowUpEditContentView">
+    <ContentView.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="130"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+
+            <!-- Follow Up Date -->
+            <Label Grid.Column="0"
+                   Grid.Row="0"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[FollowUpDate]}"
+                   Margin="10,5,5,5"
+                   Style="{StaticResource EditLabelDescription}"/>
+            <DatePicker Grid.Column="1"
+                        Grid.Row="0"
+                        Margin="10,5,5,5"
+                        Date="{Binding FollowUpDate, Mode=TwoWay}"/>
+
+            <!-- Work Activities (Status Customization) -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                       Style="{StaticResource EditLabelDescription}"                       
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[WorkActivitiesQuestion]}"/>
+                <StackLayout Grid.Row="1"
+                             x:Name="DynamicWorkActivities"/>
+            </Grid>
+
+            <!-- Work Activities Returning -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="2">
+                <StackLayout>
+                    <Label Style="{StaticResource EditLabelDescription}"
+                           Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[WorkActivitiesReturningQuestion]}"/>
+                    <Switch IsToggled="{Binding HaveJobReturningTo, Mode=TwoWay}"
+                            HorizontalOptions="Center"/>
+                </StackLayout>
+            </Grid>
+
+            <!-- Work Activities Hours Engaged -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="3">
+                <StackLayout>
+                    <Label Style="{StaticResource EditLabelDescription}"
+                           Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[WorkActivitiesHoursEngagedQuestion]}"/>
+                    <Entry Text="{Binding HoursWorked, Mode=TwoWay}"
+                           Keyboard="Numeric"/>
+                </StackLayout>
+            </Grid>
+
+            <!-- Hazardous Conditions Status Customization) -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                       Style="{StaticResource EditLabelDescription}"                       
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HazardousConditionsQuestion]}"/>
+                <StackLayout Grid.Row="1"
+                             x:Name="DynamicHazardousConditions"/>
+            </Grid>
+
+            <!-- Household Tasks (Status Customization) -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                       Style="{StaticResource EditLabelDescription}"                       
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HouseholdTasksQuestion]}"/>
+                <StackLayout Grid.Row="1"
+                             x:Name="DynamicHouseholdTasks"/>
+            </Grid>
+
+            <!-- Household Tasks Hours Engaged -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="6">
+                <StackLayout>
+                    <Label Style="{StaticResource EditLabelDescription}"
+                           Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HouseholdTasksHoursEngagedQuestion]}"/>
+                    <Entry Text="{Binding HouseWorkedOnHousework, Mode=TwoWay}"
+                           Keyboard="Numeric"/>
+                </StackLayout>
+            </Grid>
+
+            <!-- Are You Enrolled In School And Or College -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="7">
+                <StackLayout>
+                    <Label Style="{StaticResource EditLabelDescription}"
+                           Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AreYouEnrolledInSchoolAndOrCollege]}"/>
+                    <Switch IsToggled="{Binding EnrolledInSchool, Mode=TwoWay}"
+                            HorizontalOptions="Center"/>
+                </StackLayout>
+            </Grid>
+
+            <!-- Custom Fields -->
+            
+        </Grid>
+    </ContentView.Content>
+</ContentView>

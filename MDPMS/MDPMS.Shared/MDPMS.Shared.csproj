@@ -102,6 +102,12 @@
     <Compile Update="Views\ContentPages\PersonFollowUpViewContentPage.xaml.cs">
       <DependentUpon>PersonFollowUpViewContentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\ContentPages\PersonFollowUpEditContentPage.xaml.cs">
+      <DependentUpon>PersonFollowUpEditContentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ContentViews\PersonFollowUpEditContentView.xaml.cs">
+      <DependentUpon>PersonFollowUpEditContentView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
