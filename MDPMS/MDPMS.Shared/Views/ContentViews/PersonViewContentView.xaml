@@ -38,6 +38,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <!-- Intake Date -->
@@ -243,11 +244,17 @@
             </Grid>
             
             <!-- CustomFieldContent -->
+            <StackLayout Grid.Column="0"
+                         Grid.ColumnSpan="2"
+                         Grid.Row="16"
+                         x:Name="CustomFieldContent"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="StartAndExpand"/>
 
             <!-- Person Follow Ups -->
             <StackLayout Grid.Column="0"
                          Grid.ColumnSpan="2"
-                         Grid.Row="16"
+                         Grid.Row="17"
                          x:Name="PersonFollowUpsContent"/>
             
         </Grid>
