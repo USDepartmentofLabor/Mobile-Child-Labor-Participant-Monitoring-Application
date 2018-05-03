@@ -5,6 +5,7 @@ using System.Linq;
 using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
+using Xamarin.Forms;
 
 namespace MDPMS.Shared.ViewModels.ContentViewModels
 {
@@ -26,6 +27,10 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
         public ObservableCollection<Tuple<bool, StatusCustomizationWorkActivity, GenericSwitchTextViewModel>> BindableWorkActivities { get; set; }
         public ObservableCollection<Tuple<bool, StatusCustomizationHazardousCondition, GenericSwitchTextViewModel>> BindableHazardousConditions { get; set; }
         public ObservableCollection<Tuple<bool, StatusCustomizationHouseholdTask, GenericSwitchTextViewModel>> BindableHouseholdTasks { get; set; }
+
+        // Custom fields
+        public List<CustomField> CustomFields { get; set; }
+        public List<ContentView> CustomFieldControls { get; set; }
 
         public PersonFollowUpEditContentViewModel(ApplicationInstanceData applicationInstanceData, Person parentPerson)
         {
@@ -74,6 +79,11 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
                 BindableHouseholdTasks.Add(new Tuple<bool, StatusCustomizationHouseholdTask, GenericSwitchTextViewModel>(value, householdTask,
                     new GenericSwitchTextViewModel(householdTask.DisplayName, value)));
             }
+
+            // Custom Fields
+            var customFieldInit = Helpers.CustomFieldInit.InitCustomFields(@"FollowUp", applicationInstanceData);
+            CustomFields = customFieldInit.Item1;
+            CustomFieldControls = customFieldInit.Item2;
 
             // *** PersonFollowUp ***
             if (isCreate)

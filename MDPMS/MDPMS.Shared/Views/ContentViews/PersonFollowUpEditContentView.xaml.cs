@@ -1,4 +1,9 @@
-﻿using MDPMS.Shared.ViewModels.ContentViewModels;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using MDPMS.Database.Data.Models;
+using MDPMS.Shared.ViewModels.ContentViewModels;
+using MDPMS.Shared.ViewModels.Helpers;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared.Views.ContentViews
@@ -58,6 +63,21 @@ namespace MDPMS.Shared.Views.ContentViews
                 i++;
             }
             DynamicHouseholdTasks.Children.Add(householdTasksGrid);
+
+            // Custom Fields
+            CustomFieldContent.Children.Clear();
+            foreach (var customFieldControl in viewModel.CustomFieldControls)
+            {
+                CustomFieldContent.Children.Add(customFieldControl);
+            }
+
+            if (!loadValues) return;
+
+            // query values (optional)
+            var values = new List<Tuple<CustomField, string>>();
+            var query = viewModel.ApplicationInstanceData.Data.CustomPersonFollowUpValues.Where(a => a.PersonFollowUp.InternalId == viewModel.PersonFollowUp.InternalId);
+            foreach (var result in query) values.Add(new Tuple<CustomField, string>(result.CustomField, result.Value));
+            CustomFieldInit.LoadCustomFieldValues(viewModel.CustomFields, viewModel.CustomFieldControls, values);
         }
     }
 }
