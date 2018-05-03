@@ -31,6 +31,13 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <!-- Intake Date -->
@@ -123,12 +130,124 @@
                    Style="{StaticResource LabelValue}"
                    Text="{Binding Person.RelationshipIfOther}"/>
             
-            <!-- NOTE, not showing all intake properties on view to mimic web app -->
+            <!-- Work Activities Question -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="9">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[WorkActivitiesQuestion]}"/>
+            <Label Grid.Row="1"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding WorkActivitiesReadableList}"/>
+            </Grid>
+
+            <!-- Work Activities Returning Question -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[WorkActivitiesReturningQuestion]}"/>
+            <Label Grid.Row="1"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding HaveJobReturningToReadable}"/>
+            </Grid>
+
+            <!-- Work Activities Hours Engaged -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="11">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[WorkActivitiesHoursEngagedQuestion]}"/>
+            <Label Grid.Row="1"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding Person.HoursWorked}"/>
+            </Grid>
+
+            <!-- Hazardous Conditions Status Customization) -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HazardousConditionsQuestion]}"/>
+            <Label Grid.Row="1"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding HazardousConditionsReadableList}"/>
+            </Grid>
+            
+            <!-- Household Tasks (Status Customization) -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="13">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HouseholdTasksQuestion]}"/>
+            <Label Grid.Row="1"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding HouseholdTasksReadableList}"/>
+            </Grid>
+            
+            <!-- Household Tasks Hours Engaged -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="14">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HouseholdTasksHoursEngagedQuestion]}"/>
+            <Label Grid.Row="1"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding Person.HouseWorkedOnHousework}"/>
+            </Grid>
+
+            <!-- Are You Enrolled In School And Or College -->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[AreYouEnrolledInSchoolAndOrCollege]}"/>
+            <Label Grid.Row="1"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding EnrolledInSchoolReadable}"/>
+            </Grid>
+            
+            <!-- CustomFieldContent -->
 
             <!-- Person Follow Ups -->
             <StackLayout Grid.Column="0"
                          Grid.ColumnSpan="2"
-                         Grid.Row="9"
+                         Grid.Row="16"
                          x:Name="PersonFollowUpsContent"/>
             
         </Grid>
