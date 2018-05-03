@@ -39,6 +39,12 @@
                 <Setter Property="Margin" Value="10,5"/>
             </Style>
 
+            <Style x:Key="EditLabelDescription" TargetType="Label">
+                <Setter Property="TextColor" Value="Blue"/>
+                <Setter Property="Margin" Value="10,5"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+
             <!-- Converters -->
             <converters:ReverseBooleanConverter x:Key="ReverseBooleanConverter"/>
 
