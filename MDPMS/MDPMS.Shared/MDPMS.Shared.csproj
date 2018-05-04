@@ -108,6 +108,9 @@
     <Compile Update="Views\ContentViews\PersonFollowUpEditContentView.xaml.cs">
       <DependentUpon>PersonFollowUpEditContentView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\ContentPages\ServiceInstanceViewContentPage.xaml.cs">
+      <DependentUpon>ServiceInstanceViewContentPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
