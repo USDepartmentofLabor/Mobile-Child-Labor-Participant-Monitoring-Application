@@ -54,7 +54,7 @@
             </Grid>
             <ListView Grid.Row="3"
                       ItemsSource="{Binding Person.ServiceInstances}"
-                      SelectedItem="{Binding SelectedServiceInstances}"
+                      SelectedItem="{Binding SelectedServiceInstance}"
                       Margin="10,5,5,5">
                 <ListView.ItemTemplate>
                     <DataTemplate>
