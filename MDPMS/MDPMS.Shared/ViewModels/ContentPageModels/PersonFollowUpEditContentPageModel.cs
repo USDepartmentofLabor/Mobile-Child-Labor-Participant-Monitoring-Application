@@ -53,12 +53,12 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
 
         private void ExecuteSaveCommand()
         {
-            //var validation = PersonFollowUpEditContentViewModel.ValidatePersonFollowUp();
-            //if (validation)
-            //{
-            //    PersonFollowUpEditContentViewModel.SavePersonFollowUp();
-            //    CloseView();
-            //}
+            var validation = PersonFollowUpEditContentViewModel.Validate();
+            if (validation)
+            {
+                PersonFollowUpEditContentViewModel.Save();
+                CloseView();
+            }
         }
 
         private void CloseView()
