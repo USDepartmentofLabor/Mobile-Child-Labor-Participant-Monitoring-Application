@@ -149,6 +149,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"FollowUps", @"Follow Ups");
             translation.Translations.Add(@"AddFollowUp", @"Add Follow Up");
             translation.Translations.Add(@"ConfirmationMessageDeletePersonFollowUp", @"Are you sure you want to delete this follow up?");
+            translation.Translations.Add(@"ServiceAssignments", @"Service Assignments");
+            translation.Translations.Add(@"ConfirmationMessageDeleteServiceAssignment", @"Are you sure you want to delete this service assignment?");
             return translation;
         }
 
@@ -279,6 +281,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"FollowUps", @"Seguimiento de");
             translation.Translations.Add(@"AddFollowUp", @"Agregar seguimiento");
             translation.Translations.Add(@"ConfirmationMessageDeletePersonFollowUp", @"¿Estás seguro de que deseas eliminar este seguimiento?");
+            translation.Translations.Add(@"ServiceAssignments", @"Asignaciones de servicio");
+            translation.Translations.Add(@"ConfirmationMessageDeleteServiceAssignment", @"¿Seguro que quieres eliminar esta asignación de servicio?");
             return translation;
         }
 
@@ -409,6 +413,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"FollowUps", @"Suivis");
             translation.Translations.Add(@"AddFollowUp", @"Ajouter un suivi");
             translation.Translations.Add(@"ConfirmationMessageDeletePersonFollowUp", @"Êtes-vous sûr de vouloir supprimer ce suivi?");
+            translation.Translations.Add(@"ServiceAssignments", @"Affectations de service");
+            translation.Translations.Add(@"ConfirmationMessageDeleteServiceAssignment", @"Êtes-vous sûr de vouloir supprimer cette attribution de service?");
             return translation;
         }
 
@@ -539,6 +545,8 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"FollowUps", @"Na sequência");
             translation.Translations.Add(@"AddFollowUp", @"Adicionar Acompanhamento");
             translation.Translations.Add(@"ConfirmationMessageDeletePersonFollowUp", @"Tem certeza de que deseja excluir este acompanhamento?");
+            translation.Translations.Add(@"ServiceAssignments", @"Atribuições de serviço");
+            translation.Translations.Add(@"ConfirmationMessageDeleteServiceAssignment", @"Tem certeza de que deseja excluir esta atribuição de serviço?");
             return translation;
         }
     }     
