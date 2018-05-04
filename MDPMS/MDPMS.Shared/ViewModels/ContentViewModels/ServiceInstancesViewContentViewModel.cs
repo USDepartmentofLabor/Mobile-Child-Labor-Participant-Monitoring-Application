@@ -13,8 +13,8 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
 
         public Person Person { get; set; }
 
-        private IncomeSource _selectedServiceInstance;
-        public IncomeSource SelectedServiceInstance
+        private ServiceInstance _selectedServiceInstance;
+        public ServiceInstance SelectedServiceInstance
         {
             get => _selectedServiceInstance;
             set
