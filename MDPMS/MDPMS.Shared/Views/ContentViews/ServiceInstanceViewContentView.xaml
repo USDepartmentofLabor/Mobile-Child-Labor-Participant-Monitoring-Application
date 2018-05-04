@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDPMS.Shared.Views.ContentViews.ServiceInstanceViewContentView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelDescription" TargetType="Label">
+                <Setter Property="TextColor" Value="Blue"/>
+                <Setter Property="Margin" Value="10,5"/>
+            </Style>
+            <Style x:Key="LabelValue" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="Margin" Value="10,5"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Service Name -->
+            <Label Grid.Column="0"
+                   Grid.Row="0"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Service]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="0"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding ServiceInstance.Service.Name}"/>
+
+            <!-- Start Date -->
+            <Label Grid.Column="0"
+                   Grid.Row="1"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[StartDate]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="1"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding ServiceInstance.StartDate, StringFormat='{0:M/d/yyyy}'}"/>
+
+            <!-- End Date -->
+            <Label Grid.Column="0"
+                   Grid.Row="2"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[EndDate]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="2"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding ServiceInstance.EndDate, StringFormat='{0:M/d/yyyy}'}"/>
+            
+            <!-- Hours -->
+            <Label Grid.Column="0"
+                   Grid.Row="3"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Hours]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="3"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding ServiceInstance.Hours}"/>
+
+            <!-- Notes -->
+            <Label Grid.Column="0"
+                   Grid.Row="4"
+                   Style="{StaticResource LabelDescription}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Notes]}"/>
+            <Label Grid.Column="1"
+                   Grid.Row="4"
+                   Style="{StaticResource LabelValue}"
+                   Text="{Binding ServiceInstance.Notes}"/>
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>

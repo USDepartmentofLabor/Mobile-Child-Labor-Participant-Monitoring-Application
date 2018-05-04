@@ -1,4 +1,6 @@
 ﻿using MDPMS.Shared.ViewModels.ContentPageModels;
+using MDPMS.Shared.ViewModels.ContentViewModels;
+using MDPMS.Shared.Views.ContentViews;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared.Views.ContentPages
@@ -15,10 +17,10 @@ namespace MDPMS.Shared.Views.ContentPages
             base.OnAppearing();
 
             var viewModel = (ServiceInstanceViewContentPageModel)BindingContext;
-            //var childView = new ServiceInstanceViewContentView();
-            //var childViewModel = new ServiceInstanceViewContentViewModel(viewModel.ApplicationInstanceData, viewModel.Person);
-            //childView.BindingContext = childViewModel;
-            //this.ScrollView.Content = childView;
+            var childView = new ServiceInstanceViewContentView();
+            var childViewModel = new ServiceInstanceViewContentViewModel(viewModel.ApplicationInstanceData, viewModel.ServiceInstance);
+            childView.BindingContext = childViewModel;
+            this.ScrollView.Content = childView;
             //childView.OnAppearing();
         }
     }
