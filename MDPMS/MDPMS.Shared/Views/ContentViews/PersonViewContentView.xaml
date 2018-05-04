@@ -39,6 +39,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <!-- Intake Date -->
@@ -256,6 +257,12 @@
                          Grid.ColumnSpan="2"
                          Grid.Row="17"
                          x:Name="PersonFollowUpsContent"/>
+
+            <!-- Service Instances -->
+            <StackLayout Grid.Column="0"
+                         Grid.ColumnSpan="2"
+                         Grid.Row="18"
+                         x:Name="ServiceInstancesContent"/>
             
         </Grid>
     </ContentView.Content>

@@ -104,6 +104,14 @@ namespace MDPMS.Shared.Views.ContentViews
             personFollowUpsViewContentView.BindingContext = personFollowUpsViewContentViewModel;
             PersonFollowUpsContent.Children.Add(personFollowUpsViewContentView);
             personFollowUpsViewContentView.OnAppearing();
+
+            // Service Instances
+            ServiceInstancesContent.Children.Clear();
+            var serviceInstancesViewContentView = new ServiceInstancesViewContentView();
+            var serviceInstancesViewContentViewModel = new ServiceInstancesViewContentViewModel(viewModel.ApplicationInstanceData, viewModel.Person);
+            serviceInstancesViewContentView.BindingContext = serviceInstancesViewContentViewModel;
+            ServiceInstancesContent.Children.Add(serviceInstancesViewContentView);
+            serviceInstancesViewContentView.OnAppearing();
         }
     }
 }
