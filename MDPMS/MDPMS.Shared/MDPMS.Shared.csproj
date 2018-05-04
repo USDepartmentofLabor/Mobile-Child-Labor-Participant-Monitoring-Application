@@ -114,6 +114,12 @@
     <Compile Update="Views\ContentViews\ServiceInstanceViewContentView.xaml.cs">
       <DependentUpon>ServiceInstanceViewContentView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\ContentPages\ServiceInstanceEditContentPage.xaml.cs">
+      <DependentUpon>ServiceInstanceEditContentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ContentViews\ServiceInstanceEditContentView.xaml.cs">
+      <DependentUpon>ServiceInstanceEditContentView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

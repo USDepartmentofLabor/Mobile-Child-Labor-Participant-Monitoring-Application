@@ -46,7 +46,7 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
             if (Person.HasExternalId) return;
 
             // go to add view here
-            //ApplicationInstanceData.NavigationPage.PushAsync(new ServiceInstanceEditContentPage { BindingContext = new ServiceInstanceEditContentPageModel(ApplicationInstanceData, Person) });
+            ApplicationInstanceData.NavigationPage.PushAsync(new ServiceInstanceEditContentPage { BindingContext = new ServiceInstanceEditContentPageModel(ApplicationInstanceData, Person) });
         }
     }
 }
