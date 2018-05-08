@@ -293,28 +293,21 @@ namespace MDPMS.Shared.Workers
                     return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
                 }
 
-                // Post custom values
+                // Custom Household Values
+                var customHouseholdValuesResult = SyncCustomValueObject(
+                    applicationInstanceData,
+                    allowAlreadySyncedUpdateToParent,
+                    @"/api/custom_values",
+                    applicationInstanceData.Data.CustomHouseholdValues);                
+                if (!customHouseholdValuesResult.Item1)
+                {
+                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
+                }
                 var postNewCustomHouseholdValuesResult = PostCustomValues(
                     applicationInstanceData,
                     @"/api/custom_values",
                     applicationInstanceData.Data.CustomHouseholdValues);
                 if (!postNewCustomHouseholdValuesResult.Item1)
-                {
-                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
-                }
-                var postNewCustomPersonValuesResult = PostCustomValues(
-                    applicationInstanceData,
-                    @"/api/custom_values",
-                    applicationInstanceData.Data.CustomPersonValues);
-                if (!postNewCustomPersonValuesResult.Item1)
-                {
-                    return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
-                }
-                var postNewCustomPersonFollowUpValuesResult = PostCustomValues(
-                    applicationInstanceData,
-                    @"/api/custom_values",
-                    applicationInstanceData.Data.CustomPersonFollowUpValues);
-                if (!postNewCustomPersonFollowUpValuesResult.Item1)
                 {
                     return new Tuple<bool, string>(false, applicationInstanceData.SelectedLocalization.Translations[@"ErrorSyncError"]);
                 }
@@ -331,12 +324,15 @@ namespace MDPMS.Shared.Workers
             return new Tuple<bool, string>(true, @"");
         }
 
-        public static Tuple<bool, string> PostCustomValues<T>(ApplicationInstanceData applicationInstanceData, string apiPath, DbSet<T> data) where T : class, IObjectToJsonConvertible<T>, new()
+        public static Tuple<bool, string> PostCustomValues<T>(ApplicationInstanceData applicationInstanceData, string apiPath, DbSet<T> data)
+            where T : class, IObjectToJsonConvertible<T>, ISyncableAsChild<T>, ISyncableWithCustomFieldSecondParent<T>, new()
         {
             try
             {                
-                foreach (var objectInstance in data)
+                foreach (var objectInstance in data.Where(a => a.GetExternalId() == null))
                 {
+                    objectInstance.SetMdpmsdbContext(applicationInstanceData.Data);
+                    objectInstance.SetIds();
                     var objectJson = objectInstance.GetJsonFromObject();
                     var postSuccess = Helper.Rest.RestHelper.PerformRestPostRequestWithApiKey(
                         applicationInstanceData.SerializedApplicationInstanceData.Url,
@@ -346,12 +342,12 @@ namespace MDPMS.Shared.Workers
 
                     if (postSuccess.Item1)
                     {
-                        // set last updated at from JSON response
                         dynamic jsonResponseParse = JsonConvert.DeserializeObject(postSuccess.Item2);
                         if (jsonResponseParse.status.Value.ToString().Equals(@"success"))
                         {
-                            // delete it for now
-                            data.Remove(objectInstance);
+                            objectInstance.SetLastUpdatedAt(jsonResponseParse.updated_at.Value);
+                            objectInstance.SetCreatedAt(jsonResponseParse.created_at.Value);
+                            objectInstance.SetExternalId((int?)jsonResponseParse.id);
                         }
                         else
                         {
@@ -698,6 +694,127 @@ namespace MDPMS.Shared.Workers
                         // TODO: error log    
                         return new Tuple<bool, string>(false, @"Add error");
                     }
+                }
+                applicationInstanceData.Data.SaveChanges();
+            }
+            catch
+            {
+                // TODO: error log
+                return new Tuple<bool, string>(false, @"Sync error");
+            }
+            return new Tuple<bool, string>(true, @"");
+        }
+
+        public static Tuple<bool, string> SyncCustomValueObject<T>(
+            ApplicationInstanceData applicationInstanceData,
+            bool allowAlreadySyncedUpdateToParent,
+            string apiPath,
+            DbSet<T> data)
+            where T : class, ISyncableAsChild<T>, ISyncableWithCustomFieldSecondParent<T>, new()
+        {
+            // parent objects
+            try
+            {
+                // get existing objects from parent
+                var existingObjectsJson = Helper.Rest.RestHelper.PerformRestGetRequestWithApiKey(
+                    applicationInstanceData.SerializedApplicationInstanceData.Url,
+                    apiPath,
+                    applicationInstanceData.SerializedApplicationInstanceData.ApiKey);
+
+                // deserialize and sync Households
+                var idsInParent = new List<int>();
+                dynamic objectParse = JsonConvert.DeserializeObject(existingObjectsJson);
+                foreach (var objectInstance in objectParse)
+                {
+                    var tContextSet = new T();
+                    tContextSet.SetMdpmsdbContext(applicationInstanceData.Data);
+                    T newObject = tContextSet.GetObjectFromJson(objectInstance);
+                    newObject.SetMdpmsdbContext(applicationInstanceData.Data);
+                    idsInParent.Add((int)newObject.GetExternalId());
+                    var query = data.Where(a => a.GetExternalId().Equals(newObject.GetExternalId()));
+                    if (query.Any())
+                    {
+                        // sync non new records
+                        var record = query.First();
+
+                        // the parent is newer so update the local
+                        if (record.GetLastUpdatedAt() < newObject.GetLastUpdatedAt()) record.UpdateObject(newObject);
+                        else if (record.GetLastUpdatedAt() > newObject.GetLastUpdatedAt())
+                        {
+                            if (allowAlreadySyncedUpdateToParent)
+                            {
+                                // IF_SUPPORTED: the local is newer so update the parent with new info
+                                if (record.GetObjectNeedsUpate(newObject))
+                                {
+                                    var putSuccess = Helper.Rest.RestHelper.PerformRestPutRequestWithApiKeyAndId(
+                                        applicationInstanceData.SerializedApplicationInstanceData.Url,
+                                        apiPath,
+                                        applicationInstanceData.SerializedApplicationInstanceData.ApiKey,
+                                        newObject.GenerateUpdateJsonFromObject(record),
+                                        record.GetExternalId().ToString());
+                                    if (putSuccess.Item1)
+                                    {
+                                        // set last updated at from JSON response
+                                        dynamic jsonResponseParse = JsonConvert.DeserializeObject(putSuccess.Item2);
+                                        if (jsonResponseParse.status.Value.ToString().Equals(@"success"))
+                                        {
+                                            record.SetLastUpdatedAt(jsonResponseParse.updated_at.Value);
+                                        }
+                                        else
+                                        {
+                                            // TODO: error log    
+                                            return new Tuple<bool, string>(false, @"Update error");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // TODO: error log    
+                                        return new Tuple<bool, string>(false, @"Update error");
+                                    }
+                                }
+                                else
+                                {
+                                    record.SetLastUpdatedAt(newObject.GetLastUpdatedAt());
+                                }
+                            }
+                            else
+                            {
+                                // NOT_YET_SUPPORTED: the local is newer so update the parent with new info
+                                // TODO: error log
+                                return new Tuple<bool, string>(false, @"Update error, update from mobile not allowed");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // add it locally, it is new to mobile
+                        newObject.SetIds();
+                        data.Add(newObject);
+                    }
+                }
+                applicationInstanceData.Data.SaveChanges();
+
+                // Delete local households not on parent, i.e. not in GET but has external id, requires parent suppoorting delete
+                var idQuery = data.Where(a => !a.GetExternalId().Equals(null)).Select(a => (int)a.GetExternalId()).ToList();
+                var toDeleteIds = idQuery.Except(idsInParent).ToList();
+                foreach (var id in toDeleteIds)
+                {
+                    // TODO: generic delete children first if contains relationship
+                    if (typeof(T) == typeof(Household))
+                    {
+                        // delete income sources related to it
+                        var children =
+                            applicationInstanceData.Data.IncomeSources.Where(a => a.GetExternalParentId().Equals(id));
+                        foreach (var incomeSource in children)
+                        {
+                            var childRecord = applicationInstanceData.Data.IncomeSources.First(a => a.InternalId.Equals(incomeSource.InternalId));
+                            applicationInstanceData.Data.IncomeSources.Remove(childRecord);
+                        }
+                        applicationInstanceData.Data.SaveChanges();
+                    }
+
+                    var rec = data.Where(a => a.GetExternalId().Equals(id));
+                    data.Remove(rec.First());
                 }
                 applicationInstanceData.Data.SaveChanges();
             }

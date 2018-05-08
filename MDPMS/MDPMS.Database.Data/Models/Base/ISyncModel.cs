@@ -37,6 +37,17 @@ namespace MDPMS.Database.Data.Models.Base
         void SetInternalParentId(int? id);
     }
 
+    public interface ISyncableWithCustomFieldSecondParent<T>
+    {
+        int? GetExternalCustomFieldId();
+        void SetExternalCustomFieldId(int? id);
+
+        int? GetInternalCustomFieldId();
+        void SetInternalCustomFieldId(int? id);
+
+        void SetIds();
+    }
+
     public interface IJsonToObjectConvertable<T>
     {
         T GetObjectFromJson(dynamic json);
