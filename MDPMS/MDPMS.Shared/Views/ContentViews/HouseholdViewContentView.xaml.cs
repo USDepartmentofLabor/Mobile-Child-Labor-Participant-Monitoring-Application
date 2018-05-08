@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using MDPMS.Shared.ViewModels.ContentViewModels;
 using MDPMS.Shared.ViewModels.Helpers;
 using Xamarin.Forms;
@@ -64,10 +65,12 @@ namespace MDPMS.Shared.Views.ContentViews
                             valueString = CustomValueConverter.GetValueFromJsonSelect(valueString);
                             break;
                         case @"number":
-                            valueString = CustomValueConverter.GetValueFromJsonNumber(valueString).ToString();
+                            var numberConverted = CustomValueConverter.GetValueFromJsonNumber(valueString);
+                            valueString = (numberConverted == null) ? @"" : numberConverted.ToString();
                             break;
                         case @"date":
-                            valueString = CustomValueConverter.GetValueFromJsonDate(valueString).ToShortDateString();
+                            var dateTimeConverted = CustomValueConverter.GetValueFromJsonDate(valueString);
+                            valueString = (dateTimeConverted == null) ? @"" : ((DateTime)dateTimeConverted).ToShortDateString();
                             break;
                         case @"rank_list":
                             valueString = CustomValueConverter.GetDisplayValueFromJsonRankList(valueString);

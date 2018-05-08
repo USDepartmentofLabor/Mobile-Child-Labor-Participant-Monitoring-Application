@@ -174,7 +174,8 @@ namespace MDPMS.Shared.ViewModels.Helpers
                             break;
                         case "number":
                             var numberViewModel = (CustomFieldDoubleValueViewModel)customControls[i].BindingContext;
-                            numberViewModel.EntryValue = CustomValueConverter.GetValueFromJsonNumber(value).ToString();
+                            var numberConverted = CustomValueConverter.GetValueFromJsonNumber(value);
+                            numberViewModel.EntryValue = (numberConverted == null) ? @"" : numberConverted.ToString();
                             numberViewModel.NotifyPropertyChange(nameof(CustomFieldDoubleValueViewModel.EntryValue));
                             break;
                         case "date":

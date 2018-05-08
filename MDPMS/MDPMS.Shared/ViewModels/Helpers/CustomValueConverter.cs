@@ -111,9 +111,19 @@ namespace MDPMS.Shared.ViewModels.Helpers
             return ConcatenateValue(value.ToString());
         }
 
-        public static double GetValueFromJsonNumber(string json)
+        public static double? GetValueFromJsonNumber(string json)
         {
-            return double.Parse(GetJsonValue(json));
+            // TEMP: if no value return 0.0
+            try
+            {
+                return double.Parse(GetJsonValue(json));
+            }
+            catch
+            {
+                return null;
+            }
+
+            //return double.Parse(GetJsonValue(json));
         }
 
         // date = {"value_text":{"(1i)":"1901","(2i)":"12","(3i)":"31"}}
@@ -126,19 +136,39 @@ namespace MDPMS.Shared.ViewModels.Helpers
             return sb.ToString();
         }
 
-        public static DateTime GetValueFromJsonDate(string json)
+        public static DateTime? GetValueFromJsonDate(string json)
         {
-            dynamic jsonResponseParse = JsonConvert.DeserializeObject(json);
-            var year = 0;
-            var month = 0;
-            var day = 0;
-            foreach (var x in jsonResponseParse.value_text)
+            // TEMP: if error return today
+            try
             {
-                if (x.Name == "(1i)") year = x.Value;
-                if (x.Name == "(2i)") month = x.Value;
-                if (x.Name == "(3i)") day = x.Value;
+                dynamic jsonResponseParse = JsonConvert.DeserializeObject(json);
+                var year = 0;
+                var month = 0;
+                var day = 0;
+                foreach (var x in jsonResponseParse.value_text)
+                {
+                    if (x.Name == "(1i)") year = x.Value;
+                    if (x.Name == "(2i)") month = x.Value;
+                    if (x.Name == "(3i)") day = x.Value;
+                }
+                return new DateTime(year, month, day);
             }
-            return new DateTime(year, month, day);
+            catch
+            {
+                return null;
+            }
+
+            //dynamic jsonResponseParse = JsonConvert.DeserializeObject(json);
+            //var year = 0;
+            //var month = 0;
+            //var day = 0;
+            //foreach (var x in jsonResponseParse.value_text)
+            //{
+            //    if (x.Name == "(1i)") year = x.Value;
+            //    if (x.Name == "(2i)") month = x.Value;
+            //    if (x.Name == "(3i)") day = x.Value;
+            //}
+            //return new DateTime(year, month, day);
         }
 
         // rank_list = {"order":""}
@@ -175,6 +205,9 @@ namespace MDPMS.Shared.ViewModels.Helpers
         public static List<Tuple<int, string>> GetValueFromJsonRankList(string json)
         {            
             dynamic jsonResponseParse = JsonConvert.DeserializeObject(json);
+
+            // TEMP: if no value or {"order":""} then return new list
+            if (jsonResponseParse.value_text == null) return new List<Tuple<int, string>>();
 
             var values = new List<string>();
             foreach (var value in jsonResponseParse.value_text)
