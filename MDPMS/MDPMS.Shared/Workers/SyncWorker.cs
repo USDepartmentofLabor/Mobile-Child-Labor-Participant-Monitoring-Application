@@ -623,37 +623,55 @@ namespace MDPMS.Shared.Workers
                         {                            
                             var parent = parentQuery.First() as Household;
                             if (parent.IncomeSources == null) parent.IncomeSources = new List<IncomeSource>();
-                            parent.IncomeSources.Add(newObject as IncomeSource);                            
+                            if (!parent.IncomeSources.Any(a => a.ExternalId == newObject.GetExternalId()))
+                            {
+                                parent.IncomeSources.Add(newObject as IncomeSource);
+                            }
                         }
                         else if (typeof(T) == typeof(Person))
                         {
                             var parent = parentQuery.First() as Household;
                             if (parent.Members == null) parent.Members = new List<Person>();
-                            parent.Members.Add(newObject as Person);
+                            if (!parent.Members.Any(a => a.ExternalId == newObject.GetExternalId()))
+                            {
+                                parent.Members.Add(newObject as Person);
+                            }
                         }
                         else if (typeof(T) == typeof(PersonFollowUp))
                         {
                             var parent = parentQuery.First() as Person;
                             if (parent.PeopleFollowUps == null) parent.PeopleFollowUps = new List<PersonFollowUp>();
-                            parent.PeopleFollowUps.Add(newObject as PersonFollowUp);
+                            if (!parent.PeopleFollowUps.Any(a => a.ExternalId == newObject.GetExternalId()))
+                            {
+                                parent.PeopleFollowUps.Add(newObject as PersonFollowUp);
+                            }
                         }
                         else if (typeof(T) == typeof(ServiceType))
                         {
                             var parent = parentQuery.First() as ServiceTypeCategory;
                             if (parent.ServiceTypes == null) parent.ServiceTypes = new List<ServiceType>();
-                            parent.ServiceTypes.Add(newObject as ServiceType);
+                            if (!parent.ServiceTypes.Any(a => a.ExternalId == newObject.GetExternalId()))
+                            {
+                                parent.ServiceTypes.Add(newObject as ServiceType);
+                            }
                         }
                         else if (typeof(T) == typeof(Service))
                         {
                             var parent = parentQuery.First() as ServiceType;
                             if (parent.Services == null) parent.Services = new List<Service>();
-                            parent.Services.Add(newObject as Service);
+                            if (!parent.Services.Any(a => a.ExternalId == newObject.GetExternalId()))
+                            {
+                                parent.Services.Add(newObject as Service);
+                            }
                         }
                         else if (typeof(T) == typeof(ServiceInstance))
                         {
                             var parent = parentQuery.First() as Person;
                             if (parent.ServiceInstances == null) parent.ServiceInstances = new List<ServiceInstance>();
-                            parent.ServiceInstances.Add(newObject as ServiceInstance);
+                            if (!parent.ServiceInstances.Any(a => a.ExternalId == newObject.GetExternalId()))
+                            {
+                                parent.ServiceInstances.Add(newObject as ServiceInstance);
+                            }
                         }
                         else
                         {
