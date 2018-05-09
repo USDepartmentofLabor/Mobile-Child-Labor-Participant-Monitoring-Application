@@ -535,9 +535,62 @@ namespace MDPMS.Database.Data.Models
             GpsHeading = updateFrom.GpsHeading;
             GpsSpeed = updateFrom.GpsSpeed;
             GpsPositionTime = updateFrom.GpsPositionTime;
-            PeopleHazardousConditions = updateFrom.PeopleHazardousConditions;
-            PeopleWorkActivities = updateFrom.PeopleWorkActivities;
-            PeopleHouseholdTasks = updateFrom.PeopleHouseholdTasks; 
+
+            // update status customizations
+            if (!PeopleWorkActivities.Select(a => a.WorkActivity.InternalId).SequenceEqual(updateFrom.PeopleWorkActivities.Select(a => a.WorkActivity.InternalId)))
+            {
+                MdpmsDatabaseContext.RemoveRange(PeopleWorkActivities);
+                MdpmsDatabaseContext.SaveChanges();
+                foreach (var x in updateFrom.PeopleWorkActivities.Select(a => a.WorkActivity.InternalId))
+                {
+                    var scQuery = MdpmsDatabaseContext.StatusCustomizationWorkActivities.Where(a => a.InternalId == x);
+                    if (scQuery.Any())
+                    {
+                        PeopleWorkActivities.Add(new PersonWorkActivity
+                        {
+                            Person = this,
+                            WorkActivity = scQuery.First()
+                        });
+                    }
+                }
+                MdpmsDatabaseContext.SaveChanges();
+            }
+            if (!PeopleHazardousConditions.Select(a => a.HazardousCondition.InternalId).SequenceEqual(updateFrom.PeopleHazardousConditions.Select(a => a.HazardousCondition.InternalId)))
+            {
+                MdpmsDatabaseContext.RemoveRange(PeopleHazardousConditions);
+                MdpmsDatabaseContext.SaveChanges();
+                foreach (var x in updateFrom.PeopleHazardousConditions.Select(a => a.HazardousCondition.InternalId))
+                {
+                    var scQuery = MdpmsDatabaseContext.StatusCustomizationHazardousConditions.Where(a => a.InternalId == x);
+                    if (scQuery.Any())
+                    {
+                        PeopleHazardousConditions.Add(new PersonHazardousCondition
+                        {
+                            Person = this,
+                            HazardousCondition = scQuery.First()
+                        });
+                    }
+                }
+                MdpmsDatabaseContext.SaveChanges();
+            }
+            if (!PeopleHouseholdTasks.Select(a => a.HouseholdTask.InternalId).SequenceEqual(updateFrom.PeopleHouseholdTasks.Select(a => a.HouseholdTask.InternalId)))
+            {
+                MdpmsDatabaseContext.RemoveRange(PeopleHouseholdTasks);
+                MdpmsDatabaseContext.SaveChanges();
+                foreach (var x in updateFrom.PeopleHouseholdTasks.Select(a => a.HouseholdTask.InternalId))
+                {
+                    var scQuery = MdpmsDatabaseContext.StatusCustomizationHouseholdTasks.Where(a => a.InternalId == x);
+                    if (scQuery.Any())
+                    {
+                        PeopleHouseholdTasks.Add(new PersonHouseholdTask
+                        {
+                            Person = this,
+                            HouseholdTask = scQuery.First()
+                        });
+                    }
+                }
+                MdpmsDatabaseContext.SaveChanges();
+            }
         }
 
         public bool GetObjectNeedsUpate(Person checkUpdateFrom)

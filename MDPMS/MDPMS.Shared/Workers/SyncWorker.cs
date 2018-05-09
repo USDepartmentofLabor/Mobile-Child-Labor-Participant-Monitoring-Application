@@ -437,6 +437,7 @@ namespace MDPMS.Shared.Workers
                     {
                         // sync non new records
                         var record = query.First();
+                        record.SetMdpmsdbContext(applicationInstanceData.Data);
 
                         // the parent is newer so update the local
                         if (record.GetLastUpdatedAt() < newObject.GetLastUpdatedAt()) record.UpdateObject(newObject);
