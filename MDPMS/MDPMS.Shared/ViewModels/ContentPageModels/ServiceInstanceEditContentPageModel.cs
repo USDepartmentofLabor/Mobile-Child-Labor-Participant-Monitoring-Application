@@ -9,6 +9,7 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
 {
     public class ServiceInstanceEditContentPageModel : ViewModelBase
     {
+        public string Title { get; set; }
         public string SaveCommandVerb { get; set; }
 
         public Command CancelCommand { get; set; }
@@ -26,6 +27,7 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
         {
             IsCreate = true;
             SaveCommandVerb = applicationInstanceData.SelectedLocalization.Translations[@"Submit"];
+            Title = applicationInstanceData.SelectedLocalization.Translations[@"AssignService"];
             ParentPerson = parentPerson;
             Init(applicationInstanceData);
         }
@@ -34,6 +36,7 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
         {
             IsCreate = false;
             SaveCommandVerb = applicationInstanceData.SelectedLocalization.Translations[@"Save"];
+            Title = applicationInstanceData.SelectedLocalization.Translations[@"EditServiceAssignment"];
             ServiceInstance = serviceInstance;
             Init(applicationInstanceData);
         }

@@ -151,6 +151,14 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"ConfirmationMessageDeletePersonFollowUp", @"Are you sure you want to delete this follow up?");
             translation.Translations.Add(@"ServiceAssignments", @"Service Assignments");
             translation.Translations.Add(@"ConfirmationMessageDeleteServiceAssignment", @"Are you sure you want to delete this service assignment?");
+            translation.Translations.Add(@"EditHousehold", @"Edit Household");
+            translation.Translations.Add(@"IncomeSource", @"Income Source");
+            translation.Translations.Add(@"EditIncomeSource", @"Edit Income Source");
+            translation.Translations.Add(@"HouseholdMember", @"Household Member");
+            translation.Translations.Add(@"EditHouseholdMember", @"Edit Household Member");
+            translation.Translations.Add(@"EditFollowUp", @"Edit Follow Up");
+            translation.Translations.Add(@"ServiceAssignment", @"Service Assignment");
+            translation.Translations.Add(@"EditServiceAssignment", @"Edit Service Assignment");
             return translation;
         }
 
@@ -283,6 +291,14 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"ConfirmationMessageDeletePersonFollowUp", @"¿Estás seguro de que deseas eliminar este seguimiento?");
             translation.Translations.Add(@"ServiceAssignments", @"Asignaciones de servicio");
             translation.Translations.Add(@"ConfirmationMessageDeleteServiceAssignment", @"¿Seguro que quieres eliminar esta asignación de servicio?");
+            translation.Translations.Add(@"EditHousehold", @"Editar hogar");
+            translation.Translations.Add(@"IncomeSource", @"Fuente de ingresos");
+            translation.Translations.Add(@"EditIncomeSource", @"Editar fuente de ingresos");
+            translation.Translations.Add(@"HouseholdMember", @"Miembro del hogar");
+            translation.Translations.Add(@"EditHouseholdMember", @"Editar miembro del hogar");
+            translation.Translations.Add(@"EditFollowUp", @"Editar seguimiento");
+            translation.Translations.Add(@"ServiceAssignment", @"Asignación de servicio");
+            translation.Translations.Add(@"EditServiceAssignment", @"Editar tarea de servicio");
             return translation;
         }
 
@@ -415,6 +431,14 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"ConfirmationMessageDeletePersonFollowUp", @"Êtes-vous sûr de vouloir supprimer ce suivi?");
             translation.Translations.Add(@"ServiceAssignments", @"Affectations de service");
             translation.Translations.Add(@"ConfirmationMessageDeleteServiceAssignment", @"Êtes-vous sûr de vouloir supprimer cette attribution de service?");
+            translation.Translations.Add(@"EditHousehold", @"Modifier le ménage");
+            translation.Translations.Add(@"IncomeSource", @"Source de revenu");
+            translation.Translations.Add(@"EditIncomeSource", @"Modifier la source de revenu");
+            translation.Translations.Add(@"HouseholdMember", @"Membre du ménage");
+            translation.Translations.Add(@"EditHouseholdMember", @"Modifier le membre du ménage");
+            translation.Translations.Add(@"EditFollowUp", @"Modifier le suivi");
+            translation.Translations.Add(@"ServiceAssignment", @"Affectation de service");
+            translation.Translations.Add(@"EditServiceAssignment", @"Modifier l'attribution de service");
             return translation;
         }
 
@@ -547,6 +571,14 @@ namespace MDPMS.Database.Localization.Translations
             translation.Translations.Add(@"ConfirmationMessageDeletePersonFollowUp", @"Tem certeza de que deseja excluir este acompanhamento?");
             translation.Translations.Add(@"ServiceAssignments", @"Atribuições de serviço");
             translation.Translations.Add(@"ConfirmationMessageDeleteServiceAssignment", @"Tem certeza de que deseja excluir esta atribuição de serviço?");
+            translation.Translations.Add(@"EditHousehold", @"Editar casa");
+            translation.Translations.Add(@"IncomeSource", @"Fonte de renda");
+            translation.Translations.Add(@"EditIncomeSource", @"Editar fonte de renda");
+            translation.Translations.Add(@"HouseholdMember", @"Membro do agregado familiar");
+            translation.Translations.Add(@"EditHouseholdMember", @"Editar membro do agregado familiar");
+            translation.Translations.Add(@"EditFollowUp", @"Editar acompanhamento");
+            translation.Translations.Add(@"ServiceAssignment", @"Atribuição de serviço");
+            translation.Translations.Add(@"EditServiceAssignment", @"Editar atribuição de serviço");
             return translation;
         }
     }     
