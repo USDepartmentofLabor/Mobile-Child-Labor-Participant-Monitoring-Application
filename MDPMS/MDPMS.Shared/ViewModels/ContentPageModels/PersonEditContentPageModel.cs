@@ -54,14 +54,16 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
             CloseView();
         }
 
-        private void ExecuteSaveCommand()
+        private async void ExecuteSaveCommand()
         {
+            IsBusy = true;
             var validation = PersonEditContentViewModel.ValidatePerson();
             if (validation)
             {
-                PersonEditContentViewModel.SavePerson();
+                await PersonEditContentViewModel.SavePerson();
                 CloseView();
             }
+            IsBusy = false;
         }
 
         private void CloseView()

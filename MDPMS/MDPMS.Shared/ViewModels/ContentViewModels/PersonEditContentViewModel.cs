@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
@@ -241,7 +242,7 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
             return true;
         }
 
-        public async void SavePerson()
+        public async Task SavePerson()
         {
             if (isCreate) GPSPosition = await Helper.Gps.GpsHelper.GetGpsPosition();
             SavePersonCommon();
