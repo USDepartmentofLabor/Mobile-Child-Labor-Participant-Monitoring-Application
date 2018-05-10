@@ -68,7 +68,12 @@ namespace MDPMS.Shared.ViewModels
             NavigateToAddNewHouseholdCommand = new Command(ExecuteNavigateToAddNewHouseholdCommand);
             LoadHouseholds();
         }
-        
+
+        public void ExecuteAppearingCommand()
+        {
+            RefreshCommand.Execute(null);
+        }
+
         private void LoadHouseholds()
         {
             Households = new ObservableCollection<HouseholdSearchResultCellModel>();

@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using MDPMS.Shared.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace MDPMS.Shared.Views
@@ -10,5 +11,11 @@ namespace MDPMS.Shared.Views
 		{
 			InitializeComponent ();
 		}
+
+        void Handle_Appearing(object sender, System.EventArgs e)
+        {
+            var viewModel = (HouseholdsSearchViewModel)this.BindingContext;
+            viewModel.ExecuteAppearingCommand();
+        }
 	}
 }
