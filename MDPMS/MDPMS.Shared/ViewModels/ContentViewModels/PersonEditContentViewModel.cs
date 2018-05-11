@@ -320,6 +320,9 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
                 });
             }
 
+            household.AddMember(Person);
+            ApplicationInstanceData.Data.SaveChanges();
+
             // Custom Values
             for (var i = 0; i < CustomFields.Count; i++)
             {
@@ -330,7 +333,8 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
                     SoftDeleted = false,
                     CustomField = CustomFields[i],
                     Value = "",
-                    Person = Person
+                    Person = Person,
+                    InternalParentId = Person.InternalId
                 };
 
                 switch (CustomFields[i].FieldType)
@@ -404,7 +408,6 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
                 }
             }
 
-            household.AddMember(Person);
             ApplicationInstanceData.Data.SaveChanges();
         }
 
@@ -594,8 +597,10 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
                             SoftDeleted = false,
                             CustomField = CustomFields[i],
                             Value = jsonValue,
-                            Person = Person
+                            Person = Person,
+                            InternalParentId = Person.InternalId
                         };
+                        ApplicationInstanceData.Data.CustomPersonValues.Add(newCustomValue);
                     }
                     else
                     {

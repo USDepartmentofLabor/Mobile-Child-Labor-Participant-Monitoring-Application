@@ -191,6 +191,9 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
                 });
             }
 
+            person.AddFollowUp(PersonFollowUp);
+            ApplicationInstanceData.Data.SaveChanges();
+
             // Custom Values
             for (var i = 0; i < CustomFields.Count; i++)
             {
@@ -201,7 +204,8 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
                     SoftDeleted = false,
                     CustomField = CustomFields[i],
                     Value = "",
-                    PersonFollowUp = PersonFollowUp
+                    PersonFollowUp = PersonFollowUp,
+                    InternalParentId = PersonFollowUp.InternalId
                 };
 
                 switch (CustomFields[i].FieldType)
@@ -275,7 +279,6 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
                 }
             }
 
-            person.AddFollowUp(PersonFollowUp);
             ApplicationInstanceData.Data.SaveChanges();
         }
 
@@ -465,8 +468,10 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
                             SoftDeleted = false,
                             CustomField = CustomFields[i],
                             Value = jsonValue,
-                            PersonFollowUp = PersonFollowUp
+                            PersonFollowUp = PersonFollowUp,
+                            InternalParentId = PersonFollowUp.InternalId
                         };
+                        ApplicationInstanceData.Data.CustomPersonFollowUpValues.Add(newCustomValue);
                     }
                     else
                     {
