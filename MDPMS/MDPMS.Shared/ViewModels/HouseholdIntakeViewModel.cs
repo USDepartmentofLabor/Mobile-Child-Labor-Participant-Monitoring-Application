@@ -94,6 +94,9 @@ namespace MDPMS.Shared.ViewModels
                 IncomeSources = new List<IncomeSource>()
             };
 
+            ApplicationInstanceData.Data.Households.Add(newHousehold);
+            ApplicationInstanceData.Data.SaveChanges();
+
             // get custom field values
             for (var i = 0; i < CustomFields.Count; i++)
             {
@@ -106,6 +109,7 @@ namespace MDPMS.Shared.ViewModels
                     Value = "",
                     Household = newHousehold
                 };
+                newCustomValue.InternalParentId = newHousehold.InternalId;
 
                 switch (CustomFields[i].FieldType)
                 {
@@ -177,8 +181,6 @@ namespace MDPMS.Shared.ViewModels
                         break;
                 }
             }
-
-            ApplicationInstanceData.Data.Households.Add(newHousehold);
             ApplicationInstanceData.Data.SaveChanges();
 
             foreach (var incomeSource in IncomeSources)
