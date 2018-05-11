@@ -47,7 +47,7 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
 
             if (actionDecision)
             {
-                ApplicationInstanceData.Data.IncomeSources.Remove(IncomeSource);
+                ApplicationInstanceData.Data.DeleteIncomeSource(IncomeSource.InternalId);
                 ApplicationInstanceData.Data.SaveChanges();
                 await ApplicationInstanceData.NavigationPage.PopAsync();
             }

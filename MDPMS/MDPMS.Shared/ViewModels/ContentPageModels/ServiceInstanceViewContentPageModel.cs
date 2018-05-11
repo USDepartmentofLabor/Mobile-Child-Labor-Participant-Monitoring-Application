@@ -47,7 +47,7 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
 
             if (actionDecision)
             {
-                ApplicationInstanceData.Data.ServiceInstances.Remove(ServiceInstance);
+                ApplicationInstanceData.Data.DeleteServiceInstance(ServiceInstance.InternalId);
                 ApplicationInstanceData.Data.SaveChanges();
                 await ApplicationInstanceData.NavigationPage.PopAsync();
             }

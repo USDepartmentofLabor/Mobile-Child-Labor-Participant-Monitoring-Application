@@ -48,11 +48,7 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
 
             if (actionDecision)
             {
-                ApplicationInstanceData.Data.CustomPersonFollowUpValues
-                    .RemoveRange(ApplicationInstanceData.Data.CustomPersonFollowUpValues.Where(a => a.PersonFollowUp.InternalParentId == Person.InternalId));
-                ApplicationInstanceData.Data.CustomPersonValues
-                    .RemoveRange(ApplicationInstanceData.Data.CustomPersonValues.Where(a => a.Person.InternalId == Person.InternalId));
-                ApplicationInstanceData.Data.People.Remove(Person);
+                ApplicationInstanceData.Data.DeletePerson(Person.InternalId);
                 ApplicationInstanceData.Data.SaveChanges();
                 await ApplicationInstanceData.NavigationPage.PopAsync();
             }

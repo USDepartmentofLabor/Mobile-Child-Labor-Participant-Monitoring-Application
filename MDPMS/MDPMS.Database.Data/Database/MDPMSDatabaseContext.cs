@@ -184,6 +184,70 @@ namespace MDPMS.Database.Data.Database
         {
             var search = Genders.Where(a => a.GenderReadable.Equals(description));
             return !search.Count().Equals(1) ? null : search.First();
-        }        
+        }
+
+        // Deletes (calls require SaveChanges() from usage)
+        public void DeleteServiceInstance(int serviceInstanceInternalId)
+        {
+            var serviceInstanceQuery = ServiceInstances.Where(a => a.InternalId == serviceInstanceInternalId);
+            if (serviceInstanceQuery.Any()) ServiceInstances.RemoveRange(serviceInstanceQuery);
+        }
+
+        public void DeletePersonFollowUpCustomValues(int personFollowUpInternalId)
+        {
+            var personFollowUpCustomValueQuery = CustomPersonFollowUpValues.Where(a => a.InternalParentId == personFollowUpInternalId);
+            if (personFollowUpCustomValueQuery.Any()) CustomPersonFollowUpValues.RemoveRange(personFollowUpCustomValueQuery);
+        }
+
+        public void DeletePersonFollowUp(int personFollowUpInternalId)
+        {
+            DeletePersonFollowUpCustomValues(personFollowUpInternalId);
+            var personFollowUpQuery = PersonFollowUps.Where(a => a.InternalId == personFollowUpInternalId);
+            if (personFollowUpQuery.Any()) PersonFollowUps.RemoveRange(personFollowUpQuery);
+        }
+
+        public void DeletePersonCustomValues(int personInternalId)
+        {
+            var personCustomValueQuery = CustomPersonValues.Where(a => a.InternalParentId == personInternalId);
+            if (personCustomValueQuery.Any()) CustomPersonValues.RemoveRange(personCustomValueQuery);
+        }
+
+        public void DeletePerson(int personInternalId)
+        {
+            var serviceInstanceQuery = ServiceInstances.Where(a => a.InternalParentId == personInternalId);
+            if (serviceInstanceQuery.Any()) foreach (var serviceInstance in serviceInstanceQuery) DeleteServiceInstance(serviceInstance.InternalId);
+
+            var personFollowUpQuery = PersonFollowUps.Where(a => a.InternalParentId == personInternalId);
+            if (personFollowUpQuery.Any()) foreach (var personFollowUp in personFollowUpQuery) DeletePersonFollowUp(personFollowUp.InternalId);
+
+            DeletePersonCustomValues(personInternalId);
+            var personQuery = People.Where(a => a.InternalId == personInternalId);
+            if (personQuery.Any()) People.RemoveRange(personQuery);
+        }
+
+        public void DeleteIncomeSource(int incomeSourceInternalId)
+        {
+            var incomeSourceQuery = IncomeSources.Where(a => a.InternalId == incomeSourceInternalId);
+            if (incomeSourceQuery.Any()) IncomeSources.RemoveRange(incomeSourceQuery);
+        }
+
+        public void DeleteHouseholdCustomValues(int householdInternalId)
+        {
+            var householdCustomValueQuery = CustomHouseholdValues.Where(a => a.InternalParentId == householdInternalId);
+            if (householdCustomValueQuery.Any()) CustomHouseholdValues.RemoveRange(householdCustomValueQuery);
+        }
+
+        public void DeleteHousehold(int householdInternalId)
+        {
+            var personQuery = People.Where(a => a.InternalParentId == householdInternalId);
+            if (personQuery.Any()) foreach (var person in personQuery) DeletePerson(person.InternalId);
+
+            var incomeSourceQuery = IncomeSources.Where(a => a.InternalParentId == householdInternalId);
+            if (incomeSourceQuery.Any()) foreach (var incomeSource in incomeSourceQuery) DeleteIncomeSource(incomeSource.InternalId);
+
+            DeleteHouseholdCustomValues(householdInternalId);
+            var householdQuery = Households.Where(a => a.InternalId == householdInternalId);
+            if (householdQuery.Any()) Households.RemoveRange(householdQuery);
+        }
     }
 }

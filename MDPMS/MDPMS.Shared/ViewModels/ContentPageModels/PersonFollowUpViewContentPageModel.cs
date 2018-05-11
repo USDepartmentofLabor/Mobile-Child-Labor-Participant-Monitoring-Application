@@ -49,9 +49,7 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
 
             if (actionDecision)
             {
-                ApplicationInstanceData.Data.CustomPersonFollowUpValues
-                    .RemoveRange(ApplicationInstanceData.Data.CustomPersonFollowUpValues.Where(a => a.PersonFollowUp.InternalId == PersonFollowUp.InternalId));
-                ApplicationInstanceData.Data.PersonFollowUps.Remove(PersonFollowUp);
+                ApplicationInstanceData.Data.DeletePersonFollowUp(PersonFollowUp.InternalId);
                 ApplicationInstanceData.Data.SaveChanges();
                 await ApplicationInstanceData.NavigationPage.PopAsync();
             }

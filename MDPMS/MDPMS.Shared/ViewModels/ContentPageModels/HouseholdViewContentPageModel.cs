@@ -50,9 +50,7 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
 
             if (actionDecision)
             {
-                ApplicationInstanceData.Data.CustomHouseholdValues
-                    .RemoveRange(ApplicationInstanceData.Data.CustomHouseholdValues.Where(a => a.Household.InternalId == Household.InternalId));
-                ApplicationInstanceData.Data.Households.Remove(Household);
+                ApplicationInstanceData.Data.DeleteHousehold(Household.InternalId);
                 ApplicationInstanceData.Data.SaveChanges();
                 ApplicationInstanceData.GoToView(new HouseholdsSearchView { BindingContext = new HouseholdsSearchViewModel(ApplicationInstanceData) });
             }
