@@ -587,8 +587,8 @@ namespace MDPMS.Shared.Workers
             // similar to parent, check id link and validity of id
             try
             {                
-                var incomeSourcesResult = SyncObject(applicationInstanceData, allowAlreadySyncedUpdateToParent, apiPath, data);
-                if (!incomeSourcesResult.Item1)
+                var syncResult = SyncObject(applicationInstanceData, allowAlreadySyncedUpdateToParent, apiPath, data);
+                if (!syncResult.Item1)
                 {
                     return new Tuple<bool, string>(false, @"Sync error");
                 }
