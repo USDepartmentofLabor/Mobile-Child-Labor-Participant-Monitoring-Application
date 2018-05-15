@@ -19,6 +19,8 @@ namespace MDPMS.Shared.ViewModels
 
         public ObservableCollection<HouseholdSearchResultCellModel> Households { get; set; }
 
+        public int? HouseholdInternalIdTarget { get; set; } = null;
+
         private HouseholdSearchResultCellModel _selectedHousehold;
         public HouseholdSearchResultCellModel SelectedHousehold
         {
@@ -87,6 +89,20 @@ namespace MDPMS.Shared.ViewModels
             HouseholdNoun = Households.Count().Equals(1) ?
                 ApplicationInstanceData.SelectedLocalization.Translations[@"Household"] :
                 ApplicationInstanceData.SelectedLocalization.Translations[@"Households"];
+
+            GoToHouseholdView();
+        }
+
+        private void GoToHouseholdView()
+        {
+            // on refresh send user to a specified household view if HouseholdInternalIdTarget set
+            if (HouseholdInternalIdTarget != null)
+            {
+                var search = Households.Where(a => a.Household.InternalId == HouseholdInternalIdTarget).ToList();
+                if (search.Any()) _selectedHousehold = search.First();
+                HouseholdInternalIdTarget = null;
+                OnPropertyChanged(nameof(SelectedHousehold));
+            }
         }
 
         private void ExecuteNavigateToAddNewHouseholdCommand()
