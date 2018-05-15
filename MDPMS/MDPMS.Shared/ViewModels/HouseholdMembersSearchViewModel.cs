@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
-using MDPMS.Shared.Views;
+using MDPMS.Shared.ViewModels.ContentPageModels;
+using MDPMS.Shared.Views.ContentPages;
 using Microsoft.EntityFrameworkCore;
 using Xamarin.Forms;
 
@@ -26,11 +27,10 @@ namespace MDPMS.Shared.ViewModels
                 _selectedHouseholdMember = value;
                 if (_selectedHouseholdMember == null) return;
                 // open another view
-                ApplicationInstanceData.NavigationPage.PushAsync(new HouseholdMemberFollowUpView
+                ApplicationInstanceData.NavigationPage.PushAsync(new PersonViewContentPage
                 {
-                    BindingContext = new HouseholdMemberFollowUpViewModel(ApplicationInstanceData, value.Person)
+                    BindingContext = new PersonViewContentPageModel(ApplicationInstanceData, value.Person)
                 });
-                //SelectedHouseholdMember = null;                
             }
         }
 
