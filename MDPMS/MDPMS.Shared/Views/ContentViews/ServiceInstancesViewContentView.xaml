@@ -35,19 +35,24 @@
             <Grid Grid.Row="2"
                   Margin="10,5,5,5">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48"/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0"
-                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Service]}"
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[GridHeaderTitleID]}"
                        Style="{StaticResource LabelDescription}"
                        TextColor="Gray"/>
                 <Label Grid.Column="1"
-                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[StartDate]}"
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Service]}"
                        Style="{StaticResource LabelDescription}"
                        TextColor="Gray"/>
                 <Label Grid.Column="2"
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[StartDate]}"
+                       Style="{StaticResource LabelDescription}"
+                       TextColor="Gray"/>
+                <Label Grid.Column="3"
                        Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[EndDate]}"
                        Style="{StaticResource LabelDescription}"
                        TextColor="Gray"/>
@@ -61,17 +66,21 @@
                         <ViewCell>
                             <Grid>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="48"/>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0"
-                                       Text="{Binding Service.Name}"
+                                       Text="{Binding ExternalId}"
                                        Style="{StaticResource LabelValue}"/>
                                 <Label Grid.Column="1"
-                                       Text="{Binding StartDate, StringFormat='{0:M/d/yyyy}'}"
+                                       Text="{Binding Service.Name}"
                                        Style="{StaticResource LabelValue}"/>
                                 <Label Grid.Column="2"
+                                       Text="{Binding StartDate, StringFormat='{0:M/d/yyyy}'}"
+                                       Style="{StaticResource LabelValue}"/>
+                                <Label Grid.Column="3"
                                        Text="{Binding EndDate, StringFormat='{0:M/d/yyyy}'}"
                                        Style="{StaticResource LabelValue}"/>
                             </Grid>
