@@ -6,7 +6,6 @@ using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
 using MDPMS.Shared.ViewModels.ContentPageModels;
-using MDPMS.Shared.Views;
 using MDPMS.Shared.Views.ContentPages;
 using Xamarin.Forms;
 
@@ -101,9 +100,9 @@ namespace MDPMS.Shared.ViewModels
                 return;
             }
 
-            ApplicationInstanceData.GoToView(new HouseholdIntakeView               
-            {                   
-                BindingContext = new HouseholdIntakeViewModel(ApplicationInstanceData)               
+            ApplicationInstanceData.NavigationPage.PushAsync(new HouseholdEditContentPage
+            {
+                BindingContext = new HouseholdEditContentPageModel(ApplicationInstanceData)
             });
         }
     }

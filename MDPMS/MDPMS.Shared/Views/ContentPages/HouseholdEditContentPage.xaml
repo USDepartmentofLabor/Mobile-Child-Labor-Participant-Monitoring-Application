@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDPMS.Shared.Views.ContentPages.HouseholdEditContentPage"
-             Title="{Binding ApplicationInstanceData.SelectedLocalization.Translations[EditHousehold]}">
+             Title="{Binding Title}"
+             IsEnabled="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
     <ContentPage.Content>     
         <Grid>
             <Grid.RowDefinitions>
@@ -20,7 +21,7 @@
                         Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Cancel]}"
                         Command="{Binding CancelCommand}"/>
                 <Button Grid.Column="1"
-                        Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Save]}"
+                        Text="{Binding SaveCommandVerb}"
                         Command="{Binding SaveCommand}"/>
             </Grid>
         </Grid>

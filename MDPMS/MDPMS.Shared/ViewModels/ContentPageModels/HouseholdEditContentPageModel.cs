@@ -9,6 +9,9 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
 {
     public class HouseholdEditContentPageModel : ViewModelBase
     {
+        public string Title { get; set; }
+        public string SaveCommandVerb { get; set; }
+
         public Command CancelCommand { get; set; }
         public Command SaveCommand { get; set; }
 
@@ -17,14 +20,31 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
 
         public Household Household { get; set; }
 
+        public bool IsCreate { get; set; }
+
+        public HouseholdEditContentPageModel(ApplicationInstanceData applicationInstanceData)
+        {
+            IsCreate = true;
+            SaveCommandVerb = applicationInstanceData.SelectedLocalization.Translations[@"Submit"];
+            Title = applicationInstanceData.SelectedLocalization.Translations[@"AddNewHousehold"];
+            Init(applicationInstanceData);
+        }
+
         public HouseholdEditContentPageModel(ApplicationInstanceData applicationInstanceData, Household household)
+        {
+            IsCreate = false;
+            SaveCommandVerb = applicationInstanceData.SelectedLocalization.Translations[@"Save"];
+            Title = applicationInstanceData.SelectedLocalization.Translations[@"EditHousehold"];
+            Household = household;
+            Init(applicationInstanceData);
+        }
+
+        private void Init(ApplicationInstanceData applicationInstanceData)
         {
             ApplicationInstanceData = applicationInstanceData;
 
             CancelCommand = new Command(ExecuteCancelCommand);
             SaveCommand = new Command(ExecuteSaveCommand);
-
-            Household = household;
         }
 
         private void ExecuteCancelCommand()
@@ -32,14 +52,16 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
             CloseView();
         }
 
-        private void ExecuteSaveCommand()
+        private async void ExecuteSaveCommand()
         {
+            IsBusy = true;
             var validation = HouseholdEditContentViewModel.ValidateHousehold();
             if (validation)
             {
-                HouseholdEditContentViewModel.SaveHousehold();
+                await HouseholdEditContentViewModel.Save();
                 CloseView();
             }
+            IsBusy = false;
         }
 
         private void CloseView()

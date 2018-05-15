@@ -17,12 +17,21 @@ namespace MDPMS.Shared.Views.ContentPages
 			base.OnAppearing();
 
             var viewModel = (HouseholdEditContentPageModel)BindingContext;
-            viewModel.HouseholdEditContentViewModel = new HouseholdEditContentViewModel(viewModel.ApplicationInstanceData, viewModel.Household);
+
+            if (viewModel.IsCreate)
+            {
+                viewModel.HouseholdEditContentViewModel = new HouseholdEditContentViewModel(viewModel.ApplicationInstanceData);
+            }
+            else
+            {
+                viewModel.HouseholdEditContentViewModel = new HouseholdEditContentViewModel(viewModel.ApplicationInstanceData, viewModel.Household);
+            }
+
             viewModel.HouseholdEditContentView = new HouseholdEditContentView();
             viewModel.HouseholdEditContentView.BindingContext = viewModel.HouseholdEditContentViewModel;
 
             Scrollview.Content = viewModel.HouseholdEditContentView;
-            viewModel.HouseholdEditContentView.OnAppearing(true);
+            viewModel.HouseholdEditContentView.OnAppearing(!viewModel.IsCreate);
 		}
 	}
 }
