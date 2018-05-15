@@ -11,8 +11,6 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
     {
         public Command AddServiceInstanceCommand { get; set; }
 
-        public GridLength AllowAddServiceInstanceButtonRowHeight { get; set; }
-
         public Person Person { get; set; }
 
         private ServiceInstance _selectedServiceInstance;
@@ -34,18 +32,11 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
         {
             ApplicationInstanceData = applicationInstanceData;
             Person = person;
-
-            AllowAddServiceInstanceButtonRowHeight = Person.HasExternalId ? 0 : 80;
-
             AddServiceInstanceCommand = new Command(ExecuteAddServiceInstanceCommand);
         }
 
         private void ExecuteAddServiceInstanceCommand()
         {
-            // is it allowed?
-            if (Person.HasExternalId) return;
-
-            // go to add view here
             ApplicationInstanceData.NavigationPage.PushAsync(new ServiceInstanceEditContentPage { BindingContext = new ServiceInstanceEditContentPageModel(ApplicationInstanceData, Person) });
         }
     }

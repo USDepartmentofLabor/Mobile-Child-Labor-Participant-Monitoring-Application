@@ -11,8 +11,6 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
     {
         public Command AddPersonFollowUpCommand { get; set; }
 
-        public GridLength AllowAddPersonFollowUpButtonRowHeight { get; set; }
-
         public Person Person { get; set; }
 
         private PersonFollowUp _selectedPersonFollowUp;
@@ -34,18 +32,11 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
         {
             ApplicationInstanceData = applicationInstanceData;
             Person = person;
-
-            AllowAddPersonFollowUpButtonRowHeight = Person.HasExternalId ? 0 : 80;
-
             AddPersonFollowUpCommand = new Command(ExecuteAddPersonFollowUpCommand);
         }
 
         private void ExecuteAddPersonFollowUpCommand()
         {
-            // is it allowed?
-            if (Person.HasExternalId) return;
-
-            // go to add view here
             ApplicationInstanceData.NavigationPage.PushAsync(new PersonFollowUpEditContentPage { BindingContext = new PersonFollowUpEditContentPageModel(ApplicationInstanceData, Person) });
         }
     }
