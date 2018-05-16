@@ -3,7 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
+using MDPMS.Shared.ViewModels.ContentPageModels;
 using MDPMS.Shared.Views;
+using MDPMS.Shared.Views.ContentPages;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared.ViewModels

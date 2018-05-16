@@ -1,7 +1,7 @@
 ﻿using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
 
-namespace MDPMS.Shared.ViewModels
+namespace MDPMS.Shared.ViewModels.ContentPageModels
 {
     public class AboutContentPageModel : ViewModelBase
     {
