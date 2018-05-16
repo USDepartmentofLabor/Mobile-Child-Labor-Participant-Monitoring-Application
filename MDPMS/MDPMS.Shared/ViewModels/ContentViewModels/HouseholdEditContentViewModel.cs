@@ -163,8 +163,8 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
             {
                 var newCustomValue = new CustomHouseholdValue
                 {
-                    CreatedAt = DateTime.Now,
-                    LastUpdatedAt = DateTime.Now,
+                    CreatedAt = DateTime.UtcNow,
+                    LastUpdatedAt = DateTime.UtcNow,
                     SoftDeleted = false,
                     CustomField = CustomFields[i],
                     Value = "",

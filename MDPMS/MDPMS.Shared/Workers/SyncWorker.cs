@@ -360,7 +360,7 @@ namespace MDPMS.Shared.Workers
             }
 
             // successful sync
-            applicationInstanceData.SerializedApplicationInstanceData.LastSync = DateTime.Now;
+            applicationInstanceData.SerializedApplicationInstanceData.LastSync = DateTime.UtcNow;
             applicationInstanceData.SaveSerializedApplicationInstanceData();
             return new Tuple<bool, string>(true, @"");
         }
