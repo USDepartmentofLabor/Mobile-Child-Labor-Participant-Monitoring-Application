@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MDPMS.Shared.ViewModels;
+using MDPMS.Shared.Views.CustomControls;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared.Views
@@ -20,7 +21,7 @@ namespace MDPMS.Shared.Views
             var vm = (CustomFieldSwitchArrayViewModel)BindingContext;
             for (var i = 0; i < ContentArea.Children.Count; i++)
             {
-                var value = ((GenericSwitchTextViewModel)((GenericSwitchTextView)ContentArea.Children[i]).BindingContext).BoolValue;
+                var value = ((GenericSwitchTextViewModel)((NewGenericSwitchTextView)ContentArea.Children[i]).BindingContext).BoolValue;
                 rtn.Add(new Tuple<string, bool>(vm.Content[i].Item2,value));
             }
             return rtn;
@@ -54,7 +55,7 @@ namespace MDPMS.Shared.Views
             ContentArea.Children.Clear();
             foreach (var content in vm.Content)
             {
-                var switchControl = new GenericSwitchTextView
+                var switchControl = new NewGenericSwitchTextView
                 {
                     BindingContext = new GenericSwitchTextViewModel(content.Item2, content.Item1)
                 };
