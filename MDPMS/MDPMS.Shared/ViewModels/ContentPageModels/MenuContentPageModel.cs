@@ -93,14 +93,36 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
             if (currentView.Pages.First().GetType() == typeof(HouseholdsSearchContentPage))
             {
                 var householdsSearchContentPageModel = (HouseholdsSearchContentPageModel)currentView.Pages.First().BindingContext;
-                await Task.Run(() => { householdsSearchContentPageModel.RefreshCommand.Execute(null); });
+
+                // use existing
+                //await Task.Run(() => { householdsSearchContentPageModel.RefreshCommand.Execute(null); });
+
+                // create new
+                var searchText = householdsSearchContentPageModel.SearchText;
+                var newHouseholdsSearchContentPageModel = new HouseholdsSearchContentPageModel(ApplicationInstanceData);
+                newHouseholdsSearchContentPageModel.SearchText = searchText;
+                ApplicationInstanceData.GoToView(new HouseholdsSearchContentPage
+                {
+                    BindingContext = newHouseholdsSearchContentPageModel
+                });
             }
 
             // if HouseholdMembersSearchView then refresh
             if (currentView.Pages.First().GetType() == typeof(HouseholdMembersSearchContentPage))
             {
                 var viewModel = (HouseholdMembersSearchContentPageModel)currentView.Pages.First().BindingContext;
-                await Task.Run(() => { viewModel.RefreshCommand.Execute(null); });
+
+                // use existing
+                //await Task.Run(() => { viewModel.RefreshCommand.Execute(null); });
+
+                // create new
+                var searchText = viewModel.SearchText;
+                var newHouseholdMembersSearchContentPageModel = new HouseholdMembersSearchContentPageModel(ApplicationInstanceData);
+                newHouseholdMembersSearchContentPageModel.SearchText = searchText;
+                ApplicationInstanceData.GoToView(new HouseholdMembersSearchContentPage
+                {
+                    BindingContext = newHouseholdMembersSearchContentPageModel
+                });
             }
 
             ApplicationInstanceData.RootPage.Detail = ApplicationInstanceData.NavigationPage;
