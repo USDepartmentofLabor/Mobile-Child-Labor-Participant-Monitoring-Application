@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
 using MDPMS.Shared.ViewModels.ContentPageModels;
-using MDPMS.Shared.Views;
 using MDPMS.Shared.Views.ContentPages;
 using Xamarin.Forms;
 
@@ -99,9 +98,9 @@ namespace MDPMS.Shared.ViewModels
             }
 
             // if HouseholdMembersSearchView then refresh
-            if (currentView.Pages.First().GetType() == typeof(HouseholdMembersSearchView))
+            if (currentView.Pages.First().GetType() == typeof(HouseholdMembersSearchContentPage))
             {
-                var viewModel = (HouseholdMembersSearchViewModel)currentView.Pages.First().BindingContext;
+                var viewModel = (HouseholdMembersSearchContentPageModel)currentView.Pages.First().BindingContext;
                 await Task.Run(() => { viewModel.RefreshCommand.Execute(null); });
             }
 
@@ -141,9 +140,9 @@ namespace MDPMS.Shared.ViewModels
 
         private void ExecuteNavigateToHouseholdMembersCommand()
         {
-            ApplicationInstanceData.GoToView(new HouseholdMembersSearchView
+            ApplicationInstanceData.GoToView(new HouseholdMembersSearchContentPage
             {
-                BindingContext = new HouseholdMembersSearchViewModel(ApplicationInstanceData)
+                BindingContext = new HouseholdMembersSearchContentPageModel(ApplicationInstanceData)
             });
         }
 
