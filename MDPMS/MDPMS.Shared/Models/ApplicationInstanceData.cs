@@ -3,8 +3,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using MDPMS.Database.Data.Database;
 using MDPMS.Database.Localization.Database;
-using MDPMS.Shared.ViewModels;
-using MDPMS.Shared.Views;
+using MDPMS.Shared.ViewModels.ContentPageModels;
+using MDPMS.Shared.Views.ContentPages;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared.Models
@@ -68,9 +68,9 @@ namespace MDPMS.Shared.Models
         
         public void NavigateToLandingView()
         {            
-            App.MainPage = new LandingView
+            App.MainPage = new LandingContentPage
             {
-                BindingContext = new LandingViewModel(this)
+                BindingContext = new LandingContentPageModel(this)
             };
         }
 

@@ -1,12 +1,12 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MDPMS.Shared.Views
+namespace MDPMS.Shared.Views.ContentPages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class LandingView : ContentPage
+    public partial class LandingContentPage : ContentPage
 	{
-		public LandingView ()
+        public LandingContentPage ()
 		{
 			InitializeComponent ();
 		}

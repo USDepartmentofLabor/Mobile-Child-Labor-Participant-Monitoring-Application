@@ -126,6 +126,12 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\SyncContentPage.xaml.cs">
       <DependentUpon>SyncContentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\LandingContentPage.xaml.cs">
+      <DependentUpon>LandingContentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\ContentPages\LandingContentPage.xaml.cs">
+      <DependentUpon>LandingContentPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

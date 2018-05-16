@@ -3,14 +3,14 @@ using MDPMS.Shared.ViewModels.Base;
 using MDPMS.Shared.Views;
 using Xamarin.Forms;
 
-namespace MDPMS.Shared.ViewModels
+namespace MDPMS.Shared.ViewModels.ContentPageModels
 {
-    public class LandingViewModel : ViewModelBase
+    public class LandingContentPageModel : ViewModelBase
     {
         public Command NavigateToLocalizationSelectionCommand { get; set; }
         public Command NavigateToMainContentCommand { get; set; }
         
-        public LandingViewModel(ApplicationInstanceData applicationInstanceData)
+        public LandingContentPageModel(ApplicationInstanceData applicationInstanceData)
         {
             NavigateToLocalizationSelectionCommand = new Command(ExecuteNavigateToLocalizationSelectionCommand);    
             NavigateToMainContentCommand = new Command(ExecuteNavigateToMainContentCommand);

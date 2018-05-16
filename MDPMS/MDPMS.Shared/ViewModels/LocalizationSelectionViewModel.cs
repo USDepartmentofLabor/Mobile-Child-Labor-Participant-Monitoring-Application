@@ -1,7 +1,8 @@
-﻿using MDPMS.Shared.Models;
+﻿using System.Collections.ObjectModel;
+using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
-using MDPMS.Shared.Views;
-using System.Collections.ObjectModel;
+using MDPMS.Shared.ViewModels.ContentPageModels;
+using MDPMS.Shared.Views.ContentPages;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared.ViewModels
@@ -29,9 +30,9 @@ namespace MDPMS.Shared.ViewModels
         
         private void ExecuteNavigateToLandingPageCommand()
         {            
-            Application.Current.MainPage = new LandingView
+            Application.Current.MainPage = new LandingContentPage
             {
-                BindingContext = new LandingViewModel(ApplicationInstanceData)
+                BindingContext = new LandingContentPageModel(ApplicationInstanceData)
             };
         }
 
@@ -42,9 +43,9 @@ namespace MDPMS.Shared.ViewModels
                 ApplicationInstanceData.SetLocalization(SelectedLocalization.Abbreviation);
             }
 
-            Application.Current.MainPage = new LandingView
+            Application.Current.MainPage = new LandingContentPage
             {
-                BindingContext = new LandingViewModel(ApplicationInstanceData)
+                BindingContext = new LandingContentPageModel(ApplicationInstanceData)
             };
         }
     }
