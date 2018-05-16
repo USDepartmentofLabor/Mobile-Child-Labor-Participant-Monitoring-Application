@@ -73,8 +73,8 @@ namespace MDPMS.Shared.ViewModels
             var currentView = ApplicationInstanceData.NavigationPage;
             
             // show sync view
-            var syncViewModel = new SyncViewModel(ApplicationInstanceData);
-            ApplicationInstanceData.GoToView(new SyncView { BindingContext = syncViewModel });
+            var syncContentPageModel = new SyncContentPageModel(ApplicationInstanceData);
+            ApplicationInstanceData.GoToView(new SyncContentPage { BindingContext = syncContentPageModel });
             
             HideMenu();
 
@@ -82,11 +82,11 @@ namespace MDPMS.Shared.ViewModels
             ApplicationInstanceData.RootPage.IsGestureEnabled = false;
 
             // sync            
-            syncViewModel.StatusMessage = ApplicationInstanceData.SelectedLocalization.Translations[@"Syncing"];
-            syncViewModel.IsBusy = true;
+            syncContentPageModel.StatusMessage = ApplicationInstanceData.SelectedLocalization.Translations[@"Syncing"];
+            syncContentPageModel.IsBusy = true;
             var taskResult = new Tuple<bool, string>(false, @"");
             await Task.Run(() => { taskResult = Workers.SyncWorker.Sync(ApplicationInstanceData, false); });
-            syncViewModel.IsBusy = false;
+            syncContentPageModel.IsBusy = false;
             
             // display original view
             ApplicationInstanceData.NavigationPage = currentView;

@@ -1,12 +1,12 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MDPMS.Shared.Views
+namespace MDPMS.Shared.Views.ContentPages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class SyncView : ContentPage
+    public partial class SyncContentPage : ContentPage
 	{
-		public SyncView ()
+        public SyncContentPage ()
 		{
 			InitializeComponent ();
 		}

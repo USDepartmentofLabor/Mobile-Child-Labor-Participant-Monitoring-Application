@@ -1,9 +1,9 @@
 ﻿using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
 
-namespace MDPMS.Shared.ViewModels
+namespace MDPMS.Shared.ViewModels.ContentPageModels
 {
-    public class SyncViewModel : ViewModelBase
+    public class SyncContentPageModel : ViewModelBase
     {        
         private string _statusMessage { get; set; }
 
@@ -18,7 +18,7 @@ namespace MDPMS.Shared.ViewModels
             }
         }
 
-        public SyncViewModel(ApplicationInstanceData applicationInstanceData)
+        public SyncContentPageModel(ApplicationInstanceData applicationInstanceData)
         {
             ApplicationInstanceData = applicationInstanceData;
         }        
