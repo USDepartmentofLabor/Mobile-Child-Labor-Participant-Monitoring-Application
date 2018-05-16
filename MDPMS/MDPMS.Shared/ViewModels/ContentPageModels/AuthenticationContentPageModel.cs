@@ -1,13 +1,12 @@
 ﻿using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
-using MDPMS.Shared.ViewModels.ContentPageModels;
 using MDPMS.Shared.Views.ContentPages;
 using Plugin.Connectivity;
 using Xamarin.Forms;
 
-namespace MDPMS.Shared.ViewModels
+namespace MDPMS.Shared.ViewModels.ContentPageModels
 {
-    public class UsernamePasswordAuthenticationViewModel : ViewModelBase
+    public class AuthenticationContentPageModel : ViewModelBase
     {
         public Command AuthenticateCommand { get; set; }
 
@@ -26,7 +25,7 @@ namespace MDPMS.Shared.ViewModels
             }
         }
         
-        public UsernamePasswordAuthenticationViewModel(ApplicationInstanceData applicationInstanceData)
+        public AuthenticationContentPageModel(ApplicationInstanceData applicationInstanceData)
         {
             ApplicationInstanceData = applicationInstanceData;
             AuthenticateCommand = new Command(ExecuteAuthenticateCommand);

@@ -1,7 +1,7 @@
 ﻿using System;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
-using MDPMS.Shared.Views;
+using MDPMS.Shared.Views.ContentPages;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared.ViewModels.ContentPageModels
@@ -84,9 +84,9 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
 
         private void ExecuteNavigateToGetNewApiKeyViewCommand()
         {
-            ApplicationInstanceData.GoToView(new UsernamePasswordAuthenticationView
+            ApplicationInstanceData.GoToView(new AuthenticationContentPage
             {
-                BindingContext = new UsernamePasswordAuthenticationViewModel(ApplicationInstanceData)
+                BindingContext = new AuthenticationContentPageModel(ApplicationInstanceData)
             });
         }
     }
