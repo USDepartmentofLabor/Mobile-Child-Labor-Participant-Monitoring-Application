@@ -147,6 +147,9 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\MenuContentPage.xaml.cs">
       <DependentUpon>MenuContentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\CustomControls\GenericSwitchTextView.xaml.cs">
+      <DependentUpon>GenericSwitchTextView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

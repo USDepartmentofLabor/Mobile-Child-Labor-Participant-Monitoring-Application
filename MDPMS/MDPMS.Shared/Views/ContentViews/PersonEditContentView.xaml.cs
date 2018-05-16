@@ -27,7 +27,7 @@ namespace MDPMS.Shared.Views.ContentViews
             {
                 var newWorkActivitiesGridRow = new RowDefinition();
                 newWorkActivitiesGridRow.Height = 80;
-                var newWorkActivityContent = new CustomControls.NewGenericSwitchTextView { BindingContext = bindableWorkActivity.Item3 };
+                var newWorkActivityContent = new CustomControls.GenericSwitchTextView { BindingContext = bindableWorkActivity.Item3 };
                 newWorkActivityContent.SetValue(Grid.RowProperty, i);
                 workActivitiesGrid.Children.Add(newWorkActivityContent);
                 i++;
@@ -42,7 +42,7 @@ namespace MDPMS.Shared.Views.ContentViews
             {
                 var newHazardousConditionsGridRow = new RowDefinition();
                 newHazardousConditionsGridRow.Height = 80;
-                var newHazardousConditionContent = new CustomControls.NewGenericSwitchTextView { BindingContext = bindableHazardousCondition.Item3 };
+                var newHazardousConditionContent = new CustomControls.GenericSwitchTextView { BindingContext = bindableHazardousCondition.Item3 };
                 newHazardousConditionContent.SetValue(Grid.RowProperty, i);
                 hazardousConditionsGrid.Children.Add(newHazardousConditionContent);
                 i++;
@@ -57,7 +57,7 @@ namespace MDPMS.Shared.Views.ContentViews
             {
                 var newHouseholdTasksGridRow = new RowDefinition();
                 newHouseholdTasksGridRow.Height = 80;
-                var newHouseholdTaskContent = new CustomControls.NewGenericSwitchTextView { BindingContext = bindableHouseholdTask.Item3 };
+                var newHouseholdTaskContent = new CustomControls.GenericSwitchTextView { BindingContext = bindableHouseholdTask.Item3 };
                 newHouseholdTaskContent.SetValue(Grid.RowProperty, i);
                 householdTasksGrid.Children.Add(newHouseholdTaskContent);
                 i++;

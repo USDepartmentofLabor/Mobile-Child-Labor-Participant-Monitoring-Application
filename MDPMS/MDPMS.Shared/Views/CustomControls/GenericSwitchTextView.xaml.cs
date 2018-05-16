@@ -2,9 +2,9 @@
 
 namespace MDPMS.Shared.Views.CustomControls
 {
-    public partial class NewGenericSwitchTextView : ContentView
+    public partial class GenericSwitchTextView : ContentView
     {
-        public NewGenericSwitchTextView()
+        public GenericSwitchTextView()
         {
             InitializeComponent();
         }

@@ -21,7 +21,7 @@ namespace MDPMS.Shared.Views
             var vm = (CustomFieldSwitchArrayViewModel)BindingContext;
             for (var i = 0; i < ContentArea.Children.Count; i++)
             {
-                var value = ((GenericSwitchTextViewModel)((NewGenericSwitchTextView)ContentArea.Children[i]).BindingContext).BoolValue;
+                var value = ((GenericSwitchTextViewModel)((GenericSwitchTextView)ContentArea.Children[i]).BindingContext).BoolValue;
                 rtn.Add(new Tuple<string, bool>(vm.Content[i].Item2,value));
             }
             return rtn;
@@ -55,7 +55,7 @@ namespace MDPMS.Shared.Views
             ContentArea.Children.Clear();
             foreach (var content in vm.Content)
             {
-                var switchControl = new NewGenericSwitchTextView
+                var switchControl = new GenericSwitchTextView
                 {
                     BindingContext = new GenericSwitchTextViewModel(content.Item2, content.Item1)
                 };
