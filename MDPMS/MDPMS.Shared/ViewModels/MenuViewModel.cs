@@ -125,9 +125,9 @@ namespace MDPMS.Shared.ViewModels
 
         private void ExecuteNavigateToSettingsCommand()
         {
-            ApplicationInstanceData.GoToView(new SettingsView
+            ApplicationInstanceData.GoToView(new SettingsContentPage
             {
-                BindingContext = new SettingsViewModel(ApplicationInstanceData)
+                BindingContext = new SettingsContentPageModel(ApplicationInstanceData)
             });
         }
 

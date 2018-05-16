@@ -1,7 +1,7 @@
-﻿using System;
-using MDPMS.Shared.Models;
+﻿using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
-using MDPMS.Shared.Views;
+using MDPMS.Shared.ViewModels.ContentPageModels;
+using MDPMS.Shared.Views.ContentPages;
 using Plugin.Connectivity;
 using Xamarin.Forms;
 
@@ -54,7 +54,7 @@ namespace MDPMS.Shared.ViewModels
                     // Save app data
                     Helper.Json.JsonFileHelper.SaveDataToJsonFile(ApplicationInstanceData.SerializedApplicationInstanceData, System.IO.Path.Combine(ApplicationInstanceData.PlatformDataPath, ApplicationInstanceData.ApplicationInstanceDataFileName));
                     // go back to settings since successful
-                    ApplicationInstanceData.GoToView(new SettingsView { BindingContext = new SettingsViewModel(ApplicationInstanceData) });
+                    ApplicationInstanceData.GoToView(new SettingsContentPage { BindingContext = new SettingsContentPageModel(ApplicationInstanceData) });
                 }
                 catch
                 {

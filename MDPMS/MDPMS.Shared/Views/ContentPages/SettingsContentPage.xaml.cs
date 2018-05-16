@@ -1,12 +1,12 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MDPMS.Shared.Views
+namespace MDPMS.Shared.Views.ContentPages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class SettingsView : ContentPage
+    public partial class SettingsContentPage : ContentPage
 	{
-		public SettingsView ()
+        public SettingsContentPage ()
 		{
 			InitializeComponent ();
 		}

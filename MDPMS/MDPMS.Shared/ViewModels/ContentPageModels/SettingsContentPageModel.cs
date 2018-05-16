@@ -4,9 +4,9 @@ using MDPMS.Shared.ViewModels.Base;
 using MDPMS.Shared.Views;
 using Xamarin.Forms;
 
-namespace MDPMS.Shared.ViewModels
+namespace MDPMS.Shared.ViewModels.ContentPageModels
 {
-    public class SettingsViewModel : ViewModelBase
+    public class SettingsContentPageModel : ViewModelBase
     {
         public Command RevertChangesCommand { get; set; }
         public Command CommitChangesCommand { get; set; }
@@ -43,7 +43,7 @@ namespace MDPMS.Shared.ViewModels
 
         public string ApiKeyObtained { get; set; }
 
-        public SettingsViewModel(ApplicationInstanceData applicationInstanceData)
+        public SettingsContentPageModel(ApplicationInstanceData applicationInstanceData)
         {
             RevertChangesCommand = new Command(ExecuteRevertChangesCommand);
             CommitChangesCommand = new Command(ExecuteCommitChangesCommand);
