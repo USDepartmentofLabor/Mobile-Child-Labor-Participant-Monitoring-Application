@@ -1,12 +1,12 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MDPMS.Shared.Views
+namespace MDPMS.Shared.Views.ContentPages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MenuView : ContentPage
+    public partial class MenuContentPage : ContentPage
 	{
-		public MenuView ()
+        public MenuContentPage ()
 		{
 			InitializeComponent ();
 		}

@@ -3,13 +3,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
-using MDPMS.Shared.ViewModels.ContentPageModels;
 using MDPMS.Shared.Views.ContentPages;
 using Xamarin.Forms;
 
-namespace MDPMS.Shared.ViewModels
+namespace MDPMS.Shared.ViewModels.ContentPageModels
 {
-    public class MenuViewModel : ViewModelBase
+    public class MenuContentPageModel : ViewModelBase
     {        
         public Command HideMenuCommand { get; set; }
         public Command NavigateToLandingViewCommand { get; set; }
@@ -19,7 +18,7 @@ namespace MDPMS.Shared.ViewModels
         public Command NavigateToSettingsCommand { get; set; }
         public Command NavigateToAboutCommand { get; set; }
         
-        public MenuViewModel(ApplicationInstanceData applicationInstanceData)
+        public MenuContentPageModel(ApplicationInstanceData applicationInstanceData)
         {
             HideMenuCommand = new Command(ExecuteHideMenuCommand);
             NavigateToLandingViewCommand = new Command(ExecuteNavigateToLandingViewCommand);

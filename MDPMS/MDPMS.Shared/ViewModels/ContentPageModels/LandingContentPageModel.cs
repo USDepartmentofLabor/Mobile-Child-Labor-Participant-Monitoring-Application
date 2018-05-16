@@ -1,6 +1,5 @@
 ﻿using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
-using MDPMS.Shared.Views;
 using MDPMS.Shared.Views.ContentPages;
 using Xamarin.Forms;
 
@@ -35,9 +34,9 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
             });
             var rootPage = new RootPage
             {
-                Master = new MenuView
+                Master = new MenuContentPage
                 {
-                    BindingContext = new MenuViewModel(ApplicationInstanceData),
+                    BindingContext = new MenuContentPageModel(ApplicationInstanceData),
                     Title = ApplicationInstanceData.Title
                 },
                 Detail = ApplicationInstanceData.NavigationPage
