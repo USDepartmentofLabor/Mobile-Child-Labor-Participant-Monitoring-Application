@@ -4,9 +4,9 @@ using Xamarin.Forms.Xaml;
 namespace MDPMS.Shared.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AboutView : ContentPage
+    public partial class AboutContentPage : ContentPage
 	{
-		public AboutView ()
+        public AboutContentPage ()
 		{
 			InitializeComponent ();
 		}

@@ -131,9 +131,9 @@ namespace MDPMS.Shared.ViewModels
 
         private void ExecuteNavigateToAboutCommand()
         {
-            ApplicationInstanceData.GoToView(new AboutView
+            ApplicationInstanceData.GoToView(new AboutContentPage
             {
-                BindingContext = new AboutViewModel(ApplicationInstanceData)
+                BindingContext = new AboutContentPageModel(ApplicationInstanceData)
             });
         }
 

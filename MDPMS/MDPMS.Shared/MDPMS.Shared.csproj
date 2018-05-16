@@ -120,6 +120,9 @@
     <Compile Update="Views\ContentViews\ServiceInstanceEditContentView.xaml.cs">
       <DependentUpon>ServiceInstanceEditContentView.xaml</DependentUpon>
     </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\AboutContentPage.xaml.cs">
+      <DependentUpon>AboutContentPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -128,9 +131,6 @@
   <ItemGroup>
     <EmbeddedResource Update="RootPage.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\AboutView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\GenericSwitchTextView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

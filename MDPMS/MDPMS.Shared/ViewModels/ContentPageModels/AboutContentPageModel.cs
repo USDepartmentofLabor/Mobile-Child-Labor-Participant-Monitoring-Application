@@ -3,9 +3,9 @@ using MDPMS.Shared.ViewModels.Base;
 
 namespace MDPMS.Shared.ViewModels
 {
-    public class AboutViewModel : ViewModelBase
+    public class AboutContentPageModel : ViewModelBase
     {
-        public AboutViewModel(ApplicationInstanceData applicationInstanceData)
+        public AboutContentPageModel(ApplicationInstanceData applicationInstanceData)
         {
             ApplicationInstanceData = applicationInstanceData;
         }        
