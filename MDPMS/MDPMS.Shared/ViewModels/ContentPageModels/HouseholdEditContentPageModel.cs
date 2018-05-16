@@ -2,7 +2,7 @@
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
 using MDPMS.Shared.ViewModels.ContentViewModels;
-using MDPMS.Shared.Views;
+using MDPMS.Shared.Views.ContentPages;
 using MDPMS.Shared.Views.ContentViews;
 using Xamarin.Forms;
 
@@ -71,9 +71,9 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
             {
                 // Should be HouseholdsSearchView + Model, send user to the household they just created if new
                 var currentParentView = ApplicationInstanceData.NavigationPage.RootPage;
-                if (currentParentView.GetType() == typeof(HouseholdsSearchView))
+                if (currentParentView.GetType() == typeof(HouseholdsSearchContentPage))
                 {
-                    var viewModel = (HouseholdsSearchViewModel)currentParentView.BindingContext;
+                    var viewModel = (HouseholdsSearchContentPageModel)currentParentView.BindingContext;
                     viewModel.HouseholdInternalIdTarget = HouseholdEditContentViewModel.Household.InternalId;
                 }
             }

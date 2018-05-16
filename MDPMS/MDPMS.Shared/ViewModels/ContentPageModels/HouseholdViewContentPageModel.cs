@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using MDPMS.Database.Data.Models;
+﻿using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
-using MDPMS.Shared.Views;
 using MDPMS.Shared.Views.ContentPages;
 using Xamarin.Forms;
 
@@ -52,7 +50,7 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
             {
                 ApplicationInstanceData.Data.DeleteHousehold(Household.InternalId);
                 ApplicationInstanceData.Data.SaveChanges();
-                ApplicationInstanceData.GoToView(new HouseholdsSearchView { BindingContext = new HouseholdsSearchViewModel(ApplicationInstanceData) });
+                ApplicationInstanceData.GoToView(new HouseholdsSearchContentPage { BindingContext = new HouseholdsSearchContentPageModel(ApplicationInstanceData) });
             }
         }
     }

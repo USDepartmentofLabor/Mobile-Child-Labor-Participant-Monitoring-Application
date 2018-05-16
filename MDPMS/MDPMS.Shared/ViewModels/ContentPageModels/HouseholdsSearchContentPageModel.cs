@@ -5,13 +5,12 @@ using System.Threading.Tasks;
 using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
-using MDPMS.Shared.ViewModels.ContentPageModels;
 using MDPMS.Shared.Views.ContentPages;
 using Xamarin.Forms;
 
-namespace MDPMS.Shared.ViewModels
+namespace MDPMS.Shared.ViewModels.ContentPageModels
 {
-    public class HouseholdsSearchViewModel : ViewModelBase
+    public class HouseholdsSearchContentPageModel : ViewModelBase
     {
         public string SearchText { get; set; } = @"";
         public Command NavigateToAddNewHouseholdCommand { get; set; }
@@ -62,7 +61,7 @@ namespace MDPMS.Shared.ViewModels
 
         public Command SearchCommand { get; set; }
 
-        public HouseholdsSearchViewModel(ApplicationInstanceData applicationInstanceData)
+        public HouseholdsSearchContentPageModel(ApplicationInstanceData applicationInstanceData)
         {
             ApplicationInstanceData = applicationInstanceData;
             SearchCommand = new Command(LoadHouseholds);

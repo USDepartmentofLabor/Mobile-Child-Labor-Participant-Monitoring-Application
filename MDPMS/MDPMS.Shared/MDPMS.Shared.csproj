@@ -69,9 +69,6 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\HouseholdsView.xaml.cs">
       <DependentUpon>HouseholdsSearchView.xaml</DependentUpon>
     </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\HouseholdsSearchView.xaml.cs">
-      <DependentUpon>HouseholdsSearchView.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\ContentPages\HouseholdViewContentPage.xaml.cs">
       <DependentUpon>HouseholdViewContentPage.xaml</DependentUpon>
     </Compile>
@@ -140,6 +137,9 @@
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\ContentPages\AuthenticationContentPage.xaml.cs">
       <DependentUpon>AuthenticationContentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\HouseholdsSearchContentPage.xaml.cs">
+      <DependentUpon>HouseholdsSearchContentPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
