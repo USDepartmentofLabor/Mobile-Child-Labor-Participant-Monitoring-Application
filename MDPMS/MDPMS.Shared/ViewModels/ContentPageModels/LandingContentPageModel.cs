@@ -1,6 +1,7 @@
 ﻿using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
 using MDPMS.Shared.Views;
+using MDPMS.Shared.Views.ContentPages;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared.ViewModels.ContentPageModels
@@ -19,9 +20,9 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
 
         private void ExecuteNavigateToLocalizationSelectionCommand()
         {
-            Application.Current.MainPage = new LocalizationSelectionView()
+            Application.Current.MainPage = new LocalizationSelectionContentPage()
             {
-                BindingContext = new LocalizationSelectionViewModel(ApplicationInstanceData)
+                BindingContext = new LocalizationSelectionContentPageModel(ApplicationInstanceData)
             };
         }
 

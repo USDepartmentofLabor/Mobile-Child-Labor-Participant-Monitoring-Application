@@ -21,9 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\LocalizationSelectionView.xaml.cs">
-      <DependentUpon>LocalizationSelectionView.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\GenericLabelPickerView.xaml.cs">
       <DependentUpon>CustomFieldPickerView.xaml</DependentUpon>
     </Compile>
@@ -131,6 +128,9 @@
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\ContentPages\LandingContentPage.xaml.cs">
       <DependentUpon>LandingContentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\LocalizationSelectionContentPage.xaml.cs">
+      <DependentUpon>LocalizationSelectionContentPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 

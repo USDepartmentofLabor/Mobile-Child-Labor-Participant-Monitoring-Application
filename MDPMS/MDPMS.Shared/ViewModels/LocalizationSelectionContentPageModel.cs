@@ -1,13 +1,12 @@
 ﻿using System.Collections.ObjectModel;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
-using MDPMS.Shared.ViewModels.ContentPageModels;
 using MDPMS.Shared.Views.ContentPages;
 using Xamarin.Forms;
 
-namespace MDPMS.Shared.ViewModels
+namespace MDPMS.Shared.ViewModels.ContentPageModels
 {
-    public class LocalizationSelectionViewModel : ViewModelBase
+    public class LocalizationSelectionContentPageModel : ViewModelBase
     {                
         public ObservableCollection<Localization> Localizations { get; set; }
         public Localization SelectedLocalization { get; set; }
@@ -15,7 +14,7 @@ namespace MDPMS.Shared.ViewModels
         public Command NavigateToLandingPageCommand { get; set; }
         public Command NavigateToLandingPageCheckSelectionCommand { get; set; }
 
-        public LocalizationSelectionViewModel(ApplicationInstanceData applicationInstanceData)
+        public LocalizationSelectionContentPageModel(ApplicationInstanceData applicationInstanceData)
         {
             NavigateToLandingPageCommand = new Command(() => ExecuteNavigateToLandingPageCommand());
             NavigateToLandingPageCheckSelectionCommand = new Command(() => ExecuteNavigateToLandingPageCheckSelectionCommand());
