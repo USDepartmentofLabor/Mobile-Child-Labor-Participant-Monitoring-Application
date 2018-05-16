@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MDPMS.Shared.Views.CustomFieldRankListView">
-    <ContentView.Content>
+             x:Class="MDPMS.Shared.Views.CustomControls.CustomFieldEditorView">
+	<ContentView.Content>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="200"/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0"
                    Text="{Binding Name}"
                    Font="Bold"/>
             <Label Grid.Row="1"
                    Text="{Binding HelpText}"/>
-            <StackLayout Grid.Row="2"
-                         x:Name="ContentArea"/>
+            <Editor Grid.Row="2"
+                    Text="{Binding EntryValue}"/>
         </Grid>
-    </ContentView.Content>
+	</ContentView.Content>
 </ContentView>

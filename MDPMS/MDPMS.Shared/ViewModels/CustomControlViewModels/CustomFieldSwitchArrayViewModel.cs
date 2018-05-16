@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
 
-namespace MDPMS.Shared.ViewModels
+namespace MDPMS.Shared.ViewModels.CustomControlViewModels
 {
     public class CustomFieldSwitchArrayViewModel : ViewModelBase
     {

@@ -30,31 +30,16 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\GenericEntryVerticalView.xaml.cs">
       <DependentUpon>CustomFieldEntryView.xaml</DependentUpon>
     </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\CustomFieldEntryView.xaml.cs">
-      <DependentUpon>CustomFieldEntryView.xaml</DependentUpon>
-    </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\GenericEditorView.xaml.cs">
       <DependentUpon>CustomFieldEditorView.xaml</DependentUpon>
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\CustomFieldEditorView..xaml.cs">
       <DependentUpon>CustomFieldEditorView.xaml</DependentUpon>
     </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\CustomFieldEditorView.xaml.cs">
-      <DependentUpon>CustomFieldEditorView.xaml</DependentUpon>
-    </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\GenericLabelSwitchArrayView.xaml.cs">
       <DependentUpon>CustomFieldSwitchArrayView.xaml</DependentUpon>
     </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\CustomFieldSwitchArrayView.xaml.cs">
-      <DependentUpon>CustomFieldSwitchArrayView.xaml</DependentUpon>
-    </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\CustomFieldPickerView.xaml.cs">
-      <DependentUpon>CustomFieldPickerView.xaml</DependentUpon>
-    </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\GenericNumericView.xaml.cs">
-      <DependentUpon>CustomFieldNumericView.xaml</DependentUpon>
-    </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\CustomFieldNumericView.xaml.cs">
       <DependentUpon>CustomFieldNumericView.xaml</DependentUpon>
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\GenericDateTimeView.xaml.cs">
@@ -62,9 +47,6 @@
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\CustomFieldDateTimeView..xaml.cs">
       <DependentUpon>CustomFieldDateTimeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\CustomFieldRankListView.xaml.cs">
-      <DependentUpon>CustomFieldRankListView.xaml</DependentUpon>
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\HouseholdsView.xaml.cs">
       <DependentUpon>HouseholdsSearchView.xaml</DependentUpon>
@@ -150,6 +132,30 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\CustomControls\GenericSwitchTextView.xaml.cs">
       <DependentUpon>GenericSwitchTextView.xaml</DependentUpon>
     </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\CustomControls\CustomFieldDateTimeView.xaml.cs">
+      <DependentUpon>..\Views\CustomFieldDateTimeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\CustomControls\CustomFieldEditorView.xaml.cs">
+      <DependentUpon>..\Views\CustomFieldEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\CustomControls\CustomFieldEntryView.xaml.cs">
+      <DependentUpon>..\Views\CustomFieldEntryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\CustomControls\CustomFieldNumericView.xaml.cs">
+      <DependentUpon>..\Views\CustomFieldNumericView.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\CustomControls\CustomFieldPickerView.xaml.cs">
+      <DependentUpon>..\Views\CustomFieldPickerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\CustomControls\CustomFieldRankListView.xaml.cs">
+      <DependentUpon>..\Views\CustomFieldRankListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\CustomControls\CustomFieldSwitchArrayView.xaml.cs">
+      <DependentUpon>..\Views\CustomFieldSwitchArrayView.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\CustomControls\GenericRankListEntryView.xaml.cs">
+      <DependentUpon>..\Views\GenericRankListEntryView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -171,5 +177,6 @@
     <Folder Include="ViewModels\ContentPageModels\" />
     <Folder Include="Views\ContentPages\" />
     <Folder Include="Views\CustomControls\" />
+    <Folder Include="ViewModels\CustomControlViewModels\" />
   </ItemGroup>
 </Project>

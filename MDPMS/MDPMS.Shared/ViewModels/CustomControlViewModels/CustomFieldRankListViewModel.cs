@@ -3,10 +3,10 @@ using System.Collections.ObjectModel;
 using System.Text;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
-using MDPMS.Shared.Views;
+using MDPMS.Shared.Views.CustomControls;
 using Xamarin.Forms;
 
-namespace MDPMS.Shared.ViewModels
+namespace MDPMS.Shared.ViewModels.CustomControlViewModels
 {
     public class CustomFieldRankListViewModel : ViewModelBase
     {

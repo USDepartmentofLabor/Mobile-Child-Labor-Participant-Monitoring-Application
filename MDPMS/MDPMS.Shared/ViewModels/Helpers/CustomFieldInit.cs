@@ -4,7 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using MDPMS.Database.Data.Models;
 using MDPMS.Shared.Models;
-using MDPMS.Shared.Views;
+using MDPMS.Shared.ViewModels.CustomControlViewModels;
+using MDPMS.Shared.Views.CustomControls;
 using Xamarin.Forms;
 
 namespace MDPMS.Shared.ViewModels.Helpers

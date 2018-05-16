@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MDPMS.Shared.Views.CustomFieldNumericView">
-	<ContentView.Content>        
+             x:Class="MDPMS.Shared.Views.CustomControls.CustomFieldPickerView">
+    <ContentView.Content>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -14,9 +14,9 @@
                    Font="Bold"/>
             <Label Grid.Row="1"
                    Text="{Binding HelpText}"/>
-            <Entry Grid.Row="2"
-                   Text="{Binding EntryValue}"
-                   Keyboard="Numeric"/>
-        </Grid>        
+            <Picker Grid.Row="2"
+                    ItemsSource="{Binding BindableOptions}"
+                    SelectedItem="{Binding SelectedBindableOption}"/>
+        </Grid>
     </ContentView.Content>
 </ContentView>

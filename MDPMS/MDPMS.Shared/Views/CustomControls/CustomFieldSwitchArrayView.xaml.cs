@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MDPMS.Shared.ViewModels;
-using MDPMS.Shared.Views.CustomControls;
+using MDPMS.Shared.ViewModels.CustomControlViewModels;
 using Xamarin.Forms;
 
-namespace MDPMS.Shared.Views
+namespace MDPMS.Shared.Views.CustomControls
 {
     public partial class CustomFieldSwitchArrayView : ContentView
     {

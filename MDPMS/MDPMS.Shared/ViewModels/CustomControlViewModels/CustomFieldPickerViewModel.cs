@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using MDPMS.Shared.Models;
+﻿using System.Collections.ObjectModel;
 using MDPMS.Shared.ViewModels.Base;
 
-namespace MDPMS.Shared.ViewModels
+namespace MDPMS.Shared.ViewModels.CustomControlViewModels
 {
     public class CustomFieldPickerViewModel : ViewModelBase
     {

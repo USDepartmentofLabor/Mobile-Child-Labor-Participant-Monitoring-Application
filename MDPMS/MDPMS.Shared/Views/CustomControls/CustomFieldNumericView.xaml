@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MDPMS.Shared.Views.CustomFieldEditorView">
-	<ContentView.Content>
+             x:Class="MDPMS.Shared.Views.CustomControls.CustomFieldNumericView">
+	<ContentView.Content>        
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition Height="200"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0"
                    Text="{Binding Name}"
                    Font="Bold"/>
             <Label Grid.Row="1"
                    Text="{Binding HelpText}"/>
-            <Editor Grid.Row="2"
-                    Text="{Binding EntryValue}"/>
-        </Grid>
-	</ContentView.Content>
+            <Entry Grid.Row="2"
+                   Text="{Binding EntryValue}"
+                   Keyboard="Numeric"/>
+        </Grid>        
+    </ContentView.Content>
 </ContentView>

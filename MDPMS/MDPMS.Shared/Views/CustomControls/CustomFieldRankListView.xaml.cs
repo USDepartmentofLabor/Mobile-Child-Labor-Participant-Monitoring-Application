@@ -1,8 +1,7 @@
-﻿using MDPMS.Shared.ViewModels;
+﻿using MDPMS.Shared.ViewModels.CustomControlViewModels;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
-namespace MDPMS.Shared.Views
+namespace MDPMS.Shared.Views.CustomControls
 {
     public partial class CustomFieldRankListView : ContentView
     {

@@ -2,7 +2,7 @@
 using MDPMS.Shared.ViewModels.Base;
 using Xamarin.Forms;
 
-namespace MDPMS.Shared.ViewModels
+namespace MDPMS.Shared.ViewModels.CustomControlViewModels
 {
     public class CustomFieldDateTimeValueViewModel : ViewModelBase
     {

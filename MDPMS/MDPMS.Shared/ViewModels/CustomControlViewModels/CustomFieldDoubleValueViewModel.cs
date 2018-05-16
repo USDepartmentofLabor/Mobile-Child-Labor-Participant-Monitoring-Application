@@ -1,6 +1,6 @@
 ﻿using MDPMS.Shared.ViewModels.Base;
 
-namespace MDPMS.Shared.ViewModels
+namespace MDPMS.Shared.ViewModels.CustomControlViewModels
 {
     public class CustomFieldDoubleValueViewModel : ViewModelBase
     {
