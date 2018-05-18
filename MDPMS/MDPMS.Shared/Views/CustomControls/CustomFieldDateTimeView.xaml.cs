@@ -1,8 +1,10 @@
 ﻿using MDPMS.Shared.ViewModels.CustomControlViewModels;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace MDPMS.Shared.Views.CustomControls
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomFieldDateTimeView : ContentView
     {
         public CustomFieldDateTimeView()

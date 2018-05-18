@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using MDPMS.Shared.Models;
-using MDPMS.Shared.Views;
-using MDPMS.Shared.ViewModels;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace MDPMS.Shared
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class App : Application
 	{
 		public App ()

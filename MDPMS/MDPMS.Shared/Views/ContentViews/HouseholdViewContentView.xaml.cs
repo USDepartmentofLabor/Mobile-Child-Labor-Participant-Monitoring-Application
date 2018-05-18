@@ -3,9 +3,11 @@ using System.Linq;
 using MDPMS.Shared.ViewModels.ContentViewModels;
 using MDPMS.Shared.ViewModels.Helpers;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace MDPMS.Shared.Views.ContentViews
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HouseholdViewContentView : ContentView
     {
         public HouseholdViewContentView()
