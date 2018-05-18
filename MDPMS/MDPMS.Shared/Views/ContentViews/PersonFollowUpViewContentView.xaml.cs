@@ -24,9 +24,9 @@ namespace MDPMS.Shared.Views.ContentViews
 
             var grid = new Grid();
             var labelColumnDefinition = new ColumnDefinition();
-            labelColumnDefinition.Width = 200;
             grid.ColumnDefinitions.Add(labelColumnDefinition);
             var valueColumnDefinition = new ColumnDefinition();
+            valueColumnDefinition.Width = new GridLength(3, GridUnitType.Star);
             grid.ColumnDefinitions.Add(valueColumnDefinition);
 
             var customFields = viewModel.ApplicationInstanceData.Data.CustomFields
