@@ -11,8 +11,6 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
     {
         public Command AddIncomeSourceCommand { get; set; }
 
-        public GridLength AllowAddIncomeSourceButtonRowHeight { get; set; }
-
         public Household Household { get; set; }
 
         private IncomeSource _selectedIncomeSource;
@@ -34,18 +32,11 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
         {
             ApplicationInstanceData = applicationInstanceData;
             Household = household;
-
-            AllowAddIncomeSourceButtonRowHeight = Household.HasExternalId ? 0 : 80;
-
             AddIncomeSourceCommand = new Command(ExecuteAddIncomeSourceCommand);
         }
 
         private void ExecuteAddIncomeSourceCommand()
-        {
-            // is it allowed?
-            if (Household.HasExternalId) return;
-
-            // go to add view here
+        {            
             ApplicationInstanceData.NavigationPage.PushAsync(new IncomeSourceEditContentPage { BindingContext = new IncomeSourceEditContentPageModel(ApplicationInstanceData, Household) });
         }
     }
