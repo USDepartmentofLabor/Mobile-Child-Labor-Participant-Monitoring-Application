@@ -43,6 +43,7 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
             };
             ApplicationInstanceData.RootPage = rootPage;
             ApplicationInstanceData.App.MainPage = rootPage;
+            ApplicationInstanceData.RootPage.IsPresented = true;
         }
     }
 }
