@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDPMS.Shared.Views.ContentPages.MenuLandingContentPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0" Grid.RowSpan="6" Source="LandingPictureMedRes.jpeg" Opacity="0.75" Aspect="AspectFill"/>
+            <Label Grid.Row="1"
+                   TextColor="White"
+                   Style="{StaticResource LabelStyleCenteredWrapped}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[ProjectName]}"
+                   FontAttributes="Bold"
+                   FontSize="28"/>
+            <Label Grid.Row="2"
+                   TextColor="White"
+                   Style="{StaticResource LabelStyleCenteredWrapped}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Mobile]}"
+                   FontAttributes="Bold"
+                   FontSize="24"/>
+            <Label Grid.Row="3"
+                   TextColor="White"
+                   Style="{StaticResource LabelStyleCenteredWrapped}"
+                   Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[ProjectPhrase]}"
+                   FontAttributes="Bold"
+                   FontSize="24"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
