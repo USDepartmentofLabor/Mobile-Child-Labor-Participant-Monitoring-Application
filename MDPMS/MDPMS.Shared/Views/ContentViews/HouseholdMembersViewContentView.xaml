@@ -35,14 +35,19 @@
             <Grid Grid.Row="2"
                   Margin="10,5,5,5">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="48"/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0"
-                           Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[FirstNameGivenName]}"
+                           Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[GridHeaderTitleID]}"
                            Style="{StaticResource LabelDescription}"
                            TextColor="Gray"/>
                     <Label Grid.Column="1"
+                           Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[FirstNameGivenName]}"
+                           Style="{StaticResource LabelDescription}"
+                           TextColor="Gray"/>
+                    <Label Grid.Column="2"
                            Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[LastNameFamilyName]}"
                            Style="{StaticResource LabelDescription}"
                            TextColor="Gray"/>
@@ -56,13 +61,17 @@
                         <ViewCell>
                             <Grid>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="48"/>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0"
-                                       Text="{Binding FirstName}"
+                                       Text="{Binding ExternalId}"
                                        Style="{StaticResource LabelValue}"/>
                                 <Label Grid.Column="1"
+                                       Text="{Binding FirstName}"
+                                       Style="{StaticResource LabelValue}"/>
+                                <Label Grid.Column="2"
                                        Text="{Binding LastName}"
                                        Style="{StaticResource LabelValue}"/>
                             </Grid>
