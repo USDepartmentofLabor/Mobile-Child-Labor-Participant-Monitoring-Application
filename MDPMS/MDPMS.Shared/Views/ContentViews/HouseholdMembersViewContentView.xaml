@@ -21,7 +21,7 @@
                 <RowDefinition Height="35"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition x:Name="ListViewRowDefinition"/>
-                <RowDefinition Height="{Binding AllowAddHouseholdMemberButtonRowHeight}"/>
+                <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
             <BoxView Grid.Row="0"
                      HeightRequest="1"

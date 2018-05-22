@@ -11,8 +11,6 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
     {
         public Command AddHouseholdMemberCommand { get; set; }
 
-        public GridLength AllowAddHouseholdMemberButtonRowHeight { get; set; }
-
         public Household Household { get; set; }
 
         private Person _selectedHouseholdMember;
@@ -34,18 +32,12 @@ namespace MDPMS.Shared.ViewModels.ContentViewModels
         {
             ApplicationInstanceData = applicationInstanceData;
             Household = household;
-            AllowAddHouseholdMemberButtonRowHeight = Household.HasExternalId ? 0 : 80;
             AddHouseholdMemberCommand = new Command(ExecuteAddHouseholdMemberCommand);
         }
 
         private void ExecuteAddHouseholdMemberCommand()
         {
-            // is it allowed?
-            if (Household.HasExternalId) return;
-
-            // go to add view here
             ApplicationInstanceData.NavigationPage.PushAsync(new PersonEditContentPage { BindingContext = new PersonEditContentPageModel(ApplicationInstanceData, Household) });
         }
-
     }
 }
