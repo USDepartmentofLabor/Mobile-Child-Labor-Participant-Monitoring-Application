@@ -46,7 +46,8 @@ namespace MDPMS.Shared
 
             // Init Language Database
             var localizationDb = new Database.Localization.Database.LocalizationDatabaseContext(applicationInstanceData.LocalizationDatabasePath);
-		    localizationDb.Database.EnsureCreated();
+            //localizationDb.Database.EnsureCreated();
+            localizationDb.Database.Migrate();
             Database.Localization.Database.DatabaseSeed.SeedDatabase(localizationDb);            
 		    applicationInstanceData.Localization = localizationDb;
 
