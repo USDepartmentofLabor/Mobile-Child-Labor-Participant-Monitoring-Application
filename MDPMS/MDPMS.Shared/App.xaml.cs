@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using MDPMS.Shared.Models;
+using Microsoft.EntityFrameworkCore;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -37,8 +38,8 @@ namespace MDPMS.Shared
 
             // Init db
 		    var db = new Database.Data.Database.MDPMSDatabaseContext(applicationInstanceData.DatabasePath);
-            db.Database.EnsureCreated();            
-            //db.Database.Migrate();
+            //db.Database.EnsureCreated();
+            db.Database.Migrate();
             db.LoadRelatedData();
             Database.Data.Database.DatabaseSeed.SeedDatabase(db);
 		    applicationInstanceData.Data = db;
