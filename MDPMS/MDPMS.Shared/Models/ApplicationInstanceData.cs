@@ -67,11 +67,23 @@ namespace MDPMS.Shared.Models
         }
         
         public void NavigateToLandingView()
-        {            
-            App.MainPage = new LandingContentPage
+        {
+            NavigationPage = new NavigationPage(new MenuLandingContentPage
             {
-                BindingContext = new LandingContentPageModel(this)
+                BindingContext = new MenuLandingContentPageModel(this)
+            });
+            var rootPage = new RootPage
+            {
+                Master = new MenuContentPage
+                {
+                    BindingContext = new MenuContentPageModel(this),
+                    Title = Title
+                },
+                Detail = NavigationPage
             };
+            RootPage = rootPage;
+            App.MainPage = rootPage;
+            RootPage.IsPresented = true;
         }
 
         public void SaveSerializedApplicationInstanceData()
