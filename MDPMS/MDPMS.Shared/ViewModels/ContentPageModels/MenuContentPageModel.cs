@@ -17,6 +17,7 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
         public Command SyncCommand { get; set; }
         public Command NavigateToSettingsCommand { get; set; }
         public Command NavigateToAboutCommand { get; set; }
+        public Command NavigateToLocalizationSelectionCommand { get; set; }
         
         public MenuContentPageModel(ApplicationInstanceData applicationInstanceData)
         {
@@ -27,6 +28,7 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
             SyncCommand = new Command(ExecuteSyncCommand);
             NavigateToSettingsCommand = new Command(ExecuteNavigateToSettingsCommand);
             NavigateToAboutCommand = new Command(ExecuteNavigateToAboutCommand);
+            NavigateToLocalizationSelectionCommand = new Command(ExecuteNavigateToLocalizationSelectionCommand);
             ApplicationInstanceData = applicationInstanceData;
         }
 
@@ -165,6 +167,14 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
             {
                 BindingContext = new HouseholdMembersSearchContentPageModel(ApplicationInstanceData)
             });
+        }
+
+        private void ExecuteNavigateToLocalizationSelectionCommand()
+        {
+            var view = new LocalizationSelectionContentPage();
+            var viewModel = new LocalizationSelectionContentPageModel(ApplicationInstanceData, true);
+            view.BindingContext = viewModel;
+            ApplicationInstanceData.GoToView(view);
         }
 
         private void HideMenu()

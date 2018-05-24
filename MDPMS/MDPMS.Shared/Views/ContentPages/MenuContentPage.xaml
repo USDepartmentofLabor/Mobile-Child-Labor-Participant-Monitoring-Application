@@ -12,6 +12,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Button Grid.Row="0"
                     Image="ic_menu_black_24dp_rotate_90.png"
@@ -34,6 +35,9 @@
             <Button Grid.Row="6"
                     Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[About]}"
                     Command="{Binding NavigateToAboutCommand}"/>
+            <Button Grid.Row="7"
+                    Image="ic_language_black_24dp.png"
+                    Command="{Binding NavigateToLocalizationSelectionCommand}"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
