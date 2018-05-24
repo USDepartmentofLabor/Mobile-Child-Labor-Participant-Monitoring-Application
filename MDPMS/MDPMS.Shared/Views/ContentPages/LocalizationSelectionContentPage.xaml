@@ -32,10 +32,12 @@
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0"
                         Image="ic_close_black_24dp.png"
-                        Command="{Binding NavigateToLandingPageCommand}"/>
+                        Command="{Binding NavigateToLandingPageCommand}"
+                        IsVisible="{Binding ShowCancel}"/>
                 <Button Grid.Column="1"
                         Image="ic_check_black_24dp.png"
-                        Command="{Binding NavigateToLandingPageCheckSelectionCommand}"/>
+                        Command="{Binding NavigateToLandingPageCheckSelectionCommand}"
+                        IsVisible="{Binding LocalizationSelectionChanged}"/>
             </Grid>
         </Grid>
     </ContentPage.Content>

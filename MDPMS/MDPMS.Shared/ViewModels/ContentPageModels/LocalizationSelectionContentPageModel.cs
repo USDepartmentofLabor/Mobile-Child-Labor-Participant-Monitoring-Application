@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using MDPMS.Shared.Models;
 using MDPMS.Shared.ViewModels.Base;
 using MDPMS.Shared.Views.ContentPages;
@@ -9,16 +10,62 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
     public class LocalizationSelectionContentPageModel : ViewModelBase
     {                
         public ObservableCollection<Localization> Localizations { get; set; }
-        public Localization SelectedLocalization { get; set; }
+
+        public Localization _selectedLocalization { get; set; }
+
+        public Localization SelectedLocalization
+        {
+            get
+            {
+                return _selectedLocalization;
+            }
+            set
+            {
+                _selectedLocalization = value;
+                if (_selectedLocalization == null || ApplicationInstanceData.SelectedLocalization == null) return;
+                SetLocalizationSelectionChanged();
+            }
+        }
+
+        private void SetLocalizationSelectionChanged()
+        {
+            if (!SelectedLocalization.Abbreviation.Equals(ApplicationInstanceData.SelectedLocalization.Abbreviation))
+            {
+                LocalizationSelectionChanged = true;
+                OnPropertyChanged(nameof(LocalizationSelectionChanged));
+                SetShowCancel();
+            }
+            else
+            {
+                if (LocalizationSelectionChanged)
+                {
+                    LocalizationSelectionChanged = false;
+                    OnPropertyChanged(nameof(LocalizationSelectionChanged));
+                    SetShowCancel();
+                }
+            }
+        }
+
+        private void SetShowCancel()
+        {
+            if (!isFromMainMenu) return;
+            ShowCancel = LocalizationSelectionChanged;
+            OnPropertyChanged(nameof(ShowCancel));
+        }
 
         public Command NavigateToLandingPageCommand { get; set; }
         public Command NavigateToLandingPageCheckSelectionCommand { get; set; }
+
+        public bool LocalizationSelectionChanged { get; set; }
+
+        public bool ShowCancel { get; set; }
 
         private bool isFromMainMenu = false;
 
         public LocalizationSelectionContentPageModel(ApplicationInstanceData applicationInstanceData)
         {
             isFromMainMenu = false;
+            ShowCancel = true;
             Init(applicationInstanceData);
         }
 
@@ -43,6 +90,14 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
 
         private void ExecuteNavigateToLandingPageCommand()
         {
+            // cancel selection
+            if (ApplicationInstanceData.SelectedLocalization != null)
+            {
+                var query = Localizations.Where(a => a.Abbreviation == ApplicationInstanceData.SelectedLocalization.Abbreviation);
+                if (query.Any()) SelectedLocalization = query.First();
+                OnPropertyChanged(nameof(SelectedLocalization));
+            }
+
             if (isFromMainMenu) return;
 
             Application.Current.MainPage = new LandingContentPage
@@ -56,6 +111,7 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
             if (!ApplicationInstanceData.SelectedLocalization.Abbreviation.Equals(SelectedLocalization.Abbreviation))
             {
                 ApplicationInstanceData.SetLocalization(SelectedLocalization.Abbreviation);
+                SetLocalizationSelectionChanged();
             }
 
             if (isFromMainMenu)
