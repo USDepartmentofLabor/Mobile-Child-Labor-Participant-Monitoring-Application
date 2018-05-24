@@ -9,5 +9,6 @@ namespace MDPMS.Shared.Models
         public bool SyncError { get; set; } = false;
         public string ApiKey { get; set; } = @"";
         public string LastSuccessfulUsernameUsed { get; set; } = @"";
+        public string Localization { get; set; } = @"";
     }
 }

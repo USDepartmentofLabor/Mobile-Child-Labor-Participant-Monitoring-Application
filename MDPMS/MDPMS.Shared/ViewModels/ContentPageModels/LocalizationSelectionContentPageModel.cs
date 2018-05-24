@@ -112,6 +112,10 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
             {
                 ApplicationInstanceData.SetLocalization(SelectedLocalization.Abbreviation);
                 SetLocalizationSelectionChanged();
+
+                // save pref
+                ApplicationInstanceData.SerializedApplicationInstanceData.Localization = SelectedLocalization.Abbreviation;
+                ApplicationInstanceData.SaveSerializedApplicationInstanceData();
             }
 
             if (isFromMainMenu)

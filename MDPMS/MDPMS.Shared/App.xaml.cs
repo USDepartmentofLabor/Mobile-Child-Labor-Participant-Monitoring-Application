@@ -53,8 +53,18 @@ namespace MDPMS.Shared
 
             // Load Localizations
             applicationInstanceData.GetAvailableLocalizations();
-		    // Load en as default for now
-            applicationInstanceData.SetLocalization(@"en");
+            // Load saved localization preference
+            try
+            {
+                applicationInstanceData.SetLocalization(applicationInstanceData.SerializedApplicationInstanceData.Localization);
+            }
+            catch
+            {
+                // revert to en on error
+                applicationInstanceData.SerializedApplicationInstanceData.Localization = @"en";
+                applicationInstanceData.SaveSerializedApplicationInstanceData();
+                applicationInstanceData.SetLocalization(@"en");
+            }
                        
             // Load view
             applicationInstanceData.NavigateToLandingView();                        
