@@ -2,15 +2,6 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDPMS.Shared.Views.ContentViews.PersonEditContentView">
-    <ContentView.Resources>
-        <ResourceDictionary>
-            <Style x:Key="EditLabelDescription" TargetType="Label">
-                <Setter Property="TextColor" Value="Blue"/>
-                <Setter Property="Margin" Value="10,5"/>
-                <Setter Property="VerticalOptions" Value="Center"/>
-            </Style>
-        </ResourceDictionary>
-    </ContentView.Resources>
     <ContentView.Content>
         <Grid>
             <Grid.ColumnDefinitions>
