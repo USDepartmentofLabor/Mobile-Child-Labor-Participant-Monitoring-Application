@@ -87,14 +87,14 @@ namespace MDPMS.Shared.Views.ContentViews
                 labelLabel.Text = customField.Name;
                 labelLabel.SetValue(Grid.ColumnProperty, 0);
                 labelLabel.SetValue(Grid.RowProperty, i);
-                labelLabel.Style = (Style)Resources["LabelDescription"];
+                labelLabel.Style = (Style)Application.Current.Resources["LabelDescription"];
                 grid.Children.Add(labelLabel);
 
                 var valueLabel = new Label();
                 valueLabel.Text = valueString;
                 valueLabel.SetValue(Grid.ColumnProperty, 1);
                 valueLabel.SetValue(Grid.RowProperty, i);
-                valueLabel.Style = (Style)Resources["LabelValue"];
+                valueLabel.Style = (Style)Application.Current.Resources["LabelValue"];
                 grid.Children.Add(valueLabel);
 
                 i++;

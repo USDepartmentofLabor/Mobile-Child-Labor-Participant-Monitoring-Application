@@ -2,18 +2,6 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDPMS.Shared.Views.ContentViews.ServiceInstanceViewContentView">
-    <ContentView.Resources>
-        <ResourceDictionary>
-            <Style x:Key="LabelDescription" TargetType="Label">
-                <Setter Property="TextColor" Value="Blue"/>
-                <Setter Property="Margin" Value="10,5"/>
-            </Style>
-            <Style x:Key="LabelValue" TargetType="Label">
-                <Setter Property="TextColor" Value="Black"/>
-                <Setter Property="Margin" Value="10,5"/>
-            </Style>
-        </ResourceDictionary>
-    </ContentView.Resources>
     <ContentView.Content>
         <Grid>
             <Grid.ColumnDefinitions>
