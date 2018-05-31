@@ -124,7 +124,7 @@ namespace MDPMS.Database.Data.Models
                 writer.WritePropertyName("custom_field_id");
                 writer.WriteValue(CustomField.ExternalId);
                 writer.WritePropertyName("value_text");
-                writer.WriteValue(Value);
+                writer.WriteValue((CustomField.FieldType == "textarea" ? Value.Replace(Environment.NewLine, @"\r\n") : Value));
                 writer.WritePropertyName("model_id");
                 writer.WriteValue(Household.ExternalId);
                 writer.WriteEndObject();
