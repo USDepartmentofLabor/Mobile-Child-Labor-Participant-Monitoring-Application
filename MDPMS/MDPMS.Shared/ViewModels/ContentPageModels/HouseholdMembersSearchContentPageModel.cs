@@ -88,10 +88,10 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
             var query = SearchText.Equals(string.Empty)
                 ? youthsAsOfToday
                 : youthsAsOfToday
-                    .Where(a => a.Person.LastName.Contains(SearchText) |
-                                a.Person.FirstName.Contains(SearchText) |
-                                a.Person.MiddleName.Contains(SearchText) |
-                                a.Household.HouseholdName.Contains(SearchText) |
+                    .Where(a => a.Person.LastName.ToUpper().Contains(SearchText.ToUpper()) |
+                                a.Person.FirstName.ToUpper().Contains(SearchText.ToUpper()) |
+                                a.Person.MiddleName.ToUpper().Contains(SearchText.ToUpper()) |
+                                a.Household.HouseholdName.ToUpper().Contains(SearchText.ToUpper()) |
                                 a.PersonId.Contains(SearchText) |
                                 (a.Household != null && a.HouseholdId.Contains(SearchText)));            
             foreach (var person in query.OrderBy(a => a.Person.LastName)) HouseholdMembers.Add(new HouseholdMemberSearchResultCellModel(person.Person, person.Household));            
