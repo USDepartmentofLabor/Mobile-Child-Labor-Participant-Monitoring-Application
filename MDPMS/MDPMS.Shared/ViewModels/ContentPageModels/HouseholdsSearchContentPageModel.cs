@@ -77,7 +77,10 @@ namespace MDPMS.Shared.ViewModels.ContentPageModels
         private void LoadHouseholds()
         {
             Households = new ObservableCollection<HouseholdSearchResultCellModel>();
-            var query = SearchText.Equals(string.Empty) ? ApplicationInstanceData.Data.Households : ApplicationInstanceData.Data.Households.Where(a => a.HouseholdName.Contains(SearchText));
+            var query = SearchText.Equals(string.Empty) ?
+                                  ApplicationInstanceData.Data.Households :
+                                  ApplicationInstanceData.Data.Households
+                                    .Where(a => a.HouseholdName.ToUpper().Contains(SearchText.ToUpper()) | a.ExternalId.ToString().Contains(SearchText));
             foreach (var household in query.OrderBy(a => a.HouseholdName))
             {
                 Households.Add(new HouseholdSearchResultCellModel(household));
