@@ -53,6 +53,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PlayStoreAPKs", "PlayStoreA
 		mDPMSALPHA_1_0.apk = mDPMSALPHA_1_0.apk
 		mDPMSALPHA_1_1.apk = mDPMSALPHA_1_1.apk
 		mDPMSALPHA_1_2.apk = mDPMSALPHA_1_2.apk
+		mDPMSALPHA_1_3.apk = mDPMSALPHA_1_3.apk
 	EndProjectSection
 EndProject
 Global
