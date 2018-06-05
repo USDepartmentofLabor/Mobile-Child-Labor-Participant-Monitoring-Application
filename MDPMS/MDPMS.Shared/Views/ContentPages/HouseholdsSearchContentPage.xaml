@@ -46,7 +46,7 @@
                        Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Children]}"
                        HorizontalTextAlignment="Center"/>
                 <Label Grid.Column="4"
-                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Adult]}"
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Adults]}"
                        HorizontalTextAlignment="Center"/>
             </Grid>
             <ListView Grid.Row="2"
