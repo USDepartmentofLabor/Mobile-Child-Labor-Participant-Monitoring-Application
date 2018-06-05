@@ -43,7 +43,7 @@
                 <Label Grid.Column="2"
                        Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[HouseholdName]}"/>
                 <Label Grid.Column="3"
-                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Youth]}"
+                       Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Children]}"
                        HorizontalTextAlignment="Center"/>
                 <Label Grid.Column="4"
                        Text="{Binding ApplicationInstanceData.SelectedLocalization.Translations[Adult]}"
