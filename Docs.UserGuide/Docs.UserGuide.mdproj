@@ -51,5 +51,6 @@
     <None Include="img\SettingsUrlFilledInSavedApiKeyYes.png" />
     <None Include="img\SuccessfulSyncMessage.png" />
     <None Include="img\Syncing.png" />
+    <None Include="mDPMS_User_Guide.pdf" />
   </ItemGroup>
 </Project>
