@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Default</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ItemType>GenericProject</ItemType>
+    <ProjectGuid>{50C0CEDE-8F4D-4DCF-A053-4E4F50DDCB37}</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Default|AnyCPU' ">
+    <OutputPath>.\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="img\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="mDPMS_User_Guide.md" />
+    <None Include="img\AuthenticateBlank.png" />
+    <None Include="img\AuthenticateCredentialsFilledIn.png" />
+    <None Include="img\FollowUpAddView.png" />
+    <None Include="img\FollowUpEditView.png" />
+    <None Include="img\FollowUpView.png" />
+    <None Include="img\FollowUpViewEditDeleteEnabled.png" />
+    <None Include="img\HouseholdAddView.png" />
+    <None Include="img\HouseholdEditView.png" />
+    <None Include="img\HouseholdsSearchView.png" />
+    <None Include="img\HouseholdView.png" />
+    <None Include="img\HouseholdViewEditDeleteEnabled.png" />
+    <None Include="img\HouseholdViewIncomeSourcesList.png" />
+    <None Include="img\HouseholdViewMembersList.png" />
+    <None Include="img\IncomeSourceAddView.png" />
+    <None Include="img\IncomeSourceEditView.png" />
+    <None Include="img\IncomeSourceView.png" />
+    <None Include="img\IncomeSourceViewEditDeleteEnabled.png" />
+    <None Include="img\LandingView.png" />
+    <None Include="img\LocalizationSelectionEnSelectedNoChange.png" />
+    <None Include="img\LocalizationSelectionEsSelectedYesChange.png" />
+    <None Include="img\ParticipantsSearchView.png" />
+    <None Include="img\PersonAddView.png" />
+    <None Include="img\PersonEditView.png" />
+    <None Include="img\PersonView.png" />
+    <None Include="img\PersonViewEditDeleteEnabled.png" />
+    <None Include="img\PersonViewFollowUpsList.png" />
+    <None Include="img\PersonViewServiceAssignmentsList.png" />
+    <None Include="img\ServiceAssignmentAddView.png" />
+    <None Include="img\ServiceAssignmentEditView.png" />
+    <None Include="img\ServiceAssignmentView.png" />
+    <None Include="img\ServiceAssignmentViewEditDeleteEnabled.png" />
+    <None Include="img\SettingsBlank.png" />
+    <None Include="img\SettingsUrlFilledInNotSavedApiKeyNo.png" />
+    <None Include="img\SettingsUrlFilledInSavedApiKeyNo.png" />
+    <None Include="img\SettingsUrlFilledInSavedApiKeyYes.png" />
+    <None Include="img\SuccessfulSyncMessage.png" />
+    <None Include="img\Syncing.png" />
+  </ItemGroup>
+</Project>
