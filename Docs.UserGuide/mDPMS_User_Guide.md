@@ -30,7 +30,7 @@ This document provides screen prints and corresponding narrative to describe how
 
 * Download from the Google Play Store https://play.google.com/store/apps/details?id=com.companyname.MDPMS
 * Launch the app.
-* Open the menu by selecting ```☰``` on the top left of the screen if is not already open
+* Open the menu by selecting ☰ on the top left of the screen if is not already open
 
 
   ![Landing View](./img/LandingView.png)
