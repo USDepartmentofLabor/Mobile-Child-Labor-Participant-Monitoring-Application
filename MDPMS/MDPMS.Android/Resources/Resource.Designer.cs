@@ -2967,7 +2967,7 @@ namespace MDPMS.Droid
 			public const int icon = 2130837791;
 			
 			// aapt resource value: 0x7f020120
-			public const int LandingPictureMedRes = 2130837792;
+			public const int LandingPicture = 2130837792;
 			
 			// aapt resource value: 0x7f020121
 			public const int mr_button_connected_dark = 2130837793;

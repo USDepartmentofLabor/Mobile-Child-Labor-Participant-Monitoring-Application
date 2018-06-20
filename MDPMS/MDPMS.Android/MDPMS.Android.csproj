@@ -252,7 +252,7 @@
     <AndroidResource Include="Resources\Drawable\ic_language_white_24dp.png" />
     <AndroidResource Include="Resources\Drawable\ic_menu_black_24dp_rotate_90.png" />
     <AndroidResource Include="Resources\Drawable\ic_date_range_black_24dp.png" />
-    <AndroidResource Include="Resources\Drawable\LandingPictureMedRes.jpeg" />
+    <AndroidResource Include="Resources\Drawable\LandingPicture.jpeg" />
     <AndroidResource Include="Resources\Drawable\icon.png" />
     <AndroidResource Include="Resources\Drawable\ic_keyboard_arrow_down_black_24dp.png" />
     <AndroidResource Include="Resources\Drawable\ic_keyboard_arrow_left_black_24dp.png" />

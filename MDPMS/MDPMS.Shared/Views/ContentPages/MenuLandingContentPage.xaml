@@ -10,7 +10,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
-            <Image Grid.Row="0" Grid.RowSpan="6" Source="LandingPictureMedRes.jpeg" Opacity="0.75" Aspect="AspectFill"/>
+            <Image Grid.Row="0" Grid.RowSpan="6" Source="LandingPicture.jpeg" Opacity="0.75" Aspect="AspectFill"/>
             <Label Grid.Row="1"
                    TextColor="White"
                    Style="{StaticResource LabelStyleCenteredWrapped}"
