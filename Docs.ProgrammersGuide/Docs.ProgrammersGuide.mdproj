@@ -11,5 +11,6 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="mDPMS_ProgrammersGuide.md" />
+    <None Include="mDPMS_Programmers_Guide.pdf" />
   </ItemGroup>
 </Project>
