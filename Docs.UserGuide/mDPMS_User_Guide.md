@@ -37,7 +37,7 @@
         - [2.3.1 mDPMS Installation](#231-mdpms-installation)
         - [2.3.2 Accessing the mDPMS](#232-accessing-the-mdpms)
         - [2.3.3 Initial Sync](#233-initial-sync)
-    - [2.4 System Organization & Navigation](#24-system-organization-navigation)
+    - [2.4 System Organization & Navigation](#24-system-organization--navigation)
 - [3. Using the System](#3-using-the-system)
     - [3.1 Menu Item Overview](#31-menu-item-overview)
         - [3.1.1 Open/Close Menu](#311-openclose-menu)
