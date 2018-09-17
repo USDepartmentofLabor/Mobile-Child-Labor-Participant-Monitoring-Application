@@ -52,5 +52,26 @@
     <None Include="img\SuccessfulSyncMessage.png" />
     <None Include="img\Syncing.png" />
     <None Include="mDPMS_User_Guide.pdf" />
+    <None Include="img\AuthenticateBlank_UsernamePasswordCircled.png" />
+    <None Include="img\AuthenticateCredentialsFilledIn_AuthenticateCircled.png" />
+    <None Include="img\AuthenticationCredentialsFilledIn_WithConnectivityError.png" />
+    <None Include="img\AuthenticationCredentialsFilledIn_WithError.png" />
+    <None Include="img\LandingView_AboutCircled.png" />
+    <None Include="img\LandingView_GlobeCircled.png" />
+    <None Include="img\LandingView_HomeCircled.png" />
+    <None Include="img\LandingView_HouseholdsCircled.png" />
+    <None Include="img\LandingView_MenuCircled.png" />
+    <None Include="img\LandingView_MenuClosed.png" />
+    <None Include="img\LandingView_ParticipantsCircled.png" />
+    <None Include="img\LandingView_SettingsCircled.png" />
+    <None Include="img\LandingView_SyncCircled.png" />
+    <None Include="img\LandingView_SyncConnectivityError.png" />
+    <None Include="img\LandingView_SyncError.png" />
+    <None Include="img\LocalizationSelectionEsSelectedYesChange_CheckCircled.png" />
+    <None Include="img\SettingsBlank_DPMSURLCircled.png" />
+    <None Include="img\SettingsUrlFilledInNotSavedApiKeyNo_CheckCircled.png" />
+    <None Include="img\SettingsUrlFilledInSavedApiKeyNo_GetNewAPIKeyCircled.png" />
+    <None Include="img\SettingsUrlFilledInSavedApiKeyYes_YesCircled.png" />
+    <None Include="img\mDPMSDataFlow.png" />
   </ItemGroup>
 </Project>
